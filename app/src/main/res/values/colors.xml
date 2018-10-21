@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#004083</color>
+    <color name="colorPrimaryDark">#2b3d50</color>
+    <color name="colorAccent">#1a76d7</color>
+
+
+    <!--Navigation-->
+    <color name="actv_icon_nav">#FFDB6E</color>
+    <color name="icon_nav">#A8BBCA</color>
+    <color name="bg_main_layout">#232234</color>
+    <color name="ic_color_greey">#b8c9d9</color>
+
+
+</resources>

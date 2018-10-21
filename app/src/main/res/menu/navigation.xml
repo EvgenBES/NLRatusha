@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_list"
+        android:icon="@drawable/ic_helmet"
+        android:title="List coin" />
+
+    <item
+        android:id="@+id/navigation_alert"
+        android:icon="@drawable/ic_banner"
+        android:title="Notification" />
+
+</menu>
