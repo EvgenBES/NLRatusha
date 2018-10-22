@@ -5,6 +5,8 @@ MainActivi {
     private ImageView blackStoneImage;
     private Animation animUpDown;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,7 @@ MainActivi {
         blackStoneImage.startAnimation(animUpDown);
 
     }
+
 
     Animation.AnimationListener animationListener = new Animation.AnimationListener() {
         @Override
