@@ -19,6 +19,7 @@ class LoginPresenter(var loginView: LoginView?, val loginInteractor: LoginIntera
     }
 
     override fun onSuccess() {
+
         loginView?.navigateToHome()
     }
 

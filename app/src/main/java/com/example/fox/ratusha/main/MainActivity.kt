@@ -10,10 +10,6 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val actionBar = supportActionBar
-        actionBar!!.hide()
-
-
         val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> return@OnNavigationItemSelectedListener true
