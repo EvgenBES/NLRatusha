@@ -23,8 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity" />
-        <!-- <activity android:name=".testViewDel.Main2Activity"></activity> -->
-        <!--<activity android:name=".testViewDel.DropboxSampleActivity"></activity>-->
     </application>
 
 </manifest>

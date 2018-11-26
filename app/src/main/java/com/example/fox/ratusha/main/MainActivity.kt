@@ -10,18 +10,17 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> return@OnNavigationItemSelectedListener true
-                R.id.navigation_list -> {
-                    return@OnNavigationItemSelectedListener true
+        val mOnNavigationItemSelectedListener =
+                BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                    when (item.itemId) {
+                        R.id.navigation_home -> return@OnNavigationItemSelectedListener true
+                        R.id.navigation_list -> {return@OnNavigationItemSelectedListener true}
+                        R.id.navigation_alert -> return@OnNavigationItemSelectedListener true
+                    }
+                    false
                 }
-                R.id.navigation_alert -> return@OnNavigationItemSelectedListener true
-            }
-            false
-        }
 
-
+        LoadInfoService().execute()
     }
 
 
