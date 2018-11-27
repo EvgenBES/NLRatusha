@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity" />
+        <service android:name=".service.LoadService"/>
     </application>
 
 </manifest>

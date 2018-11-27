@@ -1,9 +1,11 @@
 package com.example.fox.ratusha.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.example.fox.ratusha.R
+import com.example.fox.ratusha.service.LoadService
 
 class MainActivity : AppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +22,8 @@ class MainActivity : AppCompatActivity(), MainView {
                     false
                 }
 
-        LoadInfoService().execute()
+
+        startService(Intent(this, LoadService::class.java))
     }
 
 

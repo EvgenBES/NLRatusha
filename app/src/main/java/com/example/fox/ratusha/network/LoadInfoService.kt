@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.main
+package com.example.fox.ratusha.network
 
 import android.os.AsyncTask
 import android.util.Log
