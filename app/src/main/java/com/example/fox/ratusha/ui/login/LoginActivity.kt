@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.login
+package com.example.fox.ratusha.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.example.fox.ratusha.R
-import com.example.fox.ratusha.main.MainActivity
+import com.example.fox.ratusha.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 

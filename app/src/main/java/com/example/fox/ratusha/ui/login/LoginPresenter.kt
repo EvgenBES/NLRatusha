@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.login
+package com.example.fox.ratusha.ui.login
 
 class LoginPresenter(var loginView: LoginView?, val loginInteractor: LoginInteractor) :
         LoginInteractor.OnLoginFinishedListener {

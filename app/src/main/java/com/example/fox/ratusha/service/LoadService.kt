@@ -4,7 +4,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import com.example.fox.ratusha.network.LoadInfoService
+import com.example.fox.ratusha.data.db.ItemDataBase
+import com.example.fox.ratusha.data.network.LoadInfoService
 import java.util.concurrent.TimeUnit
 
 
@@ -36,8 +37,7 @@ class LoadService : Service() {
 
     fun someTask() {
         Thread(Runnable {
-            for (i in 1..5) {
-                Log.d(TAG, "i = $i")
+            while (true) {
                 LoadInfoService().execute()
                 try {
                     TimeUnit.SECONDS.sleep(5)
@@ -45,7 +45,7 @@ class LoadService : Service() {
                     e.printStackTrace()
                 }
             }
-            stopSelf()
+//            stopSelf()
         }).start()
     }
 }

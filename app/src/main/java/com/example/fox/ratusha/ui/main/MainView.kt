@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.main
+package com.example.fox.ratusha.ui.main
 
 interface MainView {
     fun showProgress()

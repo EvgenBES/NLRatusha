@@ -1,14 +1,19 @@
-package com.example.fox.ratusha.network
+package com.example.fox.ratusha.data.network
 
 import android.os.AsyncTask
 import android.util.Log
+import com.example.fox.ratusha.data.db.ItemDataBase
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.URL
 import java.net.URLConnection
 
-class LoadInfoService : AsyncTask<Void, Void, String>() {
+class LoadInfoService  : AsyncTask<Void, Void, String>() {
+
+     companion object {
+       lateinit var  itemDataBase: ItemDataBase
+     }
 
     private val listString = arrayListOf<String>()
     private val URL_FORT = "http://service.neverlands.ru/info/cityhall_1.txt"

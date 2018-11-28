@@ -1,13 +1,13 @@
-package com.example.fox.ratusha.main
+package com.example.fox.ratusha.ui.main
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.service.LoadService
+import com.example.fox.ratusha.ui.base.BaseActivity
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : BaseActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
