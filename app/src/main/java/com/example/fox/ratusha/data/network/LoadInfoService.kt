@@ -2,20 +2,15 @@ package com.example.fox.ratusha.data.network
 
 import android.os.AsyncTask
 import android.util.Log
-import com.example.fox.ratusha.data.db.ItemDataBase
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.URL
 import java.net.URLConnection
 
-class LoadInfoService  : AsyncTask<Void, Void, String>() {
+class LoadInfoService : AsyncTask<Void, Void, String>() {
 
-     companion object {
-       lateinit var  itemDataBase: ItemDataBase
-     }
-
-    private val listString = arrayListOf<String>()
+    private val forpostList = arrayListOf<String>()
     private val URL_FORT = "http://service.neverlands.ru/info/cityhall_1.txt"
     private val URL_OCTAL = "http://service.neverlands.ru/info/cityhall_2.txt"
 
@@ -30,11 +25,19 @@ class LoadInfoService  : AsyncTask<Void, Void, String>() {
             var line: String? = null
             while ({ line = reader.readLine(); line }() != null) {
                 line?.let {
-                    listString.add(it)
-                    Log.d("LoadInfoService", it)
+                    if (it.contains("order") && it.length < 10) {
+                        // order forpost finished
+                    }
+                    if (it.contains("Телепорт")) {
+                        // appeared teleport in ratusha forpost
+                    }
+                    forpostList.add(it)
+//                    Log.d("LoadInfoService", it)
                 }
             }
             intpStream.close()
+
+//            respons(forpostList)
 
         } catch (e: Exception) {
             Log.d("LoadInfoService ", "Exception ${e.message}")
@@ -51,7 +54,13 @@ class LoadInfoService  : AsyncTask<Void, Void, String>() {
             var line: String? = null
             while ({ line = reader.readLine(); line }() != null) {
                 line?.let {
-                    Log.d("LoadInfoService", it)
+                    if (it.contains("order") && it.length < 10) {
+                            // order octal finished
+                    }
+                    if (it.contains("Телепорт")) {
+                        // appeared teleport in ratusha octal
+                    }
+//                    Log.d("LoadInfoService", it)
                 }
             }
             intpStream.close()
@@ -61,5 +70,16 @@ class LoadInfoService  : AsyncTask<Void, Void, String>() {
         }
 
         return null
+    }
+
+    //Start after background to UI
+    override fun onPreExecute() {
+        super.onPreExecute()
+    }
+
+    fun respons(forpostList: ArrayList<String>) {
+        val aTest = arrayListOf<String>()
+        aTest.add(forpostList.get(0).split("|").toString())
+
     }
 }

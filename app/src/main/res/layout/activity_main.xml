@@ -10,15 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/head_main"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/borderBottom"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headLayout"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/headLayout">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_contain_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/headLayout">
 
 
     <LinearLayout
@@ -30,8 +40,7 @@
         android:layout_marginEnd="15dp"
         android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headLayout">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -55,17 +64,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/defused"
-                        android:text="FORP"
+                        android:text="@string/castle_name_forp"
                         android:textColor="#4edfe5"
                         android:textSize="36sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/time_order_forp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:fontFamily="@font/defused"
-                        android:text="1д 17:47:38"
+                        android:text="@string/order_time"
                         android:textColor="#4edfe5"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -73,6 +83,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/progress_order_forp"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_gravity="center"
@@ -80,7 +91,7 @@
                     android:background="@drawable/ring_blue"
                     android:fontFamily="@font/defused"
                     android:gravity="center"
-                    android:text="99%"
+                    android:text="@string/order_progress"
                     android:textColor="#4edfe5"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -101,7 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Товар:"
+                android:text="@string/product_text"
                 android:textStyle="bold" />
 
 
@@ -112,16 +123,18 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/product_item_forp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/org_eag" />
+                    android:src="@drawable/ic_hourglass"/>
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/product_time_forp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:41:31" />
+                android:text="@string/product_timer" />
 
         </LinearLayout>
 
@@ -153,7 +166,6 @@
                 android:orientation="horizontal">
 
 
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -165,17 +177,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/defused"
-                        android:text="OCTAL"
+                        android:text="@string/castle_name_octal"
                         android:textColor="#ecb902"
                         android:textSize="36sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/time_order_octal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:fontFamily="@font/defused"
-                        android:text="0д 14:17:28"
+                        android:text="@string/order_time"
                         android:textColor="#ecb902"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -184,13 +197,14 @@
 
 
                 <TextView
+                    android:id="@+id/progress_order_octal"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_gravity="center"
                     android:background="@drawable/ring_orange"
                     android:fontFamily="@font/defused"
                     android:gravity="center"
-                    android:text="26%"
+                    android:text="@string/order_progress"
                     android:textColor="#ecb902"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -211,7 +225,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Товар:"
+                android:text="@string/product_text"
                 android:textStyle="bold" />
 
 
@@ -222,16 +236,17 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/product_item_octal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/teleport" />
-
+                    android:src="@drawable/ic_hourglass"/>
             </LinearLayout>
 
             <TextView
+                android:id="@+id/product_time_octal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:41:31" />
+                android:text="@string/product_timer" />
 
         </LinearLayout>
 
@@ -262,6 +277,7 @@
 
 
                 <TextView
+                    android:id="@+id/status_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -269,7 +285,7 @@
                     android:textColor="#2bb106"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="Online" />
+                    android:text="@string/status_account" />
 
             </LinearLayout>
         </LinearLayout>
@@ -285,7 +301,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Abyss:"
+                android:text="@string/nick_name"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -412,6 +428,25 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/borderBottom" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

@@ -2,4 +2,16 @@
 <resources>
     <string name="app_name">NeverLandsR</string>
     <string name="username_error">Username cannot be empty</string>
+
+
+    <string name="castle_name_forp">FORP</string>
+    <string name="castle_name_octal">OCTAL</string>
+    <string name="order_time">0д 00:00:00</string>
+    <string name="order_progress">00%</string>
+    <string name="product_text">Товар:</string>
+    <string name="product_timer">00:00:00</string>
+    <string name="status_account">Online</string>
+    <string name="nick_name">nickname</string>
+
+
 </resources>
