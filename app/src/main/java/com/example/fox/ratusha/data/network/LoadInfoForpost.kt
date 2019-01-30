@@ -3,7 +3,6 @@ package com.example.fox.ratusha.data.network
 import android.os.AsyncTask
 import android.util.Log
 import com.example.fox.ratusha.ui.entity.Order
-import com.example.fox.ratusha.ui.main.MainPresenter
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -11,12 +10,10 @@ import java.net.URL
 import java.net.URLConnection
 
 
-class LoadInfoService : AsyncTask<Void, Void, String>() {
+class LoadInfoForpost : AsyncTask<Void, Void, String>() {
 
     private var forpOrder: Order? = null
-    private var octalOrder: Order? = null
     private val URL_FORT = "http://service.neverlands.ru/info/cityhall_1.txt"
-    private val URL_OCTAL = "http://service.neverlands.ru/info/cityhall_2.txt"
 
     override fun doInBackground(vararg p0: Void?): String? {
 
@@ -50,36 +47,6 @@ class LoadInfoService : AsyncTask<Void, Void, String>() {
             e.printStackTrace()
         }
 
-
-        //Load info nl service Octal
-        try {
-            val octalList = arrayListOf<String>()
-            val conn: URLConnection = URL(URL_OCTAL).openConnection()
-            conn.connect()
-            val intpStream: InputStream = conn.getInputStream()
-            val reader = BufferedReader(InputStreamReader(intpStream, "Cp1251"), 8)
-            var line: String? = null
-            while ({ line = reader.readLine(); line }() != null) {
-                line?.let {
-                    if (it.contains("order") && it.length < 10) {
-                        // order octal finished
-                    }
-                    if (it.contains("Телепорт")) {
-                        // appeared teleport in ratusha octal
-                    }
-//                    Log.d("LoadInfoService", it)
-
-                }
-            }
-            intpStream.close()
-
-            octalOrder = respons(octalList)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-
         return null
     }
 
@@ -107,8 +74,5 @@ class LoadInfoService : AsyncTask<Void, Void, String>() {
         }
         return responseOrder
     }
-
-
-
 
 }

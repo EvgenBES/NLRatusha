@@ -3,7 +3,7 @@ package com.example.fox.ratusha.ui.main
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BaseViewModel
 
-class MainPresenter (var mainView: MainView?) : BaseViewModel() {
+class MainPresenter(var mainView: MainView?) : BaseViewModel() {
 
 
     override fun runInject() {
@@ -12,10 +12,17 @@ class MainPresenter (var mainView: MainView?) : BaseViewModel() {
 
 
     fun onResume() {
-        mainView?.showProgress()
+//        mainView?.showProgress()
     }
 
     fun onDestroy() {
         mainView = null
     }
+
+    fun test(){
+
+    }
+
+
+
 }
