@@ -3,7 +3,6 @@ package com.example.fox.ratusha.data.network
 import android.os.AsyncTask
 import android.util.Log
 import com.example.fox.ratusha.ui.entity.Order
-import com.example.fox.ratusha.ui.main.MainPresenter
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

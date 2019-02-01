@@ -19,10 +19,5 @@ class MainPresenter(var mainView: MainView?) : BaseViewModel() {
         mainView = null
     }
 
-    fun test(){
-
-    }
-
-
 
 }

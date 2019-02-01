@@ -3,6 +3,7 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#2b3d50</color>
     <color name="colorAccent">#FAFAFB</color>
+    <color name="colorPrimaryLight">#3D5672</color>
 
 
     <!--Navigation-->
@@ -10,6 +11,7 @@
     <color name="icon_nav">#A8BBCA</color>
     <color name="bg_main_layout">#2b3d50</color>
     <color name="ic_color_greey">#B8C9D9</color>
+
 
     <color name="wrap_bg">#7d5e5e5e</color>
     <color name="colorDarkText">#333333</color>
