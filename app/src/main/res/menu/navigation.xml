@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/menu_btn_home"
         android:icon="@drawable/ic_open_book_top_view"
-        android:title="Инфо" />
+        android:title="Главная" />
 
     <item
-        android:id="@+id/navigation_list"
-        android:icon="@drawable/ic_helmet"
-        android:title="Перс" />
-
-    <item
-        android:id="@+id/navigation_alert"
+        android:id="@+id/menu_btn_fp"
         android:icon="@drawable/ic_banner"
         android:title="Форпост" />
+
+    <item
+        android:id="@+id/menu_btn_oct"
+        android:icon="@drawable/ic_banner"
+        android:title="Октал" />
+
+    <item
+        android:id="@+id/menu_btn_info"
+        android:icon="@drawable/ic_open_book_top_view"
+        android:title="Инфо" />
 
 </menu>

@@ -2,15 +2,21 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#021728">
 
     <LinearLayout
         android:id="@+id/headLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/head_main"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
     </LinearLayout>
 
     <LinearLayout
@@ -20,84 +26,128 @@
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headLayout">
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/item_contain_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/headLayout">
+        app:layout_constraintTop_toBottomOf="@+id/headLayout" />
 
 
     <LinearLayout
         android:id="@+id/firstCastle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:weightSum="2"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/borderBottom">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/castle">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#7d5e5e5e">
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/castle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/border_radius_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="155dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_order_forp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        style="@style/ForpostHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/defused"
-                        android:text="@string/castle_name_forp"
-                        android:textColor="#4edfe5"
-                        android:textSize="36sp"
-                        android:textStyle="bold" />
+                        android:text="@string/castle_name_forp" />
 
                     <TextView
                         android:id="@+id/time_order_forp"
+                        style="@style/ForpostTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
-                        android:fontFamily="@font/defused"
-                        android:text="@string/order_time"
-                        android:textColor="#4edfe5"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="0д 00:00:00" />
 
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/progress_order_forp"
+                    style="@style/ForpostProgress"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="25dp"
                     android:background="@drawable/ring_blue"
-                    android:fontFamily="@font/defused"
                     android:gravity="center"
                     android:text="@string/order_progress"
-                    android:textColor="#4edfe5"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            </android.support.constraint.ConstraintLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/border_radius_right"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="2dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/ProductStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/main_activity_product_header" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@android:drawable/btn_star_big_on" />
+
+
+                <TextView
+                    style="@style/ProductStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="2:00:22" />
             </LinearLayout>
-        </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -106,13 +156,14 @@
             android:background="#bebebe"
             android:gravity="center"
             android:minWidth="120dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_text"
+                android:text="@string/main_activity_product_header"
                 android:textStyle="bold" />
 
 
@@ -126,7 +177,7 @@
                     android:id="@+id/product_item_forp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_hourglass"/>
+                    android:src="@drawable/ic_hourglass" />
 
             </LinearLayout>
 
@@ -134,7 +185,7 @@
                 android:id="@+id/product_time_forp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_timer" />
+                android:text="01:00:00" />
 
         </LinearLayout>
 
@@ -143,74 +194,123 @@
 
     <LinearLayout
         android:id="@+id/secondCastle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:weightSum="2"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstCastle">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/castle">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#7d5e5e5e"
-                android:orientation="horizontal">
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/castle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/border_radius_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="155dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_order_octal"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        style="@style/OctalHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/defused"
-                        android:text="@string/castle_name_octal"
-                        android:textColor="#ecb902"
-                        android:textSize="36sp"
-                        android:textStyle="bold" />
+                        android:text="@string/castle_name_octal" />
 
                     <TextView
                         android:id="@+id/time_order_octal"
+                        style="@style/OctalTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
-                        android:fontFamily="@font/defused"
-                        android:text="@string/order_time"
-                        android:textColor="#ecb902"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="0д 00:00:00" />
 
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/progress_order_octal"
+                    style="@style/OctalProgress"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_gravity="center"
                     android:background="@drawable/ring_orange"
-                    android:fontFamily="@font/defused"
                     android:gravity="center"
                     android:text="@string/order_progress"
-                    android:textColor="#ecb902"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            </android.support.constraint.ConstraintLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/border_radius_right"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="2dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/ProductStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/main_activity_product_header" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@android:drawable/btn_star_big_on" />
+
+
+                <TextView
+                    style="@style/ProductStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="2:00:22" />
             </LinearLayout>
-        </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -219,13 +319,14 @@
             android:background="#bebebe"
             android:gravity="center"
             android:minWidth="120dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_text"
+                android:text="@string/main_activity_product_header"
                 android:textStyle="bold" />
 
 
@@ -239,19 +340,17 @@
                     android:id="@+id/product_item_octal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_hourglass"/>
+                    android:src="@drawable/ic_hourglass" />
+
             </LinearLayout>
 
             <TextView
                 android:id="@+id/product_time_octal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_timer" />
+                android:text="02:00:00" />
 
         </LinearLayout>
-
-    </LinearLayout>
-
 
     </LinearLayout>
 

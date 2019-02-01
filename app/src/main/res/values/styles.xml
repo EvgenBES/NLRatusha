@@ -8,4 +8,40 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ForpostHeader">
+        <item name="android:textColor">@color/fp_accent</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/defused</item>
+    </style>
+
+    <style name="ForpostTime" parent="ForpostHeader">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ForpostProgress" parent="ForpostHeader">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="OctalHeader" parent="ForpostHeader">
+        <item name="android:textColor">@color/oct_accent</item>
+    </style>
+
+    <style name="OctalTime" parent="OctalHeader">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="OctalProgress" parent="OctalHeader">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="ProductStyle" parent="ForpostHeader">
+        <item name="android:textColor">@color/colorDarkText</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 </resources>
