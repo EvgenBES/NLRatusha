@@ -6,8 +6,8 @@ import com.example.fox.ratusha.ui.base.BaseViewModel
 class MainPresenter(var mainView: MainView?) : BaseViewModel() {
 
 
-    override fun runInject() {
-        App.getAppComponent().runInject(this)
+    init {
+        App.appComponent.runInject(this)
     }
 
 

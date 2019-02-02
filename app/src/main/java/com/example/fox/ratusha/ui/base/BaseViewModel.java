@@ -8,12 +8,6 @@ public abstract class BaseViewModel extends ViewModel {
 
     private CompositeDisposable compositeDisposable;
 
-    protected abstract void runInject();
-
-    public BaseViewModel() {
-        runInject();
-    }
-
 
     public CompositeDisposable getCompositeDisposable() {
         if(compositeDisposable == null) {
