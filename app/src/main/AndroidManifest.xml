@@ -14,15 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name="com.example.fox.ratusha.ui.start.StartActivity">
+        <activity android:name="com.example.fox.ratusha.ui.start.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.fox.ratusha.ui.main.MainActivity" />
+        <activity
+            android:name="com.example.fox.ratusha.ui.main.MainActivity"
+            android:launchMode="singleTop" />
 
         <service android:name=".service.LoadService" />
     </application>

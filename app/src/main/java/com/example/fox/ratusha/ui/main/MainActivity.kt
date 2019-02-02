@@ -1,24 +1,37 @@
 package com.example.fox.ratusha.ui.main
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.View
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.service.LoadService
-import com.example.fox.ratusha.ui.base.BaseActivity
+import com.example.fox.ratusha.ui.base.BaseMvpActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), MainView {
+class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
+
+    override fun providePresenter(): MainPresenter {
+        return MainPresenter(this)
+    }
+
+    override fun provideRouter(): MainRouter {
+        return MainRouter(this)
+    }
+
+    override fun provideLayoutId(): Int {
+        return R.layout.activity_main
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         bottomNavigation()
 
-        setForpostInfo("д1 12:32:33", 36, " ", "01:23:55")
-        setOctalInfo("д1 12:32:33", 36, " ", "01:23:55")
+        setForpostInfo("д1 12:32:33", "36%", " ", "01:23:55")
+        setOctalInfo("д1 12:32:33", "16%", " ", "01:23:55")
     }
 
     override fun onStart() {
@@ -34,10 +47,10 @@ class MainActivity : BaseActivity(), MainView {
         progress_bar.visibility = View.GONE
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun setForpostInfo(timeOrder: String, progressOrder: Int, urlProduct: String, timeProduct: String) {
+
+    override fun setForpostInfo(timeOrder: String, progressOrder: String, urlProduct: String, timeProduct: String) {
         time_order_forp.text = timeOrder
-        progress_order_forp.text = "$progressOrder%"
+        progress_order_forp.text = progressOrder
         product_time_forp.text = timeProduct
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/db6jg8ca.gif")
@@ -47,10 +60,9 @@ class MainActivity : BaseActivity(), MainView {
     }
 
 
-    @SuppressLint("SetTextI18n")
-    override fun setOctalInfo(timeOrder: String, progressOrder: Int, urlProduct: String, timeProduct: String) {
+    override fun setOctalInfo(timeOrder: String, progressOrder: String, urlProduct: String, timeProduct: String) {
         time_order_octal.text = timeOrder
-        progress_order_octal.text = "$progressOrder%"
+        progress_order_octal.text = progressOrder
         product_time_octal.text = timeProduct
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/w18_form.gif")
