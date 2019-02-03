@@ -1,10 +1,8 @@
 package com.example.fox.ratusha.data.repositories
 
-import com.example.fox.ratusha.data.repositories.model.ItemModele
+import com.example.fox.ratusha.ui.entity.Order
+import io.reactivex.Completable
 
-import io.reactivex.Flowable
-
-interface ItemRepository {
-    //Get all users from bd
-    fun getAll() : Flowable<List<ItemModele>>
+interface ItemRepository : BaseRepository {
+    fun setForpostItem(order: List<Order>)
 }

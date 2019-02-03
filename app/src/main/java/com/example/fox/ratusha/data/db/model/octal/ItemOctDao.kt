@@ -5,7 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 
 @Dao
-interface ItemOctDAO {
+interface ItemOctDao {
 
     @Insert
     fun insert(itemOctResponce: ItemOctResponce)

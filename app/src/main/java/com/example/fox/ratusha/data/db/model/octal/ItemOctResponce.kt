@@ -12,6 +12,5 @@ data class ItemOctResponce(
         val countStart: Int = 0,
         val countFinish: Int = 0,
         val startOrder: String = " ",
-        val finishOrder: String = " ",
-        val countItem: Int = 0
+        val finishOrder: String = " "
 )

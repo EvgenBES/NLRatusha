@@ -1,6 +1,5 @@
 package com.example.fox.ratusha.ui.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -32,11 +31,14 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
         setForpostInfo("д1 12:32:33", "36%", " ", "01:23:55")
         setOctalInfo("д1 12:32:33", "16%", " ", "01:23:55")
+
     }
 
     override fun onStart() {
         super.onStart()
         startService(Intent(this, LoadService::class.java))
+
+        presenter.setItem()
     }
 
     override fun showProgress() {

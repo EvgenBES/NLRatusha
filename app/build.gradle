@@ -36,12 +36,10 @@ dependencies {
     def picassoVersion = '2.71828'
 
     //Room DB
-    def roomVersion = '1.1.1'
+    def roomVersion = "1.1.1"
 
     //Dagger
     def daggerVersion = '2.16'
-
-
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -55,8 +53,8 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     //Database
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    api "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
 
     //Dagger

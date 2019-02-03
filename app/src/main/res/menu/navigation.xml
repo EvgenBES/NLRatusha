@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/menu_btn_home"
-        android:icon="@drawable/ic_open_book_top_view"
+        android:icon="@drawable/ic_tower"
         android:title="Главная" />
 
     <item

@@ -7,11 +7,10 @@ import android.arch.persistence.room.PrimaryKey
 data class ItemForpResponce(
         @PrimaryKey
         val id: Int,
-        val name: String?,
-        val image: String?,
-        val countStart: Int?,
-        val countFinish: Int?,
-        val startOrder: String?,
-        val finishOrder: String?,
-        val countItem: Int?
+        val name: String = " ",
+        val image: String = " ",
+        val countStart: Int = 0,
+        val countFinish: Int = 0,
+        val startOrder: String = " ",
+        val finishOrder: String = " "
 )

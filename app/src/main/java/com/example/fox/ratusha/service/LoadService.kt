@@ -2,10 +2,9 @@ package com.example.fox.ratusha.service
 
 import android.app.Service
 import android.content.Intent
-import android.os.Handler
 import android.os.IBinder
 import android.util.Log
-import com.example.fox.ratusha.data.network.LoadInfoService
+import com.example.fox.ratusha.data.network.GetOrderAsyncTask
 import java.util.concurrent.TimeUnit
 
 
@@ -37,8 +36,9 @@ class LoadService : Service() {
 
         Thread(Runnable {
             while (true) {
-                TimeUnit.SECONDS.sleep(5L)
-                LoadInfoService().execute()
+                TimeUnit.SECONDS.sleep(15L)
+//                GetOrderAsyncTask().execute()
+
             }
 //            stopSelf()
         }).start()
