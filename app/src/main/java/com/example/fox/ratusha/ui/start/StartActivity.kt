@@ -35,7 +35,7 @@ class StartActivity : AppCompatActivity(), StartView {
         Handler().postDelayed({
             startActivity(MainActivity().getIntent(this))
             finish()
-        }, 3000)
+        }, 2500)
     }
 
 

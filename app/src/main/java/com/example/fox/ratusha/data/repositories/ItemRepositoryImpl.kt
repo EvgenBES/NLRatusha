@@ -1,5 +1,6 @@
 package com.example.fox.ratusha.data.repositories
 
+import com.example.fox.ratusha.data.db.AppDataBase
 import com.example.fox.ratusha.data.db.model.forpost.ItemForpDao
 import com.example.fox.ratusha.data.db.model.forpost.ItemForpResponce
 import com.example.fox.ratusha.ui.entity.Order
@@ -10,21 +11,21 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ItemRepositoryImpl @Inject constructor(val itemForpDAO: ItemForpDao) : ItemRepository {
+class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : ItemRepository {
 
 
     override fun setForpostItem(order: List<Order>) {
-        Observable.just(itemForpDAO)
+        Observable.just(appDataBase)
                 .subscribeOn(Schedulers.io())
-                .subscribe(object : Observer<ItemForpDao> {
+                .subscribe(object : Observer<AppDataBase> {
                     override fun onSubscribe(d: Disposable) {
 
                     }
 
-                    override fun onNext(itemForpDAO: ItemForpDao) {
-                        itemForpDAO.deleteAll()
+                    override fun onNext(appDataBase: AppDataBase) {
+                        appDataBase.getForpDao().deleteAll()
                         for (tempOrder in order) {
-                            itemForpDAO.insert(ItemForpResponce(1, "2","3",4,5,"6","7"))
+                            appDataBase.getForpDao().insert(ItemForpResponce(1, "2","3",4,5,"6","7"))
                         }
                     }
 

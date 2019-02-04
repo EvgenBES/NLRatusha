@@ -11,5 +11,5 @@ interface ItemForpDao {
     fun insert(itemForpResponce: ItemForpResponce)
 
     @Query("DELETE FROM forpost")
-    abstract fun deleteAll()
+    fun deleteAll()
 }
