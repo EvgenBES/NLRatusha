@@ -1,10 +1,9 @@
 package com.example.fox.ratusha.data.repositories
 
 import com.example.fox.ratusha.data.db.AppDataBase
-import com.example.fox.ratusha.data.db.model.forpost.ItemForpDao
-import com.example.fox.ratusha.data.db.model.forpost.ItemForpResponce
+import com.example.fox.ratusha.data.db.model.ItemForpost
+import com.example.fox.ratusha.data.db.model.ItemOctal
 import com.example.fox.ratusha.ui.entity.Order
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -24,8 +23,32 @@ class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : Ite
 
                     override fun onNext(appDataBase: AppDataBase) {
                         appDataBase.getForpDao().deleteAll()
-                        for (tempOrder in order) {
-                            appDataBase.getForpDao().insert(ItemForpResponce(1, "2","3",4,5,"6","7"))
+
+                        for (orderList in order[0].listItem) {
+                            appDataBase.getForpDao().insert(ItemForpost(0,
+                                    orderList.id.toInt(),
+                                    orderList.itemName,
+                                    orderList.urlImage,
+                                    orderList.countStart.toInt(),
+                                    orderList.countFinish.toInt(),
+                                    order[0].startOrder,
+                                    order[0].finishOrder))
+
+                        }
+
+
+                        appDataBase.getOctDao().deleteAll()
+
+                        for (orderList in order[1].listItem) {
+                            appDataBase.getOctDao().insert(ItemOctal(0,
+                                    orderList.id.toInt(),
+                                    orderList.itemName,
+                                    orderList.urlImage,
+                                    orderList.countStart.toInt(),
+                                    orderList.countFinish.toInt(),
+                                    order[1].startOrder,
+                                    order[1].finishOrder))
+
                         }
                     }
 
@@ -37,6 +60,8 @@ class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : Ite
 
                     }
                 })
+
+
     }
 
 }

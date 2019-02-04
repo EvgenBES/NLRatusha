@@ -31,8 +31,8 @@ abstract class BaseMvpActivity<P : BasePresenter<R, *>, R : BaseRouter<*>> : Bas
 
     override fun onResume() {
         super.onResume()
-        presenter.onResume()
         presenter.addRouter(router)
+        presenter.onResume()
     }
 
     override fun onPause() {

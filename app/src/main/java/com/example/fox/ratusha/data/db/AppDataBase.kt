@@ -4,10 +4,12 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.example.fox.ratusha.data.db.model.forpost.ItemForpDao
-import com.example.fox.ratusha.data.db.model.forpost.ItemForpResponce
+import com.example.fox.ratusha.data.db.model.ItemForpDao
+import com.example.fox.ratusha.data.db.model.ItemForpost
+import com.example.fox.ratusha.data.db.model.ItemOctDao
+import com.example.fox.ratusha.data.db.model.ItemOctal
 
-@Database(entities = [ItemForpResponce::class], version = 1)
+@Database(entities = [ItemForpost::class, ItemOctal::class], version = 1)
 abstract class AppDataBase : RoomDatabase() {
 
     companion object {
@@ -23,4 +25,5 @@ abstract class AppDataBase : RoomDatabase() {
     }
 
     abstract fun getForpDao(): ItemForpDao
+    abstract fun getOctDao(): ItemOctDao
 }

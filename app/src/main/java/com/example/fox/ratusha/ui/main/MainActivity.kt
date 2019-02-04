@@ -1,28 +1,18 @@
 package com.example.fox.ratusha.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.View
 import com.example.fox.ratusha.R
-import com.example.fox.ratusha.service.LoadService
 import com.example.fox.ratusha.ui.base.BaseMvpActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
-    override fun providePresenter(): MainPresenter {
-        return MainPresenter(this)
-    }
-
-    override fun provideRouter(): MainRouter {
-        return MainRouter(this)
-    }
-
-    override fun provideLayoutId(): Int {
-        return R.layout.activity_main
-    }
+    override fun providePresenter(): MainPresenter =  MainPresenter(this)
+    override fun provideRouter(): MainRouter = MainRouter(this)
+    override fun provideLayoutId(): Int =  R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +24,11 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        startService(Intent(this, LoadService::class.java))
 
-        presenter.setItem()
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+        presenter.addRouter(router)
     }
 
     override fun showProgress() {
@@ -73,7 +63,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
                 .into(product_item_octal)
     }
 
-    fun bottomNavigation() {
+    private fun bottomNavigation() {
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_btn_home -> return@OnNavigationItemSelectedListener true

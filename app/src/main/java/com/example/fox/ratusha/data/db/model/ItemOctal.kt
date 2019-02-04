@@ -1,12 +1,13 @@
-package com.example.fox.ratusha.data.db.model.octal
+package com.example.fox.ratusha.data.db.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "octal")
-data class ItemOctResponce(
-        @PrimaryKey
+data class ItemOctal(
+        @PrimaryKey (autoGenerate = true)
         val id: Int,
+        val itemId: Int,
         val name: String = " ",
         val image: String = " ",
         val countStart: Int = 0,

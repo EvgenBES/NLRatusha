@@ -1,13 +1,12 @@
 package com.example.fox.ratusha.ui.main
 
+import com.example.fox.ratusha.data.network.GetOrderAsyncTask
 import com.example.fox.ratusha.data.usecases.ItemDataBaseUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
-import com.example.fox.ratusha.ui.entity.ItemOrder
-import com.example.fox.ratusha.ui.entity.Order
 import javax.inject.Inject
 
-class MainPresenter(mainView: MainView) : BasePresenter<MainRouter, MainView>(mainView) {
+class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) {
 
     init {
         App.appComponent.runInject(this)
@@ -16,12 +15,19 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainRouter, MainView>(ma
     @Inject
     lateinit var itemDataBase: ItemDataBaseUseCase
 
-    fun setItem() {
 
-        val list: List<ItemOrder> = arrayListOf(ItemOrder("1", "2", "3", "4", "5"))
-        val order: List<Order> = arrayListOf(Order("1", "2", list, "3", "4"))
+    override fun onResume() {
+        super.onResume()
+        setItem()
+    }
+    private fun setItem() {
+        val resultGetOrder =  GetOrderAsyncTask().execute().get()
 
-        itemDataBase.setOrder(order)
+        if (resultGetOrder[0].startOrder !== " ") {
+            itemDataBase.setOrder(resultGetOrder)
+        } else {
+            router?.showToastActivity("I'm need internet! Give me please internet!")
+        }
     }
 
 }

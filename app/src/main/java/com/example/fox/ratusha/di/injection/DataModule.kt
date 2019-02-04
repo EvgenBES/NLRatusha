@@ -2,10 +2,9 @@ package com.example.fox.ratusha.di.injection
 
 import android.content.Context
 import com.example.fox.ratusha.data.db.AppDataBase
-import com.example.fox.ratusha.data.db.model.forpost.ItemForpDao
+import com.example.fox.ratusha.data.db.model.ItemForpDao
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * @author Evgeny Butov
