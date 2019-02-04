@@ -116,7 +116,6 @@
 
 
                     <TextView
-
                         android:id="@+id/progress_order_forp"
                         style="@style/ForpostProgress"
                         android:layout_width="85dp"
@@ -154,7 +153,7 @@
                     android:id="@+id/product_item_forp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    tools:src="@drawable/ic_hourglass" />
+                    android:src="@drawable/ic_cancel" />
 
 
                 <TextView
@@ -298,7 +297,7 @@
                     android:id="@+id/product_item_octal"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    tools:src="@drawable/ic_hourglass" />
+                    android:src="@drawable/ic_cancel" />
 
 
                 <TextView
@@ -341,5 +340,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation" />
+
+    <Button
+        android:id="@+id/buttonRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_refresh"
+        android:drawableStart="@drawable/ic_refresh_wifi"
+        android:paddingStart="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondCastle" />
 
 </android.support.constraint.ConstraintLayout>

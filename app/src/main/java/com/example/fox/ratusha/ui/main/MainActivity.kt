@@ -18,17 +18,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
         super.onCreate(savedInstanceState)
 
         bottomNavigation()
-
-        setForpostInfo("д1 12:32:33", "36%", " ", "01:23:55")
-        setOctalInfo("д1 12:32:33", "16%", " ", "01:23:55")
-
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        presenter.onResume()
-        presenter.addRouter(router)
+        buttonRefreshClick()
     }
 
     override fun showProgress() {
@@ -45,7 +35,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
         progress_order_forp.text = progressOrder
         product_time_forp.text = timeProduct
         Picasso.get()
-                .load("http://image.neverlands.ru/weapon/db6jg8ca.gif")
+                .load("http://image.neverlands.ru/weapon/$urlProduct")
                 .placeholder(R.drawable.ic_hourglass)
                 .error(R.drawable.ic_cancel)
                 .into(product_item_forp)
@@ -57,7 +47,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
         progress_order_octal.text = progressOrder
         product_time_octal.text = timeProduct
         Picasso.get()
-                .load("http://image.neverlands.ru/weapon/w18_form.gif")
+                .load("http://image.neverlands.ru/weapon/$urlProduct")
                 .placeholder(R.drawable.ic_hourglass)
                 .error(R.drawable.ic_cancel)
                 .into(product_item_octal)
@@ -75,6 +65,11 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
             }
             false
         }
+    }
+
+    private fun buttonRefreshClick() {
+        buttonRefresh.setOnClickListener { presenter.setItem() }
+
     }
 
 }
