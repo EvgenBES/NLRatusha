@@ -38,25 +38,24 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
     private fun setViewItem(resultGetOrder: List<Order>) {
 
-        router?.activity?.setForpostInfo(timeMap(resultGetOrder[0].startOrder, resultGetOrder[0].finishOrder),
+        router?.activity?.setForpostInfo(timeMap(resultGetOrder[0].finishOrder),
                 countProgress(resultGetOrder[0].listItem), resultGetOrder[0].urlProduct, "01:32:32")
 
-        router?.activity?.setOctalInfo(timeMap(resultGetOrder[1].startOrder, resultGetOrder[1].finishOrder),
-                countProgress(resultGetOrder[1].listItem), resultGetOrder[1].urlProduct, "00:02:12")
+        router?.activity?.setOctalInfo(timeMap(resultGetOrder[1].finishOrder),
+                countProgress(resultGetOrder[1].listItem),
+                resultGetOrder[1].urlProduct, "00:02:12")
     }
 
 
-    private fun timeMap(start: String, finish: String): String {
-        val dateStart = SimpleDateFormat("dd.MM.yyyy HH:mm").parse(start).time
+    private fun timeMap(finish: String): String {
+        val fixTime = 10800000L // 3 hor
         val dateFinish = SimpleDateFormat("dd.MM.yyyy HH:mm").parse(finish).time
+        val dateNew = dateFinish - Date().time - fixTime
 
-        val currentDate = Date()
-        val dateNew = currentDate.time - (dateFinish - dateStart)
+        val daysLeft = SimpleDateFormat("d", Locale.getDefault()).format(dateNew).toInt()
+        val result = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(dateNew)
 
-        val day = SimpleDateFormat("d").format(dateNew)
-        val time = SimpleDateFormat("HH:mm:ss").format(dateNew)
-
-        return "${day}д $time"
+        return "${daysLeft - 1}д $result" //return 4д 12:03:01
     }
 
     private fun countProgress(listItem: List<ItemOrder>): String {
@@ -70,7 +69,9 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
         val result: Double = (100 - ((sumFinishCount / sumStartCount) * 10))
 
-        return "${result.toInt()}%"
+        return "${result.toInt()}%" // return 0..99%
     }
 
 }
+
+
