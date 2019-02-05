@@ -32,18 +32,20 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
             itemDataBase.setOrder(resultGetOrder)
             setViewItem(resultGetOrder)
         } else {
-            router?.showToastActivity("I'm need internet! Give me please internet!")
+            router?.showToastActivity("Ошибка соединения...")
         }
+
+        timerProduct()
     }
 
     private fun setViewItem(resultGetOrder: List<Order>) {
 
         router?.activity?.setForpostInfo(timeMap(resultGetOrder[0].finishOrder),
-                countProgress(resultGetOrder[0].listItem), resultGetOrder[0].urlProduct, "01:32:32")
+                countProgress(resultGetOrder[0].listItem), resultGetOrder[0].urlProduct)
 
         router?.activity?.setOctalInfo(timeMap(resultGetOrder[1].finishOrder),
                 countProgress(resultGetOrder[1].listItem),
-                resultGetOrder[1].urlProduct, "00:02:12")
+                resultGetOrder[1].urlProduct)
     }
 
 
@@ -71,6 +73,18 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
         return "${result.toInt()}%" // return 0..99%
     }
+
+    private fun timerProduct() {
+        val hour = SimpleDateFormat("HH").format(Date()).toInt() % 2
+        val minute = SimpleDateFormat("mm:ss", Locale.getDefault()).format(Date())
+        val getTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse(minute).time
+        val fixedTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse("00:00").time
+
+        val result = SimpleDateFormat("mm:ss", Locale.getDefault()).format(fixedTimeLong - getTimeLong)
+
+        router?.activity?.setTimeProduct("0${if (hour == 0) 1 else 0}:$result")
+    }
+
 
 }
 

@@ -10,9 +10,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
-    override fun providePresenter(): MainPresenter =  MainPresenter(this)
+    override fun providePresenter(): MainPresenter = MainPresenter(this)
     override fun provideRouter(): MainRouter = MainRouter(this)
-    override fun provideLayoutId(): Int =  R.layout.activity_main
+    override fun provideLayoutId(): Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +30,9 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
     }
 
 
-    override fun setForpostInfo(timeOrder: String, progressOrder: String, urlProduct: String, timeProduct: String) {
+    override fun setForpostInfo(timeOrder: String, progressOrder: String, urlProduct: String) {
         time_order_forp.text = timeOrder
         progress_order_forp.text = progressOrder
-        product_time_forp.text = timeProduct
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/$urlProduct")
                 .placeholder(R.drawable.ic_hourglass)
@@ -42,15 +41,19 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
     }
 
 
-    override fun setOctalInfo(timeOrder: String, progressOrder: String, urlProduct: String, timeProduct: String) {
+    override fun setOctalInfo(timeOrder: String, progressOrder: String, urlProduct: String) {
         time_order_octal.text = timeOrder
         progress_order_octal.text = progressOrder
-        product_time_octal.text = timeProduct
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/$urlProduct")
                 .placeholder(R.drawable.ic_hourglass)
                 .error(R.drawable.ic_cancel)
                 .into(product_item_octal)
+    }
+
+    fun setTimeProduct(time: String) {
+        product_time_forp.text = time
+        product_time_octal.text = time
     }
 
     private fun bottomNavigation() {
@@ -69,7 +72,6 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
     private fun buttonRefreshClick() {
         buttonRefresh.setOnClickListener { presenter.setItem() }
-
     }
 
 }
