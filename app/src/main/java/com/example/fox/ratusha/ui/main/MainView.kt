@@ -5,6 +5,6 @@ import com.example.fox.ratusha.ui.base.BaseView
 interface MainView : BaseView{
     fun showProgress()
     fun hideProgress()
-    fun setForpostInfo(timeOrder: String, progressOrder: String, urlProduct: String)
-    fun setOctalInfo(timeOrder: String, progressOrder: String, urlProduct: String)
+    fun setForpostInfo(progressOrder: String, urlProduct: String)
+    fun setOctalInfo(progressOrder: String, urlProduct: String)
 }
