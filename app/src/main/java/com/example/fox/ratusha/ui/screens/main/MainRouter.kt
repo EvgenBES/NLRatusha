@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.ui.main
+package com.example.fox.ratusha.ui.screens.main
 
 import android.widget.Toast
 import com.example.fox.ratusha.ui.base.BaseRouter

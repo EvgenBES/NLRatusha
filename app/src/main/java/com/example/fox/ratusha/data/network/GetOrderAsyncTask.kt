@@ -4,6 +4,8 @@ import android.os.AsyncTask
 import android.util.Log
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import com.example.fox.ratusha.ui.entity.Order
+import com.example.fox.ratusha.ui.entity.TownHall
+import java.lang.NumberFormatException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.UnknownHostException
@@ -56,39 +58,41 @@ class GetOrderAsyncTask : AsyncTask<Void, Void, List<Order>>() {
 
     override fun onPostExecute(result: List<Order>) {
         super.onPostExecute(result)
-
-        Log.d(TAG, "doInBackground ${result.size}")
     }
 
 
     /**
      * Map Orders
      */
-    private fun mapOrder(forpostList: List<String>): Order {
+    private fun mapOrder(listString: List<String>): Order {
 
         val timeList = arrayListOf<String>()
         val listItemOrder = mutableListOf<ItemOrder>()
         val productList = arrayListOf<String>()
 
         var i = 0
-        while (i < forpostList.size) {
+        while (i < listString.size) {
             if (i == 0) {
-                val timeOrder = forpostList[0].split("|")
+                val timeOrder = listString[0].split("|")
                 for (list in timeOrder) {
                     timeList.add(list)
                 }
             }
             if (i == 1) {
-                val replaceText = forpostList[1].replace("order|", "").replace("item,", "")
+                val replaceText = listString[1].replace("order|", "").replace("item,", "")
                 val itemOrder = replaceText.split("@")
                 for (list in itemOrder) {
                     val tempList = list.split(",")
                     if (tempList.size > 4)
-                        listItemOrder.add(ItemOrder(tempList[0], tempList[1], tempList[2], tempList[3], tempList[4]))
+                        try {
+                            listItemOrder.add(ItemOrder(tempList[0].toInt(), tempList[1], tempList[2], tempList[3].toInt(), tempList[4].toInt()))
+                        } catch (e: NumberFormatException) {
+                            Log.e(TAG, "mapOrder NumberFormatException")
+                        }
                 }
             }
             if (i == 2) {
-                val replaceText = forpostList[2].replace("store|item|", "").replace("|1", "")
+                val replaceText = listString[2].replace("store|item|", "")
                 val itemProduct = replaceText.split("|")
                 for (tempProduct in itemProduct) {
                     productList.add(tempProduct)
@@ -97,11 +101,11 @@ class GetOrderAsyncTask : AsyncTask<Void, Void, List<Order>>() {
             i++
         }
 
-        if (timeList.size == 3 && productList.size == 2) {
-            return Order(timeList[1], timeList[2], listItemOrder, productList[0], productList[1])
+        if (timeList.size == 3 && productList.size > 1) {
+            return Order(listItemOrder, TownHall(timeList[0].toInt(), timeList[1], timeList[2], productList[1]))
         }
 
-        return Order(listItem = listItemOrder)
+        return Order(itemList = listItemOrder, townHall = TownHall())
     }
 
 

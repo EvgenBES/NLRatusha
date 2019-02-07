@@ -11,7 +11,5 @@ data class ItemForpost(
         val name: String = " ",
         val image: String = " ",
         val countStart: Int = 0,
-        val countFinish: Int = 0,
-        val startOrder: String = " ",
-        val finishOrder: String = " "
+        val countFinish: Int = 0
 )

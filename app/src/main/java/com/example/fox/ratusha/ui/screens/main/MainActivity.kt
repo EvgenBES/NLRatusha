@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.ui.main
+package com.example.fox.ratusha.ui.screens.main
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -31,8 +31,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
     }
 
 
-    override fun setForpostInfo(progressOrder: String, urlProduct: String) {
-        progress_order_forp.text = progressOrder
+    override fun setImageProductForpost(urlProduct: String) {
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/$urlProduct")
                 .placeholder(com.example.fox.ratusha.R.drawable.ic_hourglass)
@@ -41,8 +40,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
     }
 
 
-    override fun setOctalInfo(progressOrder: String, urlProduct: String) {
-        progress_order_octal.text = progressOrder
+    override fun setImageProductOctal(urlProduct: String) {
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/$urlProduct")
                 .placeholder(com.example.fox.ratusha.R.drawable.ic_hourglass)
@@ -50,17 +48,25 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
                 .into(product_item_octal)
     }
 
-    fun setTimeProduct(time: String) {
-        product_time_forp.text = time
-        product_time_octal.text = time
-    }
-
     fun setForpostTime(time: String) {
         time_order_forp.text = time
     }
 
+    fun setForpostProgress(progress: String) {
+        progress_order_forp.text = progress
+    }
+
     fun setOctalTime(time: String) {
         time_order_octal.text = time
+    }
+
+    fun setOctalProgress(progress: String) {
+        progress_order_octal.text = progress
+    }
+
+    fun setTimeProduct(time: String) {
+        product_time_forp.text = time
+        product_time_octal.text = time
     }
 
     private fun bottomNavigation() {

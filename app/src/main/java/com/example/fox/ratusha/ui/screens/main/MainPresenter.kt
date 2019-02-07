@@ -1,11 +1,13 @@
-package com.example.fox.ratusha.ui.main
+package com.example.fox.ratusha.ui.screens.main
 
 import com.example.fox.ratusha.data.network.GetOrderAsyncTask
+import com.example.fox.ratusha.data.usecases.GetInfoTownHall
 import com.example.fox.ratusha.data.usecases.ItemDataBaseUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import com.example.fox.ratusha.ui.entity.Order
+import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -17,12 +19,16 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
     private var remainderTimeOrderForpost = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L) //today + 10days
     private var remainderTimeOrderOctal = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L)
 
-    init {
-        App.appComponent.runInject(this)
-    }
-
     @Inject
     lateinit var itemDataBase: ItemDataBaseUseCase
+
+    @Inject
+    lateinit var getInfoTownHall: GetInfoTownHall
+
+    init {
+        App.appComponent.runInject(this)
+        getTownHall()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -39,11 +45,11 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
     fun setItem() {
         val resultGetOrder = GetOrderAsyncTask().execute().get()
 
-        if (resultGetOrder[0].startOrder !== " ") {
+        if (resultGetOrder[0].townHall.start !== " ") {
             itemDataBase.setOrder(resultGetOrder)
-            setViewItem(resultGetOrder) // observer
-            remainderTimeOrderForpost = resultGetOrder[0].finishOrder //observer
-            remainderTimeOrderOctal = resultGetOrder[1].finishOrder //observer
+            setProgressOrder(resultGetOrder)
+            remainderTimeOrderForpost = resultGetOrder[0].townHall.finish //observer
+            remainderTimeOrderOctal = resultGetOrder[1].townHall.finish //observer
             router?.activity?.hideButtonRefresh()
         } else {
             router?.showToastActivity("Ошибка соединения...")
@@ -51,9 +57,15 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
         }
     }
 
-    private fun setViewItem(resultGetOrder: List<Order>) {
-        router?.activity?.setForpostInfo(countProgress(resultGetOrder[0].listItem), resultGetOrder[0].urlProduct)
-        router?.activity?.setOctalInfo(countProgress(resultGetOrder[1].listItem), resultGetOrder[1].urlProduct)
+//    private fun setProgressOrder(fortProgress: String, octalProgress: String) {
+    private fun setProgressOrder(result: List<Order>) {
+        router?.activity?.setForpostProgress(countProgress(result[0].itemList))
+        router?.activity?.setOctalProgress(countProgress(result[1].itemList))
+    }
+
+    private fun setImageProduct(urlImageProductForpost: String, urlImageProductOctal: String) {
+        router?.activity?.setImageProductForpost(urlImageProductForpost)
+        router?.activity?.setImageProductOctal(urlImageProductOctal)
     }
 
     /**
@@ -79,8 +91,8 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
         var sumFinishCount = 0.0
 
         for (item in listItem) {
-            sumStartCount += item.countStart.toInt()
-            sumFinishCount += item.countFinish.toInt()
+            sumStartCount += item.countStart
+            sumFinishCount += item.countFinish
         }
 
         val result: Double = (100 - ((sumFinishCount / sumStartCount) * 10))
@@ -132,5 +144,13 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
         }
     }
 
+
+    private fun getTownHall() {
+        val disposable = getInfoTownHall.get().subscribeBy(
+                onNext = { setImageProduct(it[0].url, it[1].url) },
+                onError = { router?.showToastActivity("error") }
+        )
+        addToDisposible(disposable)
+    }
 
 }

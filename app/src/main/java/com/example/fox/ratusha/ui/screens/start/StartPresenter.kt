@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.ui.start
+package com.example.fox.ratusha.ui.screens.start
 
 class StartPresenter(var loginView: StartView?){
     fun onDestroy() {

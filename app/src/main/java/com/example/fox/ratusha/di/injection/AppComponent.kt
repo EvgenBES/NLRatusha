@@ -2,7 +2,7 @@ package com.example.fox.ratusha.di.injection
 
 
 import com.example.fox.ratusha.di.app.App
-import com.example.fox.ratusha.ui.main.MainPresenter
+import com.example.fox.ratusha.ui.screens.main.MainPresenter
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

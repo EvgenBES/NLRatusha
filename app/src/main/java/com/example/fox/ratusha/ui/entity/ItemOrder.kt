@@ -5,9 +5,9 @@ package com.example.fox.ratusha.ui.entity
  * @since 03.02.2019
  */
 data class ItemOrder(
-        val id: String,
+        val id: Int,
         val itemName: String,
         val urlImage: String,
-        val countStart: String,
-        val countFinish: String
+        val countStart: Int,
+        val countFinish: Int
 )

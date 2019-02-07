@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.ui.start
+package com.example.fox.ratusha.ui.screens.start
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.example.fox.ratusha.R
-import com.example.fox.ratusha.ui.main.MainActivity
+import com.example.fox.ratusha.ui.screens.main.MainActivity
 import kotlinx.android.synthetic.main.activity_start.*
 
 
