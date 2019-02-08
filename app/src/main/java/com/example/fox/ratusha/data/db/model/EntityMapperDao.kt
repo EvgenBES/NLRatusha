@@ -1,6 +1,7 @@
 package com.example.fox.ratusha.data.db.model
 
 import com.example.fox.ratusha.ui.entity.ItemOrder
+import com.example.fox.ratusha.ui.entity.Order
 import com.example.fox.ratusha.ui.entity.TownHall
 
 /**
@@ -18,4 +19,16 @@ fun ItemOctal.transformToPresenter(): ItemOrder {
 
 fun InfoTownHall.transformToPresenter(): TownHall {
     return TownHall(id = idTown, start = start, finish = finish, url = url)
+}
+
+fun ItemOrder.transformToItemForpostDao(): ItemForpost {
+    return ItemForpost(id = 0, itemId = id, name = itemName, image = urlImage, countStart = countStart, countFinish = countFinish)
+}
+
+fun ItemOrder.transformToItemOctalDao(): ItemOctal {
+    return ItemOctal(id = 0, itemId = id, name = itemName, image = urlImage, countStart = countStart, countFinish = countFinish)
+}
+
+fun Order.transformToTownHallDao(): InfoTownHall {
+    return InfoTownHall(id = 0, idTown = townHall.id, start = townHall.start, finish = townHall.finish, url = townHall.url)
 }

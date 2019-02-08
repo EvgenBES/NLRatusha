@@ -1,10 +1,7 @@
 package com.example.fox.ratusha.data.repositories
 
 import com.example.fox.ratusha.data.db.AppDataBase
-import com.example.fox.ratusha.data.db.model.InfoTownHall
-import com.example.fox.ratusha.data.db.model.ItemForpost
-import com.example.fox.ratusha.data.db.model.ItemOctal
-import com.example.fox.ratusha.data.db.model.transformToPresenter
+import com.example.fox.ratusha.data.db.model.*
 import com.example.fox.ratusha.ui.entity.Order
 import com.example.fox.ratusha.ui.entity.TownHall
 import io.reactivex.Flowable
@@ -27,37 +24,18 @@ class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : Ite
 
                     override fun onNext(appDataBase: AppDataBase) {
                         appDataBase.getForpDao().deleteAll()
-
                         for (orderList in order[0].itemList) {
-                            appDataBase.getForpDao().insert(ItemForpost(0,
-                                    orderList.id,
-                                    orderList.itemName,
-                                    orderList.urlImage,
-                                    orderList.countStart,
-                                    orderList.countFinish))
+                            appDataBase.getForpDao().insert(orderList.transformToItemForpostDao())
                         }
 
                         appDataBase.getOctDao().deleteAll()
-
                         for (orderList in order[1].itemList) {
-                            appDataBase.getOctDao().insert(ItemOctal(0,
-                                    orderList.id,
-                                    orderList.itemName,
-                                    orderList.urlImage,
-                                    orderList.countStart,
-                                    orderList.countFinish))
+                            appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
                         }
 
                         appDataBase.getTownHallDao().deleteAll()
-
                         for (listOrder in order) {
-                            appDataBase.getTownHallDao().insert(InfoTownHall(
-                                    0,
-                                    listOrder.townHall.id,
-                                    listOrder.townHall.start,
-                                    listOrder.townHall.finish,
-                                    listOrder.townHall.url
-                            ))
+                            appDataBase.getTownHallDao().insert(listOrder.transformToTownHallDao())
                         }
 
                     }
@@ -74,7 +52,7 @@ class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : Ite
 
 
     override fun getInfoTownHall(): Flowable<List<TownHall>> {
-        return appDataBase.getTownHallDao().getAll().map { it.map { it.transformToPresenter() } }
+        return appDataBase.getTownHallDao().getAll().map { list -> list.map { it.transformToPresenter() } }
     }
 }
 
