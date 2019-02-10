@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.data.db.model
+package com.example.fox.ratusha.data.db.entity
 
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import com.example.fox.ratusha.ui.entity.Order

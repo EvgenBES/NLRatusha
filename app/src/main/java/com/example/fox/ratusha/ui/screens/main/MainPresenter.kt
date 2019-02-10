@@ -1,12 +1,14 @@
 package com.example.fox.ratusha.ui.screens.main
 
+import android.util.Log
 import com.example.fox.ratusha.data.network.GetOrderAsyncTask
 import com.example.fox.ratusha.data.usecases.GetInfoTownHall
-import com.example.fox.ratusha.data.usecases.ItemDataBaseUseCase
+import com.example.fox.ratusha.data.usecases.GetItemForpostUseCase
+import com.example.fox.ratusha.data.usecases.GetItemOctalUseCase
+import com.example.fox.ratusha.data.usecases.SetItemDataBaseUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
 import com.example.fox.ratusha.ui.entity.ItemOrder
-import com.example.fox.ratusha.ui.entity.Order
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,26 +17,38 @@ import javax.inject.Inject
 
 class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) {
 
-    lateinit var timerThread: Thread
+    private lateinit var timerThread: Thread
+    private lateinit var getOrderInfoThread: Thread
     private var remainderTimeOrderForpost = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L) //today + 10days
     private var remainderTimeOrderOctal = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L)
 
     @Inject
-    lateinit var itemDataBase: ItemDataBaseUseCase
+    lateinit var itemDataBase: SetItemDataBaseUseCase
 
     @Inject
     lateinit var getInfoTownHall: GetInfoTownHall
 
+    @Inject
+    lateinit var getItemForpost: GetItemForpostUseCase
+
+    @Inject
+    lateinit var getItemOctal: GetItemOctalUseCase
+
     init {
         App.appComponent.runInject(this)
+
         getTownHall()
+        getProgressOrders()
     }
 
     override fun onResume() {
         super.onResume()
-        setItem()
+
         timerThread = createdTimerThread()
         startTimerThread()
+
+        getOrderInfoThread = createdRefreshInfoThread()
+        getOrderInformation()
     }
 
     override fun onPause() {
@@ -42,25 +56,30 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
         stopTimerThread()
     }
 
-    fun setItem() {
+    fun getOrderInformation() {
         val resultGetOrder = GetOrderAsyncTask().execute().get()
 
         if (resultGetOrder[0].townHall.start !== " ") {
             itemDataBase.setOrder(resultGetOrder)
-            setProgressOrder(resultGetOrder)
-            remainderTimeOrderForpost = resultGetOrder[0].townHall.finish //observer
-            remainderTimeOrderOctal = resultGetOrder[1].townHall.finish //observer
             router?.activity?.hideButtonRefresh()
+
+            if (!getOrderInfoThread.isAlive) {
+                getOrderInfoThread.start()
+            }
+
         } else {
             router?.showToastActivity("Ошибка соединения...")
             router?.activity?.visibleButtonRefresh()
+
+            if (getOrderInfoThread.isAlive) {
+                getOrderInfoThread.interrupt()
+            }
         }
     }
 
-//    private fun setProgressOrder(fortProgress: String, octalProgress: String) {
-    private fun setProgressOrder(result: List<Order>) {
-        router?.activity?.setForpostProgress(countProgress(result[0].itemList))
-        router?.activity?.setOctalProgress(countProgress(result[1].itemList))
+    private fun setProgressOrder(listItemForpost: List<ItemOrder>, listItemOctal: List<ItemOrder>) {
+        router?.activity?.setForpostProgress(countProgress(listItemForpost))
+        router?.activity?.setOctalProgress(countProgress(listItemOctal))
     }
 
     private fun setImageProduct(urlImageProductForpost: String, urlImageProductOctal: String) {
@@ -100,6 +119,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
         return "${result.toInt()}%" // return 0..99%
     }
 
+
     private fun timerProduct() {
         val hour = SimpleDateFormat("HH").format(Date()).toInt() % 2
         val minute = SimpleDateFormat("mm:ss", Locale.getDefault()).format(Date())
@@ -124,6 +144,10 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
     private fun stopTimerThread() {
         timerThread.interrupt()
+
+        if (getOrderInfoThread.isAlive) {
+            getOrderInfoThread.interrupt()
+        }
     }
 
     private fun createdTimerThread(): Thread {
@@ -131,11 +155,27 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
             override fun run() {
                 try {
                     while (!isInterrupted) {
-                        sleep(1000)
                         router?.activity?.runOnUiThread {
                             timerProduct()
                             setTimeOrder()
                         }
+                        sleep(1000) //1s
+                    }
+                } catch (e: InterruptedException) {
+//                    Log.e("MainPresenter", "InterruptedException ${e.message}")
+                }
+            }
+        }
+    }
+
+
+    private fun createdRefreshInfoThread(): Thread {
+        return object : Thread() {
+            override fun run() {
+                try {
+                    while (!isInterrupted) {
+                        router?.activity?.runOnUiThread { getOrderInformation() }
+                        sleep(5 * 2 * 1000) // 5m * 60s * 1k ms
                     }
                 } catch (e: InterruptedException) {
 //                    Log.e("MainPresenter", "InterruptedException ${e.message}")
@@ -147,10 +187,31 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
     private fun getTownHall() {
         val disposable = getInfoTownHall.get().subscribeBy(
-                onNext = { setImageProduct(it[0].url, it[1].url) },
-                onError = { router?.showToastActivity("error") }
+                onNext = {
+                    if (it.size >= 2) {
+                        remainderTimeOrderForpost = it[0].finish
+                        remainderTimeOrderOctal = it[1].finish
+                        setImageProduct(it[0].url, it[1].url)
+                    }
+                },
+                onError = { Log.d("AAQQ", "message: ${it.message}") }
         )
         addToDisposible(disposable)
     }
+
+    private fun getProgressOrders() {
+        val disposable = getItemForpost.getAllItemOrder().subscribeBy(
+                onNext = { router?.activity?.setForpostProgress(countProgress(it)) },
+                onError = { Log.d("AAQQ", "message: ${it.message}") }
+        )
+        addToDisposible(disposable)
+
+        val disposableOct = getItemOctal.getAllItemOrder().subscribeBy(
+                onNext = { router?.activity?.setOctalProgress(countProgress(it)) },
+                onError = { Log.d("AAQQ", "message: ${it.message}") }
+        )
+        addToDisposible(disposableOct)
+    }
+
 
 }

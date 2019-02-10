@@ -9,13 +9,10 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @since 03.02.2019
  */
+class SetItemDataBaseUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
+                                                 private val itemRepository: ItemRepository) : BaseUseCase(postExecutionThread) {
 
-class ItemDataBaseUseCase @Inject constructor(
-        postExecutionThread: PostExecutionThread,
-        private val itemRepository: ItemRepository) : BaseUseCase(postExecutionThread) {
-
-    fun setOrder(order: List<Order>){
+    fun setOrder(order: List<Order>) {
         return itemRepository.setForpostItem(order)
-
     }
 }

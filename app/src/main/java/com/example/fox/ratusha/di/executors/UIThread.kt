@@ -1,7 +1,6 @@
-package com.example.fox.ratusha.di.injection
+package com.example.fox.ratusha.di.executors
 
 
-import com.example.fox.ratusha.di.executors.PostExecutionThread
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 

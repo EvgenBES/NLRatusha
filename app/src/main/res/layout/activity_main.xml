@@ -350,6 +350,7 @@
         android:background="@drawable/button_refresh"
         android:drawableStart="@drawable/ic_refresh_wifi"
         android:paddingStart="28dp"
+        android:alpha="0.0"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

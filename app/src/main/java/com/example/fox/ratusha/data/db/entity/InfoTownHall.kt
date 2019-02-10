@@ -1,4 +1,4 @@
-package com.example.fox.ratusha.data.db.model
+package com.example.fox.ratusha.data.db.entity
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

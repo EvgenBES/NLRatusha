@@ -2,9 +2,13 @@ package com.example.fox.ratusha.di.injection
 
 import android.content.Context
 import com.example.fox.ratusha.data.db.AppDataBase
-import com.example.fox.ratusha.data.db.model.ItemForpDao
+import com.example.fox.ratusha.data.repositories.ItemRepository
+import com.example.fox.ratusha.data.repositories.ItemRepositoryImpl
+import com.example.fox.ratusha.di.executors.PostExecutionThread
+import com.example.fox.ratusha.di.executors.UIThread
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * @author Evgeny Butov
@@ -13,13 +17,34 @@ import dagger.Provides
 @Module
 class DataModule {
 
+    @Singleton
     @Provides
     fun provideAppDataBase(context: Context): AppDataBase {
         return AppDataBase.getInstance(context)
     }
 
+    @Singleton
     @Provides
-    fun provideItemForpDao(appDataBase: AppDataBase): ItemForpDao {
-        return appDataBase.getForpDao()
+    fun provideItemRepository(itemRepository: ItemRepositoryImpl): ItemRepository {
+        return itemRepository
     }
+
+    @Singleton
+    @Provides
+    fun providePostExecutionThread(): PostExecutionThread {
+        return UIThread()
+    }
+
+
+//    @Singleton
+//    @Provides
+//    fun provideUIThread(uiThread: UIThread): PostExecutionThread {
+//        return uiThread
+//    }
+
+
+//    @Provides
+//    fun provideItemForpDao(appDataBase: AppDataBase): ItemForpDao {
+//        return appDataBase.getForpDao()
+//    }
 }

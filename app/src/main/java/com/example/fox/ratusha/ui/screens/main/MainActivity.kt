@@ -84,7 +84,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
     }
 
     private fun buttonRefreshClick() {
-        buttonRefresh.setOnClickListener { presenter.setItem() }
+        buttonRefresh.setOnClickListener { presenter.getOrderInformation() }
     }
 
     fun hideButtonRefresh() {

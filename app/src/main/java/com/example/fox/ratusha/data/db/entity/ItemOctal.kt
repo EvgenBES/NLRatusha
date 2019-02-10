@@ -1,10 +1,10 @@
-package com.example.fox.ratusha.data.db.model
+package com.example.fox.ratusha.data.db.entity
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "forpost")
-data class ItemForpost(
+@Entity(tableName = "octal")
+data class ItemOctal(
         @PrimaryKey (autoGenerate = true)
         val id: Int,
         val itemId: Int,

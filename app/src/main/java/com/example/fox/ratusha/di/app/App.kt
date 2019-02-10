@@ -37,11 +37,11 @@ class App : Application(), HasActivityInjector {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
 
-
         appComponent = DaggerAppComponent
                 .builder()
                 .application(this)
                 .build()
-    }
 
+        appComponent.inject(this)
+    }
 }

@@ -4,7 +4,9 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.example.fox.ratusha.data.db.model.*
+import com.example.fox.ratusha.data.db.entity.InfoTownHall
+import com.example.fox.ratusha.data.db.entity.ItemForpost
+import com.example.fox.ratusha.data.db.entity.ItemOctal
 
 @Database(entities = [ItemForpost::class, ItemOctal::class, InfoTownHall::class], version = 1)
 abstract class AppDataBase : RoomDatabase() {
