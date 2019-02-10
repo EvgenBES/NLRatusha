@@ -8,7 +8,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-
 class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
     override fun providePresenter(): MainPresenter = MainPresenter(this)
@@ -20,6 +19,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
 
         bottomNavigation()
         buttonRefreshClick()
+        setSwipeControler()
     }
 
     override fun showProgress() {
@@ -95,6 +95,11 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
         buttonRefresh.animate().alpha(1.0f).duration = 750
     }
 
-
+    private fun setSwipeControler() {
+        swipeContainer.setOnRefreshListener{
+            presenter.getOrderInformation()
+            swipeContainer.isRefreshing = false
+        }
+    }
 
 }
