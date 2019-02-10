@@ -149,11 +149,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/main_activity_product_header" />
 
-                <ImageView
-                    android:id="@+id/product_item_forp"
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cancel" />
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/product_item_forp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cancel" />
+                </LinearLayout>
 
 
                 <TextView
@@ -293,11 +299,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/main_activity_product_header" />
 
-                <ImageView
-                    android:id="@+id/product_item_octal"
+                <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cancel" />
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/product_item_octal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cancel" />
+                </LinearLayout>
 
 
                 <TextView
@@ -347,10 +359,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:alpha="0.0"
         android:background="@drawable/button_refresh"
         android:drawableStart="@drawable/ic_refresh_wifi"
         android:paddingStart="28dp"
-        android:alpha="0.0"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
