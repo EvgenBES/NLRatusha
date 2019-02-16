@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.example.fox.ratusha.R
-import com.example.fox.ratusha.ui.screens.main.MainActivity
+import com.example.fox.ratusha.ui.screens.mainManager.MainActivity
 import kotlinx.android.synthetic.main.activity_start.*
 
 

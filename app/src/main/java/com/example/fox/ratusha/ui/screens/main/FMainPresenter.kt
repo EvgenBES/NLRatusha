@@ -1,29 +1,33 @@
 package com.example.fox.ratusha.ui.screens.main
 
 import android.util.Log
-import com.example.fox.ratusha.data.network.GetOrderAsyncTask
 import com.example.fox.ratusha.data.usecases.GetInfoTownHall
 import com.example.fox.ratusha.data.usecases.GetItemForpostUseCase
 import com.example.fox.ratusha.data.usecases.GetItemOctalUseCase
-import com.example.fox.ratusha.data.usecases.SetItemDataBaseUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
 import com.example.fox.ratusha.ui.entity.ItemOrder
+import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-
-class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) {
+/**
+ * @author Evgeny Butov
+ * @since 16.02.2019
+ */
+class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(view) {
 
     private lateinit var timerThread: Thread
-    private lateinit var getOrderInfoThread: Thread
     private var remainderTimeOrderForpost = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L) //today + 10days
     private var remainderTimeOrderOctal = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L)
 
-    @Inject
-    lateinit var setItemDataBase: SetItemDataBaseUseCase
+    init {
+        App.appComponent.runInject(this)
+        getTownHall()
+        getProgressOrders()
+    }
 
     @Inject
     lateinit var getInfoTownHall: GetInfoTownHall
@@ -34,21 +38,10 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
     @Inject
     lateinit var getItemOctal: GetItemOctalUseCase
 
-    init {
-        App.appComponent.runInject(this)
-
-        getTownHall()
-        getProgressOrders()
-    }
-
     override fun onResume() {
         super.onResume()
-
         timerThread = createdTimerThread()
         startTimerThread()
-
-        getOrderInfoThread = createdRefreshInfoThread()
-        getOrderInformation()
     }
 
     override fun onPause() {
@@ -56,30 +49,17 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
         stopTimerThread()
     }
 
-    fun getOrderInformation() {
-        val resultGetOrder = GetOrderAsyncTask().execute().get()
-
-        if (resultGetOrder[0].townHall.start !== " ") {
-            setItemDataBase.setOrder(resultGetOrder)
-            router?.activity?.hideButtonRefresh()
-
-            if (!getOrderInfoThread.isAlive) {
-                getOrderInfoThread.start()
-            }
-
-        } else {
-            router?.showToastActivity("Ошибка соединения...")
-            router?.activity?.visibleButtonRefresh()
-
-            if (getOrderInfoThread.isAlive) {
-                getOrderInfoThread.interrupt()
-            }
-        }
+    private fun startTimerThread() {
+        if (!timerThread.isAlive) timerThread.start()
     }
 
-    private fun setImageProduct(urlImageProductForpost: String, urlImageProductOctal: String) {
-        router?.activity?.setImageProductForpost(urlImageProductForpost)
-        router?.activity?.setImageProductOctal(urlImageProductOctal)
+    private fun stopTimerThread() {
+        timerThread.interrupt()
+    }
+
+    private fun setTimeOrder() {
+        view.setForpostTime(timeMap(remainderTimeOrderForpost))
+        view.setOctalTime(timeMap(remainderTimeOrderOctal))
     }
 
     /**
@@ -115,40 +95,6 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
     }
 
     /**
-     * Here we create remains time - product
-     * @param hour - we get hour and %2 = 0 || 1
-     * @param minute - we get time in format (min:sec)
-     * @param getTimeLong - we transform minute to long
-     * @param fixedTimeLong - we get long 2hour
-     *
-     * @return result: 2 hour minus current time = time CD new products
-     */
-    private fun timerProduct() {
-        val hour = SimpleDateFormat("HH").format(Date()).toInt() % 2
-        val minute = SimpleDateFormat("mm:ss", Locale.getDefault()).format(Date())
-        val getTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse(minute).time
-        val fixedTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse("59:59").time
-
-        val result = SimpleDateFormat("mm:ss", Locale.getDefault()).format(fixedTimeLong - getTimeLong)
-
-        router?.activity?.setTimeProduct("0${if (hour == 0) 1 else 0}:$result")
-    }
-
-    private fun setTimeOrder() {
-        router?.activity?.setForpostTime(timeMap(remainderTimeOrderForpost))
-        router?.activity?.setOctalTime(timeMap(remainderTimeOrderOctal))
-    }
-
-    private fun startTimerThread() {
-        if (!timerThread.isAlive) timerThread.start()
-    }
-
-    private fun stopTimerThread() {
-        timerThread.interrupt()
-        if (getOrderInfoThread.isAlive) getOrderInfoThread.interrupt()
-    }
-
-    /**
      * This thread refresh times to textview - interval 1s
      */
     private fun createdTimerThread(): Thread {
@@ -170,22 +116,28 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
     }
 
     /**
-     * This thread getting new information from internet
-     * once in 5 minutes
+     * Here we create remains time - product
+     * @param hour - we get hour and %2 = 0 || 1
+     * @param minute - we get time in format (min:sec)
+     * @param getTimeLong - we transform minute to long
+     * @param fixedTimeLong - we get long 2hour
+     *
+     * @return result: 2 hour minus current time = time CD new products
      */
-    private fun createdRefreshInfoThread(): Thread {
-        return object : Thread() {
-            override fun run() {
-                try {
-                    while (!isInterrupted) {
-                        router?.activity?.runOnUiThread { getOrderInformation() }
-                        sleep(5 * 60 * 1000) // 5m * 60s * 1k ms
-                    }
-                } catch (e: InterruptedException) {
-                    Log.e("MainPresenter", "InterruptedException ${e.message}")
-                }
-            }
-        }
+    private fun timerProduct() {
+        val hour = SimpleDateFormat("HH").format(Date()).toInt() % 2
+        val minute = SimpleDateFormat("mm:ss", Locale.getDefault()).format(Date())
+        val getTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse(minute).time
+        val fixedTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse("59:59").time
+
+        val result = SimpleDateFormat("mm:ss", Locale.getDefault()).format(fixedTimeLong - getTimeLong)
+
+        view.setTimeProduct("0${if (hour == 0) 1 else 0}:$result")
+    }
+
+    private fun setImageProduct(urlImageProductForpost: String, urlImageProductOctal: String) {
+        view.setImageProductForpost(urlImageProductForpost)
+        view.setImageProductOctal(urlImageProductOctal)
     }
 
     /**
@@ -211,18 +163,16 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
     private fun getProgressOrders() {
         //Forpost
         val disposable = getItemForpost.getAllItemOrder().subscribeBy(
-                onNext = { router?.activity?.setForpostProgress(countProgress(it)) },
+                onNext = { view.setForpostProgress(countProgress(it)) },
                 onError = { Log.d("AAQQ", "message: ${it.message}") }
         )
         addToDisposible(disposable)
 
         //Octal
         val disposableOct = getItemOctal.getAllItemOrder().subscribeBy(
-                onNext = { router?.activity?.setOctalProgress(countProgress(it)) },
+                onNext = { view.setOctalProgress(countProgress(it)) },
                 onError = { Log.d("AAQQ", "message: ${it.message}") }
         )
         addToDisposible(disposableOct)
     }
-
-
 }

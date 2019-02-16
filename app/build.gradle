@@ -37,6 +37,7 @@ dependencies {
     //Dagger
     def daggerVersion = '2.16'
 
+    def lifecycleVersion = "1.1.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportVersion"
@@ -61,6 +62,10 @@ dependencies {
     implementation "javax.inject:javax.inject:1"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    //Lifecycle
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
 
     //debug
     implementation 'com.facebook.stetho:stetho:1.5.0'

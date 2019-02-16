@@ -11,7 +11,7 @@ import android.os.Bundle
 abstract class BaseMvpActivity<P : BasePresenter<R, *>, R : BaseRouter<*>> : BaseActivity() {
 
     protected lateinit var presenter: P
-    lateinit var router: R
+    open lateinit var router: R
 
     abstract fun providePresenter(): P
     abstract fun provideRouter(): R

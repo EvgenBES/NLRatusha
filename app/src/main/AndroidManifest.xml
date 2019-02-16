@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.fox.ratusha.ui.screens.main.MainActivity"
+            android:name="com.example.fox.ratusha.ui.screens.mainManager.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
