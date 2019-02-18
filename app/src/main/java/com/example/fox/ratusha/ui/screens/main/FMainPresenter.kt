@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 /**
  * @author Evgeny Butov
- * @since 16.02.2019
+ * @created 16.02.2019
  */
 class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(view) {
 
@@ -70,28 +70,32 @@ class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(vie
      * @return result where String finish minus real time = remainder time orders "4д 10:25:17"
      */
     private fun timeMap(finish: String): String {
-        val fixTime = 10800000L // 3 hor
-        val dateFinish = SimpleDateFormat("dd.MM.yyyy HH:mm").parse(finish).time
-        val dateNew = dateFinish - Date().time - fixTime
+        return if (finish != " ") {
+            val fixTime = 10800000L // 3 hor
+            val dateFinish = SimpleDateFormat("dd.MM.yyyy HH:mm").parse(finish).time
+            val dateNew = dateFinish - Date().time - fixTime
 
-        val daysLeft = SimpleDateFormat("d", Locale.getDefault()).format(dateNew).toInt()
-        val result = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(dateNew)
+            val daysLeft = SimpleDateFormat("d", Locale.getDefault()).format(dateNew).toInt()
+            val result = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(dateNew)
 
-        return "${daysLeft - 1}д $result"
+            "${daysLeft - 1}д $result"
+        } else {
+            "0д 0:00:00"
+        }
     }
 
     private fun countProgress(listItem: List<ItemOrder>): String {
-        var sumStartCount = 0.0
-        var sumFinishCount = 0.0
+            var sumStartCount = 0.0
+            var sumFinishCount = 0.0
 
-        for (item in listItem) {
-            sumStartCount += item.countStart
-            sumFinishCount += item.countFinish
-        }
+            for (item in listItem) {
+                sumStartCount += item.countStart
+                sumFinishCount += item.countFinish
+            }
 
-        val result: Double = (100 - ((sumFinishCount / sumStartCount) * 10))
+            val result: Double = (100 - ((sumFinishCount / sumStartCount) * 10))
 
-        return "${result.toInt()}%" // return 0..99%
+            return  "${result.toInt()}%" // return 0..99%
     }
 
     /**
@@ -126,11 +130,11 @@ class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(vie
      */
     private fun timerProduct() {
         val hour = SimpleDateFormat("HH").format(Date()).toInt() % 2
-        val minute = SimpleDateFormat("mm:ss", Locale.getDefault()).format(Date())
+        val minute: String = SimpleDateFormat("mm:ss", Locale.getDefault()).format(Date())
         val getTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse(minute).time
         val fixedTimeLong = SimpleDateFormat("mm:ss", Locale.getDefault()).parse("59:59").time
 
-        val result = SimpleDateFormat("mm:ss", Locale.getDefault()).format(fixedTimeLong - getTimeLong)
+        val result: String = SimpleDateFormat("mm:ss", Locale.getDefault()).format(fixedTimeLong - getTimeLong)
 
         view.setTimeProduct("0${if (hour == 0) 1 else 0}:$result")
     }
@@ -152,7 +156,7 @@ class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(vie
                         setImageProduct(it[0].url, it[1].url)
                     }
                 },
-                onError = { Log.d("AAQQ", "message: ${it.message}") }
+                onError = { Log.d("AAQQ", "getTownHall message: ${it.message}") }
         )
         addToDisposible(disposable)
     }
@@ -163,15 +167,15 @@ class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(vie
     private fun getProgressOrders() {
         //Forpost
         val disposable = getItemForpost.getAllItemOrder().subscribeBy(
-                onNext = { view.setForpostProgress(countProgress(it)) },
-                onError = { Log.d("AAQQ", "message: ${it.message}") }
+                onNext = { if (it.isNotEmpty()) view.setForpostProgress(countProgress(it)) },
+                onError = { Log.d("AAQQ", "getForpostOrders message: ${it.message}") }
         )
         addToDisposible(disposable)
 
         //Octal
         val disposableOct = getItemOctal.getAllItemOrder().subscribeBy(
-                onNext = { view.setOctalProgress(countProgress(it)) },
-                onError = { Log.d("AAQQ", "message: ${it.message}") }
+                onNext = { if (it.isNotEmpty()) view.setOctalProgress(countProgress(it)) },
+                onError = { Log.d("AAQQ", "getOctalOrders message: ${it.message}") }
         )
         addToDisposible(disposableOct)
     }

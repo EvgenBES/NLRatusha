@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable
 
 /**
  * @author Evgeny Butov
- * @since 16.02.2019
+ * @created 16.02.2019
  */
 abstract class BaseFragment : Fragment() {
     protected val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }

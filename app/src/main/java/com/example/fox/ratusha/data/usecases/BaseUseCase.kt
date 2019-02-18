@@ -6,7 +6,7 @@ import io.reactivex.schedulers.Schedulers
 
 /**
  * @author Evgeny Butov
- * @since 03.02.2019
+ * @created 03.02.2019
  */
 
 abstract class BaseUseCase(val postExecutorThread : Scheduler,

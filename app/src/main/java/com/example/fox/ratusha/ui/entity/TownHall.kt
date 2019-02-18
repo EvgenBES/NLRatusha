@@ -2,7 +2,7 @@ package com.example.fox.ratusha.ui.entity
 
 /**
  * @author Evgeny Butov
- * @since 07.02.2019
+ * @created 07.02.2019
  */
 data class TownHall (
         val id: Int = 0,

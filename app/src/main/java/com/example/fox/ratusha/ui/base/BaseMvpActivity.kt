@@ -5,7 +5,7 @@ import android.os.Bundle
 /**
  * @author Evgeny Butov
  * @version 1.0
- * @since 02.02.2019
+ * @created 02.02.2019
  */
 
 abstract class BaseMvpActivity<P : BasePresenter<R, *>, R : BaseRouter<*>> : BaseActivity() {

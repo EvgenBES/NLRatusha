@@ -1,6 +1,7 @@
 package com.example.fox.ratusha.ui.screens.main
 
 import android.os.Bundle
+import android.util.Log
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpFragment
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
@@ -9,23 +10,33 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
  * @author Evgeny Butov
- * @since 16.02.2019
+ * @created 16.02.2019
  */
 class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView {
+
+    private lateinit var onSwipeRefreshListener: OnRefreshInfoListener
+
     override fun providePresenter(): FMainPresenter = FMainPresenter(this)
     override fun provideLayoutId(): Int = R.layout.fragment_main
 
+    interface OnRefreshInfoListener {
+        fun onRefresh()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        buttonRefreshClick()
+
+        onSwipeRefreshListener = activity as OnRefreshInfoListener
+
         setSwipeControler()
+        buttonRefreshClick()
     }
 
     override fun setImageProductForpost(urlProduct: String) {
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/$urlProduct")
-                .placeholder(com.example.fox.ratusha.R.drawable.ic_hourglass)
-                .error(com.example.fox.ratusha.R.drawable.ic_cancel)
+                .placeholder(R.drawable.ic_hourglass)
+                .error(R.drawable.ic_cancel)
                 .into(product_item_forp)
     }
 
@@ -33,8 +44,8 @@ class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView {
     override fun setImageProductOctal(urlProduct: String) {
         Picasso.get()
                 .load("http://image.neverlands.ru/weapon/$urlProduct")
-                .placeholder(com.example.fox.ratusha.R.drawable.ic_hourglass)
-                .error(com.example.fox.ratusha.R.drawable.ic_cancel)
+                .placeholder(R.drawable.ic_hourglass)
+                .error(R.drawable.ic_cancel)
                 .into(product_item_octal)
     }
 
@@ -59,22 +70,22 @@ class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView {
         product_time_octal.text = time
     }
 
-    private fun buttonRefreshClick() {
-        buttonRefresh.setOnClickListener { router?.getOrderInformation() }
-    }
-
     fun hideButtonRefresh() {
         buttonRefresh.animate().alpha(0.0f).duration = 750
     }
 
-    fun visibleButtonRefresh() {
+    fun showButtonRefresh() {
         buttonRefresh.animate().alpha(1.0f).duration = 750
     }
 
     private fun setSwipeControler() {
-        swipeContainer.setOnRefreshListener{
-//            router?.getOrderInformation() //TODO bag need fix
+        swipeContainer.setOnRefreshListener {
+            onSwipeRefreshListener.onRefresh()
             swipeContainer.isRefreshing = false
         }
+    }
+
+    private fun buttonRefreshClick() {
+        buttonRefresh.setOnClickListener { onSwipeRefreshListener.onRefresh() }
     }
 }

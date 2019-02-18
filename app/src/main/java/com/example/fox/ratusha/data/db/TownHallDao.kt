@@ -9,7 +9,7 @@ import io.reactivex.Flowable
 
 /**
  * @author Evgeny Butov
- * @since 07.02.2019
+ * @created 07.02.2019
  */
 
 @Dao

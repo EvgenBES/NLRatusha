@@ -12,7 +12,7 @@ import com.example.fox.ratusha.ui.screens.octal.FOctal
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
+class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMain.OnRefreshInfoListener {
 
     override fun providePresenter(): MainPresenter = MainPresenter(this)
     override fun provideRouter(): MainRouter = MainRouter(this)
@@ -51,6 +51,11 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView {
             transaction.commit()
             return@setOnNavigationItemSelectedListener true
         }
+    }
+
+
+    override fun onRefresh() {
+        presenter.getOrderInformation()
     }
 
 }

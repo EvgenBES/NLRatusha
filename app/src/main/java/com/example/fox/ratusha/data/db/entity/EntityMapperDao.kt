@@ -6,7 +6,7 @@ import com.example.fox.ratusha.ui.entity.TownHall
 
 /**
  * @author Evgeny Butov
- * @since 04.02.2019
+ * @created 04.02.2019
  */
 
 fun ItemForpost.transformToPresenter(): ItemOrder {

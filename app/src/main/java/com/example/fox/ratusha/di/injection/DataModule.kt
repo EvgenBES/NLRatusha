@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 /**
  * @author Evgeny Butov
- * @since 03.02.2019
+ * @created 03.02.2019
  */
 @Module
 class DataModule {

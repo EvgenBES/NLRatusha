@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 /**
  * @author Evgeny Butov
- * @since 07.02.2019
+ * @created 07.02.2019
  */
 class GetInfoTownHall @Inject constructor(postExecutionThread: PostExecutionThread,
                                           private val itemRepository: ItemRepository) : BaseUseCase(postExecutionThread) {

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 
 /**
  * @author Evgeny Butov
- * @since 16.02.2019
+ * @created 16.02.2019
  */
 abstract class BaseMvpFragment<P : BasePresenter<R, *>, R : BaseRouter<*>> : BaseFragment() {
 
@@ -44,5 +44,10 @@ abstract class BaseMvpFragment<P : BasePresenter<R, *>, R : BaseRouter<*>> : Bas
     override fun onStop() {
         super.onStop()
         presenter.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.onDestroyView()
     }
 }

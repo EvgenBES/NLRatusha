@@ -9,7 +9,7 @@ import java.io.FileOutputStream
 
 /**
  * @author Evgeny Butov
- * @since 16.02.2019
+ * @created 16.02.2019
  */
 class ActsDbHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 

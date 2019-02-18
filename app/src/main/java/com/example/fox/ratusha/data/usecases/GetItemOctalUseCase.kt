@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 /**
  * @author Evgeny Butov
- * @since 08.02.2019
+ * @created 08.02.2019
  */
 class GetItemOctalUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
                                               private val itemRepository: ItemRepository) : BaseUseCase(postExecutionThread) {

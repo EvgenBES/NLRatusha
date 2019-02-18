@@ -35,7 +35,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
         if (resultGetOrder[0].townHall.start !== " ") {
             setItemDataBase.setOrder(resultGetOrder)
-//            router?.activity?.hideButtonRefresh()
+            router?.hideRefreshButtonMainFragment()
 
             if (!getOrderInfoThread.isAlive) {
                 getOrderInfoThread.start()
@@ -43,7 +43,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
 
         } else {
             router?.showToastActivity("Ошибка соединения...")
-//            router?.activity?.visibleButtonRefresh()
+            router?.showRefreshButtonMainFragment()
 
             if (getOrderInfoThread.isAlive) {
                 getOrderInfoThread.interrupt()

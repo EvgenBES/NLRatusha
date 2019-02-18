@@ -35,6 +35,13 @@ open class BasePresenter<R : BaseRouter<*>, V : BaseView>(val view: V) {
     }
 
     public open fun onDestroy() {
+
+    }
+
+    public open fun onCreateView() {
+    }
+
+    public open fun onDestroyView() {
         compositeDisposable.clear()
     }
 }

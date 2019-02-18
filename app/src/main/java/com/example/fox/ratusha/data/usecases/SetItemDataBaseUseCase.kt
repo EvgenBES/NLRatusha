@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 /**
  * @author Evgeny Butov
- * @since 03.02.2019
+ * @created 03.02.2019
  */
 class SetItemDataBaseUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
                                                  private val itemRepository: ItemRepository) : BaseUseCase(postExecutionThread) {
