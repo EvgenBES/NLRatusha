@@ -65,7 +65,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) 
                 try {
                     while (!isInterrupted) {
                         router?.activity?.runOnUiThread { getOrderInformation() }
-                        sleep(5 * 1 * 1000) // 5m * 60s * 1k ms
+                        sleep(5 * 5 * 1000) // 5m * 60s * 1k ms
                     }
                 } catch (e: InterruptedException) {
                     Log.e("MainPresenter", "InterruptedException ${e.message}")

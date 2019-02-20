@@ -2,6 +2,7 @@ package com.example.fox.ratusha.di.injection
 
 
 import com.example.fox.ratusha.di.app.App
+import com.example.fox.ratusha.ui.screens.forpost.FForpostPresenter
 import com.example.fox.ratusha.ui.screens.main.FMainPresenter
 import com.example.fox.ratusha.ui.screens.mainManager.MainPresenter
 import dagger.BindsInstance
@@ -25,4 +26,5 @@ interface AppComponent {
 
     fun runInject(mainPresenter: MainPresenter)
     fun runInject(fMainPresenter: FMainPresenter)
+    fun runInject(fForpostPresenter: FForpostPresenter)
 }

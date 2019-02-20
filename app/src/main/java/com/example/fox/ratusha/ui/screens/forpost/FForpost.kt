@@ -7,8 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpFragment
-import com.example.fox.ratusha.ui.base.recycler.BaseRecyclerAdapter
-import com.example.fox.ratusha.ui.entity.ItemOrder
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
 import kotlinx.android.synthetic.main.fragment_forpost.*
 
@@ -25,24 +23,12 @@ class FForpost : BaseMvpFragment<FForpostPresenter, MainRouter>(), FForpostView 
         super.onViewCreated(view, savedInstanceState)
 
 
-        val list = mutableListOf<ItemOrder>()
-        list.add(ItemOrder(1, "2", "3", 4, 5))
-        list.add(ItemOrder(2, "2", "3", 4, 5))
-        list.add(ItemOrder(3, "2", "3", 4, 5))
-        list.add(ItemOrder(3, "2", "3", 4, 5))
-        list.add(ItemOrder(3, "2", "3", 4, 5))
-        list.add(ItemOrder(3, "2", "3", 4, 5))
-        list.add(ItemOrder(3, "2", "3", 4, 5))
-
-        val forpostAdapter = BaseRecyclerAdapter()
-        forpostAdapter.setItems(list)
-
         val layoutManager = GridLayoutManager(this.activity, 2)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recyclerview.layoutManager = layoutManager
         recyclerview.setHasFixedSize(true)
         recyclerview.itemAnimator = DefaultItemAnimator()
-        recyclerview.adapter = forpostAdapter
+        recyclerview.adapter = presenter.forpostAdapter
 
     }
 

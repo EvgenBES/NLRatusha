@@ -7,23 +7,14 @@
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="145dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@drawable/border_items_order"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:src="@drawable/ic_reload_wrapper"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
-
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/topImage"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/border_items_top"
@@ -36,17 +27,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageHeader"
+                android:id="@+id/image_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_cancel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/v6byralt" />
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/topWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -54,32 +45,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/topImage">
 
             <TextView
-                android:id="@+id/textHeader"
+                android:id="@+id/nameItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:text="Зелье Сокрушительных Ударов"
                 android:textAlignment="center"
                 android:textColor="#333333"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                app:layout_constraintTop_toBottomOf="@+id/topImage" />
 
             <TextView
-                android:id="@+id/counter"
+                android:id="@+id/counterItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="(1031/1333)"
                 android:textAlignment="center"
                 android:textColor="#333333"
                 android:textSize="14dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textHeader"
-                app:layout_constraintTop_toBottomOf="@+id/textHeader" />
+                app:layout_constraintStart_toStartOf="@+id/nameItem"
+                app:layout_constraintTop_toBottomOf="@+id/nameItem" />
         </LinearLayout>
 
 
@@ -94,7 +88,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/topImage">
 
             <LinearLayout
                 android:layout_width="match_parent"

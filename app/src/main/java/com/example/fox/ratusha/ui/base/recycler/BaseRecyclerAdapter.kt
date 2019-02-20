@@ -1,13 +1,16 @@
 package com.example.fox.ratusha.ui.base.recycler
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.entity.ItemOrder
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_order_recycler.view.*
 
 /**
  * @author Evgeny Butov
@@ -24,7 +27,6 @@ class BaseRecyclerAdapter(var itemList: MutableList<ItemOrder> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(LayoutInflater.from(parent.context)
             .inflate(R.layout.item_order_recycler, parent, false))
-
 
 
     fun setItems(items: List<ItemOrder>) {
@@ -52,40 +54,51 @@ class BaseRecyclerAdapter(var itemList: MutableList<ItemOrder> = mutableListOf()
         }
 
         fun onBind(position: Int) {
-
             val (id, itemName, urlImage, countStart, countFinish) = itemList[position]
-
             inflateData(id, itemName, urlImage, countStart, countFinish)
             setItemClickListener(id)
         }
 
         private fun setItemClickListener(id: Int) {
-            itemView.setOnClickListener {
+            itemView.topImage.setOnClickListener {
                 id.let {
                     try {
                         val intent = Intent()
                         // using "with" as an example
                         with(intent) {
-                            action = Intent.ACTION_VIEW
-                            data = Uri.parse("id")
-                            addCategory(Intent.CATEGORY_BROWSABLE)
+                            //
                         }
                         itemView.context.startActivity(intent)
                     } catch (e: Exception) {
                     }
                 }
+            }
 
+
+            itemView.topWrapper.setOnClickListener {
+                if (itemView.bottomWrapper.visibility != View.VISIBLE) itemView.bottomWrapper.visibility = View.VISIBLE
+            }
+
+            itemView.bottomWrapper.setOnClickListener {
+                if (itemView.bottomWrapper.visibility == View.VISIBLE) itemView.bottomWrapper.visibility = View.INVISIBLE
             }
         }
 
+        @SuppressLint("SetTextI18n")
         private fun inflateData(id: Int, itemName: String, urlImage: String, countStart: Int, countFinish: Int) {
-//            title?.let { itemView.titleTextView.text = it }
-//            author?.let { itemView.authorTextView.text = it }
-//            date?.let { itemView.dateTextView.text = it }
-//            description?.let { itemView.contentTextView.text = it }
-//            coverPageUrl?.let {
-//                itemView.coverImageView.loadImage(it)
-//            }
+            Picasso.get()
+                    .load("http://image.neverlands.ru/weapon/$urlImage")
+                    .placeholder(R.drawable.ic_hourglass)
+                    .error(R.drawable.ic_cancel)
+                    .into(itemView.image_item)
+
+            itemName.let { itemView.nameItem.text = it }
+
+            val color = if (countStart != countFinish) "red" else "green"
+            val textColor = "<font color='$color'>($countStart/$countFinish)</font>"
+
+            itemView.counterItem.text = Html.fromHtml(textColor)
+
         }
 
     }
