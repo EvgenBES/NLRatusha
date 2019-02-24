@@ -36,7 +36,7 @@ class ActsDbHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NA
     }
 
     private fun installDatabaseFromAssets() {
-        val inputStream = context.assets.open("$ASSETS_PATH/$DATABASE_NAME.db")
+        val inputStream = context.assets.open("$ASSETS_PATH/$DATABASE_NAME")
 
         try {
             val outputFile = File(context.getDatabasePath(DATABASE_NAME).path)

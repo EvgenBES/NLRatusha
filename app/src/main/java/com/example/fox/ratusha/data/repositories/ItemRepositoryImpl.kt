@@ -31,7 +31,6 @@ class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : Ite
                                 appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
                             }
 
-                            appDataBase.getTownHallDao().deleteAll()
                             for (listOrder in order) {
                                 appDataBase.getTownHallDao().insert(listOrder.transformToTownHallDao())
                             }

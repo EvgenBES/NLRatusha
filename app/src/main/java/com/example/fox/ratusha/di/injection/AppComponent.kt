@@ -5,6 +5,7 @@ import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.screens.forpost.FForpostPresenter
 import com.example.fox.ratusha.ui.screens.main.FMainPresenter
 import com.example.fox.ratusha.ui.screens.mainManager.MainPresenter
+import com.example.fox.ratusha.ui.screens.octal.FOctalPresenter
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -27,4 +28,5 @@ interface AppComponent {
     fun runInject(mainPresenter: MainPresenter)
     fun runInject(fMainPresenter: FMainPresenter)
     fun runInject(fForpostPresenter: FForpostPresenter)
+    fun runInject(fOctalPresenter: FOctalPresenter)
 }

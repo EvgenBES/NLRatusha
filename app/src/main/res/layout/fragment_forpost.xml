@@ -47,7 +47,9 @@
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="5dp"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
                 android:scrollbars="vertical">
 
             </android.support.v7.widget.RecyclerView>

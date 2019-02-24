@@ -15,7 +15,7 @@ abstract class AppDataBase : RoomDatabase() {
         const val DATABASE_NAME = "ratushaDB"
 
         fun getInstance(context: Context): AppDataBase {
-            ActsDbHelper(context).readableDatabase
+//            ActsDbHelper(context).readableDatabase
 
             return Room
                     .databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)

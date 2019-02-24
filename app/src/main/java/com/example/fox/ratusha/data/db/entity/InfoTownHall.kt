@@ -5,9 +5,8 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "townHall")
 data class InfoTownHall(
-        @PrimaryKey (autoGenerate = true)
-        val id: Int,
-        val idTown: Int = 0,
+        @PrimaryKey
+        val idTown: Int,
         val start: String = " ",
         val finish: String = " ",
         val url: String = " "

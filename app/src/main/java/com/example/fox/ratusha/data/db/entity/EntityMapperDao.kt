@@ -30,5 +30,5 @@ fun ItemOrder.transformToItemOctalDao(): ItemOctal {
 }
 
 fun Order.transformToTownHallDao(): InfoTownHall {
-    return InfoTownHall(id = 0, idTown = townHall.id, start = townHall.start, finish = townHall.finish, url = townHall.url)
+    return InfoTownHall(idTown = townHall.id, start = townHall.start, finish = townHall.finish, url = townHall.url)
 }

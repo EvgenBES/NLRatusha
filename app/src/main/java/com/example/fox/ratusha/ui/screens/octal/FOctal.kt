@@ -1,10 +1,14 @@
 package com.example.fox.ratusha.ui.screens.octal
 
 import android.os.Bundle
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpFragment
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
+import kotlinx.android.synthetic.main.fragment_octal.*
 
 /**
  * @author Evgeny Butov
@@ -17,6 +21,13 @@ class FOctal : BaseMvpFragment<FOctalPresenter, MainRouter>(), FOctalView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val layoutManager = GridLayoutManager(this.activity, 2)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        recyclerview.layoutManager = layoutManager
+        recyclerview.setHasFixedSize(true)
+        recyclerview.itemAnimator = DefaultItemAnimator()
+        recyclerview.adapter = presenter.octalAdapter
 
     }
 

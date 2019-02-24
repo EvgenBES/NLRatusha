@@ -85,17 +85,17 @@ class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(vie
     }
 
     private fun countProgress(listItem: List<ItemOrder>): String {
-            var sumStartCount = 0.0
-            var sumFinishCount = 0.0
+        var sumStartCount = 0.0
+        var sumFinishCount = 0.0
 
-            for (item in listItem) {
-                sumStartCount += item.countStart
-                sumFinishCount += item.countFinish
-            }
+        for (item in listItem) {
+            sumStartCount += item.countStart
+            sumFinishCount += item.countFinish
+        }
 
-            val result: Double = (100 - ((sumFinishCount / sumStartCount) * 10))
+        val result = (sumStartCount / (sumFinishCount / 100))
 
-            return  "${result.toInt()}%" // return 0..99%
+        return "${result.toInt()}%" // return 0..99%
     }
 
     /**
