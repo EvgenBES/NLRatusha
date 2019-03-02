@@ -1,7 +1,7 @@
 package com.example.fox.ratusha.ui.screens.main
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpFragment
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
@@ -12,15 +12,17 @@ import kotlinx.android.synthetic.main.fragment_main.*
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView {
-
-    private lateinit var onSwipeRefreshListener: OnRefreshInfoListener
+class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView, View.OnClickListener {
 
     override fun providePresenter(): FMainPresenter = FMainPresenter(this)
     override fun provideLayoutId(): Int = R.layout.fragment_main
 
+    private lateinit var onSwipeRefreshListener: OnRefreshInfoListener
+
     interface OnRefreshInfoListener {
         fun onRefresh()
+        fun onClickForpost()
+        fun onClickOctal()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -29,7 +31,7 @@ class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView {
         onSwipeRefreshListener = activity as OnRefreshInfoListener
 
         setSwipeControler()
-        buttonRefreshClick()
+        initClick()
     }
 
     override fun setImageProductForpost(urlProduct: String) {
@@ -85,7 +87,18 @@ class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView {
         }
     }
 
-    private fun buttonRefreshClick() {
-        buttonRefresh.setOnClickListener { onSwipeRefreshListener.onRefresh() }
+    private fun initClick() {
+        buttonRefresh.setOnClickListener(this)
+        firstCastle.setOnClickListener(this)
+        secondCastle.setOnClickListener(this)
     }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            buttonRefresh -> onSwipeRefreshListener.onRefresh()
+            firstCastle -> onSwipeRefreshListener.onClickForpost()
+            secondCastle -> onSwipeRefreshListener.onClickOctal()
+        }
+    }
+
 }

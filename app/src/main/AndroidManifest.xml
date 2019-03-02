@@ -14,9 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.fox.ratusha.ui.screens.start.StartActivity"
+        <activity android:name=".ui.screens.detailItemInfo.DetailItemInfo"></activity>
+        <activity
+            android:name=".ui.screens.start.StartActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +25,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.fox.ratusha.ui.screens.mainManager.MainActivity"
+            android:name=".ui.screens.mainManager.MainActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <service android:name=".service.LoadService" />
     </application>

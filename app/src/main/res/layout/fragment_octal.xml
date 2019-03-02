@@ -10,11 +10,123 @@
         android:id="@+id/headLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_main"
+        android:background="@drawable/bg_octal"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/logo_octal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/OctalHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/fragment_octal_title"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/time_order_forp"
+                style="@style/OctalTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/order_timer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-3dp"
+                        android:drawablePadding="3dp"
+                        android:text="Сумма: 231 142"
+                        android:textColor="@color/colorAccent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_coins" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-3dp"
+                        android:drawablePadding="3dp"
+                        android:text="Залито: 131 142 [69%]"
+                        android:textColor="@color/colorAccent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_coins" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-3dp"
+                        android:drawablePadding="3dp"
+                        android:text="Осталось: 21 142 [31%]"
+                        android:textColor="@color/colorAccent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_coins" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

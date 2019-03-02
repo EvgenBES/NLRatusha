@@ -19,4 +19,11 @@ class GetInfoTownHall @Inject constructor(postExecutionThread: PostExecutionThre
                 .observeOn(postExecutorThread)
                 .subscribeOn(workExecutorThread)
     }
+
+    fun getTownHall(id: Int): Flowable<TownHall> {
+        return itemRepository
+                .getTownHall(id)
+                .observeOn(postExecutorThread)
+                .subscribeOn(workExecutorThread)
+    }
 }

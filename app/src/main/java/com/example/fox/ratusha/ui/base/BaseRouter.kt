@@ -1,5 +1,6 @@
 package com.example.fox.ratusha.ui.base
 
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.widget.Toast
 
@@ -15,12 +16,12 @@ abstract class BaseRouter<A : BaseActivity>(val activity: A) {
 
     fun replaceFragment(
             fragmentManager: FragmentManager,
-            fragment: BaseFragment,
+            fragment: Fragment,
             containerResId: Int,
             addToBackStack: Boolean = false
     ) {
         val fragmentTransition = fragmentManager.beginTransaction()
-        fragmentTransition.replace(containerResId, fragment, fragment::class.java.canonicalName)
+        fragmentTransition.replace(containerResId, fragment, fragment::class.java.simpleName)
         if (addToBackStack) {
             fragmentTransition.addToBackStack(null)
         }

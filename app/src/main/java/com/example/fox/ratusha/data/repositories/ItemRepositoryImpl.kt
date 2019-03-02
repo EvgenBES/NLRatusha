@@ -43,6 +43,10 @@ class ItemRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : Ite
         return appDataBase.getTownHallDao().getAll().map { list -> list.map { it.transformToPresenter() } }
     }
 
+    override fun getTownHall(id: Int): Flowable<TownHall> {
+        return appDataBase.getTownHallDao().getTownHall(id).map { it.transformToPresenter()  }
+    }
+
     override fun getItemForpost(): Flowable<List<ItemOrder>> {
         return appDataBase.getForpDao().getAll().map { list -> list.map { it.transformToPresenter() } }
     }

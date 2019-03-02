@@ -8,6 +8,7 @@ import io.reactivex.Flowable
 interface ItemRepository {
     fun setForpostItem(order: List<Order>)
     fun getInfoTownHall(): Flowable<List<TownHall>>
+    fun getTownHall(id: Int): Flowable<TownHall>
     fun getItemForpost(): Flowable<List<ItemOrder>>
     fun getItemOctal(): Flowable<List<ItemOrder>>
 }

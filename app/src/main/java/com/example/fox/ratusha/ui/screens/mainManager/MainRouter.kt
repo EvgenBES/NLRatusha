@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseRouter
-import com.example.fox.ratusha.ui.screens.forpost.FForpost
 import com.example.fox.ratusha.ui.screens.main.FMain
 
 /**
@@ -17,10 +16,10 @@ class MainRouter(activity: MainActivity) : BaseRouter<MainActivity>(activity) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
-    fun startForpostFragment() {
+    fun startFragment(fragment: Fragment) {
         replaceFragment(
                 activity.supportFragmentManager,
-                FForpost(),
+                fragment,
                 R.id.mainFragment,
                 false)
     }

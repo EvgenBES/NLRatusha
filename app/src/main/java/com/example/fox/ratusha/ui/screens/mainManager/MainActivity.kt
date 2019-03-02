@@ -23,9 +23,10 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(R.id.mainFragment, FMain()).commit()
-        }
+        if (savedInstanceState == null) router.startFragment(FMain())
+//            supportFragmentManager.beginTransaction().add(R.id.mainFragment, ).commit()
+
+
 
         bottomNavigation()
     }
@@ -46,9 +47,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
                 R.id.menu_btn_oct -> selectedFragment = FOctal()
                 R.id.menu_btn_info -> selectedFragment = FInformation()
             }
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.mainFragment, selectedFragment)
-            transaction.commit()
+            router.startFragment(selectedFragment)
             return@setOnNavigationItemSelectedListener true
         }
     }
@@ -58,4 +57,13 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
         presenter.getOrderInformation()
     }
 
+    override fun onClickForpost() {
+        navigation.menu.getItem(1).isChecked = true
+        router.startFragment(FForpost())
+    }
+
+    override fun onClickOctal() {
+        navigation.menu.getItem(2).isChecked = true
+        router.startFragment(FOctal())
+    }
 }

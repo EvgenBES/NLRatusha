@@ -7,4 +7,5 @@ import com.example.fox.ratusha.ui.base.BaseView
  * @created 16.02.2019
  */
 interface FForpostView : BaseView {
+    fun setTimerOrder(time: String)
 }

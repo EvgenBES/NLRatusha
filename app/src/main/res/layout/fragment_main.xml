@@ -10,7 +10,7 @@
         android:id="@+id/headLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_main"
+        android:background="@drawable/bg_main"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="-10dp"
-                                tools:text="0д 00:00:00" />
+                                tools:text="@string/order_timer" />
 
                         </LinearLayout>
 
@@ -262,7 +262,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="-10dp"
-                                tools:text="0д 00:00:00" />
+                                tools:text="@string/order_timer" />
 
                         </LinearLayout>
 

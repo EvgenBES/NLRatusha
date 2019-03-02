@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.entity.ItemOrder
+import com.example.fox.ratusha.ui.screens.detailItemInfo.DetailItemInfo
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 
@@ -61,19 +62,8 @@ class BaseRecyclerAdapter(var itemList: MutableList<ItemOrder> = mutableListOf()
 
         private fun setItemClickListener(id: Int) {
             itemView.topImage.setOnClickListener {
-                id.let {
-                    try {
-                        val intent = Intent()
-                        // using "with" as an example
-                        with(intent) {
-                            //
-                        }
-                        itemView.context.startActivity(intent)
-                    } catch (e: Exception) {
-                    }
-                }
+                itemView.context.startActivity(Intent(itemView.context, DetailItemInfo::class.java).putExtra("ID", id))
             }
-
 
             itemView.topWrapper.setOnClickListener {
                 if (itemView.bottomWrapper.visibility != View.VISIBLE) itemView.bottomWrapper.visibility = View.VISIBLE

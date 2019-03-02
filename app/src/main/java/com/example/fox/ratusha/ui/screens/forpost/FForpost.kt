@@ -32,4 +32,8 @@ class FForpost : BaseMvpFragment<FForpostPresenter, MainRouter>(), FForpostView 
 
     }
 
+    override fun setTimerOrder(time: String) {
+        time_order_forp.text = time
+    }
+
 }
