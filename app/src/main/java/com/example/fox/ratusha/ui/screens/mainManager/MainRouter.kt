@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseRouter
+import com.example.fox.ratusha.ui.screens.detailed.DetailItemInfo
 import com.example.fox.ratusha.ui.screens.main.FMain
 
 /**

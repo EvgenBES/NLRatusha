@@ -3,6 +3,7 @@ package com.example.fox.ratusha.di.injection
 
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.screens.forpost.FForpostPresenter
+import com.example.fox.ratusha.ui.screens.information.FInformationPresenter
 import com.example.fox.ratusha.ui.screens.main.FMainPresenter
 import com.example.fox.ratusha.ui.screens.mainManager.MainPresenter
 import com.example.fox.ratusha.ui.screens.octal.FOctalPresenter
@@ -29,4 +30,5 @@ interface AppComponent {
     fun runInject(fMainPresenter: FMainPresenter)
     fun runInject(fForpostPresenter: FForpostPresenter)
     fun runInject(fOctalPresenter: FOctalPresenter)
+    fun runInject(fInformationPresenter: FInformationPresenter)
 }

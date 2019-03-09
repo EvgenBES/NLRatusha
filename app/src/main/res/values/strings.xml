@@ -10,6 +10,6 @@
     <string name="fragment_octal_title">OCATAL</string>
     <string name="fragment_forpost_title">FORPOST</string>
     <string name="order_timer">0д 00:00:00</string>
-    <string name="order_time">0д 00:00:00</string>
+    <string name="product_timer">02:00:00</string>
 
 </resources>

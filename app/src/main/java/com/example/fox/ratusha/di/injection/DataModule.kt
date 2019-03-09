@@ -2,8 +2,8 @@ package com.example.fox.ratusha.di.injection
 
 import android.content.Context
 import com.example.fox.ratusha.data.db.AppDataBase
-import com.example.fox.ratusha.data.repositories.ItemRepository
-import com.example.fox.ratusha.data.repositories.ItemRepositoryImpl
+import com.example.fox.ratusha.data.repositories.RatushaRepository
+import com.example.fox.ratusha.data.repositories.RatushaRepositoryImpl
 import com.example.fox.ratusha.di.executors.PostExecutionThread
 import com.example.fox.ratusha.di.executors.UIThread
 import dagger.Module
@@ -25,7 +25,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideItemRepository(itemRepository: ItemRepositoryImpl): ItemRepository {
+    fun provideItemRepository(itemRepository: RatushaRepositoryImpl): RatushaRepository {
         return itemRepository
     }
 

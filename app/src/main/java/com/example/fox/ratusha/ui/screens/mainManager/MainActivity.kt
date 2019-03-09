@@ -2,7 +2,9 @@ package com.example.fox.ratusha.ui.screens.mainManager
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpActivity
 import com.example.fox.ratusha.ui.screens.forpost.FForpost
@@ -10,6 +12,7 @@ import com.example.fox.ratusha.ui.screens.information.FInformation
 import com.example.fox.ratusha.ui.screens.main.FMain
 import com.example.fox.ratusha.ui.screens.octal.FOctal
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMain.OnRefreshInfoListener {
@@ -19,14 +22,13 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
     override fun provideLayoutId(): Int = R.layout.activity_main
 
     private var selectedFragment: Fragment = FMain()
+    private var timerBackPressed: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) router.startFragment(FMain())
 //            supportFragmentManager.beginTransaction().add(R.id.mainFragment, ).commit()
-
-
 
         bottomNavigation()
     }
@@ -52,6 +54,19 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
         }
     }
 
+    override fun onBackPressed() {
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(com.example.fox.ratusha.R.id.mainFragment)
+        if (presenter.stateRecyclerFragment && fragment != null && fragment is FInformation) (fragment).onBackPresserFragment()
+
+        else {
+            if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
+                finish()
+            } else {
+                timerBackPressed = Calendar.getInstance().time.time
+                Toast.makeText(applicationContext, "Нажми еще раз чтобы выйти", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onRefresh() {
         presenter.getOrderInformation()
@@ -65,5 +80,9 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
     override fun onClickOctal() {
         navigation.menu.getItem(2).isChecked = true
         router.startFragment(FOctal())
+    }
+
+    fun changedStatusRecyclerFragment(state: Boolean) {
+        presenter.stateRecyclerFragment = state
     }
 }

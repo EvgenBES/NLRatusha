@@ -1,0 +1,17 @@
+package com.example.fox.ratusha.data.repositories
+
+import com.example.fox.ratusha.ui.entity.ItemCategory
+import com.example.fox.ratusha.ui.entity.ItemOrder
+import com.example.fox.ratusha.ui.entity.Order
+import com.example.fox.ratusha.ui.entity.TownHall
+import io.reactivex.Flowable
+
+interface RatushaRepository {
+    fun setForpostItem(order: List<Order>)
+    fun getInfoTownHall(): Flowable<List<TownHall>>
+    fun getTownHall(id: Int): Flowable<TownHall>
+    fun getItemForpost(): Flowable<List<ItemOrder>>
+    fun getItemOctal(): Flowable<List<ItemOrder>>
+    fun getCategoryList(): Flowable<List<ItemCategory>>
+    fun getItemsCategory(id: Int): Flowable<List<ItemCategory>>
+}

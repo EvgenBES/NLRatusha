@@ -75,6 +75,9 @@ dependencies {
     api "io.reactivex.rxjava2:rxjava:2.2.3"
     api "io.reactivex.rxjava2:rxkotlin:2.2.0"
 
+    //SQLiteAssetHelper
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+
 }
 repositories {
     mavenCentral()

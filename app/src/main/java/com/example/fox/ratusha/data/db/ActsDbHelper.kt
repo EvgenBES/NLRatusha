@@ -4,8 +4,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Environment
 import java.io.File
 import java.io.FileOutputStream
+import android.os.Environment.getExternalStorageDirectory
+
+
 
 /**
  * @author Evgeny Butov
@@ -15,7 +19,7 @@ class ActsDbHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NA
 
     companion object {
         const val ASSETS_PATH = "databases"
-        const val DATABASE_NAME = "db_info_item"
+        const val DATABASE_NAME = "db_ratusha"
         const val DATABASE_VERSION = 1
     }
 

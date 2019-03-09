@@ -11,6 +11,7 @@ import javax.inject.Inject
 class MainPresenter(view: MainView) : BasePresenter<MainRouter, MainView>(view) {
 
     private lateinit var getOrderInfoThread: Thread
+    var stateRecyclerFragment: Boolean = false
 
     @Inject
     lateinit var setItemDataBase: SetItemDataBaseUseCase
