@@ -1,7 +1,6 @@
 package com.example.fox.ratusha.ui.base.recycler
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.item_order_recycler.view.*
  * @author Evgeny Butov
  * @created 17.02.2019
  */
-class BaseRecyclerCardAdapter(var itemList: MutableList<ItemOrder> = mutableListOf()) : RecyclerView.Adapter<BaseRecyclerCardAdapter.BaseViewHolder>() {
+class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableListOf()) : RecyclerView.Adapter<RecyclerItemRatushaAdapter.BaseViewHolder>() {
 
     override fun getItemCount(): Int = itemList.size
 

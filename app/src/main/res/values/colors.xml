@@ -21,4 +21,7 @@
 
     <color name="bg_item">#BFBFBF</color>
 
+    <color name="white80">#CCFFFFFF</color>
+    <color name="white60">#99FFFFFF</color>
+    <color name="white12">#1FFFFFFF</color>
 </resources>

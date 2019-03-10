@@ -5,10 +5,9 @@ import com.example.fox.ratusha.data.usecases.GetCategoryListUseCase
 import com.example.fox.ratusha.data.usecases.GetItemsUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
-import com.example.fox.ratusha.ui.base.recycler.BaseRecyclerListAdapter
+import com.example.fox.ratusha.ui.base.recycler.RecyclerCategoryAdapter
 import com.example.fox.ratusha.ui.base.recycler.ItemClick
 import com.example.fox.ratusha.ui.entity.ItemCategory
-import com.example.fox.ratusha.ui.screens.detailed.DetailItemInfo
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -19,7 +18,7 @@ import javax.inject.Inject
  */
 class FInformationPresenter(view: FInformationView) : BasePresenter<MainRouter, FInformationView>(view) {
 
-    val adapter = BaseRecyclerListAdapter()
+    val adapter = RecyclerCategoryAdapter()
 
 
     init {

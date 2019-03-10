@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.fox.ratusha.data.usecases.GetItemOctalUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
-import com.example.fox.ratusha.ui.base.recycler.BaseRecyclerCardAdapter
+import com.example.fox.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @created 16.02.2019
  */
 class FOctalPresenter (view: FOctalView): BasePresenter<MainRouter, FOctalView>(view) {
-    val octalAdapter = BaseRecyclerCardAdapter()
+    val octalAdapter = RecyclerItemRatushaAdapter()
 
     @Inject
     lateinit var getItemOctal: GetItemOctalUseCase

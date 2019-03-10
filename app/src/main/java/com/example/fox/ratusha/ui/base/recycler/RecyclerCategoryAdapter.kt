@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.entity.ItemCategory
 import com.example.fox.ratusha.ui.screens.detailed.DetailItemInfo
-import com.squareup.picasso.Picasso
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_category_recycler.view.*
-import com.example.fox.ratusha.utils.CircleTransform
 
 
 /**
  * @author Evgeny Butov
  * @created 17.02.2019
  */
-class BaseRecyclerListAdapter(var itemList: MutableList<ItemCategory> = mutableListOf()) : RecyclerView.Adapter<BaseRecyclerListAdapter.BaseViewHolder>() {
+class RecyclerCategoryAdapter(var itemList: MutableList<ItemCategory> = mutableListOf()) : RecyclerView.Adapter<RecyclerCategoryAdapter.BaseViewHolder>() {
 
     val clickItemSubject = PublishSubject.create<ItemClick<ItemCategory>>()
 

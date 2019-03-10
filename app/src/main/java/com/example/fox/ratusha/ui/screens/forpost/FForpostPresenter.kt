@@ -5,7 +5,7 @@ import com.example.fox.ratusha.data.usecases.GetInfoTownHall
 import com.example.fox.ratusha.data.usecases.GetItemForpostUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
-import com.example.fox.ratusha.ui.base.recycler.BaseRecyclerCardAdapter
+import com.example.fox.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 class FForpostPresenter(view: FForpostView) : BasePresenter<MainRouter, FForpostView>(view) {
 
-    val forpostAdapter = BaseRecyclerCardAdapter()
+    val forpostAdapter = RecyclerItemRatushaAdapter()
 
     private lateinit var timerThread: Thread
     private var remainderTimeOrderForpost = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L) //today + 10days
