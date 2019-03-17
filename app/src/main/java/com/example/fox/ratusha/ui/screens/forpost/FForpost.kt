@@ -23,11 +23,9 @@ class FForpost : BaseMvpFragment<FForpostPresenter, MainRouter>(), FForpostView 
         super.onViewCreated(view, savedInstanceState)
 
 
-        val layoutManager = GridLayoutManager(this.activity, 2)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        recyclerview.layoutManager = layoutManager
+        recyclerview.layoutManager = LinearLayoutManager(this.activity)
         recyclerview.setHasFixedSize(true)
-        recyclerview.itemAnimator = DefaultItemAnimator()
+//        recyclerview.itemAnimator = DefaultItemAnimator()
         recyclerview.adapter = presenter.forpostAdapter
 
     }

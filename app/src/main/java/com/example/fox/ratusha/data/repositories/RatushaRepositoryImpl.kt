@@ -3,10 +3,7 @@ package com.example.fox.ratusha.data.repositories
 import android.util.Log
 import com.example.fox.ratusha.data.db.AppDataBase
 import com.example.fox.ratusha.data.db.entity.*
-import com.example.fox.ratusha.ui.entity.ItemCategory
-import com.example.fox.ratusha.ui.entity.ItemOrder
-import com.example.fox.ratusha.ui.entity.Order
-import com.example.fox.ratusha.ui.entity.TownHall
+import com.example.fox.ratusha.ui.entity.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
@@ -59,6 +56,10 @@ class RatushaRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : 
 
     override fun getItemsCategory(id: Int): Flowable<List<ItemCategory>> {
         return appDataBase.getItemsDao().getItemsCategory(id).map { list -> list.map { it.transformToPresenter() } }
+    }
+
+    override fun getRecept(id: Int): Flowable<List<ItemRecipe>> {
+       return appDataBase.getRecipeDao().getRecipe(id)
     }
 }
 

@@ -7,13 +7,18 @@ import com.example.fox.ratusha.data.db.entity.*
 import com.example.fox.ratusha.data.db.requests.*
 
 @Database(entities = [ItemForpost::class, ItemOctal::class, InfoTownHall::class,
-                      Category::class, Items::class, Recipe::class, Resurs::class  ], version = 2)
+                      Category::class, Items::class, Recipe::class, Resources::class  ], version = 2)
 abstract class AppDataBase : RoomDatabase() {
 
     companion object {
      private const val DATABASE_NAME = "db_ratusha"
 
         fun getInstance(context: Context): AppDataBase {
+//            return Room
+//                    .databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
+//                    .fallbackToDestructiveMigration() //if version was edit - deleted bd and created new
+//                    .build()
+
             return RoomAssetHelper.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
 //                    .fallbackToDestructiveMigration() //if version was edit - deleted bd and created new
                     .build()
@@ -25,4 +30,5 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun getTownHallDao(): TownHallDao
     abstract fun getCategoryDao(): CategoryDao
     abstract fun getItemsDao(): ItemsDao
+    abstract fun getRecipeDao(): RecipeDao
 }

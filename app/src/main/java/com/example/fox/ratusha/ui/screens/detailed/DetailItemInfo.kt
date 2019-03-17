@@ -25,7 +25,7 @@ class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val id = intent.getIntExtra(ID_ITEM,0)
+        presenter.getItemRecipe(intent.getIntExtra(ID_ITEM,0))
 
         recyclerInfo.layoutManager = LinearLayoutManager(this)
         recyclerInfo.setHasFixedSize(true)

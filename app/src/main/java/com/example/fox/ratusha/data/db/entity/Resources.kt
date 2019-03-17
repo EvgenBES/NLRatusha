@@ -3,10 +3,11 @@ package com.example.fox.ratusha.data.db.entity
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "resurs")
-data class Resurs(
+@Entity(tableName = "resources")
+data class Resources(
         @PrimaryKey
         val id: Int,
         val name: String,
+        val image: String,
         val price: Int
 )

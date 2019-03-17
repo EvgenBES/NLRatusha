@@ -68,8 +68,10 @@ class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView, View.OnC
     }
 
     override fun setTimeProduct(time: String) {
-        product_time_forp.text = time
-        product_time_octal.text = time
+        if (product_time_forp != null && product_time_octal != null) {
+            product_time_forp.text = time
+            product_time_octal.text = time
+        }
     }
 
     fun hideButtonRefresh() {

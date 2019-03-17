@@ -1,16 +1,17 @@
 package com.example.fox.ratusha.ui.base.recycler
 
-import android.annotation.SuppressLint
+import android.support.transition.ChangeBounds
+import android.support.transition.TransitionManager
 import android.support.v7.widget.RecyclerView
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.entity.ItemOrder
-import com.example.fox.ratusha.ui.screens.detailed.DetailItemInfo
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
+import android.support.v4.view.animation.FastOutSlowInInterpolator
+import android.util.Log
+import java.lang.Thread.sleep
+
 
 /**
  * @author Evgeny Butov
@@ -26,7 +27,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_order_recycler, parent, false))
+            .inflate(com.example.fox.ratusha.R.layout.item_order_recycler, parent, false))
 
 
     fun setItems(items: List<ItemOrder>) {
@@ -60,33 +61,37 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
         }
 
         private fun setItemClickListener(id: Int) {
-            itemView.topImage.setOnClickListener {
-                itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
-            }
+//            itemView.topImage.setOnClickListener {
+//                itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
+//            }
+//
+            itemView.bnt_arrow_down.setOnClickListener {
+                val transition = ChangeBounds()
+                transition.duration = 200L
 
-            itemView.topWrapper.setOnClickListener {
-                if (itemView.bottomWrapper.visibility != View.VISIBLE) itemView.bottomWrapper.visibility = View.VISIBLE
+                TransitionManager.beginDelayedTransition(itemView.expanded_layout,transition)
+                TransitionManager.beginDelayedTransition(itemView.wrap_content,transition)
+                if (itemView.expanded_layout.visibility == View.GONE) itemView.expanded_layout.visibility = View.VISIBLE else itemView.expanded_layout.visibility = View.GONE
             }
-
-            itemView.bottomWrapper.setOnClickListener {
-                if (itemView.bottomWrapper.visibility == View.VISIBLE) itemView.bottomWrapper.visibility = View.INVISIBLE
-            }
+//
+//            itemView.bottomWrapper.setOnClickListener {
+//                if (itemView.bottomWrapper.visibility == View.VISIBLE) itemView.bottomWrapper.visibility = View.INVISIBLE
+//            }
         }
 
-        @SuppressLint("SetTextI18n")
         private fun inflateData(id: Int, itemName: String, urlImage: String, countStart: Int, countFinish: Int) {
-            Picasso.get()
-                    .load("http://image.neverlands.ru/weapon/$urlImage")
-                    .placeholder(R.drawable.ic_hourglass)
-                    .error(R.drawable.ic_cancel)
-                    .into(itemView.image_item)
-
-            itemName.let { itemView.nameItem.text = it }
-
-            val color = if (countStart != countFinish) "red" else "green"
-            val textColor = "<font color='$color'>($countStart/$countFinish)</font>"
-
-            itemView.counterItem.text = Html.fromHtml(textColor)
+//            Picasso.get()
+//                    .load("http://image.neverlands.ru/weapon/$urlImage")
+//                    .placeholder(R.drawable.ic_hourglass)
+//                    .error(R.drawable.ic_cancel)
+//                    .into(itemView.image_item)
+//
+//            itemName.let { itemView.nameItem.text = it }
+//
+//            val color = if (countStart != countFinish) "red" else "green"
+//            val textColor = "<font color='$color'>($countStart/$countFinish)</font>"
+//
+//            itemView.counterItem.text = Html.fromHtml(textColor)
 
         }
 
