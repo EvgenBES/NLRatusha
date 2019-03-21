@@ -2,6 +2,7 @@ package com.example.fox.ratusha.di.injection
 
 import android.content.Context
 import com.example.fox.ratusha.data.db.AppDataBase
+import com.example.fox.ratusha.data.network.RestService
 import com.example.fox.ratusha.data.repositories.RatushaRepository
 import com.example.fox.ratusha.data.repositories.RatushaRepositoryImpl
 import com.example.fox.ratusha.di.executors.PostExecutionThread
@@ -34,6 +35,11 @@ class DataModule {
     fun providePostExecutionThread(): PostExecutionThread {
         return UIThread()
     }
+
+    @Singleton
+    @Provides
+    fun provideRestService(): RestService = RestService()
+
 
 
 //    @Singleton

@@ -3,6 +3,7 @@ package com.example.fox.ratusha.data.repositories
 import android.util.Log
 import com.example.fox.ratusha.data.db.AppDataBase
 import com.example.fox.ratusha.data.db.entity.*
+import com.example.fox.ratusha.data.network.RestService
 import com.example.fox.ratusha.ui.entity.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -10,7 +11,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class RatushaRepositoryImpl @Inject constructor(val appDataBase: AppDataBase) : RatushaRepository {
+class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase, private val apiService: RestService) : RatushaRepository {
     override fun setForpostItem(order: List<Order>) {
         Observable.just(appDataBase)
                 .subscribeOn(Schedulers.io())

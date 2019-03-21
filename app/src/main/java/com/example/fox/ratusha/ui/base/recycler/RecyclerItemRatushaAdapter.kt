@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 import android.support.v4.view.animation.FastOutSlowInInterpolator
-import android.util.Log
-import java.lang.Thread.sleep
 
 
 /**
