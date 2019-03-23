@@ -12,7 +12,9 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase, private val apiService: RestService) : RatushaRepository {
-    override fun setForpostItem(order: List<Order>) {
+
+    override fun updateHallTowen(order: List<Order>): Boolean {
+      var result = false
         Observable.just(appDataBase)
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
@@ -30,9 +32,15 @@ class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppData
                             for (listOrder in order) {
                                 appDataBase.getTownHallDao().insert(listOrder.transformToTownHallDao())
                             }
+
+                            result = true
                         },
-                        onError = { Log.e("ItemRepositoryImpl", "setForpostItem error") }
+                        onError = {
+                            Log.e("ItemRepositoryImpl", "updateHallTowen error")
+                            result = false
+                        }
                 )
+        return result
     }
 
     override fun getInfoTownHall(): Flowable<List<TownHall>> {

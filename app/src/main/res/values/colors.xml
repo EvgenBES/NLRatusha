@@ -12,6 +12,9 @@
     <color name="bg_main_layout">#2b3d50</color>
     <color name="ic_color_greey">#B8C9D9</color>
 
+    <!--CardView-->
+    <color name="bg_cardview">#314250</color>
+    <color name="bg_cardview_item">#152838</color>
 
     <color name="wrap_bg">#7d5e5e5e</color>
     <color name="colorDarkText">#333333</color>

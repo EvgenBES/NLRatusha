@@ -4,7 +4,7 @@ import com.example.fox.ratusha.ui.entity.*
 import io.reactivex.Flowable
 
 interface RatushaRepository {
-    fun setForpostItem(order: List<Order>)
+    fun updateHallTowen(order: List<Order>): Boolean
     fun getInfoTownHall(): Flowable<List<TownHall>>
     fun getTownHall(id: Int): Flowable<TownHall>
     fun getItemForpost(): Flowable<List<ItemOrder>>

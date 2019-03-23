@@ -12,7 +12,7 @@ import javax.inject.Inject
 class SetItemDataBaseUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
                                                  private val itemRepository: RatushaRepository) : BaseUseCase(postExecutionThread) {
 
-    fun setOrder(order: List<Order>) {
-        return itemRepository.setForpostItem(order)
+    fun setOrder(order: List<Order>): Boolean {
+        return itemRepository.updateHallTowen(order)
     }
 }

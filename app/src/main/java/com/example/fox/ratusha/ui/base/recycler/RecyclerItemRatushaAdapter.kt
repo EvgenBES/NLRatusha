@@ -1,14 +1,12 @@
 package com.example.fox.ratusha.ui.base.recycler
 
-import android.support.transition.ChangeBounds
-import android.support.transition.TransitionManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
-import android.support.v4.view.animation.FastOutSlowInInterpolator
+import android.text.Html
 
 
 /**
@@ -63,14 +61,14 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
 //                itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
 //            }
 //
-            itemView.bnt_arrow_down.setOnClickListener {
-                val transition = ChangeBounds()
-                transition.duration = 200L
-
-                TransitionManager.beginDelayedTransition(itemView.expanded_layout,transition)
-                TransitionManager.beginDelayedTransition(itemView.wrap_content,transition)
-                if (itemView.expanded_layout.visibility == View.GONE) itemView.expanded_layout.visibility = View.VISIBLE else itemView.expanded_layout.visibility = View.GONE
-            }
+//            itemView.bnt_arrow_down.setOnClickListener {
+//                val transition = ChangeBounds()
+//                transition.duration = 200L
+//
+//                TransitionManager.beginDelayedTransition(itemView.expanded_layout,transition)
+//                TransitionManager.beginDelayedTransition(itemView.wrap_content,transition)
+//                if (itemView.expanded_layout.visibility == View.GONE) itemView.expanded_layout.visibility = View.VISIBLE else itemView.expanded_layout.visibility = View.GONE
+//            }
 //
 //            itemView.bottomWrapper.setOnClickListener {
 //                if (itemView.bottomWrapper.visibility == View.VISIBLE) itemView.bottomWrapper.visibility = View.INVISIBLE
@@ -78,18 +76,18 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
         }
 
         private fun inflateData(id: Int, itemName: String, urlImage: String, countStart: Int, countFinish: Int) {
-//            Picasso.get()
-//                    .load("http://image.neverlands.ru/weapon/$urlImage")
-//                    .placeholder(R.drawable.ic_hourglass)
-//                    .error(R.drawable.ic_cancel)
-//                    .into(itemView.image_item)
-//
-//            itemName.let { itemView.nameItem.text = it }
-//
-//            val color = if (countStart != countFinish) "red" else "green"
-//            val textColor = "<font color='$color'>($countStart/$countFinish)</font>"
-//
-//            itemView.counterItem.text = Html.fromHtml(textColor)
+            val resourceId = itemView.context?.resources?.getIdentifier(urlImage, "drawable", itemView.context.packageName)
+            itemView.exp_cardview.cardImage = resourceId ?: 0
+            itemView.exp_cardview.cardTitle = itemName
+
+            if (countStart != countFinish) {
+                val tvColor = "<font color='red'>$countStart</font>/$countFinish"
+                itemView.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
+                itemView.exp_cardview.cardRemainder = "(еще: ${countFinish - countStart})"
+            } else {
+                val tvColor = "<font color='green'>$countStart/$countFinish</font>"
+                itemView.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
+            }
 
         }
 
