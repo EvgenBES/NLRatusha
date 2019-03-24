@@ -54,7 +54,7 @@ class RecyclerCategoryAdapter(var itemList: MutableList<ItemCategory> = mutableL
         }
 
         private fun inflateData(id: Int, itemName: String, image: String) {
-            val resourceId = itemView.context?.resources?.getIdentifier(image, "drawable", itemView.context.packageName)
+            val resourceId = itemView.context?.resources?.getIdentifier("ic_$image", "drawable", itemView.context.packageName)
             if (resourceId != null) itemView.imageItemCategory.setImageResource(resourceId)
             itemView.nameItemCategory.text = itemName
         }

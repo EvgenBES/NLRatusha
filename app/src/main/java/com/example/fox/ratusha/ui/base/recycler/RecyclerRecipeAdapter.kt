@@ -43,7 +43,7 @@ class RecyclerRecipeAdapter(var itemList: MutableList<ItemRecipe> = mutableListO
 
 
         private fun inflateData(id: Int, image: String, itemName: String,  price: Int, quantity: Double) {
-            val resourceId = itemView.context?.resources?.getIdentifier(image, "drawable", itemView.context.packageName)
+            val resourceId = itemView.context?.resources?.getIdentifier("ic_$image", "drawable", itemView.context.packageName)
             if (resourceId != null) itemView.image_item.setImageResource(resourceId)
             itemView.item_name.text = itemName
             itemView.item_quantity.text = quantity.toString()

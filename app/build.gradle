@@ -63,6 +63,7 @@ dependencies {
 
     //Picaso
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     //Database
     api "android.arch.persistence.room:runtime:$roomVersion"

@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 import android.text.Html
+import android.util.Log
+import com.example.fox.ratusha.R
+import com.example.fox.ratusha.ui.widget.ExpandableCardView
 
 
 /**
@@ -45,9 +48,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
 
     inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun clear() {
-//            itemView.coverImageView.setImageDrawable(null)
-//            itemView.titleTextView.text = ""
-//            itemView.contentTextView.text = ""
+            itemView.exp_cardview
         }
 
         fun onBind(position: Int) {
@@ -76,19 +77,23 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
         }
 
         private fun inflateData(id: Int, itemName: String, urlImage: String, countStart: Int, countFinish: Int) {
-            val resourceId = itemView.context?.resources?.getIdentifier(urlImage, "drawable", itemView.context.packageName)
-            itemView.exp_cardview.cardImage = resourceId ?: 0
-            itemView.exp_cardview.cardTitle = itemName
+            val card = itemView.findViewById<ExpandableCardView>(R.id.exp_cardview)
+
+            val image = urlImage.replace(".gif", "")
+            val resourceId = itemView.context?.resources?.getIdentifier("ic_$image", "drawable", itemView.context.packageName)
+            val iconEmpty: Int = itemView.context?.resources?.getIdentifier("ic_iw_empty", "drawable", itemView.context.packageName) ?: 0
+
+            card.exp_cardview.cardImage = resourceId ?: iconEmpty
+            card.exp_cardview.cardTitle = itemName
 
             if (countStart != countFinish) {
                 val tvColor = "<font color='red'>$countStart</font>/$countFinish"
-                itemView.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
-                itemView.exp_cardview.cardRemainder = "(еще: ${countFinish - countStart})"
+                card.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
+                card.exp_cardview.cardRemainder = "(еще: ${countFinish - countStart})"
             } else {
                 val tvColor = "<font color='green'>$countStart/$countFinish</font>"
-                itemView.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
+                card.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
             }
-
         }
 
     }

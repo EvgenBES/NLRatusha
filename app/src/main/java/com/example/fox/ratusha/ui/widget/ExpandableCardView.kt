@@ -3,8 +3,13 @@ package com.example.fox.ratusha.ui.widget
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
+import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
+import android.support.annotation.IntegerRes
 import android.support.annotation.StringRes
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
@@ -13,6 +18,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.fox.ratusha.R
+import de.hdodenhof.circleimageview.CircleImageView
 
 /**
  * @author Evgeny Butov
@@ -20,7 +26,7 @@ import com.example.fox.ratusha.R
  */
 class ExpandableCardView : CardView {
 
-    private val ivItem by bind<ImageView>(R.id.iv_card_expand)
+    private val ivItem by bind<CircleImageView>(R.id.iv_card_expand)
     private val tvTitle by bind<TextView>(R.id.tv_card_title)
     private val tvQuantity by bind<TextView>(R.id.tv_card_quantity)
     private val tvRemainder by bind<TextView>(R.id.tv_card_remainder)
@@ -30,7 +36,6 @@ class ExpandableCardView : CardView {
     private val ivArrow by bind<LinearLayout>(R.id.bnt_arrow_down)
     private val ivProgress by bind<LinearLayout>(R.id.ll_progress)
     private val layoutContent by bind<View>(R.id.layout_content)
-
     constructor(context: Context) : super(context) {
         init(null)
     }
@@ -50,7 +55,7 @@ class ExpandableCardView : CardView {
         var expanded = false
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
-            cardImage = typedArray.getInt(R.styleable.ExpandableCardView_image, 0)
+            cardImage = typedArray.getResourceId(R.styleable.ExpandableCardView_image, 0)
             cardTitle = typedArray.getString(R.styleable.ExpandableCardView_title) ?: "Неизвестный предмет"
             cardQuantity = typedArray.getString(R.styleable.ExpandableCardView_quantity) ?: "0/0"
             cardRemainder = typedArray.getString(R.styleable.ExpandableCardView_remainder) ?: ""
@@ -167,13 +172,20 @@ class ExpandableCardView : CardView {
     /**
      * @property cardImage The title of the card
      */
-    open var cardImage: Int = 0
+    open var cardImage: Int? = null
         set(image) {
-            if (image != 0) {
+            if (image != null)
                 ivItem.setImageResource(image)
-            }
         }
 
+    /**
+     * Sets the title of the card
+     * @param resId String resource to display as title
+     * @see cardImage
+     */
+    open fun setCardImage(@IntegerRes resId: Int) {
+        cardImage = context.resources.getInteger(resId)
+    }
 
     /**
      * @property cardTitle The title of the card
@@ -287,7 +299,6 @@ class ExpandableCardView : CardView {
     open fun setCardTotalRemain(@StringRes resId: Int) {
         cardTotalRemain = context.getString(resId)
     }
-
 
     /**
      * @property expandDuration The duration of the expand animation
