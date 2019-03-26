@@ -6,7 +6,7 @@ package com.example.fox.ratusha.ui.entity
  */
 data class ItemRecipe (
         val id: Int,
-        val image: String = "ic_res_empty",
+        val image: String = "res_empty",
         val name: String = "Empty",
         val price: Int = 0,
         val number: Double = 0.00
