@@ -29,37 +29,37 @@
         app:layout_constraintTop_toBottomOf="@+id/headLayout" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/ic_i_w19_105"
+        android:src="@drawable/ic_iw_empty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/roboto_regular"
-        android:text="Доспех Жизни"
+        android:text="Неизвестный предмет"
         android:textColor="@color/colorAccent"
         android:textSize="16dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/iv_item_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_item_image" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
-        android:text="Цена: 200 / "
+        tools:text="Цена: 200 / "
         android:textColor="@color/white80"
         android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -67,12 +67,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:src="@drawable/icon_reputation"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_price"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_price"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_price" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_item_rep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -81,7 +81,7 @@
         android:textColor="@color/white80"
         android:textSize="14dp"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/tv_item_price" />
 
     <View
         android:id="@+id/divider3"
@@ -91,7 +91,7 @@
         android:background="@color/white12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_item_image" />
 
     <TextView
         android:id="@+id/textView4"

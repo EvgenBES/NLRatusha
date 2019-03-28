@@ -67,6 +67,10 @@ class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppData
         return appDataBase.getItemsDao().getItemsCategory(id).map { list -> list.map { it.transformToPresenter() } }
     }
 
+    override fun getItem(id: Int): Flowable<Items> {
+        return appDataBase.getItemsDao().getItem(id)
+    }
+
     override fun getRecept(id: Int): Flowable<List<ItemRecipe>> {
        return appDataBase.getRecipeDao().getRecipe(id)
     }

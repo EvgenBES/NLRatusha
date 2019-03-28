@@ -1,6 +1,7 @@
 package com.example.fox.ratusha.ui.screens.detailed
 
 import android.util.Log
+import com.example.fox.ratusha.data.usecases.GetItemsUseCase
 import com.example.fox.ratusha.data.usecases.GetRecipeUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
@@ -26,8 +27,21 @@ class DetailItemPresenter(view: DetailItemView) : BasePresenter<DetailItemRouter
     @Inject
     lateinit var getRecipeUseCase: GetRecipeUseCase
 
-    fun getItemRecipe(idRecipe: Int) {
-        val disposable = getRecipeUseCase.getRecipeOrder(idRecipe).subscribeBy (
+    @Inject
+    lateinit var getItemsUseCase: GetItemsUseCase
+
+    fun getItemAndRecipe(idItem: Int) {
+
+        val disposableA = getItemsUseCase.getItem(idItem).subscribeBy(
+        onNext = {
+            view.setItem(itemName = it.name, itemImage = it.image, itemPrice = it.price, itemReputation = 1.5, itemCountRep = 5)
+        },
+        onError = { Log.d("AAQQ", "getItem message: ${it.message}") }
+        )
+        addToDisposible(disposableA)
+
+
+        val disposableB = getRecipeUseCase.getRecipeOrder(idItem).subscribeBy (
                 onNext = {
                     adapter.setItems(it)
                     setTotal(it)
@@ -35,7 +49,7 @@ class DetailItemPresenter(view: DetailItemView) : BasePresenter<DetailItemRouter
                 },
                 onError = { Log.d("AAQQ", "getCategoryDao message: ${it.message}") }
         )
-        addToDisposible(disposable)
+        addToDisposible(disposableB)
     }
 
     private fun setTotal(listItem: List<ItemRecipe>) {

@@ -93,6 +93,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
             } else {
                 val tvColor = "<font color='green'>$countStart/$countFinish</font>"
                 card.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
+                card.exp_cardview.cardRemainder = ""
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.fox.ratusha.ui.screens.detailed
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +26,7 @@ class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter.getItemRecipe(intent.getIntExtra(ID_ITEM,0))
+        presenter.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
 
         recyclerInfo.layoutManager = LinearLayoutManager(this)
         recyclerInfo.setHasFixedSize(true)
@@ -34,5 +35,14 @@ class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >()
 
     override fun setTotal(totalCost: String) {
         tv_total.text = totalCost
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun setItem(itemName: String, itemPrice: Int, itemImage: String, itemReputation: Double, itemCountRep: Int) {
+        val resourceId = applicationContext.resources.getIdentifier("ic_$itemImage", "drawable", applicationContext.packageName)
+        iv_item_image.setImageResource(resourceId)
+        tv_item_name.text = itemName
+        tv_item_price.text = "Цена: $itemPrice / "
+        tv_item_rep.text = "x1 (5)"
     }
 }

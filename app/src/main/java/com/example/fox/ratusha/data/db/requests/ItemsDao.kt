@@ -16,4 +16,7 @@ interface ItemsDao {
     @Query("SELECT * FROM items WHERE categoryID = :id")
     fun getItemsCategory(id: Int): Flowable<List<Items>>
 
+    @Query("SELECT * FROM items WHERE id = :id")
+    fun getItem(id: Int): Flowable<Items>
+
 }
