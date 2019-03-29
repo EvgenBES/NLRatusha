@@ -11,11 +11,11 @@ import com.example.fox.ratusha.ui.entity.TownHall
  */
 
 fun ItemForpost.transformToPresenter(): ItemOrder {
-    return ItemOrder(id = itemId, itemName = name, urlImage = image, countStart = countStart, countFinish = countFinish)
+    return ItemOrder(id = itemId, name = name, image = image, countStart = countStart, countFinish = countFinish)
 }
 
 fun ItemOctal.transformToPresenter(): ItemOrder {
-    return ItemOrder(id = itemId, itemName = name, urlImage = image, countStart = countStart, countFinish = countFinish)
+    return ItemOrder(id = itemId, name = name, image = image, countStart = countStart, countFinish = countFinish)
 }
 
 fun InfoTownHall.transformToPresenter(): TownHall {
@@ -23,11 +23,11 @@ fun InfoTownHall.transformToPresenter(): TownHall {
 }
 
 fun ItemOrder.transformToItemForpostDao(): ItemForpost {
-    return ItemForpost(id = 0, itemId = id, name = itemName, image = urlImage, countStart = countStart, countFinish = countFinish)
+    return ItemForpost(id = 0, itemId = id, name = name, image = image, countStart = countStart, countFinish = countFinish)
 }
 
 fun ItemOrder.transformToItemOctalDao(): ItemOctal {
-    return ItemOctal(id = 0, itemId = id, name = itemName, image = urlImage, countStart = countStart, countFinish = countFinish)
+    return ItemOctal(id = 0, itemId = id, name = name, image = image, countStart = countStart, countFinish = countFinish)
 }
 
 fun Order.transformToTownHallDao(): InfoTownHall {

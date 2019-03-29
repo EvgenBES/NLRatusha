@@ -34,7 +34,7 @@ class DetailItemPresenter(view: DetailItemView) : BasePresenter<DetailItemRouter
 
         val disposableA = getItemsUseCase.getItem(idItem).subscribeBy(
         onNext = {
-            view.setItem(itemName = it.name, itemImage = it.image, itemPrice = it.price, itemReputation = 1.5, itemCountRep = 5)
+            view.setItem(itemName = it.name, itemImage = it.image, itemPrice = it.price, itemReputation = it.reputation, itemCountRep = it.countItemRep)
         },
         onError = { Log.d("AAQQ", "getItem message: ${it.message}") }
         )

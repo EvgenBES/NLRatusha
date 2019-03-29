@@ -48,7 +48,7 @@ class RecyclerCategoryAdapter(var itemList: MutableList<ItemCategory> = mutableL
 
         private fun setItemClickListener(position: Int) {
             itemView.setOnClickListener {
-                if (itemList[position].id < 6) clickItemSubject.onNext(ItemClick(itemList[position], position))
+                if (itemList[position].image.contains("prof_")) clickItemSubject.onNext(ItemClick(itemList[position], position))
                 else itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, itemList[position].id))
             }
         }

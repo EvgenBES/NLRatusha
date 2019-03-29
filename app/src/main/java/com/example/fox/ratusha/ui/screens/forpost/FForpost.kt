@@ -1,12 +1,13 @@
 package com.example.fox.ratusha.ui.screens.forpost
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpFragment
+import com.example.fox.ratusha.ui.entity.TotalSum
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
 import kotlinx.android.synthetic.main.fragment_forpost.*
 
@@ -22,16 +23,21 @@ class FForpost : BaseMvpFragment<FForpostPresenter, MainRouter>(), FForpostView 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        recyclerview.layoutManager = LinearLayoutManager(this.activity)
         recyclerview.setHasFixedSize(true)
-//        recyclerview.itemAnimator = DefaultItemAnimator()
+        recyclerview.layoutManager = LinearLayoutManager(this.activity)
+        recyclerview.itemAnimator = DefaultItemAnimator()
         recyclerview.adapter = presenter.forpostAdapter
-
     }
 
     override fun setTimerOrder(time: String) {
         time_order_forp.text = time
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun setTotalSum(totalSum: TotalSum) {
+        tv_total.text = "Сумма: ${totalSum.total}"
+        tv_paid.text = "Залито: ${totalSum.paid} [${totalSum.paidPercent}%]"
+        tv_remainder.text = "Осталось: ${totalSum.remainder} [${totalSum.remainderPercent}%]"
     }
 
 }

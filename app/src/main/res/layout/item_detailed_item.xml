@@ -16,20 +16,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/item_name"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_regular"
-        tools:text="Бронза"
+        android:gravity="center_vertical"
         android:textColor="@color/colorAccent"
-        android:textSize="14sp"
+        app:autoSizeMaxTextSize="14sp"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/image_item"
         app:layout_constraintEnd_toStartOf="@+id/item_quantity"
         app:layout_constraintStart_toEndOf="@+id/image_item"
-        app:layout_constraintTop_toTopOf="@+id/image_item" />
+        app:layout_constraintTop_toTopOf="@+id/image_item"
+        tools:text="Бронза" />
 
     <View
         android:id="@+id/divider5"

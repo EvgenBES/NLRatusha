@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpActivity
@@ -28,8 +29,10 @@ class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >()
 
         presenter.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
 
-        recyclerInfo.layoutManager = LinearLayoutManager(this)
         recyclerInfo.setHasFixedSize(true)
+        recyclerInfo.layoutManager = LinearLayoutManager(this)
+        recyclerInfo.itemAnimator = DefaultItemAnimator()
+        recyclerInfo.isNestedScrollingEnabled = false
         recyclerInfo.adapter = presenter.adapter
     }
 
@@ -43,6 +46,6 @@ class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >()
         iv_item_image.setImageResource(resourceId)
         tv_item_name.text = itemName
         tv_item_price.text = "Цена: $itemPrice / "
-        tv_item_rep.text = "x1 (5)"
+        tv_item_rep.text = "x$itemReputation ($itemCountRep)"
     }
 }

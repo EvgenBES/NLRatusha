@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import com.example.fox.ratusha.ui.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 import android.text.Html
-import android.util.Log
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.widget.ExpandableCardView
+import com.example.fox.ratusha.utils.CalculationsUtils.calculatePercent
+import com.example.fox.ratusha.utils.CalculationsUtils.totalRemainderCardView
+import com.example.fox.ratusha.utils.CalculationsUtils.transformTotalSum
 
 
 /**
@@ -52,8 +54,8 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
         }
 
         fun onBind(position: Int) {
-            val (id, itemName, urlImage, countStart, countFinish) = itemList[position]
-            inflateData(id, itemName, urlImage, countStart, countFinish)
+            val (id, itemName, urlImage, countStart, countFinish, price) = itemList[position]
+            inflateData(itemName, urlImage, countStart, countFinish, price)
             setItemClickListener(id)
         }
 
@@ -76,7 +78,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
 //            }
         }
 
-        private fun inflateData(id: Int, itemName: String, urlImage: String, countStart: Int, countFinish: Int) {
+        private fun inflateData(itemName: String, urlImage: String, countStart: Int, countFinish: Int, price: Int) {
             val card = itemView.findViewById<ExpandableCardView>(R.id.exp_cardview)
 
             val image = urlImage.replace(".gif", "")
@@ -85,6 +87,9 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
 
             card.exp_cardview.cardImage = resourceId ?: iconEmpty
             card.exp_cardview.cardTitle = itemName
+            card.exp_cardview.cardPrice = price.toString()
+            card.exp_cardview.cardProgress = calculatePercent((price * countFinish), (price * countStart)).toInt()
+            card.exp_cardview.cardTotal = "${transformTotalSum((price * countStart))} / ${transformTotalSum((price * countFinish))}"
 
             if (countStart != countFinish) {
                 val tvColor = "<font color='red'>$countStart</font>/$countFinish"
@@ -94,6 +99,12 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
                 val tvColor = "<font color='green'>$countStart/$countFinish</font>"
                 card.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
                 card.exp_cardview.cardRemainder = ""
+            }
+
+            if (totalRemainderCardView(price, countStart, countFinish)) {
+                card.exp_cardview.cardTotalRemain = "Еще: ${(price * countFinish) - (price * countStart)}"
+            } else {
+                card.exp_cardview.cardTotalRemain = ""
             }
         }
 

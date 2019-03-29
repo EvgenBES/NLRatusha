@@ -6,7 +6,10 @@ import com.example.fox.ratusha.data.usecases.GetItemForpostUseCase
 import com.example.fox.ratusha.di.app.App
 import com.example.fox.ratusha.ui.base.BasePresenter
 import com.example.fox.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
+import com.example.fox.ratusha.ui.entity.ItemOrder
 import com.example.fox.ratusha.ui.screens.mainManager.MainRouter
+import com.example.fox.ratusha.utils.CalculationsUtils.timeMap
+import com.example.fox.ratusha.utils.CalculationsUtils.totalSum
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,7 +34,6 @@ class FForpostPresenter(view: FForpostView) : BasePresenter<MainRouter, FForpost
 
     init {
         App.appComponent.runInject(this)
-
         getItem()
         getTownHall()
     }
@@ -59,7 +61,10 @@ class FForpostPresenter(view: FForpostView) : BasePresenter<MainRouter, FForpost
     private fun getItem() {
         val disposable = getItemForpost.getAllItemOrder()
                 .subscribeBy(
-                        onNext = { forpostAdapter.setItems(it) },
+                        onNext = {
+                            forpostAdapter.setItems(it)
+                            setTotalSumOrder(it)
+                        },
                         onError = { Log.d("AAQQ", "Error message: ${it.message}") }
                 )
         addToDisposible(disposable)
@@ -82,24 +87,14 @@ class FForpostPresenter(view: FForpostView) : BasePresenter<MainRouter, FForpost
         view.setTimerOrder(timeMap(remainderTimeOrderForpost))
     }
 
-    private fun timeMap(finish: String): String {
-        return if (finish != " ") {
-            val fixTime = 10800000L // 3 hor
-            val dateFinish = SimpleDateFormat("dd.MM.yyyy HH:mm").parse(finish).time
-            val dateNew = dateFinish - Date().time - fixTime
-
-            val daysLeft = SimpleDateFormat("d", Locale.getDefault()).format(dateNew).toInt()
-            val result = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(dateNew)
-
-            "${daysLeft - 1}д $result"
-        } else {
-            "0д 0:00:00"
-        }
+    private fun setTotalSumOrder(listItem: List<ItemOrder>) {
+        view.setTotalSum(totalSum(listItem))
     }
 
     /**
      * This thread refresh times to textview - interval 1s
      */
+    //TODO change on observable RxJava
     private fun createdTimerThread(): Thread {
         return object : Thread() {
             override fun run() {
@@ -116,8 +111,6 @@ class FForpostPresenter(view: FForpostView) : BasePresenter<MainRouter, FForpost
             }
         }
     }
-
-
 
 
 }

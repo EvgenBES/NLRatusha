@@ -10,5 +10,7 @@ data class Items(
         val name: String,
         val categoryID: Int,
         val image: String,
-        val price: Int
+        val price: Int,
+        val reputation: Double,
+        val countItemRep: Int
 )

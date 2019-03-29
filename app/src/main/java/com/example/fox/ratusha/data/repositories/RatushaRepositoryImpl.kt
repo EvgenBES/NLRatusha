@@ -52,7 +52,7 @@ class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppData
     }
 
     override fun getItemForpost(): Flowable<List<ItemOrder>> {
-        return appDataBase.getForpDao().getAll().map { list -> list.map { it.transformToPresenter() } }
+        return appDataBase.getForpDao().getAll()
     }
 
     override fun getItemOctal(): Flowable<List<ItemOrder>> {

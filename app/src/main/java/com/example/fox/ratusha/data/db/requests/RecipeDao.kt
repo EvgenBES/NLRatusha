@@ -13,7 +13,7 @@ import io.reactivex.Flowable
 @Dao
 interface RecipeDao {
 
-    @Query("SELECT resources.id, image, name, price, recipe.number FROM recipe INNER JOIN resources ON recipe.resource = resources.id WHERE recipe = :id")
+    @Query("SELECT resources.id, image, name, price, number FROM recipe INNER JOIN resources ON recipe.resource = resources.id WHERE recipe = :id")
     fun getRecipe(id: Int): Flowable<List<ItemRecipe>>
 
 }

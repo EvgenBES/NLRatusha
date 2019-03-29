@@ -6,8 +6,11 @@ package com.example.fox.ratusha.ui.entity
  */
 data class ItemOrder(
         val id: Int,
-        val itemName: String,
-        val urlImage: String,
+        val name: String,
+        val image: String,
         val countStart: Int,
-        val countFinish: Int
+        val countFinish: Int,
+        val price: Int = 0,
+        val reputation: Double = 0.0,
+        val countItemRep: Int = 0
 )

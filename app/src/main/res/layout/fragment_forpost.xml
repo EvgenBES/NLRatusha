@@ -61,11 +61,12 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-3dp"
                         android:drawablePadding="3dp"
-                        android:text="Сумма: 231 142"
+                        android:text="Сумма: 0"
                         android:textColor="@color/colorAccent" />
 
                     <ImageView
@@ -84,11 +85,12 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_paid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-3dp"
                         android:drawablePadding="3dp"
-                        android:text="Залито: 131 142 [69%]"
+                        android:text="Залито: 0 [0%]"
                         android:textColor="@color/colorAccent" />
 
                     <ImageView
@@ -108,11 +110,12 @@
 
 
                     <TextView
+                        android:id="@+id/tv_remainder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-3dp"
                         android:drawablePadding="3dp"
-                        android:text="Осталось: 21 142 [31%]"
+                        android:text="Осталось: 0 [100%]"
                         android:textColor="@color/colorAccent" />
 
                     <ImageView

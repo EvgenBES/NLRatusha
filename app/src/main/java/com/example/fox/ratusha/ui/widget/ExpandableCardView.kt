@@ -13,11 +13,13 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.fox.ratusha.R
+import com.example.fox.ratusha.utils.DisplayUtils.getDensityDouble
 import de.hdodenhof.circleimageview.CircleImageView
 
 /**
@@ -319,11 +321,12 @@ class ExpandableCardView : CardView {
      */
     open var cardProgress: Int = 0
         set(progress) {
-            setProgressWidth((progress * 1.6).toInt())
+            setProgressWidth((progress * 1.6 * getDensityDouble(context)).toInt())
+            field = progress
         }
 
-    private fun setProgressWidth(height: Int) {
-        ivProgress.layoutParams.width = height
+    private fun setProgressWidth(width: Int) {
+        ivProgress.layoutParams.width = width
         layoutContent.requestLayout()
     }
 }

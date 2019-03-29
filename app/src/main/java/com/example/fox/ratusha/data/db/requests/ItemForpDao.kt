@@ -5,6 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.example.fox.ratusha.data.db.entity.ItemForpost
+import com.example.fox.ratusha.ui.entity.ItemOrder
 import io.reactivex.Flowable
 
 @Dao
@@ -12,6 +13,7 @@ interface ItemForpDao {
 
     companion object {
         const val TABLE_NAME = "forpost"
+        const val T1 = "forpost"
     }
 
     @Insert
@@ -23,6 +25,6 @@ interface ItemForpDao {
     @Query("DELETE FROM $TABLE_NAME")
     fun deleteAll()
 
-    @Query("SELECT * FROM $TABLE_NAME")
-    fun getAll(): Flowable<List<ItemForpost>>
+    @Query("SELECT itemId as id, $T1.name, $T1.image, countStart, countFinish, price, reputation, countItemRep FROM $TABLE_NAME LEFT JOIN items ON $T1.itemId = items.id")
+    fun getAll(): Flowable<List<ItemOrder>>
 }
