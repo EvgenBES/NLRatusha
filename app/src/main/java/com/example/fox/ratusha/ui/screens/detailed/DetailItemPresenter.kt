@@ -8,6 +8,7 @@ import com.example.fox.ratusha.ui.base.BasePresenter
 import com.example.fox.ratusha.ui.base.recycler.RecyclerRecipeAdapter
 import com.example.fox.ratusha.ui.entity.ItemRecipe
 import io.reactivex.rxkotlin.subscribeBy
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 /**
@@ -53,9 +54,10 @@ class DetailItemPresenter(view: DetailItemView) : BasePresenter<DetailItemRouter
     }
 
     private fun setTotal(listItem: List<ItemRecipe>) {
+        val decimatFormat = DecimalFormat("#.##")
         var total = 0.0
         listItem.forEach { total += it.number * it.price }
-        view.setTotal(total.toString())
+        view.setTotal(decimatFormat.format(total).toString())
     }
 
 }

@@ -8,6 +8,7 @@ import com.example.fox.ratusha.ui.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 import android.text.Html
 import com.example.fox.ratusha.R
+import com.example.fox.ratusha.ui.screens.detailed.DetailItemInfo
 import com.example.fox.ratusha.ui.widget.ExpandableCardView
 import com.example.fox.ratusha.utils.CalculationsUtils.calculatePercent
 import com.example.fox.ratusha.utils.CalculationsUtils.totalRemainderCardView
@@ -60,22 +61,10 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
         }
 
         private fun setItemClickListener(id: Int) {
-//            itemView.topImage.setOnClickListener {
-//                itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
-//            }
-//
-//            itemView.bnt_arrow_down.setOnClickListener {
-//                val transition = ChangeBounds()
-//                transition.duration = 200L
-//
-//                TransitionManager.beginDelayedTransition(itemView.expanded_layout,transition)
-//                TransitionManager.beginDelayedTransition(itemView.wrap_content,transition)
-//                if (itemView.expanded_layout.visibility == View.GONE) itemView.expanded_layout.visibility = View.VISIBLE else itemView.expanded_layout.visibility = View.GONE
-//            }
-//
-//            itemView.bottomWrapper.setOnClickListener {
-//                if (itemView.bottomWrapper.visibility == View.VISIBLE) itemView.bottomWrapper.visibility = View.INVISIBLE
-//            }
+            itemView.setOnClickListener {
+                itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
+            }
+
         }
 
         private fun inflateData(itemName: String, urlImage: String, countStart: Int, countFinish: Int, price: Int) {

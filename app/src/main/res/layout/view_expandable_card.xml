@@ -9,7 +9,7 @@
     android:minHeight="72dp"
     android:paddingStart="16dp"
     android:paddingTop="16dp"
-    android:paddingEnd="16dp"
+    android:paddingEnd="8dp"
     android:paddingBottom="8dp">
 
 
@@ -40,6 +40,8 @@
             android:layout_toEndOf="@id/iv_card_expand"
             android:layout_toRightOf="@id/iv_card_expand"
             android:fontFamily="@font/roboto_medium"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="#acbfce"
             android:textSize="14sp"
             tools:text="Title" />
@@ -74,18 +76,19 @@
 
         <LinearLayout
             android:id="@+id/bnt_arrow_down"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_circle"
+            android:padding="8dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:background="@drawable/shape_circle"
                 android:src="@drawable/ic_arrow_down" />
 
         </LinearLayout>

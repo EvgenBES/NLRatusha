@@ -2,7 +2,6 @@ package com.example.fox.ratusha.ui.screens.mainManager
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.fox.ratusha.R
@@ -31,6 +30,14 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
 //            supportFragmentManager.beginTransaction().add(R.id.mainFragment, ).commit()
 
         bottomNavigation()
+
+//        val values = Observable.interval(1000, TimeUnit.MILLISECONDS)
+//        val subscription = values.subscribe(
+//                { v -> println("AAQQ: " + v!!) },
+//                { e -> println("AAQQ: $e") },
+//                { println("AAQQ") }
+//        )
+
     }
 
     override fun showProgress() {
