@@ -6,11 +6,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import com.example.fox.ratusha.databinding.ActivityDetailItemInfoBinding
 import com.example.fox.ratusha.R
 import com.example.fox.ratusha.ui.base.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_detail_item_info.*
 
-class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >(), DetailItemView{
+class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter, ActivityDetailItemInfoBinding>(), DetailItemView{
 
     companion object {
         private const val ID_ITEM = "ID_ITEM"
@@ -29,15 +30,11 @@ class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter >()
 
         presenter.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
 
-        recyclerInfo.setHasFixedSize(true)
-        recyclerInfo.layoutManager = LinearLayoutManager(this)
-        recyclerInfo.itemAnimator = DefaultItemAnimator()
-        recyclerInfo.isNestedScrollingEnabled = false
-        recyclerInfo.adapter = presenter.adapter
-    }
-
-    override fun setTotal(totalCost: String) {
-        tv_total.text = totalCost
+        binding.recyclerInfo.setHasFixedSize(true)
+        binding.recyclerInfo.layoutManager = LinearLayoutManager(this)
+        binding.recyclerInfo.itemAnimator = DefaultItemAnimator()
+        binding.recyclerInfo.isNestedScrollingEnabled = false
+        binding.recyclerInfo.adapter = presenter.adapter
     }
 
     @SuppressLint("SetTextI18n")

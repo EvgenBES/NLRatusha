@@ -24,8 +24,8 @@ abstract class BaseMvpFragment<P : BasePresenter<R, *>, R : BaseRouter<*>> : Bas
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (activity is BaseMvpActivity<*, *>) {
-            router = (activity as BaseMvpActivity<*, *>).router as R
+        if (activity is BaseMvpActivity<*, *, *>) {
+            router = (activity as BaseMvpActivity<*, *, *>).router as R
         }
     }
 

@@ -7,6 +7,5 @@ import com.example.fox.ratusha.ui.base.BaseView
  * @created 24.02.2019
  */
 interface DetailItemView : BaseView {
-    fun setTotal(totalCost: String)
     fun setItem(itemName: String, itemPrice: Int, itemImage: String, itemReputation: Double, itemCountRep: Int)
 }

@@ -91,7 +91,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
             }
 
             if (totalRemainderCardView(price, countStart, countFinish)) {
-                card.exp_cardview.cardTotalRemain = "Еще: ${(price * countFinish) - (price * countStart)}"
+                card.exp_cardview.cardTotalRemain = "Еще: ${transformTotalSum((price * countFinish) - (price * countStart))}"
             } else {
                 card.exp_cardview.cardTotalRemain = ""
             }

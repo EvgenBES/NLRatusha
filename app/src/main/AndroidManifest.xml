@@ -28,8 +28,6 @@
             android:name=".ui.screens.mainManager.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-        <service android:name=".service.LoadService" />
     </application>
 
 </manifest>

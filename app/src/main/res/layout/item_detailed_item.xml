@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:background="@color/colorDarkText"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -24,16 +25,14 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center_vertical"
+        android:lines="2"
+        android:maxLines="2"
         android:textColor="@color/colorAccent"
-        app:autoSizeMaxTextSize="14sp"
-        app:autoSizeMinTextSize="8sp"
-        app:autoSizeStepGranularity="1sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="@+id/image_item"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/item_quantity"
         app:layout_constraintStart_toEndOf="@+id/image_item"
-        app:layout_constraintTop_toTopOf="@+id/image_item"
-        tools:text="Бронза" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Бронза зачарованного доспеха" />
 
     <View
         android:id="@+id/divider5"
@@ -47,47 +46,47 @@
     <TextView
         android:id="@+id/item_quantity"
         android:layout_width="68dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:fontFamily="@font/roboto_regular"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        tools:text="1.75"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/colorAccent"
-        tools:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/divider8"
         app:layout_constraintEnd_toStartOf="@+id/item_price"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1.75"
+        tools:textSize="14sp" />
 
     <TextView
         android:id="@+id/item_price"
-        android:layout_width="42dp"
+        android:layout_width="44dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        tools:text="39"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        tools:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/divider8"
         app:layout_constraintEnd_toStartOf="@+id/item_cost"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="39м"
+        tools:textSize="14sp" />
 
     <TextView
         android:id="@+id/item_cost"
-        android:layout_width="52dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_regular"
         android:paddingStart="8dp"
-        tools:text="68.25"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        tools:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/divider8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="68.25"
+        tools:textSize="14sp" />
 
     <View
         android:id="@+id/divider8"

@@ -71,8 +71,12 @@ class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppData
         return appDataBase.getItemsDao().getItem(id)
     }
 
-    override fun getRecept(id: Int): Flowable<List<ItemRecipe>> {
-       return appDataBase.getRecipeDao().getRecipe(id)
+    override fun getRecept(id: Int): Flowable<List<ItemRecipeFull>> {
+       return appDataBase.getRecipeDao().getRecipe(id).map { list -> list.map { it.transformToFull() } }
+    }
+
+    override fun getReceptAlchemy(id: Int): Flowable<List<ItemRecipeFull>> {
+       return appDataBase.getRecipeDao().getRecipeAlchemy(id)
     }
 }
 

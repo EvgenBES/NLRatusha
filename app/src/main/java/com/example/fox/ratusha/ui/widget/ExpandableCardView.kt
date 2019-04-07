@@ -321,7 +321,7 @@ class ExpandableCardView : CardView {
      */
     open var cardProgress: Int = 0
         set(progress) {
-            setProgressWidth((progress * 1.6 * getDensityDouble(context)).toInt())
+            setProgressWidth((progress * 1.16 * getDensityDouble(context)).toInt())
             field = progress
         }
 

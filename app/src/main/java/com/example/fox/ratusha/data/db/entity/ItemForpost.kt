@@ -8,8 +8,8 @@ data class ItemForpost(
         @PrimaryKey (autoGenerate = true)
         val id: Int,
         val itemId: Int,
-        val name: String = " ",
-        val image: String = " ",
-        val countStart: Int = 0,
-        val countFinish: Int = 0
+        val name: String,
+        val image: String,
+        val countStart: Int,
+        val countFinish: Int
 )

@@ -10,11 +10,12 @@ import com.example.fox.ratusha.ui.screens.forpost.FForpost
 import com.example.fox.ratusha.ui.screens.information.FInformation
 import com.example.fox.ratusha.ui.screens.main.FMain
 import com.example.fox.ratusha.ui.screens.octal.FOctal
+import com.example.fox.ratusha.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMain.OnRefreshInfoListener {
+class MainActivity : BaseMvpActivity<MainPresenter, MainRouter, ActivityMainBinding>(), MainView, FMain.OnRefreshInfoListener {
 
     override fun providePresenter(): MainPresenter = MainPresenter(this)
     override fun provideRouter(): MainRouter = MainRouter(this)
@@ -30,14 +31,6 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
 //            supportFragmentManager.beginTransaction().add(R.id.mainFragment, ).commit()
 
         bottomNavigation()
-
-//        val values = Observable.interval(1000, TimeUnit.MILLISECONDS)
-//        val subscription = values.subscribe(
-//                { v -> println("AAQQ: " + v!!) },
-//                { e -> println("AAQQ: $e") },
-//                { println("AAQQ") }
-//        )
-
     }
 
     override fun showProgress() {
@@ -70,7 +63,7 @@ class MainActivity : BaseMvpActivity<MainPresenter, MainRouter>(), MainView, FMa
                 finish()
             } else {
                 timerBackPressed = Calendar.getInstance().time.time
-                Toast.makeText(applicationContext, "Нажми еще раз чтобы выйти", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, R.string.exit_app, Toast.LENGTH_SHORT).show()
             }
         }
     }

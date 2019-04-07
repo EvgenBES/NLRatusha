@@ -3,11 +3,13 @@ package com.example.fox.ratusha.data.db.entity
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "townHall")
-data class InfoTownHall(
+/**
+ * @author Evgeny Butov
+ * @created 06.04.2019
+ */
+@Entity(tableName = "type")
+class Type(
         @PrimaryKey
-        val idTown: Int,
-        val start: String,
-        val finish: String,
-        val url: String
+        val id: Int,
+        val name: String
 )

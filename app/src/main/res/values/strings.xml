@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NeverLandsR</string>
+    <string name="exit_app">Нажми еще раз чтобы выйти</string>
 
     <string name="castle_name_forp">FORP</string>
     <string name="castle_name_octal">OCTAL</string>
@@ -11,7 +12,12 @@
     <string name="fragment_forpost_title">FORPOST</string>
     <string name="order_timer">0д 00:00:00</string>
     <string name="product_timer">02:00:00</string>
+
     <string name="detailed_total">TOTAL:</string>
-    <string name="detailed_total_count">00.00</string>
+    <string name="detail_item_quantity">Quantity</string>
+    <string name="detail_item_type">Type</string>
+    <string name="detail_item_price">Price</string>
+    <string name="detail_item_time">Time</string>
+    <string name="detail_item_cost">Cost</string>
 
 </resources>

@@ -13,5 +13,6 @@ interface RatushaRepository {
     fun getCategoryList(): Flowable<List<ItemCategory>>
     fun getItemsCategory(id: Int): Flowable<List<ItemCategory>>
     fun getItem(id: Int): Flowable<Items>
-    fun getRecept(id: Int): Flowable<List<ItemRecipe>>
+    fun getRecept(id: Int): Flowable<List<ItemRecipeFull>>
+    fun getReceptAlchemy(id: Int): Flowable<List<ItemRecipeFull>>
 }

@@ -2,7 +2,7 @@ package com.example.fox.ratusha.data.usecases
 
 import com.example.fox.ratusha.data.repositories.RatushaRepository
 import com.example.fox.ratusha.di.executors.PostExecutionThread
-import com.example.fox.ratusha.ui.entity.ItemRecipe
+import com.example.fox.ratusha.ui.entity.ItemRecipeFull
 import io.reactivex.Flowable
 import javax.inject.Inject
 
@@ -13,9 +13,16 @@ import javax.inject.Inject
 class GetRecipeUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
                                            private val itemRepository: RatushaRepository) : BaseUseCase(postExecutionThread) {
 
-    fun getRecipeOrder(id: Int): Flowable<List<ItemRecipe>> {
+    fun getRecipeItem(id: Int): Flowable<List<ItemRecipeFull>> {
         return itemRepository
                 .getRecept(id)
+                .observeOn(postExecutorThread)
+                .subscribeOn(workExecutorThread)
+    }
+
+    fun getRecipeAlchemy(id: Int): Flowable<List<ItemRecipeFull>> {
+        return itemRepository
+                .getReceptAlchemy(id)
                 .observeOn(postExecutorThread)
                 .subscribeOn(workExecutorThread)
     }

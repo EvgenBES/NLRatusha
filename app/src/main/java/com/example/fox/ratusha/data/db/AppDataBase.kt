@@ -8,7 +8,7 @@ import com.example.fox.ratusha.data.db.entity.*
 import com.example.fox.ratusha.data.db.requests.*
 
 @Database(entities = [ItemForpost::class, ItemOctal::class, InfoTownHall::class,
-                      Category::class, Items::class, Recipe::class, Resources::class  ], version = 2)
+                      Category::class, Items::class, Recipe::class, Resources::class, ItemToType::class, Type::class], version = 2)
 abstract class AppDataBase : RoomDatabase() {
 
     companion object {

@@ -1,6 +1,9 @@
 package com.example.fox.ratusha.ui.base
 
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
+import com.example.fox.ratusha.BR
 
 /**
  * @author Evgeny Butov
@@ -8,9 +11,10 @@ import android.os.Bundle
  * @created 02.02.2019
  */
 
-abstract class BaseMvpActivity<P : BasePresenter<R, *>, R : BaseRouter<*>> : BaseActivity() {
+abstract class BaseMvpActivity<P : BasePresenter<R, *>, R : BaseRouter<*>, B: ViewDataBinding> : BaseActivity() {
 
     protected lateinit var presenter: P
+    protected lateinit var binding: B
     open lateinit var router: R
 
     abstract fun providePresenter(): P
@@ -20,8 +24,10 @@ abstract class BaseMvpActivity<P : BasePresenter<R, *>, R : BaseRouter<*>> : Bas
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutId())
-        router = provideRouter()
         presenter = providePresenter()
+        binding = DataBindingUtil.setContentView(this, provideLayoutId())
+        binding.setVariable(BR.presenter, presenter)
+        router = provideRouter()
     }
 
     override fun onStart() {

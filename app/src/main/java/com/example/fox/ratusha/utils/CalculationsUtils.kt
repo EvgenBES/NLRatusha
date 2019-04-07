@@ -1,14 +1,13 @@
 package com.example.fox.ratusha.utils
 
 import com.example.fox.ratusha.ui.entity.ItemOrder
+import com.example.fox.ratusha.ui.entity.ItemRecipeFull
 import com.example.fox.ratusha.ui.entity.TotalSum
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 object CalculationsUtils {
-
-    private val formatText: DecimalFormat = DecimalFormat("#,###")
 
     fun timeMap(finish: String): String {
         return if (finish != " ") {
@@ -47,11 +46,21 @@ object CalculationsUtils {
     }
 
     fun transformTotalSum(intText: Int): String {
+        val formatText: DecimalFormat = DecimalFormat("#,###")
         return formatText.format(intText)
     }
 
     fun totalRemainderCardView(price: Int, countStart: Int, countFinish: Int): Boolean {
        return ((price * countFinish) - (price * countStart)) != 0
+    }
+
+    fun getTotalPriceRecipte(listItem: List<ItemRecipeFull>): String {
+        val decimalFormat: DecimalFormat = DecimalFormat("#.##")
+        var total = 0.0
+
+        if (listItem[0].type.contains("empty")) listItem.forEach { total += it.number * it.price } else listItem.forEach { total += it.price }
+
+        return decimalFormat.format(total)
     }
 
 }

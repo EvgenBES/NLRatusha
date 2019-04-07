@@ -1,9 +1,6 @@
 package com.example.fox.ratusha.data.db.entity
 
-import com.example.fox.ratusha.ui.entity.ItemCategory
-import com.example.fox.ratusha.ui.entity.ItemOrder
-import com.example.fox.ratusha.ui.entity.Order
-import com.example.fox.ratusha.ui.entity.TownHall
+import com.example.fox.ratusha.ui.entity.*
 
 /**
  * @author Evgeny Butov
@@ -40,4 +37,8 @@ fun Category.transformToPresenter(): ItemCategory {
 
 fun Items.transformToPresenter(): ItemCategory {
     return ItemCategory(id = id , name = name, image = image)
+}
+
+fun ItemRecipe.transformToFull(): ItemRecipeFull{
+    return ItemRecipeFull(id = id, image = image, name = name, price = price, number = number)
 }
