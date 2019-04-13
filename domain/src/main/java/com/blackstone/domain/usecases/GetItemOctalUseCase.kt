@@ -1,0 +1,23 @@
+package com.blackstone.domain.usecases
+
+import com.blackstone.domain.entity.ItemOrder
+import com.blackstone.domain.executors.PostExecutionThread
+import com.blackstone.domain.repositories.RatushaRepository
+import io.reactivex.Flowable
+import javax.inject.Inject
+
+/**
+ * @author Evgeny Butov
+ * @created 08.02.2019
+ */
+class GetItemOctalUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
+                                              private val itemRepository: RatushaRepository
+) : BaseUseCase(postExecutionThread) {
+
+    fun getAllItemOrder(): Flowable<List<ItemOrder>> {
+        return itemRepository
+                .getItemOctal()
+                .observeOn(postExecutorThread)
+                .subscribeOn(workExecutorThread)
+    }
+}

@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    def room_version = "1.1.1"
+    def ok_http_version = "3.11.0"
+    def rx_java_version = "2.4.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$rx_java_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rx_java_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rx_java_version"
+    implementation "com.squareup.okhttp3:okhttp:$ok_http_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$ok_http_version"
+
+    api "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
+
+
+    //SQLiteAssetHelper
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+
+    implementation "javax.inject:javax.inject:1"
+
+    api project(path: ":domain")
+}
