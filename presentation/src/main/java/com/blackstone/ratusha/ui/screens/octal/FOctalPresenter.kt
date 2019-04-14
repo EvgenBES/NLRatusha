@@ -2,10 +2,10 @@ package com.blackstone.ratusha.ui.screens.octal
 
 import android.util.Log
 import com.blackstone.domain.usecases.GetItemOctalUseCase
-import com.blackstone.ratusha.di.app.App
+import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvp.BasePresenter
 import com.blackstone.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
-import com.blackstone.ratusha.ui.screens.mainManager.MainRouter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
@@ -13,7 +13,7 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FOctalPresenter (view: FOctalView): BasePresenter<MainRouter, FOctalView>(view) {
+class FOctalPresenter (view: FOctalView): BasePresenter<ControllerRouter, FOctalView>(view) {
     val octalAdapter = RecyclerItemRatushaAdapter()
 
     @Inject

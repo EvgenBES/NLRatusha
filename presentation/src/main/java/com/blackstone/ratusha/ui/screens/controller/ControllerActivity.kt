@@ -1,8 +1,9 @@
-package com.blackstone.ratusha.ui.screens.mainManager
+package com.blackstone.ratusha.ui.screens.controller
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.widget.Toast
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
 import com.blackstone.ratusha.ui.screens.main.FMain
@@ -11,14 +12,15 @@ import com.blackstone.ratusha.ui.screens.forpost.FForpost
 import com.blackstone.ratusha.ui.screens.information.FInformation
 import com.blackstone.ratusha.ui.screens.octal.FOctal
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
-class MainActivity : BaseMvvmActivity<MainViewModel, MainRouter, ActivityMainBinding>(), FMain.OnRefreshInfoListener {
+class ControllerActivity : BaseMvvmActivity<ControllerViewModel, ControllerRouter, ActivityMainBinding>(), FMain.OnRefreshInfoListener {
 
 
-    override fun provideRouter(): MainRouter = MainRouter(this)
+    override fun provideRouter(): ControllerRouter = ControllerRouter(this)
     override fun provideLayoutId(): Int = R.layout.activity_main
-    override fun prodiveViewModel(): MainViewModel {
-        return ViewModelProviders.of(this).get(MainViewModel::class.java)
+    override fun prodiveViewModel(): ControllerViewModel {
+        return ViewModelProviders.of(this).get(ControllerViewModel::class.java)
 
     }
     private var selectedFragment: Fragment = FMain()
@@ -46,18 +48,18 @@ class MainActivity : BaseMvvmActivity<MainViewModel, MainRouter, ActivityMainBin
         }
     }
 
-//    override fun onBackPressed() {
-//        val fragment: Fragment? = supportFragmentManager.findFragmentById(com.blackstone.ratusha.R.id.mainFragment)
-//        if (presenter.stateRecyclerFragment && fragment != null && fragment is FInformation) (fragment).onBackPresserFragment()
-//        else {
-//            if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
-//                finish()
-//            } else {
-//                timerBackPressed = Calendar.getInstance().time.time
-//                Toast.makeText(applicationContext, R.string.exit_app, Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+    override fun onBackPressed() {
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.mainFragment)
+        if (viewModel.stateRecyclerFragment && fragment != null && fragment is FInformation) (fragment).onBackPresserFragment()
+        else {
+            if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
+                finish()
+            } else {
+                timerBackPressed = Calendar.getInstance().time.time
+                Toast.makeText(applicationContext, R.string.exit_app, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
 
     override fun onClickForpost() {
@@ -71,10 +73,10 @@ class MainActivity : BaseMvvmActivity<MainViewModel, MainRouter, ActivityMainBin
     }
 
     fun changedStatusRecyclerFragment(state: Boolean) {
-//        presenter.stateRecyclerFragment = state
+        viewModel.stateRecyclerFragment = state
     }
 
     override fun onRefresh() {
-
+        viewModel.getOrderInformation()
     }
 }

@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.ui.screens.mainManager
+package com.blackstone.ratusha.ui.screens.controller
 
 import android.support.v4.app.Fragment
 import android.widget.Toast
@@ -10,9 +10,9 @@ import com.blackstone.ratusha.ui.screens.main.FMain
  * @author Evgeny Butov
  * @created 02.02.2019
  */
-class MainRouter(activity: MainActivity) : BaseRouter<MainActivity>(activity) {
+class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActivity>(activity) {
 
-    fun showToastActivity(message: String) {
+    fun showMessage(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 

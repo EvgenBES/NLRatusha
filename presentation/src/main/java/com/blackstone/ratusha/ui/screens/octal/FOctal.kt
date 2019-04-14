@@ -6,14 +6,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvp.BaseMvpFragment
-import com.blackstone.ratusha.ui.screens.mainManager.MainRouter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import kotlinx.android.synthetic.main.fragment_octal.*
 
 /**
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FOctal : BaseMvpFragment<FOctalPresenter, MainRouter>(), FOctalView {
+class FOctal : BaseMvpFragment<FOctalPresenter, ControllerRouter>(), FOctalView {
 
     override fun providePresenter(): FOctalPresenter = FOctalPresenter(this)
     override fun provideLayoutId(): Int = R.layout.fragment_octal

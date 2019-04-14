@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvp.BaseMvpFragment
-import com.blackstone.ratusha.ui.screens.mainManager.MainRouter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FMain : BaseMvpFragment<FMainPresenter, MainRouter>(), FMainView, View.OnClickListener {
+class FMain : BaseMvpFragment<FMainPresenter, ControllerRouter>(), FMainView, View.OnClickListener {
 
     override fun providePresenter(): FMainPresenter = FMainPresenter(this)
     override fun provideLayoutId(): Int = R.layout.fragment_main

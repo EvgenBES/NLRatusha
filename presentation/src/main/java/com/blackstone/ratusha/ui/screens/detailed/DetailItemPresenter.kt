@@ -5,7 +5,7 @@ import android.databinding.ObservableField
 import android.util.Log
 import com.blackstone.domain.usecases.GetItemsUseCase
 import com.blackstone.domain.usecases.GetRecipeUseCase
-import com.blackstone.ratusha.di.app.App
+import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvp.BasePresenter
 import com.blackstone.ratusha.ui.base.recycler.RecyclerRecipeAdapter
 import com.blackstone.domain.entity.ItemRecipeFull

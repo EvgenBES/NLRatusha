@@ -3,45 +3,64 @@ package com.blackstone.data.repositories
 import android.util.Log
 import com.blackstone.data.db.AppDataBase
 import com.blackstone.data.db.entity.*
+import com.blackstone.data.extension.mapResponceOrder
 import com.blackstone.data.net.RestService
 import com.blackstone.domain.entity.*
-import com.blackstone.domain.repositories.RatushaRepository
+import com.blackstone.domain.repositories.ServerRepository
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class RatushaRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase, private val apiService: RestService) :
-    RatushaRepository {
+class ServerRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase, private val apiService: RestService) :
+    ServerRepository {
 
-    override fun updateHallTowen(order: List<Order>): Boolean {
-      var result = false
-        Observable.just(appDataBase)
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onNext = {
-                            appDataBase.getForpDao().deleteAll()
-                            for (orderList in order[0].itemList) {
-                                appDataBase.getForpDao().insert(orderList.transformToItemForpostDao())
-                            }
+    override fun updateData(): Boolean {
+        var result = false
 
-                            appDataBase.getOctDao().deleteAll()
-                            for (orderList in order[1].itemList) {
-                                appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
-                            }
+        apiService.getForpost().subscribeBy (
+            onNext = {
+                val responseOrder: Order = it.string().mapResponceOrder()
 
-                            for (listOrder in order) {
-                                appDataBase.getTownHallDao().insert(listOrder.transformToTownHallDao())
-                            }
+                if (responseOrder.itemList.isNotEmpty()) {
+                    appDataBase.getForpDao().deleteAll()
 
-                            result = true
-                        },
-                        onError = {
-                            Log.e("ItemRepositoryImpl", "updateHallTowen error")
-                            result = false
-                        }
-                )
+                    for (orderList in responseOrder.itemList) {
+                        appDataBase.getForpDao().insert(orderList.transformToItemForpostDao())
+                    }
+
+                    appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
+                }
+
+                result = true
+            },
+            onError = {
+                Log.e("RatushaRepositoryImpl", "updateDataFp error")
+                return@subscribeBy
+            }
+        )
+
+
+        apiService.getOctal().subscribeBy (
+            onNext = {
+                val responseOrder: Order = it.string().mapResponceOrder()
+
+                if (responseOrder.itemList.isNotEmpty()) {
+                    appDataBase.getOctDao().deleteAll()
+
+                    for (orderList in responseOrder.itemList) {
+                        appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
+                    }
+
+                    appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
+                }
+                result = true
+            },
+            onError = {
+                Log.e("RatushaRepositoryImpl", "updateDataOctal error")
+                return@subscribeBy
+            }
+        )
+
         return result
     }
 

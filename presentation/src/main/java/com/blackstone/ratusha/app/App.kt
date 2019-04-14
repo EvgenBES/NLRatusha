@@ -1,10 +1,11 @@
-package com.blackstone.ratusha.di.app
+package com.blackstone.ratusha.app
 
 
 import android.app.Activity
 import android.app.Application
 import com.blackstone.ratusha.di.injection.AppComponent
 import com.blackstone.ratusha.di.injection.DaggerAppComponent
+import com.facebook.stetho.Stetho
 
 import javax.inject.Inject
 
@@ -33,6 +34,7 @@ class App : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        Stetho.initializeWithDefaults(this)
 
         appComponent = DaggerAppComponent
                 .builder()

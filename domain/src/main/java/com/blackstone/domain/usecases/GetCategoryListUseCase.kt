@@ -2,7 +2,7 @@ package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.executors.PostExecutionThread
-import com.blackstone.domain.repositories.RatushaRepository
+import com.blackstone.domain.repositories.ServerRepository
 import io.reactivex.Flowable
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ import javax.inject.Inject
  * @created 08.03.2019
  */
 class GetCategoryListUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
-                                                 private val itemRepository: RatushaRepository
+                                                 private val itemRepository: ServerRepository
 ) : BaseUseCase(postExecutionThread) {
 
     fun getCategoryListOrder(): Flowable<List<ItemCategory>> {

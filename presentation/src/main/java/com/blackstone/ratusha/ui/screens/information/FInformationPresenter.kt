@@ -3,12 +3,12 @@ package com.blackstone.ratusha.ui.screens.information
 import android.util.Log
 import com.blackstone.domain.usecases.GetCategoryListUseCase
 import com.blackstone.domain.usecases.GetItemsUseCase
-import com.blackstone.ratusha.di.app.App
+import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvp.BasePresenter
 import com.blackstone.ratusha.ui.base.recycler.RecyclerCategoryAdapter
 import com.blackstone.ratusha.ui.base.recycler.ItemClick
 import com.blackstone.domain.entity.ItemCategory
-import com.blackstone.ratusha.ui.screens.mainManager.MainRouter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FInformationPresenter(view: FInformationView) : BasePresenter<MainRouter, FInformationView>(view) {
+class FInformationPresenter(view: FInformationView) : BasePresenter<ControllerRouter, FInformationView>(view) {
 
     val adapter = RecyclerCategoryAdapter()
 

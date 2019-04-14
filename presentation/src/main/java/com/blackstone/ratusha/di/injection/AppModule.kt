@@ -2,7 +2,7 @@ package com.blackstone.ratusha.di.injection
 
 
 import android.content.Context
-import com.blackstone.ratusha.di.app.App
+import com.blackstone.ratusha.app.App
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

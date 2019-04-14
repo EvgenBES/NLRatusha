@@ -63,5 +63,7 @@ dependencies {
 
     implementation "javax.inject:javax.inject:1"
 
+    implementation "com.facebook.stetho:stetho:1.5.1"
+
     implementation project(path: ":data")
 }

@@ -3,8 +3,8 @@ package com.blackstone.ratusha.di.injection
 import android.content.Context
 import com.blackstone.data.db.AppDataBase
 import com.blackstone.data.net.RestService
-import com.blackstone.domain.repositories.RatushaRepository
-import com.blackstone.data.repositories.RatushaRepositoryImpl
+import com.blackstone.domain.repositories.ServerRepository
+import com.blackstone.data.repositories.ServerRepositoryImpl
 import com.blackstone.domain.executors.PostExecutionThread
 import com.blackstone.ratusha.di.executors.UIThread
 import dagger.Module
@@ -26,7 +26,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideItemRepository(itemRepository: RatushaRepositoryImpl): RatushaRepository {
+    fun provideItemRepository(itemRepository: ServerRepositoryImpl): ServerRepository {
         return itemRepository
     }
 
@@ -41,16 +41,4 @@ class DataModule {
     fun provideRestService(): RestService = RestService()
 
 
-
-//    @Singleton
-//    @Provides
-//    fun provideUIThread(uiThread: UIThread): PostExecutionThread {
-//        return uiThread
-//    }
-
-
-//    @Provides
-//    fun provideItemForpDao(appDataBase: AppDataBase): ItemForpDao {
-//        return appDataBase.getForpDao()
-//    }
 }

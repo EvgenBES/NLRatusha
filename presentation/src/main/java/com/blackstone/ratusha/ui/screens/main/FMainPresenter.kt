@@ -4,10 +4,10 @@ import android.util.Log
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.domain.usecases.GetItemOctalUseCase
-import com.blackstone.ratusha.di.app.App
+import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvp.BasePresenter
 import com.blackstone.domain.entity.ItemOrder
-import com.blackstone.ratusha.ui.screens.mainManager.MainRouter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,7 +17,7 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FMainPresenter(view: FMainView) : BasePresenter<MainRouter, FMainView>(view) {
+class FMainPresenter(view: FMainView) : BasePresenter<ControllerRouter, FMainView>(view) {
 
     private lateinit var timerThread: Thread
     private var remainderTimeOrderForpost = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L) //today + 10days

@@ -3,11 +3,11 @@ package com.blackstone.ratusha.ui.screens.forpost
 import android.util.Log
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
-import com.blackstone.ratusha.di.app.App
+import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvp.BasePresenter
 import com.blackstone.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
 import com.blackstone.domain.entity.ItemOrder
-import com.blackstone.ratusha.ui.screens.mainManager.MainRouter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils.timeMap
 import com.blackstone.ratusha.utils.CalculationsUtils.totalSum
 import io.reactivex.rxkotlin.subscribeBy
@@ -19,7 +19,7 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FForpostPresenter(view: FForpostView) : BasePresenter<MainRouter, FForpostView>(view) {
+class FForpostPresenter(view: FForpostView) : BasePresenter<ControllerRouter, FForpostView>(view) {
 
     val forpostAdapter = RecyclerItemRatushaAdapter()
 

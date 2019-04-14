@@ -7,7 +7,7 @@ import android.arch.persistence.room.migration.Migration
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.blackstone.data.sharedprefs.defaultSharedPreferences
+import com.blackstone.data.extension.defaultSharedPreferences
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper
 
 /**
