@@ -2,6 +2,7 @@ package com.blackstone.domain.usecases
 
 import com.blackstone.domain.executors.PostExecutionThread
 import com.blackstone.domain.repositories.ServerRepository
+import io.reactivex.Completable
 import javax.inject.Inject
 
 /**
@@ -12,7 +13,15 @@ class UpdateDataUseCase
 @Inject constructor(postExecutionThread: PostExecutionThread, private val itemRepository: ServerRepository)
     : BaseUseCase(postExecutionThread) {
 
-    fun updateData(): Boolean {
-        return itemRepository.updateData()
+    fun updateDataForpost(): Completable {
+        return itemRepository.updateDataForpost()
+            .observeOn(postExecutorThread)
+            .subscribeOn(workExecutorThread)
+    }
+
+    fun updateDataOctal(): Completable {
+        return itemRepository.updateDataOctal()
+            .observeOn(postExecutorThread)
+            .subscribeOn(workExecutorThread)
     }
 }

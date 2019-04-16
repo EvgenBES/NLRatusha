@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.blackstone.ratusha.ui.screens.controller.ControllerViewModel" />
+            type="com.blackstone.ratusha.ui.screens.controller.ControllerModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

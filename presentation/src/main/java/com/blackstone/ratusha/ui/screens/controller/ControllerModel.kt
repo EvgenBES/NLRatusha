@@ -4,13 +4,14 @@ import com.blackstone.domain.usecases.UpdateDataUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
 import com.blackstone.ratusha.utils.TimerUtils
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 /**
  * @author Evgeny Butov
  * @created 13.04.2019
  */
-class ControllerViewModel : BaseViewModel<ControllerRouter>() {
+class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     var stateRecyclerFragment: Boolean = false
 
@@ -24,7 +25,15 @@ class ControllerViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     fun getOrderInformation() {
-        updateDataBase.updateData()
+        updateDataBase.updateDataForpost().andThen { observer -> observer.onComplete() }
+            .subscribeBy(onError = { })
+
+        updateDataBase.updateDataOctal().andThen { observer -> observer.onComplete() }
+            .subscribeBy(
+                onError = { error ->
+                    router?.showError(error.message.let { "Error" })
+                }
+            )
     }
 
     /**

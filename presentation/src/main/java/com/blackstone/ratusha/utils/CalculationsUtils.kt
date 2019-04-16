@@ -37,6 +37,7 @@ object CalculationsUtils {
                 remainder = transformTotalSum(sum - paid), remainderPercent = (100 - calculatePercent(sum, paid).toInt()).toString())
     }
 
+
     fun calculatePercent(sum: Int, paid: Int): String {
         return if (sum != 0) {
             (paid / (sum / 100)).toString()
@@ -45,14 +46,17 @@ object CalculationsUtils {
         }
     }
 
+
     fun transformTotalSum(intText: Int): String {
         val formatText: DecimalFormat = DecimalFormat("#,###")
         return formatText.format(intText)
     }
 
+
     fun totalRemainderCardView(price: Int, countStart: Int, countFinish: Int): Boolean {
        return ((price * countFinish) - (price * countStart)) != 0
     }
+
 
     fun getTotalPriceRecipte(listItem: List<ItemRecipeFull>): String {
         val decimalFormat: DecimalFormat = DecimalFormat("#.##")
@@ -61,6 +65,21 @@ object CalculationsUtils {
         if (listItem[0].type.contains("empty")) listItem.forEach { total += it.number * it.price } else listItem.forEach { total += it.price }
 
         return decimalFormat.format(total)
+    }
+
+
+    fun countProgress(listItem: List<ItemOrder>): String {
+        var sumStartCount = 0.0
+        var sumFinishCount = 0.0
+
+        for (item in listItem) {
+            sumStartCount += item.countStart
+            sumFinishCount += item.countFinish
+        }
+
+        val result = (sumStartCount / (sumFinishCount / 100))
+
+        return "${result.toInt()}%" // return 0..99%
     }
 
 }

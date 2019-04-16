@@ -1,10 +1,12 @@
 package com.blackstone.domain.repositories
 
 import com.blackstone.domain.entity.*
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 interface ServerRepository {
-    fun updateData(): Boolean
+    fun updateDataForpost(): Completable
+    fun updateDataOctal(): Completable
 
     fun getInfoTownHall(): Flowable<List<TownHall>>
     fun getTownHall(id: Int): Flowable<TownHall>

@@ -14,13 +14,13 @@ import com.blackstone.ratusha.ui.screens.octal.FOctal
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class ControllerActivity : BaseMvvmActivity<ControllerViewModel, ControllerRouter, ActivityMainBinding>(), FMain.OnRefreshInfoListener {
+class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, ActivityMainBinding>(), FMain.OnRefreshInfoListener {
 
 
     override fun provideRouter(): ControllerRouter = ControllerRouter(this)
     override fun provideLayoutId(): Int = R.layout.activity_main
-    override fun prodiveViewModel(): ControllerViewModel {
-        return ViewModelProviders.of(this).get(ControllerViewModel::class.java)
+    override fun prodiveViewModel(): ControllerModel {
+        return ViewModelProviders.of(this).get(ControllerModel::class.java)
 
     }
     private var selectedFragment: Fragment = FMain()
