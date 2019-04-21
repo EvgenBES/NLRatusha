@@ -9,6 +9,7 @@ import io.reactivex.disposables.Disposable
  * @created 13.04.2019
  */
 abstract class BaseViewModel<R : BaseRouter<*>> : ViewModel() {
+
     protected val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
     protected var router: R? = null
     public  fun addRouter(router: R?){

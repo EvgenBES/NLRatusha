@@ -33,4 +33,8 @@ class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActi
         val fragment: Fragment? = activity.supportFragmentManager.findFragmentById(R.id.mainFragment)
         if (fragment != null && fragment is FMain) (fragment).hideButtonRefresh()
     }
+
+    fun refrashInformation() {
+        activity.prodiveViewModel().getOrderInformation()
+    }
 }

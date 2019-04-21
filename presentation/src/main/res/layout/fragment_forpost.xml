@@ -1,171 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.screens.forpost.FForpost">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/headLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_forp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="15dp"
-            android:src="@drawable/logo_fp" />
+        <variable
+                name="viewModel"
+                type="com.blackstone.ratusha.ui.screens.forpost.FForpostModel"/>
+    </data>
 
-        <LinearLayout
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:orientation="vertical">
+            tools:context=".ui.screens.forpost.FForpost">
 
-            <TextView
-                style="@style/ForpostHeader"
+        <LinearLayout
+                android:id="@+id/headLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/fragment_forpost_title"
-                android:textSize="30sp" />
+                android:background="@drawable/bg_forp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/time_order_forp"
-                style="@style/ForpostTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
-                android:gravity="center_horizontal"
-                android:text="@string/order_timer" />
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/logo_fp"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="vertical">
-
-                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        style="@style/ForpostHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fragment_forpost_title"
+                        android:textSize="30sp"/>
+
+                <TextView
+                        android:id="@+id/time_order_forp"
+                        style="@style/ForpostTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:gravity="center_horizontal"
+                        android:text="@{viewModel.getTimeOrder}"
+                        tools:text="@string/order_timer"/>
+
+                <android.support.constraint.ConstraintLayout
+                        android:layout_width="150dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/border_progress_item">
+
+                    <LinearLayout
+                            android:id="@+id/ll_progress"
+                            android:layout_width="100dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:background="#2d3e4c"
+                            android:orientation="horizontal"
+                            app:progress="@{viewModel.getProgress}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tv_total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-3dp"
-                        android:drawablePadding="3dp"
-                        android:text="Сумма: 0"
-                        android:textColor="@color/colorAccent" />
+                            style="@style/TextHeaderProgressOrder"
+                            android:id="@+id/tv_card_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.getPaid}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="1 275 850 / 1 305 700" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                        style="@style/TextHeaderProgressOrder"
+                        android:gravity="center"
                         android:layout_marginTop="2dp"
-                        android:src="@drawable/ic_coins" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_paid"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-3dp"
-                        android:drawablePadding="3dp"
-                        android:text="Залито: 0 [0%]"
-                        android:textColor="@color/colorAccent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="2dp"
-                        android:src="@drawable/ic_coins" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:id="@+id/tv_remainder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-3dp"
-                        android:drawablePadding="3dp"
-                        android:text="Осталось: 0 [100%]"
-                        android:textColor="@color/colorAccent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="2dp"
-                        android:src="@drawable/ic_coins" />
-
-                </LinearLayout>
-
+                        android:text="@{viewModel.getRemainder}"
+                        tools:text="Еще: 1 155 312"/>
 
             </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headLayout">
-
-        <LinearLayout
-            android:id="@+id/linearLayoutSwipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <View
-                android:id="@+id/borderBottom"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp"
-                android:background="@color/colorPrimaryDark"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"/>
 
         </LinearLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeContainer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headLayout">
+
+            <LinearLayout
+                    android:id="@+id/linearLayoutSwipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
 
-</android.support.constraint.ConstraintLayout>
+                <View
+                        android:id="@+id/borderBottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:background="@color/white12"/>
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

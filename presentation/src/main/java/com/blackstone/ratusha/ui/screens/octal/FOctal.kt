@@ -1,32 +1,43 @@
 package com.blackstone.ratusha.ui.screens.octal
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.base.mvp.BaseMvpFragment
+import com.blackstone.ratusha.databinding.FragmentOctalBinding
+import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
-import kotlinx.android.synthetic.main.fragment_octal.*
+import kotlinx.android.synthetic.main.fragment_octal.swipeContainer
 
 /**
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FOctal : BaseMvpFragment<FOctalPresenter, ControllerRouter>(), FOctalView {
+class FOctal : BaseMvvmFragment<FOctalModel, ControllerRouter, FragmentOctalBinding>(){
 
-    override fun providePresenter(): FOctalPresenter = FOctalPresenter(this)
     override fun provideLayoutId(): Int = R.layout.fragment_octal
+    override fun prodiveViewModel(): FOctalModel {
+        return ViewModelProviders.of(this).get(FOctalModel::class.java)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerview.setHasFixedSize(true)
+        binding.recyclerview.layoutManager = LinearLayoutManager(this.activity)
+        binding.recyclerview.itemAnimator = DefaultItemAnimator()
+        binding.recyclerview.adapter = viewModel.adapter
 
-        recyclerview.layoutManager = LinearLayoutManager(this.activity)
-        recyclerview.setHasFixedSize(true)
-        recyclerview.itemAnimator = DefaultItemAnimator()
-        recyclerview.adapter = presenter.octalAdapter
+        setSwipeController()
+    }
 
+    private fun setSwipeController() {
+        swipeContainer.setOnRefreshListener {
+            router?.refrashInformation()
+            swipeContainer.isRefreshing = false
+        }
     }
 
 }

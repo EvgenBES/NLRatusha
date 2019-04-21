@@ -20,7 +20,6 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
     private lateinit var onSwipeRefreshListener: OnRefreshInfoListener
 
     interface OnRefreshInfoListener {
-        fun onRefresh()
         fun onClickForpost()
         fun onClickOctal()
     }
@@ -30,49 +29,9 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
         onSwipeRefreshListener = activity as OnRefreshInfoListener
 
-        setSwipeControler()
+        setSwipeController()
         initClick()
     }
-
-//    override fun setImageProductForpost(urlProduct: String) {
-//        Picasso.get()
-//                .load("http://image.neverlands.ru/weapon/$urlProduct")
-//                .placeholder(R.drawable.ic_hourglass)
-//                .error(R.drawable.ic_cancel)
-//                .into(product_item_forp)
-//    }
-//
-//
-//    override fun setImageProductOctal(urlProduct: String) {
-//        Picasso.get()
-//                .load("http://image.neverlands.ru/weapon/$urlProduct")
-//                .placeholder(R.drawable.ic_hourglass)
-//                .error(R.drawable.ic_cancel)
-//                .into(product_item_octal)
-//    }
-//
-//    override fun setForpostTime(time: String) {
-//        time_order_forp.text = time
-//    }
-//
-//    override fun setForpostProgress(progress: String) {
-//        progress_order_forp.text = progress
-//    }
-//
-//    override fun setOctalTime(time: String) {
-//        time_order_octal.text = time
-//    }
-//
-//    override fun setOctalProgress(progress: String) {
-//        progress_order_octal.text = progress
-//    }
-//
-//    override fun setTimeProduct(time: String) {
-//        if (product_time_forp != null && product_time_octal != null) {
-//            product_time_forp.text = time
-//            product_time_octal.text = time
-//        }
-//    }
 
     fun hideButtonRefresh() {
         buttonRefresh.animate().alpha(0.0f).duration = 750
@@ -82,9 +41,9 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
         buttonRefresh.animate().alpha(1.0f).duration = 750
     }
 
-    private fun setSwipeControler() {
+    private fun setSwipeController() {
         swipeContainer.setOnRefreshListener {
-            onSwipeRefreshListener.onRefresh()
+            router?.refrashInformation()
             swipeContainer.isRefreshing = false
         }
     }
@@ -97,7 +56,7 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
     override fun onClick(v: View?) {
         when (v) {
-            buttonRefresh -> onSwipeRefreshListener.onRefresh()
+            buttonRefresh -> router?.refrashInformation()
             firstCastle -> onSwipeRefreshListener.onClickForpost()
             secondCastle -> onSwipeRefreshListener.onClickOctal()
         }

@@ -13,6 +13,10 @@ import javax.inject.Inject
  */
 class ControllerModel : BaseViewModel<ControllerRouter>() {
 
+    companion object {
+        const val TAG = "Ratusha ControllerModel"
+    }
+
     var stateRecyclerFragment: Boolean = false
 
     @Inject
@@ -43,7 +47,7 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     private fun startTimer() {
         val disposable = TimerUtils.observable5m.subscribe(
             { getOrderInformation() },
-            { e -> println("MainPresenter startTimer: $e") },
+            { e -> println("$TAG startTimer: $e") },
             { }
         )
         addToDisposable(disposable)

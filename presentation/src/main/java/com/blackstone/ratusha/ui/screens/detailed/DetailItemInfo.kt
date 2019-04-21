@@ -1,47 +1,41 @@
 package com.blackstone.ratusha.ui.screens.detailed
 
-import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.base.mvp.BaseMvpActivity
-import kotlinx.android.synthetic.main.activity_detail_item_info.*
+import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
+import com.blackstone.ratusha.databinding.ActivityDetailItemInfoBinding
 
-class DetailItemInfo : BaseMvpActivity<DetailItemPresenter, DetailItemRouter>(), DetailItemView{
+class DetailItemInfo : BaseMvvmActivity<DetailItemModel, DetailItemRouter, ActivityDetailItemInfoBinding>(){
 
     companion object {
         private const val ID_ITEM = "ID_ITEM"
 
         fun getInstance(context: Context, id: Int): Intent {
-            return Intent(context, DetailItemInfo::class.java).putExtra(DetailItemInfo.ID_ITEM, id)
+            return Intent(context, DetailItemInfo::class.java).putExtra(ID_ITEM, id)
         }
     }
 
-    override fun providePresenter(): DetailItemPresenter = DetailItemPresenter(this)
+    override fun prodiveViewModel(): DetailItemModel {
+        return ViewModelProviders.of(this).get(DetailItemModel::class.java)
+    }
     override fun provideRouter(): DetailItemRouter = DetailItemRouter(this)
     override fun provideLayoutId(): Int = R.layout.activity_detail_item_info
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
+        viewModel.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
 
-        recyclerInfo.setHasFixedSize(true)
-        recyclerInfo.layoutManager = LinearLayoutManager(this)
-        recyclerInfo.itemAnimator = DefaultItemAnimator()
-        recyclerInfo.isNestedScrollingEnabled = false
-        recyclerInfo.adapter = presenter.adapter
-    }
+        binding.recyclerInfo.setHasFixedSize(true)
+        binding.recyclerInfo.layoutManager = LinearLayoutManager(this)
+        binding.recyclerInfo.itemAnimator = DefaultItemAnimator()
+        binding.recyclerInfo.isNestedScrollingEnabled = false
+        binding.recyclerInfo.adapter = viewModel.adapter
 
-    @SuppressLint("SetTextI18n")
-    override fun setItem(itemName: String, itemPrice: Int, itemImage: String, itemReputation: Double, itemCountRep: Int) {
-        val resourceId = applicationContext.resources.getIdentifier("ic_$itemImage", "drawable", applicationContext.packageName)
-        iv_item_image.setImageResource(resourceId)
-        tv_item_name.text = itemName
-        tv_item_price.text = "Цена: $itemPrice / "
-        tv_item_rep.text = "x$itemReputation ($itemCountRep)"
     }
 }

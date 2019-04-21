@@ -23,6 +23,11 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="TextHeaderProgressOrder">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorSuperLightWhite</item>
+    </style>
 
     <style name="OctalHeader" parent="ForpostHeader">
         <item name="android:textColor">@color/oct_accent</item>

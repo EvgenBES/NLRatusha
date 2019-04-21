@@ -33,16 +33,19 @@ object CalculationsUtils {
             paid += it.price * it.countStart
         }
 
-        return TotalSum(total = transformTotalSum(sum), paid = transformTotalSum(paid), paidPercent = calculatePercent(sum, paid),
-                remainder = transformTotalSum(sum - paid), remainderPercent = (100 - calculatePercent(sum, paid).toInt()).toString())
+        return TotalSum(
+            total = transformTotalSum(sum),
+            paid = transformTotalSum(paid),
+            remainder = transformTotalSum(sum - paid)
+        )
     }
 
 
-    fun calculatePercent(sum: Int, paid: Int): String {
+    fun calculatePercent(sum: Int, paid: Int): Int {
         return if (sum != 0) {
-            (paid / (sum / 100)).toString()
+            (paid / (sum / 100))
         } else {
-            "100"
+            100
         }
     }
 
@@ -79,7 +82,7 @@ object CalculationsUtils {
 
         val result = (sumStartCount / (sumFinishCount / 100))
 
-        return "${result.toInt()}%" // return 0..99%
+        return "${result.toInt()}" // return 0..99%
     }
 
 }

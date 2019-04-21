@@ -21,15 +21,18 @@ import javax.inject.Inject
 
 class FMainModel : BaseViewModel<ControllerRouter>() {
 
-    private val timeProduct = ObservableField<String>("2:00:00")
+    companion object {
+        const val TAG = "Ratusha FMainModel"
+    }
 
-    private val remainderTimeOrderForpost = ObservableField<String>()
-    private val remainderTimeOrderOctal = ObservableField<String>()
+    private val timeProduct = ObservableField<String>("2:00:00")
+    private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
+    private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private val forpostPercent = ObservableField<String>("00%")
     private val octalPercent = ObservableField<String>("00%")
 
-    public val urlFirst = ObservableField<String>()
-    public val urlSecond = ObservableField<String>()
+    val urlFirst = ObservableField<String>()
+    val urlSecond = ObservableField<String>()
 
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
@@ -69,7 +72,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
                     urlSecond.set(it[1].url)
                 }
             },
-            onError = { Log.d("AAQQ", "getTownHall message: ${it.message}") }
+            onError = { Log.d(TAG, "getTownHall message: ${it.message}") }
         )
         addToDisposable(disposable)
     }
@@ -80,15 +83,15 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private fun getProgressOrders() {
         //Forpost
         val disposable = getItemForpost.getAllItemOrder().subscribeBy(
-            onNext = { if (it.isNotEmpty()) forpostPercent.set(countProgress(it)) },
-            onError = { Log.d("AAQQ", "getForpostOrders message: ${it.message}") }
+            onNext = { if (it.isNotEmpty()) forpostPercent.set("${countProgress(it)}%") },
+            onError = { Log.d(TAG, "getForpostOrders message: ${it.message}") }
         )
         addToDisposable(disposable)
 
         //Octal
         val disposableOct = getItemOctal.getAllItemOrder().subscribeBy(
-            onNext = { if (it.isNotEmpty()) octalPercent.set((countProgress(it))) },
-            onError = { Log.d("AAQQ", "getOctalOrders message: ${it.message}") }
+            onNext = { if (it.isNotEmpty()) octalPercent.set("${countProgress(it)}%") },
+            onError = { Log.d(TAG, "getOctalOrders message: ${it.message}") }
         )
         addToDisposable(disposableOct)
     }
@@ -100,8 +103,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
                 remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast))
                 remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast))
             },
-            { e -> println("MainPresenter startTimer: $e") },
-            { }
+            { e -> println("MainPresenter startTimer: $e") }
         )
         addToDisposable(disposable)
     }

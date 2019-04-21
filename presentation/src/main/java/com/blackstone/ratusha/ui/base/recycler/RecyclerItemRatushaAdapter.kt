@@ -29,7 +29,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(LayoutInflater.from(parent.context)
-            .inflate(com.blackstone.ratusha.R.layout.item_order_recycler, parent, false))
+            .inflate(R.layout.item_order_recycler, parent, false))
 
 
     fun setItems(items: List<ItemOrder>) {
@@ -77,7 +77,7 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
             card.exp_cardview.cardImage = resourceId ?: iconEmpty
             card.exp_cardview.cardTitle = itemName
             card.exp_cardview.cardPrice = price.toString()
-            card.exp_cardview.cardProgress = calculatePercent((price * countFinish), (price * countStart)).toInt()
+            card.exp_cardview.cardProgress = calculatePercent((price * countFinish), (price * countStart))
             card.exp_cardview.cardTotal = "${transformTotalSum((price * countStart))} / ${transformTotalSum((price * countFinish))}"
 
             if (countStart != countFinish) {

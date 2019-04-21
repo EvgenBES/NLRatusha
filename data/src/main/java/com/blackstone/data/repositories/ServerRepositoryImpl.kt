@@ -72,7 +72,7 @@ class ServerRepositoryImpl @Inject constructor(
     }
 
     override fun getItemOctal(): Flowable<List<ItemOrder>> {
-        return appDataBase.getOctDao().getAll().map { list -> list.map { it.transformToPresenter() } }
+        return appDataBase.getOctDao().getAll()
     }
 
     override fun getCategoryList(): Flowable<List<ItemCategory>> {

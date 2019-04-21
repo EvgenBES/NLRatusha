@@ -160,7 +160,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="275 850 / 305 700" />
 
-
         </android.support.constraint.ConstraintLayout>
 
         <TextView

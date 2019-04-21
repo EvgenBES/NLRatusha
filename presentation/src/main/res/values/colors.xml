@@ -5,6 +5,7 @@
     <color name="colorPrimaryBlack">#021728</color>
     <color name="colorAccent">#FAFAFB</color>
     <color name="colorPrimaryLight">#3D5672</color>
+    <color name="colorSuperLightWhite">#a9bccb</color>
 
     <!--Navigation-->
     <color name="actv_icon_nav">#FFDB6E</color>

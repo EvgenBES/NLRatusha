@@ -1,43 +1,43 @@
 package com.blackstone.ratusha.ui.screens.forpost
 
-import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.base.mvp.BaseMvpFragment
-import com.blackstone.domain.entity.TotalSum
+import com.blackstone.ratusha.databinding.FragmentForpostBinding
+import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
-import kotlinx.android.synthetic.main.fragment_forpost.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
  * @author Evgeny Butov
  * @created 16.02.2019
  */
-class FForpost : BaseMvpFragment<FForpostPresenter, ControllerRouter>(), FForpostView {
+class FForpost : BaseMvvmFragment<FForpostModel, ControllerRouter, FragmentForpostBinding>(){
 
-    override fun providePresenter(): FForpostPresenter = FForpostPresenter(this)
     override fun provideLayoutId(): Int = R.layout.fragment_forpost
+    override fun prodiveViewModel(): FForpostModel {
+        return ViewModelProviders.of(this).get(FForpostModel::class.java)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerview.setHasFixedSize(true)
-        recyclerview.layoutManager = LinearLayoutManager(this.activity)
-        recyclerview.itemAnimator = DefaultItemAnimator()
-        recyclerview.adapter = presenter.forpostAdapter
+        binding.recyclerview.setHasFixedSize(true)
+        binding.recyclerview.layoutManager = LinearLayoutManager(this.activity)
+        binding.recyclerview.itemAnimator = DefaultItemAnimator()
+        binding.recyclerview.adapter = viewModel.adapter
+
+        setSwipeController()
     }
 
-    override fun setTimerOrder(time: String) {
-        time_order_forp.text = time
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun setTotalSum(totalSum: TotalSum) {
-        tv_total.text = "Сумма: ${totalSum.total}"
-        tv_paid.text = "Залито: ${totalSum.paid} [${totalSum.paidPercent}%]"
-        tv_remainder.text = "Осталось: ${totalSum.remainder} [${totalSum.remainderPercent}%]"
+    private fun setSwipeController() {
+        swipeContainer.setOnRefreshListener {
+            router?.refrashInformation()
+            swipeContainer.isRefreshing = false
+        }
     }
 
 }

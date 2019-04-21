@@ -21,7 +21,6 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     override fun provideLayoutId(): Int = R.layout.activity_main
     override fun prodiveViewModel(): ControllerModel {
         return ViewModelProviders.of(this).get(ControllerModel::class.java)
-
     }
     private var selectedFragment: Fragment = FMain()
     private var timerBackPressed: Long = 0L
@@ -61,7 +60,6 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
         }
     }
 
-
     override fun onClickForpost() {
         navigation.menu.getItem(1).isChecked = true
         router.startFragment(FForpost())
@@ -76,7 +74,4 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
         viewModel.stateRecyclerFragment = state
     }
 
-    override fun onRefresh() {
-        viewModel.getOrderInformation()
-    }
 }
