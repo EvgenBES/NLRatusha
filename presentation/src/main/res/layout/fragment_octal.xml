@@ -55,7 +55,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/order_timer"/>
+                        android:text="@{viewModel.getTimeOrder}"
+                        tools:text="@string/order_timer"/>
 
                 <android.support.constraint.ConstraintLayout
                         android:layout_width="150dp"
@@ -64,7 +65,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"
-                        android:background="@drawable/border_progress_item">
+                        android:background="@drawable/border_progress_octal">
 
                     <LinearLayout
                             android:id="@+id/ll_progress"
@@ -73,7 +74,7 @@
                             android:layout_marginStart="1dp"
                             android:layout_marginTop="1dp"
                             android:layout_marginBottom="1dp"
-                            android:background="#2d3e4c"
+                            android:background="#e4b004"
                             android:orientation="horizontal"
                             app:progress="@{viewModel.getProgress}"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,6 +87,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{viewModel.getPaid}"
+                            android:textColor="#46342d"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +102,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#c9982f"
                         android:text="@{viewModel.getRemainder}"
                         tools:text="Еще: 1 155 312"/>
 
@@ -129,7 +132,7 @@
                         android:layout_height="2dp"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        android:background="@color/colorPrimaryDark"/>
+                        android:background="#a5721f"/>
 
                 <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerview"
