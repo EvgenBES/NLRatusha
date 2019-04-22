@@ -1,12 +1,14 @@
 package com.blackstone.ratusha.ui.screens.main
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.databinding.FragmentMainBinding
-import kotlinx.android.synthetic.main.fragment_main.*
+import com.blackstone.ratusha.ui.screens.controller.ControllerModel
 
 /**
  * @author Evgeny Butov
@@ -31,34 +33,49 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
         setSwipeController()
         initClick()
+
+        /**
+         *  create view model in activity scope
+         */
+        activity?.let {
+            val sharedViewModel = ViewModelProviders.of(it).get(ControllerModel::class.java)
+            observeInput(sharedViewModel)
+        }
     }
 
+    private fun observeInput(controllerModel: ControllerModel) {
+        controllerModel.stateData.observe(this, Observer { status ->
+            status?.let { if (status) hideButtonRefresh() else showButtonRefresh() }
+        })
+    }
+
+
     fun hideButtonRefresh() {
-        buttonRefresh.animate().alpha(0.0f).duration = 750
+        binding.buttonRefresh.animate().alpha(0.0f).duration = 750
     }
 
     fun showButtonRefresh() {
-        buttonRefresh.animate().alpha(1.0f).duration = 750
+        binding.buttonRefresh.animate().alpha(1.0f).duration = 750
     }
 
     private fun setSwipeController() {
-        swipeContainer.setOnRefreshListener {
+        binding.swipeContainer.setOnRefreshListener {
             router?.refrashInformation()
-            swipeContainer.isRefreshing = false
+            binding.swipeContainer.isRefreshing = false
         }
     }
 
     private fun initClick() {
-        buttonRefresh.setOnClickListener(this)
-        firstCastle.setOnClickListener(this)
-        secondCastle.setOnClickListener(this)
+        binding.buttonRefresh.setOnClickListener(this)
+        binding.firstCastle.setOnClickListener(this)
+        binding.secondCastle.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            buttonRefresh -> router?.refrashInformation()
-            firstCastle -> onSwipeRefreshListener.onClickForpost()
-            secondCastle -> onSwipeRefreshListener.onClickOctal()
+            binding.buttonRefresh -> router?.refrashInformation()
+            binding.firstCastle -> onSwipeRefreshListener.onClickForpost()
+            binding.secondCastle -> onSwipeRefreshListener.onClickOctal()
         }
     }
 

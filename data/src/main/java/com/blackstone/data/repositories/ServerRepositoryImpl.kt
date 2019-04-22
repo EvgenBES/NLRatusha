@@ -6,56 +6,42 @@ import com.blackstone.data.extension.mapResponceOrder
 import com.blackstone.data.net.RestService
 import com.blackstone.domain.entity.*
 import com.blackstone.domain.repositories.ServerRepository
-import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class ServerRepositoryImpl @Inject constructor(
     private val appDataBase: AppDataBase, private val apiService: RestService
 ) : ServerRepository {
 
-    override fun updateDataForpost(): Completable {
-        return Completable.fromAction {
-            apiService.getForpost().subscribeBy(
-                onNext = {
-                    val responseOrder: Order = it.string().mapResponceOrder()
+    override fun updateDataForpost(): Observable<Boolean> {
+        return apiService.getForpost().map {
+            val responseOrder: Order = it.string().mapResponceOrder()
 
-                    if (responseOrder.itemList.isNotEmpty()) {
-                        appDataBase.getForpDao().deleteAll()
+            if (responseOrder.itemList.isNotEmpty()) {
+                appDataBase.getForpDao().deleteAll()
 
-                        for (orderList in responseOrder.itemList) {
-                            appDataBase.getForpDao().insert(orderList.transformToItemForpostDao())
-                        }
-                        appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
-                    }
-                },
-                onError = {
-                    return@subscribeBy
+                for (orderList in responseOrder.itemList) {
+                    appDataBase.getForpDao().insert(orderList.transformToItemForpostDao())
                 }
-            )
+                appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
+            }
+            return@map true
         }
     }
 
-    override fun updateDataOctal(): Completable {
-        return Completable.fromAction {
-            apiService.getOctal().subscribeBy(
-                onNext = {
-                    val responseOrder: Order = it.string().mapResponceOrder()
+    override fun updateDataOctal(): Observable<Boolean> {
+        return apiService.getOctal().map {
+            val responseOrder: Order = it.string().mapResponceOrder()
+            if (responseOrder.itemList.isNotEmpty()) {
+                appDataBase.getOctDao().deleteAll()
 
-                    if (responseOrder.itemList.isNotEmpty()) {
-                        appDataBase.getOctDao().deleteAll()
-
-                        for (orderList in responseOrder.itemList) {
-                            appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
-                        }
-                        appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
-                    }
-                },
-                onError = {
-                    return@subscribeBy
+                for (orderList in responseOrder.itemList) {
+                    appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
                 }
-            )
+                appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
+            }
+            return@map true
         }
     }
 

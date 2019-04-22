@@ -5,11 +5,10 @@
     android:id="@+id/wrap_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/border_item_ratusha"
+    android:background="@drawable/border_item_ratusha_yellow"
     android:minHeight="72dp"
     android:paddingStart="16dp"
     android:paddingTop="16dp"
-    android:paddingEnd="8dp"
     android:paddingBottom="8dp">
 
 
@@ -19,16 +18,16 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/iv_card_expand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_iw_empty"
-                app:civ_border_color="#314250"
-                app:civ_border_width="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_card_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_iw_empty"
+            app:civ_border_color="#e5af05"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_card_title"
@@ -37,14 +36,14 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="-2dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_toStartOf="@+id/bnt_arrow_down"
             android:layout_toEndOf="@id/iv_card_expand"
             android:layout_toRightOf="@id/iv_card_expand"
             android:fontFamily="@font/roboto_medium"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="#acbfce"
+            android:textColor="#3D2504"
             android:textSize="14sp"
             tools:text="Title" />
 
@@ -55,7 +54,7 @@
             android:layout_below="@+id/tv_card_title"
             android:layout_alignStart="@+id/tv_card_title"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#acbfce"
+            android:textColor="#382306"
             android:textSize="12sp"
             android:paddingBottom="8dp"
             tools:text="340/777" />
@@ -72,7 +71,7 @@
             android:layout_toEndOf="@id/tv_card_quantity"
             android:layout_toRightOf="@id/tv_card_quantity"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#acbfce"
+            android:textColor="#382306"
             android:textSize="10sp"
             tools:text="(еще 303)" />
 
@@ -83,6 +82,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:padding="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -90,8 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:background="@drawable/shape_circle"
-                android:src="@drawable/ic_arrow_down" />
+                android:background="@drawable/shape_circle_yellow"
+                android:src="@drawable/ic_arrow_down_yellow" />
 
         </LinearLayout>
 
@@ -123,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/roboto_regular"
-                android:textColor="#acbfce"
+                android:textColor="#382306"
                 android:textSize="10sp"
                 tools:text="0" />
 
@@ -133,7 +134,7 @@
             android:layout_width="116dp"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
-            android:background="@drawable/border_progress_item"
+            android:background="@drawable/border_progress_item_yellow"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -143,7 +144,7 @@
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="#2d3e4c"
+                android:background="#e8ae02"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:textColor="#acbfce"
+                android:textColor="#382306"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#acbfce"
+            android:textColor="#382306"
             android:textSize="10dp"
             tools:text="Еще: 305 954" />
 

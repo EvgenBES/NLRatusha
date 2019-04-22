@@ -7,18 +7,18 @@ import android.widget.Toast
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
 import com.blackstone.ratusha.ui.screens.main.FMain
-import com.blackstone.ratusha.databinding.ActivityMainBinding
+import com.blackstone.ratusha.databinding.ActivityControllerBinding
 import com.blackstone.ratusha.ui.screens.forpost.FForpost
 import com.blackstone.ratusha.ui.screens.information.FInformation
 import com.blackstone.ratusha.ui.screens.octal.FOctal
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_controller.*
 import java.util.*
 
-class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, ActivityMainBinding>(), FMain.OnRefreshInfoListener {
+class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, ActivityControllerBinding>(), FMain.OnRefreshInfoListener {
 
 
     override fun provideRouter(): ControllerRouter = ControllerRouter(this)
-    override fun provideLayoutId(): Int = R.layout.activity_main
+    override fun provideLayoutId(): Int = R.layout.activity_controller
     override fun prodiveViewModel(): ControllerModel {
         return ViewModelProviders.of(this).get(ControllerModel::class.java)
     }

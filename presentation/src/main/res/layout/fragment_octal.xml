@@ -55,8 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:gravity="center_horizontal"
-                        android:text="@{viewModel.getTimeOrder}"
-                        tools:text="@string/order_timer"/>
+                        android:text="@string/order_timer"/>
 
                 <android.support.constraint.ConstraintLayout
                         android:layout_width="150dp"
@@ -65,7 +64,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"
-                        android:background="@drawable/border_progress_octal">
+                        android:background="@drawable/border_progress_item_yellow">
 
                     <LinearLayout
                             android:id="@+id/ll_progress"
@@ -74,7 +73,7 @@
                             android:layout_marginStart="1dp"
                             android:layout_marginTop="1dp"
                             android:layout_marginBottom="1dp"
-                            android:background="#e4b004"
+                            android:background="#e5af04"
                             android:orientation="horizontal"
                             app:progress="@{viewModel.getProgress}"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{viewModel.getPaid}"
-                            android:textColor="#46342d"
+                            android:textColor="#3D2504"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -99,10 +98,10 @@
                 <TextView
                         style="@style/TextHeaderProgressOrder"
                         android:gravity="center"
+                        android:textColor="#ba9544"
                         android:layout_marginTop="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#c9982f"
                         android:text="@{viewModel.getRemainder}"
                         tools:text="Еще: 1 155 312"/>
 
@@ -114,6 +113,7 @@
                 android:id="@+id/swipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:background="#231b18"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
                         android:layout_height="2dp"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        android:background="#a5721f"/>
+                        android:background="#e5af05"/>
 
                 <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerview"

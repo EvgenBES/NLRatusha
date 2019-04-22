@@ -1,5 +1,6 @@
 package com.blackstone.ratusha.ui.screens.controller
 
+import android.arch.lifecycle.MutableLiveData
 import com.blackstone.domain.usecases.UpdateDataUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
@@ -18,6 +19,7 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     }
 
     var stateRecyclerFragment: Boolean = false
+    val stateData = MutableLiveData<Boolean>()
 
     @Inject
     lateinit var updateDataBase: UpdateDataUseCase
@@ -29,13 +31,13 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     }
 
     fun getOrderInformation() {
-        updateDataBase.updateDataForpost().andThen { observer -> observer.onComplete() }
-            .subscribeBy(onError = { })
+        updateDataBase.updateDataForpost().subscribeBy(onError = { })
 
-        updateDataBase.updateDataOctal().andThen { observer -> observer.onComplete() }
+        updateDataBase.updateDataOctal()
             .subscribeBy(
-                onError = { error ->
-                    router?.showError(error.message.let { "Error" })
+                onNext = { stateData.value = true },
+                onError = { error -> router?.showError(error.message.let { "Error connect..." })
+                    stateData.value = false
                 }
             )
     }

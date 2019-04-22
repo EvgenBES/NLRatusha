@@ -7,7 +7,7 @@ import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemOctalUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
-import com.blackstone.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
+import com.blackstone.ratusha.ui.base.recycler.RecyclerItemRatushaOctalAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
 import com.blackstone.ratusha.utils.DisplayUtils
@@ -25,7 +25,7 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
         const val TAG = "Ratusha FOctalModel"
     }
 
-    val adapter = RecyclerItemRatushaAdapter()
+    val adapter = RecyclerItemRatushaOctalAdapter()
 
     private val progress = ObservableField<Int>()
     private val paid = ObservableField<String>("0 / 0")
