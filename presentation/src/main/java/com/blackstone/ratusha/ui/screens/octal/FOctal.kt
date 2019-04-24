@@ -35,7 +35,7 @@ class FOctal : BaseMvvmFragment<FOctalModel, ControllerRouter, FragmentOctalBind
 
     private fun setSwipeController() {
         swipeContainer.setOnRefreshListener {
-            router?.refrashInformation()
+            router?.refreshInformation()
             swipeContainer.isRefreshing = false
         }
     }

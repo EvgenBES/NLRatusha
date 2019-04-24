@@ -26,11 +26,11 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     init {
         App.appComponent.runInject(this)
-        getOrderInformation()
         startTimer()
+        getOrderInformation()
     }
 
-    fun getOrderInformation() {
+    private fun getOrderInformation() {
         updateDataBase.updateDataForpost().subscribeBy(onError = { })
 
         updateDataBase.updateDataOctal()
@@ -38,8 +38,14 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
                 onNext = { stateData.value = true },
                 onError = { error -> router?.showError(error.message.let { "Error connect..." })
                     stateData.value = false
+                    compositeDisposable.clear()
                 }
             )
+    }
+
+    fun refreshData() {
+        startTimer()
+        getOrderInformation()
     }
 
     /**

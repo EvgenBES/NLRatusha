@@ -65,7 +65,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"
-                        android:background="@drawable/border_progress_item">
+                        android:background="@drawable/border_progress_item_blue">
 
                     <LinearLayout
                             android:id="@+id/ll_progress"

@@ -3,6 +3,7 @@ package com.blackstone.ratusha.ui.screens.controller
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.res.ResourcesCompat
 import android.widget.Toast
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
@@ -11,7 +12,7 @@ import com.blackstone.ratusha.databinding.ActivityControllerBinding
 import com.blackstone.ratusha.ui.screens.forpost.FForpost
 import com.blackstone.ratusha.ui.screens.information.FInformation
 import com.blackstone.ratusha.ui.screens.octal.FOctal
-import kotlinx.android.synthetic.main.activity_controller.*
+import com.blackstone.ratusha.utils.DisplayUtils
 import java.util.*
 
 class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, ActivityControllerBinding>(), FMain.OnRefreshInfoListener {
@@ -35,16 +36,31 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
 
 
     private fun bottomNavigation() {
-        navigation.setOnNavigationItemSelectedListener { item ->
+        binding.navigation.setOnNavigationItemSelectedListener { item ->
+            setBaseStyleNavigation()
             when (item.itemId) {
                 R.id.menu_btn_home -> selectedFragment = FMain()
                 R.id.menu_btn_fp -> selectedFragment = FForpost()
-                R.id.menu_btn_oct -> selectedFragment = FOctal()
+                R.id.menu_btn_oct -> { selectedFragment = FOctal()
+                    setYellowStyleNavigation()
+                }
                 R.id.menu_btn_info -> selectedFragment = FInformation()
             }
             router.startFragment(selectedFragment)
             return@setOnNavigationItemSelectedListener true
         }
+    }
+
+    private fun setBaseStyleNavigation() {
+        binding.navigation.itemBackground = ResourcesCompat.getDrawable(resources, R.drawable.navigation_bg, null)
+        binding.navigation.itemTextColor = DisplayUtils.getCommonColorNavigation()
+        binding.navigation.itemIconTintList = DisplayUtils.getCommonColorNavigation()
+    }
+
+    private fun setYellowStyleNavigation() {
+        binding.navigation.itemBackground = ResourcesCompat.getDrawable(resources, R.drawable.navigation_bg_yellow, null)
+        binding.navigation.itemTextColor = DisplayUtils.getYellowStatesNavigation()
+        binding.navigation.itemIconTintList = DisplayUtils.getYellowStatesNavigation()
     }
 
     override fun onBackPressed() {
@@ -61,12 +77,12 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     }
 
     override fun onClickForpost() {
-        navigation.menu.getItem(1).isChecked = true
+        binding.navigation.menu.getItem(1).isChecked = true
         router.startFragment(FForpost())
     }
 
     override fun onClickOctal() {
-        navigation.menu.getItem(2).isChecked = true
+        binding.navigation.menu.getItem(2).isChecked = true
         router.startFragment(FOctal())
     }
 

@@ -13,7 +13,7 @@ import io.reactivex.Flowable
 @Dao
 interface ItemsDao {
 
-    @Query("SELECT * FROM items WHERE categoryID = :id")
+    @Query("SELECT * FROM items WHERE categoryID = :id ORDER BY name")
     fun getItemsCategory(id: Int): Flowable<List<Items>>
 
     @Query("SELECT * FROM items WHERE id = :id")

@@ -60,7 +60,7 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
     private fun setSwipeController() {
         binding.swipeContainer.setOnRefreshListener {
-            router?.refrashInformation()
+            router?.refreshInformation()
             binding.swipeContainer.isRefreshing = false
         }
     }
@@ -73,7 +73,7 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.buttonRefresh -> router?.refrashInformation()
+            binding.buttonRefresh -> router?.refreshInformation()
             binding.firstCastle -> onSwipeRefreshListener.onClickForpost()
             binding.secondCastle -> onSwipeRefreshListener.onClickOctal()
         }

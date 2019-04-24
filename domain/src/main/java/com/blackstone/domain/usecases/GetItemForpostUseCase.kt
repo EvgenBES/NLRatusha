@@ -3,6 +3,7 @@ package com.blackstone.domain.usecases
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.executors.PostExecutionThread
 import com.blackstone.domain.repositories.ServerRepository
+import com.blackstone.domain.utils.DomainUtils.sortItemOrder
 import io.reactivex.Flowable
 import javax.inject.Inject
 
@@ -16,9 +17,10 @@ class GetItemForpostUseCase @Inject constructor(postExecutionThread: PostExecuti
 
     fun getAllItemOrder(): Flowable<List<ItemOrder>> {
         return itemRepository
-                .getItemForpost()
-                .observeOn(postExecutorThread)
-                .subscribeOn(workExecutorThread)
+            .getItemForpost()
+            .map { sortItemOrder(it) }
+            .observeOn(postExecutorThread)
+            .subscribeOn(workExecutorThread)
 
     }
 }

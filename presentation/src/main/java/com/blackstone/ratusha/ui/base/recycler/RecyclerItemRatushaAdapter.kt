@@ -1,5 +1,6 @@
 package com.blackstone.ratusha.ui.base.recycler
 
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,8 @@ import com.blackstone.ratusha.utils.CalculationsUtils.transformTotalSum
  * @author Evgeny Butov
  * @created 17.02.2019
  */
-class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableListOf()) : RecyclerView.Adapter<RecyclerItemRatushaAdapter.BaseViewHolder>() {
+class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<ItemOrder> = mutableListOf()) :
+    RecyclerView.Adapter<RecyclerItemRatushaAdapter.BaseViewHolder>() {
 
     override fun getItemCount(): Int = itemList.size
 
@@ -71,27 +73,46 @@ class RecyclerItemRatushaAdapter(var itemList: MutableList<ItemOrder> = mutableL
             val card = itemView.findViewById<ExpandableCardView>(R.id.exp_cardview)
 
             val image = urlImage.replace(".gif", "")
-            val resourceId = itemView.context?.resources?.getIdentifier("ic_$image", "drawable", itemView.context.packageName)
-            val iconEmpty: Int = itemView.context?.resources?.getIdentifier("ic_iw_empty", "drawable", itemView.context.packageName) ?: 0
+            val resourceId =
+                itemView.context?.resources?.getIdentifier("ic_$image", "drawable", itemView.context.packageName)
+            val iconEmpty: Int =
+                itemView.context?.resources?.getIdentifier("ic_iw_empty", "drawable", itemView.context.packageName) ?: 0
 
+            card.exp_cardview.background = if (type == 0) {
+                ResourcesCompat.getDrawable(itemView.context.resources, R.drawable.card_view_border_blue, null)
+            } else {
+                ResourcesCompat.getDrawable(itemView.context.resources, R.drawable.card_view_border_yellow, null)
+            }
+
+            card.exp_cardview.type = type
             card.exp_cardview.cardImage = resourceId ?: iconEmpty
             card.exp_cardview.cardTitle = itemName
             card.exp_cardview.cardPrice = price.toString()
             card.exp_cardview.cardProgress = calculatePercent((price * countFinish), (price * countStart))
-            card.exp_cardview.cardTotal = "${transformTotalSum((price * countStart))} / ${transformTotalSum((price * countFinish))}"
+            card.exp_cardview.cardTotal =
+                "${transformTotalSum((price * countStart))} / ${transformTotalSum((price * countFinish))}"
 
             if (countStart != countFinish) {
-                val tvColor = "<font color='red'>$countStart</font>/$countFinish"
+                val tvColor = if (type == 0) {
+                    "<font color='red'>$countStart</font>/$countFinish"
+                } else {
+                    "<font color='#ff1414'>$countStart</font>/$countFinish" //RED
+                }
                 card.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
                 card.exp_cardview.cardRemainder = "(еще: ${countFinish - countStart})"
             } else {
-                val tvColor = "<font color='green'>$countStart/$countFinish</font>"
+                val tvColor = if (type == 0) {
+                    "<font color='green'>$countStart/$countFinish</font>"
+                } else {
+                    "<font color='#17bd1c'>$countStart/$countFinish</font>" //GREEN
+                }
                 card.exp_cardview.cardQuantity = Html.fromHtml(tvColor)
                 card.exp_cardview.cardRemainder = ""
             }
 
             if (totalRemainderCardView(price, countStart, countFinish)) {
-                card.exp_cardview.cardTotalRemain = "Еще: ${transformTotalSum((price * countFinish) - (price * countStart))}"
+                card.exp_cardview.cardTotalRemain =
+                    "Еще: ${transformTotalSum((price * countFinish) - (price * countStart))}"
             } else {
                 card.exp_cardview.cardTotalRemain = ""
             }

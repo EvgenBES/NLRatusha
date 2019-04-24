@@ -3,14 +3,20 @@ package com.blackstone.ratusha.ui.widget
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.annotation.IdRes
 import android.support.annotation.IntegerRes
 import android.support.annotation.StringRes
+import android.support.constraint.ConstraintLayout
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.utils.DisplayUtils.getDensityDouble
@@ -22,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView
  */
 class ExpandableCardView : CardView {
 
+    private val wrapContent by bind<RelativeLayout>(R.id.wrap_content)
     private val ivItem by bind<CircleImageView>(R.id.iv_card_expand)
     private val tvTitle by bind<TextView>(R.id.tv_card_title)
     private val tvQuantity by bind<TextView>(R.id.tv_card_quantity)
@@ -29,10 +36,13 @@ class ExpandableCardView : CardView {
     private val tvPrice by bind<TextView>(R.id.tv_card_price)
     private val tvTotal by bind<TextView>(R.id.tv_card_total)
     private val tvTotalRemain by bind<TextView>(R.id.tv_card_total_remain)
-    private val ivArrow by bind<LinearLayout>(R.id.bnt_arrow_down)
-    private val ivProgress by bind<LinearLayout>(R.id.ll_progress)
+    private val llArrow by bind<LinearLayout>(R.id.bnt_arrow_down)
+    private val ivArrow by bind<ImageView>(R.id.imgArrow)
+    private val llProgress by bind<LinearLayout>(R.id.ll_progress)
     private val layoutContent by bind<View>(R.id.layout_content)
-    constructor(context: Context) : super(context) {
+    private val wrapProgress by bind<ConstraintLayout>(R.id.wrap_progress)
+
+    constructor(context: Context, type: Int) : super(context) {
         init(null)
     }
 
@@ -47,10 +57,10 @@ class ExpandableCardView : CardView {
     private fun init(attrs: AttributeSet?) {
         inflate(context, R.layout.view_expandable_card, this)
 
-
         var expanded = false
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
+            type = typedArray.getInt(R.styleable.ExpandableCardView_type, 0)
             cardImage = typedArray.getResourceId(R.styleable.ExpandableCardView_image, 0)
             cardTitle = typedArray.getString(R.styleable.ExpandableCardView_title) ?: "Неизвестный предмет"
             cardQuantity = typedArray.getString(R.styleable.ExpandableCardView_quantity) ?: "0/0"
@@ -73,24 +83,26 @@ class ExpandableCardView : CardView {
             }
         }
 
-        ivArrow.setOnClickListener {
+        llArrow.setOnClickListener {
             if (isExpanded) {
                 collapse(true)
             } else {
                 expand(true)
             }
         }
+
+        setCardViewColor(type)
     }
 
     private fun <T : View> View.bind(@IdRes res: Int): Lazy<T> =
-            lazy(LazyThreadSafetyMode.NONE) { findViewById<T>(res) }
+        lazy(LazyThreadSafetyMode.NONE) { findViewById<T>(res) }
 
     private fun rotateArrow(rotation: Float, animate: Boolean) {
-        ViewCompat.animate(ivArrow)
-                .rotation(rotation)
-                .withLayer()
-                .setDuration(if (animate) expandDuration else 0)
-                .start()
+        ViewCompat.animate(llArrow)
+            .rotation(rotation)
+            .withLayer()
+            .setDuration(if (animate) expandDuration else 0)
+            .start()
     }
 
     private fun setHeightToZero(animate: Boolean) {
@@ -145,7 +157,7 @@ class ExpandableCardView : CardView {
     /**
      * Expand the Card
      */
-    open fun expand(animate: Boolean) {
+    private fun expand(animate: Boolean) {
         if (isExpanded) return
 
         setHeightToContentHeight(animate)
@@ -156,7 +168,7 @@ class ExpandableCardView : CardView {
     /**
      * Collapse the Card
      */
-    open fun collapse(animate: Boolean) {
+    private fun collapse(animate: Boolean) {
         if (!isExpanded) return
 
         setHeightToZero(animate)
@@ -320,7 +332,55 @@ class ExpandableCardView : CardView {
         }
 
     private fun setProgressWidth(width: Int) {
-        ivProgress.layoutParams.width = width
+        llProgress.layoutParams.width = width
         layoutContent.requestLayout()
     }
+
+    open var type: Int = 0
+        set(type) {
+            setCardViewColor(type)
+        }
+
+
+    private fun setCardViewColor(type: Int) {
+        val backgroundCardView: Drawable?
+        val backgroundImageArrow: Drawable?
+        val backgroundProgress: Drawable?
+        val backgroundWrapProgress: Drawable?
+        val iconImageArrow: Drawable?
+        val borderColor: Int
+        val textColor: Int
+
+        if (type == 0) {
+            backgroundCardView = ResourcesCompat.getDrawable(resources, R.drawable.border_item_ratusha_blue, null)
+            backgroundImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.shape_circle_blue, null)
+            backgroundProgress = ResourcesCompat.getDrawable(resources, R.drawable.card_view_progress_blue, null)
+            backgroundWrapProgress = ResourcesCompat.getDrawable(resources, R.drawable.border_progress_item_blue, null)
+            borderColor = ContextCompat.getColor(context, R.color.card_view_border_blue)
+            textColor = ContextCompat.getColor(context, R.color.card_view_text_blue)
+            iconImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down_blue, null)
+        } else {
+            backgroundCardView = ResourcesCompat.getDrawable(resources, R.drawable.border_item_ratusha_yellow, null)
+            backgroundImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.shape_circle_yellow, null)
+            backgroundProgress = ResourcesCompat.getDrawable(resources, R.drawable.card_view_progress_yellow, null)
+            backgroundWrapProgress = ResourcesCompat.getDrawable(resources, R.drawable.border_progress_item_yellow, null)
+            borderColor = ContextCompat.getColor(context, R.color.card_view_border_yellow)
+            textColor = ContextCompat.getColor(context, R.color.card_view_text_yellow)
+            iconImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down_yellow, null)
+        }
+
+        wrapContent.background = backgroundCardView
+        ivItem.borderColor = borderColor
+        tvTitle.setTextColor(textColor)
+        tvQuantity.setTextColor(textColor)
+        tvRemainder.setTextColor(textColor)
+        tvPrice.setTextColor(textColor)
+        tvTotal.setTextColor(textColor)
+        tvTotalRemain.setTextColor(textColor)
+        ivArrow.background = backgroundImageArrow
+        ivArrow.setImageDrawable(iconImageArrow)
+        wrapProgress.background = backgroundWrapProgress
+        llProgress.background = backgroundProgress
+    }
 }
+

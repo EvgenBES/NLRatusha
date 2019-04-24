@@ -38,4 +38,12 @@ class DetailItemInfo : BaseMvvmActivity<DetailItemModel, DetailItemRouter, Activ
         binding.recyclerInfo.adapter = viewModel.adapter
 
     }
+
+    fun hideTextCount() {
+        binding.tvCounter.animate().alpha(0.0f).duration = 750
+    }
+
+    fun showTextCount() {
+        binding.tvCounter.animate().alpha(1.0f).duration = 250
+    }
 }

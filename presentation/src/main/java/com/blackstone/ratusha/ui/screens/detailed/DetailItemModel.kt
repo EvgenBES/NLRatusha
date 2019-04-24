@@ -27,6 +27,7 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
         const val TAG = "Ratusha DetailItemModel"
     }
 
+    val counter: ObservableField<String> = ObservableField<String>("1")
     val typeItem: ObservableBoolean = ObservableBoolean(true)
     val total: ObservableField<String> = ObservableField<String>("0.00")
     val image: ObservableField<Int> = ObservableField<Int>()
@@ -34,9 +35,12 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     val price: ObservableField<String> = ObservableField<String>("Цена: 0")
     val reputation: ObservableField<String> = ObservableField<String>("х0")
     val craft: ObservableField<String> = ObservableField<String>("1")
+    val itemNoAlchemy: ObservableBoolean = ObservableBoolean(false)
+    var listItem = mutableListOf<ItemRecipeFull>()
 
     private var plusTime: Long = 0
     private var minusTime: Long = 0
+    private var textVisibility: Boolean = false
 
     val adapter = RecyclerRecipeAdapter()
     private val emptyItemRecipe = listOf<ItemRecipeFull>(ItemRecipeFull(id = 0))
@@ -69,8 +73,8 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     }
 
     private fun getImageResources(image: String): Int {
-        return router?.activity?.resources?.getIdentifier("ic_$image", "drawable", router?.activity?.packageName) ?:
-        router?.activity?.resources?.getIdentifier("ic_iw_empty", "drawable", router?.activity?.packageName) ?: 0
+        return router?.activity?.resources?.getIdentifier("ic_$image", "drawable", router?.activity?.packageName)
+            ?: router?.activity?.resources?.getIdentifier("ic_iw_empty", "drawable", router?.activity?.packageName) ?: 0
     }
 
     private fun setTotal(listItem: List<ItemRecipeFull>) {
@@ -93,8 +97,10 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
         val disposableB = getRecipeUseCase.getRecipeItem(id).subscribeBy (
             onNext = {
                 adapter.setItems(it)
+                listItem = it as MutableList<ItemRecipeFull>
                 setTotal(it)
                 if (it.isEmpty()) adapter.setItems(emptyItemRecipe)
+                itemNoAlchemy.set(true)
             },
             onError = { Log.d(TAG, "getRecipeItem message: ${it.message}") }
         )
@@ -103,21 +109,70 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
 
 
     fun onPlusTouched(v: View, event: MotionEvent): Boolean {
-        if (System.currentTimeMillis() - 250 > plusTime && craft.get()?.toInt() ?: 1 < 999) {
-            plusTime = System.currentTimeMillis()
-            val count: Int = craft.get()?.toInt() ?: 1
-            craft.set(count.plus(1).toString())
+
+        if (craft.get().toString().length == 0) {
+            craft.set("1")
         }
+
+        if (craft.get()?.toInt() ?: 1 < 999) {
+
+            if (System.currentTimeMillis() - 50 > plusTime && event.actionMasked == MotionEvent.ACTION_MOVE) {
+                plusTime = System.currentTimeMillis()
+                val count: Int = craft.get()?.toInt() ?: 1
+                craft.set(count.plus(1).toString())
+            }
+            counter.set(craft.get())
+        }
+
+        setVisibilityTextCount(event.actionMasked)
+
         return true // or return false, depending on what you want to do
     }
 
     fun onMinusTouched(v: View, event: MotionEvent): Boolean {
-        if (System.currentTimeMillis() - 250 > minusTime && craft.get()?.toInt() ?: 1 > 1) {
-            minusTime = System.currentTimeMillis()
-            val count: Int = craft.get()?.toInt() ?: 1
-            craft.set(count.minus(1).toString())
-        }
-        return true // or return false, depending on what you want to do
 
+        if (craft.get().toString().length == 0) {
+            craft.set("1")
+        }
+
+        if (craft.get()?.toInt() ?: 1 > 1) {
+            if (System.currentTimeMillis() - 50 > minusTime) {
+                minusTime = System.currentTimeMillis()
+                val count: Int = craft.get()?.toInt() ?: 1
+                craft.set(count.minus(1).toString())
+            }
+            counter.set(craft.get())
+        }
+
+        setVisibilityTextCount(event.actionMasked)
+
+        return true // or return false, depending on what you want to do
     }
+
+    private fun setVisibilityTextCount(event: Int) {
+        if (textVisibility.not()) {
+            router?.showTextCounter()
+            textVisibility = true
+        }
+
+        if (event == MotionEvent.ACTION_UP && textVisibility) {
+            router?.hideTextCounter()
+            textVisibility = false
+        }
+    }
+
+    fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        if (s.isNotEmpty()) {
+            val result: Int = s.toString().toInt()
+            val returnList = mutableListOf<ItemRecipeFull>()
+
+            listItem.forEach {
+                returnList.add(ItemRecipeFull(it.id, it.image, it.name, it.price, it.number * result, it.type))
+            }
+
+            adapter.setItems(returnList)
+            if (returnList.isNotEmpty()) setTotal(returnList)
+        }
+    }
+
 }

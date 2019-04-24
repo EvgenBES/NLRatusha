@@ -35,7 +35,7 @@ class FForpost : BaseMvvmFragment<FForpostModel, ControllerRouter, FragmentForpo
 
     private fun setSwipeController() {
         swipeContainer.setOnRefreshListener {
-            router?.refrashInformation()
+            router?.refreshInformation()
             swipeContainer.isRefreshing = false
         }
     }
