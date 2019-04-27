@@ -2,7 +2,7 @@ package com.blackstone.ratusha.app
 
 
 import android.app.Activity
-import android.app.Application
+import android.content.Context
 import com.blackstone.ratusha.di.injection.AppComponent
 import com.blackstone.ratusha.di.injection.DaggerAppComponent
 import com.facebook.stetho.Stetho
@@ -12,8 +12,12 @@ import javax.inject.Inject
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import android.support.multidex.MultiDex
+import android.support.multidex.MultiDexApplication
+import com.blackstone.ratusha.utils.CrashLogger
 
-class App : Application(), HasActivityInjector {
+
+class App : MultiDexApplication(), HasActivityInjector {
 
     companion object {
         lateinit var instance: App
@@ -32,6 +36,11 @@ class App : Application(), HasActivityInjector {
         return activityInjector
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
+
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
@@ -42,5 +51,11 @@ class App : Application(), HasActivityInjector {
                 .build()
 
         appComponent.inject(this)
+
+        initCrashlytics()
+    }
+
+    private fun initCrashlytics() {
+        CrashLogger.initialize(this)
     }
 }

@@ -2,7 +2,6 @@ package com.blackstone.ratusha.ui.screens.forpost
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.blackstone.ratusha.R
@@ -27,7 +26,6 @@ class FForpost : BaseMvvmFragment<FForpostModel, ControllerRouter, FragmentForpo
 
         binding.recyclerview.setHasFixedSize(true)
         binding.recyclerview.layoutManager = LinearLayoutManager(this.activity)
-        binding.recyclerview.itemAnimator = DefaultItemAnimator()
         binding.recyclerview.adapter = viewModel.adapter
 
         setSwipeController()

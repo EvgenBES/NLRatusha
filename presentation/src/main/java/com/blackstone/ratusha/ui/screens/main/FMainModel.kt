@@ -25,7 +25,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
         const val TAG = "Ratusha FMainModel"
     }
 
-    private val timeProduct = ObservableField<String>("2:00:00")
+    private val timeProduct = ObservableField<String>("02:00:00")
     private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private val forpostPercent = ObservableField<String>("00%")
