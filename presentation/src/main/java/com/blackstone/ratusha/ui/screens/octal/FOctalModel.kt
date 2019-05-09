@@ -91,7 +91,7 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
 
         paid.set("${result.paid} / ${result.total}")
         remainder.set("Еще: ${result.remainder}")
-        progress.set((CalculationsUtils.countProgress(listItem).toInt() * 1.5 * DisplayUtils.getDensityDouble(router?.activity ?: return)).toInt())
+        progress.set((CalculationsUtils.countProgress(listItem).toInt() * 1.48 * DisplayUtils.getDensityDouble(router?.activity ?: return)).toInt())
     }
 
     private fun startTimer() {

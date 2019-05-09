@@ -36,7 +36,8 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
         updateDataBase.updateDataOctal()
             .subscribeBy(
                 onNext = { stateData.value = true },
-                onError = { error -> router?.showError(error.message.let { "Error connect..." })
+                onError = { error ->
+                    router?.showError(error.message.let { "Error connect..." })
                     stateData.value = false
                     compositeDisposable.clear()
                 }

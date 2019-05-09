@@ -16,14 +16,14 @@
     <drawable name="card_view_border_blue">#021728</drawable>
     <drawable name="card_view_progress_blue">#2d3e4c</drawable>
     <color name="card_view_background_blue">#122331</color>
-    <color name="card_view_border_blue">#314250</color>
+    <color name="card_view_border_blue">#677178</color>
     <color name="card_view_text_blue">#acbfce</color>
 
     <!--CardView Yellow -->
     <drawable name="card_view_border_yellow">#231b18</drawable>
     <drawable name="card_view_progress_yellow">#e8ae02</drawable>
     <color name="card_view_background_yellow">#8a6019</color>
-    <color name="card_view_border_yellow">#e3b104</color>
+    <color name="card_view_border_yellow">#80E3B104</color>
     <color name="card_view_text_yellow">#382306</color>
 
 
@@ -34,6 +34,7 @@
     <color name="oct_accent">#ecb902</color>
 
     <color name="bg_item">#BFBFBF</color>
+    <color name="bg_item_detailed">#b3b3b3</color>
 
     <color name="white80">#CCFFFFFF</color>
     <color name="white60">#99FFFFFF</color>

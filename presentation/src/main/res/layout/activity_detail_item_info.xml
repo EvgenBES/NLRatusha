@@ -47,17 +47,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/headLayout"/>
 
-        <ImageView
-                android:id="@+id/imgItem"
+        <LinearLayout
+                android:id="@+id/img_wrap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_iw_empty"
-                android:focusableInTouchMode="true"
-                app:src="@{viewModel.image}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                android:background="@drawable/border_radius_items_details">
+
+            <ImageView
+                    android:id="@+id/imgItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_iw_empty"
+                    android:focusableInTouchMode="true"
+                    app:src="@{viewModel.image}"/>
+
+        </LinearLayout>
 
         <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_item_name"
@@ -72,8 +80,8 @@
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform"
-                app:layout_constraintStart_toEndOf="@+id/imgItem"
-                app:layout_constraintTop_toTopOf="@+id/imgItem"/>
+                app:layout_constraintStart_toEndOf="@+id/img_wrap"
+                app:layout_constraintTop_toTopOf="@+id/img_wrap"/>
 
         <TextView
                 android:id="@+id/tv_item_price"
@@ -162,7 +170,7 @@
                 android:background="@color/white12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgItem"/>
+                app:layout_constraintTop_toBottomOf="@+id/img_wrap"/>
 
         <TextView
                 android:id="@+id/textView4"

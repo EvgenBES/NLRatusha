@@ -8,7 +8,6 @@ import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.FragmentForpostBinding
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
-import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
  * @author Evgeny Butov
@@ -32,9 +31,9 @@ class FForpost : BaseMvvmFragment<FForpostModel, ControllerRouter, FragmentForpo
     }
 
     private fun setSwipeController() {
-        swipeContainer.setOnRefreshListener {
+        binding.swipeContainer.setOnRefreshListener {
             router?.refreshInformation()
-            swipeContainer.isRefreshing = false
+            binding.swipeContainer.isRefreshing = false
         }
     }
 

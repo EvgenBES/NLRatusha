@@ -11,13 +11,9 @@ import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.view.ViewCompat
-import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.utils.DisplayUtils.getDensityDouble
 import de.hdodenhof.circleimageview.CircleImageView
@@ -26,9 +22,8 @@ import de.hdodenhof.circleimageview.CircleImageView
  * @author Evgeny Butov
  * @created 23.03.2019
  */
-class ExpandableCardView : CardView {
+class ExpandableCardView : FrameLayout {
 
-    private val wrapContent by bind<RelativeLayout>(R.id.wrap_content)
     private val ivItem by bind<CircleImageView>(R.id.iv_card_expand)
     private val tvTitle by bind<TextView>(R.id.tv_card_title)
     private val tvQuantity by bind<TextView>(R.id.tv_card_quantity)
@@ -327,7 +322,7 @@ class ExpandableCardView : CardView {
      */
     open var cardProgress: Int = 0
         set(progress) {
-            setProgressWidth((progress * 1.16 * getDensityDouble(context)).toInt())
+            setProgressWidth((progress * 1.14 * getDensityDouble(context)).toInt())
             field = progress
         }
 
@@ -343,7 +338,6 @@ class ExpandableCardView : CardView {
 
 
     private fun setCardViewColor(type: Int) {
-        val backgroundCardView: Drawable?
         val backgroundImageArrow: Drawable?
         val backgroundProgress: Drawable?
         val backgroundWrapProgress: Drawable?
@@ -352,7 +346,6 @@ class ExpandableCardView : CardView {
         val textColor: Int
 
         if (type == 0) {
-            backgroundCardView = ResourcesCompat.getDrawable(resources, R.drawable.border_item_ratusha_blue, null)
             backgroundImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.shape_circle_blue, null)
             backgroundProgress = ResourcesCompat.getDrawable(resources, R.drawable.card_view_progress_blue, null)
             backgroundWrapProgress = ResourcesCompat.getDrawable(resources, R.drawable.border_progress_item_blue, null)
@@ -360,7 +353,6 @@ class ExpandableCardView : CardView {
             textColor = ContextCompat.getColor(context, R.color.card_view_text_blue)
             iconImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down_blue, null)
         } else {
-            backgroundCardView = ResourcesCompat.getDrawable(resources, R.drawable.border_item_ratusha_yellow, null)
             backgroundImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.shape_circle_yellow, null)
             backgroundProgress = ResourcesCompat.getDrawable(resources, R.drawable.card_view_progress_yellow, null)
             backgroundWrapProgress = ResourcesCompat.getDrawable(resources, R.drawable.border_progress_item_yellow, null)
@@ -369,7 +361,6 @@ class ExpandableCardView : CardView {
             iconImageArrow = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down_yellow, null)
         }
 
-        wrapContent.background = backgroundCardView
         ivItem.borderColor = borderColor
         tvTitle.setTextColor(textColor)
         tvQuantity.setTextColor(textColor)

@@ -92,7 +92,7 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
 
         paid.set("${result.paid} / ${result.total}")
         remainder.set("Еще: ${result.remainder}")
-        progress.set((countProgress(listItem).toInt() * 1.5 * DisplayUtils.getDensityDouble(router?.activity ?: return)).toInt())
+        progress.set((countProgress(listItem).toInt() * 1.48 * DisplayUtils.getDensityDouble(router?.activity ?: return)).toInt())
     }
 
     private fun startTimer() {

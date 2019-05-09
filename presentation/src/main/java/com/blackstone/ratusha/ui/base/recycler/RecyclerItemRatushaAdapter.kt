@@ -1,6 +1,5 @@
 package com.blackstone.ratusha.ui.base.recycler
 
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -66,7 +65,6 @@ class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<It
             itemView.setOnClickListener {
                 itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
             }
-
         }
 
         private fun inflateData(itemName: String, urlImage: String, countStart: Int, countFinish: Int, price: Int) {
@@ -78,17 +76,12 @@ class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<It
             val iconEmpty: Int =
                 itemView.context?.resources?.getIdentifier("ic_iw_empty", "drawable", itemView.context.packageName) ?: 0
 
-            card.exp_cardview.background = if (type == 0) {
-                ResourcesCompat.getDrawable(itemView.context.resources, R.drawable.card_view_border_blue, null)
-            } else {
-                ResourcesCompat.getDrawable(itemView.context.resources, R.drawable.card_view_border_yellow, null)
-            }
-
             card.exp_cardview.type = type
             card.exp_cardview.cardImage = resourceId ?: iconEmpty
             card.exp_cardview.cardTitle = itemName
             card.exp_cardview.cardPrice = price.toString()
             card.exp_cardview.cardProgress = calculatePercent((price * countFinish), (price * countStart))
+
             card.exp_cardview.cardTotal =
                 "${transformTotalSum((price * countStart))} / ${transformTotalSum((price * countFinish))}"
 

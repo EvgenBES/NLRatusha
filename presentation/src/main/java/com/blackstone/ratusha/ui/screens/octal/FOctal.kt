@@ -2,14 +2,12 @@ package com.blackstone.ratusha.ui.screens.octal
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.FragmentOctalBinding
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
-import kotlinx.android.synthetic.main.fragment_octal.swipeContainer
 
 /**
  * @author Evgeny Butov
@@ -27,16 +25,15 @@ class FOctal : BaseMvvmFragment<FOctalModel, ControllerRouter, FragmentOctalBind
 
         binding.recyclerview.setHasFixedSize(true)
         binding.recyclerview.layoutManager = LinearLayoutManager(this.activity)
-        binding.recyclerview.itemAnimator = DefaultItemAnimator()
         binding.recyclerview.adapter = viewModel.adapter
 
         setSwipeController()
     }
 
     private fun setSwipeController() {
-        swipeContainer.setOnRefreshListener {
+        binding.swipeContainer.setOnRefreshListener {
             router?.refreshInformation()
-            swipeContainer.isRefreshing = false
+            binding.swipeContainer.isRefreshing = false
         }
     }
 

@@ -35,5 +35,6 @@ abstract class BaseMvvmActivity<VM : BaseViewModel<R>, R : BaseRouter<*>, B : Vi
 
     override fun onPause() {
         super.onPause()
+        viewModel.removeRouter()
     }
 }

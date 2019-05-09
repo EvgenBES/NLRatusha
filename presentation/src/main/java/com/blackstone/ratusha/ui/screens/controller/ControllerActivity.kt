@@ -17,7 +17,6 @@ import java.util.*
 
 class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, ActivityControllerBinding>(), FMain.OnRefreshInfoListener {
 
-
     override fun provideRouter(): ControllerRouter = ControllerRouter(this)
     override fun provideLayoutId(): Int = R.layout.activity_controller
     override fun prodiveViewModel(): ControllerModel {
@@ -77,11 +76,13 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     }
 
     override fun onClickForpost() {
+        setBaseStyleNavigation()
         binding.navigation.menu.getItem(1).isChecked = true
         router.startFragment(FForpost())
     }
 
     override fun onClickOctal() {
+        setYellowStyleNavigation()
         binding.navigation.menu.getItem(2).isChecked = true
         router.startFragment(FOctal())
     }
