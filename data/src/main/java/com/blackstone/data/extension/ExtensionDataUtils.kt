@@ -1,9 +1,11 @@
 package com.blackstone.data.extension
 
+import android.app.NotificationManager
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.Order
@@ -17,6 +19,9 @@ import java.lang.NumberFormatException
 
 inline val Context.defaultSharedPreferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(this)
+
+fun Context.notificationManager() =
+    getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
 
 
 fun String.mapResponceOrder(): Order {

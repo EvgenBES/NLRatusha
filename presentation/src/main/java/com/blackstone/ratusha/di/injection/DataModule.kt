@@ -6,6 +6,7 @@ import com.blackstone.data.net.RestService
 import com.blackstone.domain.repositories.ServerRepository
 import com.blackstone.data.repositories.ServerRepositoryImpl
 import com.blackstone.domain.executors.PostExecutionThread
+import com.blackstone.notif.NotificationR
 import com.blackstone.ratusha.di.executors.UIThread
 import dagger.Module
 import dagger.Provides
@@ -28,6 +29,12 @@ class DataModule {
     @Provides
     fun provideItemRepository(itemRepository: ServerRepositoryImpl): ServerRepository {
         return itemRepository
+    }
+
+    @Singleton
+    @Provides
+    fun provideNotificationR(appDataBase: AppDataBase, context: Context): NotificationR {
+        return NotificationR(appDataBase, context)
     }
 
     @Singleton

@@ -12,6 +12,7 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
 import com.blackstone.ratusha.utils.DisplayUtils
 import com.blackstone.ratusha.utils.TimerUtils
+import com.blackstone.domain.entity.Town.OCTAL
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
@@ -63,7 +64,7 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
      * Get remainder time order from database
      */
     private fun getTownHall() {
-        val disposable = getInfoTownHall.getTownHall(2).subscribeBy(
+        val disposable = getInfoTownHall.getTownHall(OCTAL.getId()).subscribeBy(
             onNext = { timeOrderOctalNoCast = it.finish },
             onError = { Log.d(TAG, "getTownHall message: ${it.message}") }
         )

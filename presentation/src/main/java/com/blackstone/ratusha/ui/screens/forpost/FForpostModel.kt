@@ -3,6 +3,7 @@ package com.blackstone.ratusha.ui.screens.forpost
 import android.databinding.ObservableField
 import android.util.Log
 import com.blackstone.domain.entity.ItemOrder
+import com.blackstone.domain.entity.Town.FORPOST
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.ratusha.app.App
@@ -64,7 +65,7 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
      * Get remainder time order from database
      */
     private fun getTownHall() {
-        val disposable = getInfoTownHall.getTownHall(1).subscribeBy(
+        val disposable = getInfoTownHall.getTownHall(FORPOST.getId()).subscribeBy(
             onNext = { timeOrderForpostNoCast = it.finish },
             onError = { Log.d(TAG, "getTownHall message: ${it.message}") }
         )

@@ -2,6 +2,7 @@ package com.blackstone.ratusha.ui.screens.controller
 
 import android.arch.lifecycle.MutableLiveData
 import com.blackstone.domain.usecases.UpdateDataUseCase
+import com.blackstone.notif.NotificationR
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
 import com.blackstone.ratusha.utils.TimerUtils
@@ -24,6 +25,9 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     @Inject
     lateinit var updateDataBase: UpdateDataUseCase
 
+    @Inject
+    lateinit var notificationR: NotificationR
+
     init {
         App.appComponent.runInject(this)
         startTimer()
@@ -39,13 +43,11 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
                 onError = { error ->
                     router?.showError(error.message.let { "Error connect..." })
                     stateData.value = false
-                    compositeDisposable.clear()
                 }
             )
     }
 
     fun refreshData() {
-        startTimer()
         getOrderInformation()
     }
 
