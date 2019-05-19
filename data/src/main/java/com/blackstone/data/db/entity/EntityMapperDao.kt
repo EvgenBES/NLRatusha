@@ -46,3 +46,11 @@ fun Items.transformToPresenter(): Item {
 fun ItemRecipe.transformToFull(): ItemRecipeFull{
     return ItemRecipeFull(id = id, image = image, name = name, price = price, number = number)
 }
+
+fun ConfigApp.transformToConfig(): Config{
+    return Config(tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
+}
+
+fun Config.transformToConfigApp(): ConfigApp{
+    return ConfigApp(0, tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
+}

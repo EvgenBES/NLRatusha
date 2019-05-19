@@ -16,7 +16,7 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 class FInformation : BaseMvvmFragment<FInformationModel, ControllerRouter, FragmentInformationBinding>() {
 
     override fun provideLayoutId(): Int = R.layout.fragment_information
-    override fun prodiveViewModel(): FInformationModel {
+    override fun provideViewModel(): FInformationModel {
         return ViewModelProviders.of(this).get(FInformationModel::class.java)
     }
 

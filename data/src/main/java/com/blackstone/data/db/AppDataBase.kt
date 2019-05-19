@@ -6,12 +6,23 @@ import android.content.Context
 import com.blackstone.data.db.entity.*
 import com.blackstone.data.db.dao.*
 
-@Database(entities = [ItemForpost::class, ItemOctal::class, InfoTownHall::class,
-                      Category::class, Items::class, Recipe::class, Resources::class, ItemToType::class, Type::class], version = 2)
+@Database(
+    entities = [
+        ItemForpost::class,
+        ItemOctal::class,
+        InfoTownHall::class,
+        Category::class,
+        Items::class,
+        Recipe::class,
+        Resources::class,
+        ItemToType::class,
+        Type::class,
+        ConfigApp::class], version = 2
+)
 abstract class AppDataBase : RoomDatabase() {
 
     companion object {
-     private const val DATABASE_NAME = "db_ratusha"
+        private const val DATABASE_NAME = "db_ratusha"
 
         fun getInstance(context: Context): AppDataBase {
 //            return Room
@@ -31,4 +42,5 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun getCategoryDao(): CategoryDao
     abstract fun getItemsDao(): ItemsDao
     abstract fun getRecipeDao(): RecipeDao
+    abstract fun getConfgigDao():ConfigDao
 }

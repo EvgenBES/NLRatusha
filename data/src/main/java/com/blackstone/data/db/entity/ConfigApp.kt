@@ -9,8 +9,8 @@ import android.arch.persistence.room.PrimaryKey
  */
 
 @Entity(tableName = "config")
-data class Config(
-    @PrimaryKey(autoGenerate = true)
+data class ConfigApp(
+    @PrimaryKey
     val id: Int,
     val tpForpost: Boolean = false,
     val tpOctal: Boolean = false,

@@ -20,7 +20,7 @@ class DetailItemInfo : BaseMvvmActivity<DetailItemModel, DetailItemRouter, Activ
         }
     }
 
-    override fun prodiveViewModel(): DetailItemModel {
+    override fun provideViewModel(): DetailItemModel {
         return ViewModelProviders.of(this).get(DetailItemModel::class.java)
     }
     override fun provideRouter(): DetailItemRouter = DetailItemRouter(this)

@@ -8,6 +8,7 @@ import com.blackstone.ratusha.ui.screens.forpost.FForpostModel
 import com.blackstone.ratusha.ui.screens.information.FInformationModel
 import com.blackstone.ratusha.ui.screens.main.FMainModel
 import com.blackstone.ratusha.ui.screens.octal.FOctalModel
+import com.blackstone.ratusha.ui.screens.settings.SettingsModel
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -33,4 +34,5 @@ interface AppComponent {
     fun runInject(fForpostModel: FForpostModel)
     fun runInject(fOctalModel: FOctalModel)
     fun runInject(fInformationModel: FInformationModel)
+    fun runInject(settingsModel: SettingsModel)
 }
