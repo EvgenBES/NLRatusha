@@ -16,7 +16,7 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 class FOctal : BaseMvvmFragment<FOctalModel, ControllerRouter, FragmentOctalBinding>(){
 
     override fun provideLayoutId(): Int = R.layout.fragment_octal
-    override fun prodiveViewModel(): FOctalModel {
+    override fun provideViewModel(): FOctalModel {
         return ViewModelProviders.of(this).get(FOctalModel::class.java)
     }
 

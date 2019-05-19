@@ -3,6 +3,7 @@ package com.blackstone.ratusha.ui.screens.controller
 import android.support.v4.app.Fragment
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseRouter
+import com.blackstone.ratusha.ui.screens.settings.Settings
 
 /**
  * @author Evgeny Butov
@@ -19,6 +20,10 @@ class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActi
     }
 
     fun refreshInformation() {
-        activity.prodiveViewModel().refreshData()
+        activity.provideViewModel().refreshData()
+    }
+
+    fun openSettings() {
+        Settings().show(activity.supportFragmentManager, "Settings")
     }
 }

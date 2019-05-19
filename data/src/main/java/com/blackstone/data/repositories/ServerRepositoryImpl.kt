@@ -17,13 +17,10 @@ class ServerRepositoryImpl @Inject constructor(
     override fun updateDataForpost(): Observable<Boolean> {
         return apiService.getForpost().map {
             val responseOrder: Order = it.string().mapResponceOrder()
+            appDataBase.getForpDao().deleteAll()
 
             if (responseOrder.itemList.isNotEmpty()) {
-                appDataBase.getForpDao().deleteAll()
-
-                for (orderList in responseOrder.itemList) {
-                    appDataBase.getForpDao().insert(orderList.transformToItemForpostDao())
-                }
+                appDataBase.getForpDao().insert(responseOrder.itemList.transformToItemForpostDao())
                 appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
             }
             return@map true
@@ -33,12 +30,10 @@ class ServerRepositoryImpl @Inject constructor(
     override fun updateDataOctal(): Observable<Boolean> {
         return apiService.getOctal().map {
             val responseOrder: Order = it.string().mapResponceOrder()
-            if (responseOrder.itemList.isNotEmpty()) {
-                appDataBase.getOctDao().deleteAll()
+            appDataBase.getOctDao().deleteAll()
 
-                for (orderList in responseOrder.itemList) {
-                    appDataBase.getOctDao().insert(orderList.transformToItemOctalDao())
-                }
+            if (responseOrder.itemList.isNotEmpty()) {
+                appDataBase.getOctDao().insert(responseOrder.itemList.transformToItemOctalDao())
                 appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
             }
             return@map true

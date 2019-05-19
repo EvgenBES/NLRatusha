@@ -27,6 +27,18 @@ fun ItemOrder.transformToItemOctalDao(): ItemOctal {
     return ItemOctal(id = 0, itemId = id, name = name, image = image, countStart = countStart, countFinish = countFinish)
 }
 
+fun List<ItemOrder>.transformToItemOctalDao(): List<ItemOctal> {
+    val list = mutableListOf<ItemOctal>()
+    this.forEach { list.add(it.transformToItemOctalDao()) }
+    return list
+}
+
+fun List<ItemOrder>.transformToItemForpostDao(): List<ItemForpost> {
+    val list = mutableListOf<ItemForpost>()
+    this.forEach { list.add(it.transformToItemForpostDao()) }
+    return list
+}
+
 fun Order.transformToTownHallDao(): InfoTownHall {
     return InfoTownHall(idTown = townHall.id, start = townHall.start, finish = townHall.finish, url = townHall.url)
 }
@@ -45,4 +57,12 @@ fun Items.transformToPresenter(): Item {
 
 fun ItemRecipe.transformToFull(): ItemRecipeFull{
     return ItemRecipeFull(id = id, image = image, name = name, price = price, number = number)
+}
+
+fun ConfigApp.transformToConfig(): Config{
+    return Config(tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
+}
+
+fun Config.transformToConfigApp(): ConfigApp{
+    return ConfigApp(0, tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
 }

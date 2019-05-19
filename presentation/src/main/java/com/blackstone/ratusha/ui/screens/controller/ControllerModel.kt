@@ -64,4 +64,8 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
         addToDisposable(disposable)
     }
 
+    fun openSettings() {
+        router?.openSettings()
+    }
+
 }

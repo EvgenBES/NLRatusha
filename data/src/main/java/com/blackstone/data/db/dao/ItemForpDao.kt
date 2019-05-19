@@ -16,7 +16,7 @@ interface ItemForpDao {
         const val T1 = "forpost"
     }
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(itemForpResponce: List<ItemForpost>) // (vararg student: StudentDb)(Student...student)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

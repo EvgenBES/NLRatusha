@@ -16,7 +16,7 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerModel
  */
 class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding>(), View.OnClickListener {
 
-    override fun prodiveViewModel(): FMainModel = FMainModel()
+    override fun provideViewModel(): FMainModel = FMainModel()
     override fun provideLayoutId(): Int = R.layout.fragment_main
 
     private lateinit var onSwipeRefreshListener: OnRefreshInfoListener

@@ -19,7 +19,7 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
 
     override fun provideRouter(): ControllerRouter = ControllerRouter(this)
     override fun provideLayoutId(): Int = R.layout.activity_controller
-    override fun prodiveViewModel(): ControllerModel {
+    override fun provideViewModel(): ControllerModel {
         return ViewModelProviders.of(this).get(ControllerModel::class.java)
     }
     private var selectedFragment: Fragment = FMain()

@@ -16,7 +16,7 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 class FForpost : BaseMvvmFragment<FForpostModel, ControllerRouter, FragmentForpostBinding>(){
 
     override fun provideLayoutId(): Int = R.layout.fragment_forpost
-    override fun prodiveViewModel(): FForpostModel {
+    override fun provideViewModel(): FForpostModel {
         return ViewModelProviders.of(this).get(FForpostModel::class.java)
     }
 

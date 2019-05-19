@@ -16,7 +16,7 @@ interface ItemOctDao {
         const val T1 = "octal"
     }
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(itemOctResponce: List<ItemOctal>) // (vararg student: StudentDb)(Student...student)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
