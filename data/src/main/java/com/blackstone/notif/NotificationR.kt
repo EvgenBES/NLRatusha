@@ -130,18 +130,15 @@ class NotificationR @Inject constructor(private val appDataBase: AppDataBase, pr
             .getAll()
             .subscribeBy(
                 onNext = {
-                    if (it.isEmpty() && sumItemListFp == 0) {
-                        Log.d("AAQQ", "------------ 1 --------------")
-                    } else {
-
-                        Log.d("AAQQ", "------------ 2 --------------")
-                        sumItemListFp = it.size
+                    if (it.size == 1 && it[0].id == 0) {
+                        showNotification(
+                            context,
+                            ID_ORDER_FORPOST,
+                            R.drawable.ic_notif_banner_fp,
+                            context.getString(R.string.notification_fp),
+                            context.getString(R.string.notification_close_order)
+                        )
                     }
-
-                    Log.d("AAQQ", "------------ 3 --------------")
-                    Log.d("AAQQ", "${it.size}")
-                    Log.d("AAQQ", "${it.toString()}")
-
                 },
                 onError = {}
             )
@@ -153,8 +150,15 @@ class NotificationR @Inject constructor(private val appDataBase: AppDataBase, pr
             .getAll()
             .subscribeBy(
                 onNext = {
-//                    Log.d("AAQQ", "2 $it")
-//                    Log.d("AAQQ", "2 ${it.size}")
+                    if (it.size == 1 && it[0].id == 0) {
+                        showNotification(
+                            context,
+                            ID_ORDER_OCTAL,
+                            R.drawable.ic_notif_banner_fp,
+                            context.getString(R.string.notification_oc),
+                            context.getString(R.string.notification_close_order)
+                        )
+                    }
                 },
                 onError = {}
             )

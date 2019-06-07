@@ -22,6 +22,8 @@ class ServerRepositoryImpl @Inject constructor(
             if (responseOrder.itemList.isNotEmpty()) {
                 appDataBase.getForpDao().insert(responseOrder.itemList.transformToItemForpostDao())
                 appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
+            } else {
+                appDataBase.getForpDao().insert(ItemForpost(1, 0, "Пусто", "iw_empty", 0, 0))
             }
             return@map true
         }
@@ -35,6 +37,8 @@ class ServerRepositoryImpl @Inject constructor(
             if (responseOrder.itemList.isNotEmpty()) {
                 appDataBase.getOctDao().insert(responseOrder.itemList.transformToItemOctalDao())
                 appDataBase.getTownHallDao().insert(responseOrder.transformToTownHallDao())
+            } else {
+                appDataBase.getForpDao().insert(ItemForpost(1, 0, "Пусто", "iw_empty", 0, 0))
             }
             return@map true
         }
