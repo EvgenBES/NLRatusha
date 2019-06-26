@@ -59,4 +59,10 @@ object TimerUtils {
             "0д 0:00:00"
         }
     }
+
+    fun updateTime(time: Long): Int {
+        if (time == 0L) return 99
+        val currentTime = Date().time - time
+        return SimpleDateFormat("mm", Locale.getDefault()).format(currentTime).toInt()
+    }
 }

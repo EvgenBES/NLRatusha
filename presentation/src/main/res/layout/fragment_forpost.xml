@@ -10,7 +10,7 @@
                 type="com.blackstone.ratusha.ui.screens.forpost.FForpostModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.screens.forpost.FForpost">
@@ -58,7 +58,7 @@
                         android:text="@{viewModel.getTimeOrder}"
                         tools:text="@string/order_timer"/>
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="150dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
@@ -95,7 +95,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="1 275 850 / 1 305 700" />
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                         style="@style/TextHeaderProgressOrder"
@@ -110,7 +110,7 @@
 
         </LinearLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -134,15 +134,15 @@
                         android:layout_marginEnd="0dp"
                         android:background="@color/white12"/>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
             </LinearLayout>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

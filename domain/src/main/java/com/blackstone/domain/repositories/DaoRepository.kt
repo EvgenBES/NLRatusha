@@ -1,7 +1,6 @@
 package com.blackstone.domain.repositories
 
-import com.blackstone.domain.entity.Config
-import com.blackstone.domain.entity.TownHall
+import com.blackstone.domain.entity.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
@@ -10,7 +9,19 @@ import io.reactivex.Flowable
  * @created 14.04.2019
  */
 interface DaoRepository {
-    fun getTownHall(id: Int): Flowable<TownHall>
     fun getConfig(): Flowable<Config>
-    fun getUpdateConfig(config: Config): Completable
+    fun setConfig(config: Config): Completable
+
+    fun getTownHall(id: Int): Flowable<TownHall>
+    fun getInfoTownHall(): Flowable<List<TownHall>>
+
+    fun getItemForpost(): Flowable<List<ItemOrder>>
+    fun getItemOctal(): Flowable<List<ItemOrder>>
+
+    suspend fun getCategoryList(): List<ItemCategory>
+    suspend fun getItemsCategory(id: Int): List<ItemCategory>
+
+    suspend fun getItem(id: Int): Item
+    suspend fun getRecept(id: Int): List<ItemRecipeFull>
+    suspend fun getReceptAlchemy(id: Int): List<ItemRecipeFull>
 }

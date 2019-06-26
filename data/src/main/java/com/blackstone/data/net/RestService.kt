@@ -2,14 +2,14 @@ package com.blackstone.data.net
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
-import io.reactivex.Observable
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 /**
  * @author Evgeny Butov
  * @created 20.03.2019
@@ -23,34 +23,32 @@ class RestService {
 
     init {
         val okHttpBuilder = OkHttpClient.Builder()
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .addNetworkInterceptor(StethoInterceptor())
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .addNetworkInterceptor(StethoInterceptor())
         okHttpBuilder
-                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
 
 
         val gson = GsonBuilder()
-                .create()
+            .create()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(URL_SERVER)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(okHttpBuilder.build())
-                .build()
+            .baseUrl(URL_SERVER)
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(okHttpBuilder.build())
+            .build()
 
         restApi = retrofit.create(RestApi::class.java)
     }
 
-    fun getOctal(): Observable<ResponseBody> {
-        return restApi.getOctal()
+    suspend fun getOctal(): ResponseBody {
+        return restApi.getOctal().await()
     }
 
-    fun getForpost(): Observable<ResponseBody> {
-        return restApi.getForpost()
+    suspend fun getForpost(): ResponseBody {
+        return restApi.getForpost().await()
     }
 }
-
-

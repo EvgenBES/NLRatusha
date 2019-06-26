@@ -1,9 +1,8 @@
 package com.blackstone.data.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import androidx.room.Dao
+import androidx.room.Query
 import com.blackstone.data.db.entity.Category
-import io.reactivex.Flowable
 
 /**
  * @author Evgeny Butov
@@ -14,6 +13,6 @@ import io.reactivex.Flowable
 interface CategoryDao {
 
     @Query("SELECT * FROM category")
-    fun getAll(): Flowable<List<Category>>
+    suspend fun getAll(): List<Category>
 
 }

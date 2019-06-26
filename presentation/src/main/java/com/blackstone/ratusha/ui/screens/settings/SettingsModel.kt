@@ -1,7 +1,7 @@
 package com.blackstone.ratusha.ui.screens.settings
 
-import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableBoolean
+import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableBoolean
 import android.util.Log
 import com.blackstone.domain.entity.Config
 import com.blackstone.domain.usecases.GetConfigUseCase

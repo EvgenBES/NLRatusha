@@ -1,11 +1,11 @@
 package com.blackstone.ratusha.ui.screens.detailed
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
 import com.blackstone.ratusha.databinding.ActivityDetailItemInfoBinding

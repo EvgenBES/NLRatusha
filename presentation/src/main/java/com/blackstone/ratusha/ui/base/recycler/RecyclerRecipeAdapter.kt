@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.ui.base.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,11 +39,11 @@ class RecyclerRecipeAdapter(var itemList: MutableList<ItemRecipeFull> = mutableL
 
         fun onBind(position: Int) {
             val (id, image, name, price, quantity, type: String) = itemList[position]
-            inflateData(id, image, name, price, quantity, type)
+            inflateData(image, name, price, quantity, type)
         }
 
 
-        private fun inflateData(id: Int, image: String, itemName: String,  price: Int, quantity: Double, type: String) {
+        private fun inflateData(image: String, itemName: String,  price: Int, quantity: Double, type: String) {
             val resourceId = itemView.context?.resources?.getIdentifier("ic_$image", "drawable", itemView.context.packageName)
             val emptyImage = itemView.context?.resources?.getIdentifier("ic_res_empty", "drawable", itemView.context.packageName)
 

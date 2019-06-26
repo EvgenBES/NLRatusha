@@ -1,7 +1,7 @@
 package com.blackstone.ratusha.ui.base.mvvm
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import android.widget.Toast
 
 abstract class BaseRouter<A : BaseActivity>(val activity: A) {
@@ -15,10 +15,10 @@ abstract class BaseRouter<A : BaseActivity>(val activity: A) {
     }
 
     fun replaceFragment(
-            fragmentManager: FragmentManager,
-            fragment: Fragment,
-            containerResId: Int,
-            addToBackStack: Boolean = false
+        fragmentManager: FragmentManager,
+        fragment: Fragment,
+        containerResId: Int,
+        addToBackStack: Boolean = false
     ) {
         val fragmentTransition = fragmentManager.beginTransaction()
         fragmentTransition.replace(containerResId, fragment, fragment::class.java.simpleName)

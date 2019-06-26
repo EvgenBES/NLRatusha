@@ -3,7 +3,7 @@ package com.blackstone.ratusha.ui.screens.information
 import android.util.Log
 import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.usecases.GetCategoryListUseCase
-import com.blackstone.domain.usecases.GetItemsUseCase
+import com.blackstone.domain.usecases.GetListItemCategoryUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
 import com.blackstone.ratusha.ui.base.recycler.ItemClick
@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @created 20.04.2019
  */
-class FInformationModel: BaseViewModel<ControllerRouter>() {
+class FInformationModel : BaseViewModel<ControllerRouter>() {
 
     companion object {
         const val TAG = "Ratusha FInfoModel"
@@ -28,7 +28,7 @@ class FInformationModel: BaseViewModel<ControllerRouter>() {
     lateinit var getCategoryList: GetCategoryListUseCase
 
     @Inject
-    lateinit var getItemsUseCase: GetItemsUseCase
+    lateinit var getListItemCategoryUseCase: GetListItemCategoryUseCase
 
     init {
         App.appComponent.runInject(this)
@@ -37,14 +37,13 @@ class FInformationModel: BaseViewModel<ControllerRouter>() {
     }
 
     fun getCategoryDao() {
-        val disposable = getCategoryList.getCategoryListOrder().subscribeBy(
-            onNext = {
+        getCategoryList.execute {
+            onComplete {
                 adapter.setItems(it)
-                    router?.activity?.changedStatusRecyclerFragment(false)
-            },
-            onError = { Log.d(TAG, "getCategoryDao message: ${it.message}") }
-        )
-        addToDisposable(disposable)
+                router?.activity?.changedStatusRecyclerFragment(false)
+            }
+            onError { Log.d(TAG, "getCategoryDao message: ${it.message}") }
+        }
     }
 
     private fun subscribeOnClick() {
@@ -56,13 +55,13 @@ class FInformationModel: BaseViewModel<ControllerRouter>() {
     }
 
     private fun onClickItem(item: ItemClick<ItemCategory>) {
-        val disposable = getItemsUseCase.getCategoryListOrder(item.item.id).subscribeBy(
-            onNext = {
+        getListItemCategoryUseCase.setID(item.item.id)
+        getListItemCategoryUseCase.execute {
+            onComplete {
                 adapter.setItems(it)
                 router?.activity?.changedStatusRecyclerFragment(true)
-            },
-            onError = { Log.d(TAG, "onClickItem message: ${it.message}") }
-        )
-        addToDisposable(disposable)
+            }
+            onError { Log.d(TAG, "onClickItem message: ${it.message}") }
+        }
     }
 }

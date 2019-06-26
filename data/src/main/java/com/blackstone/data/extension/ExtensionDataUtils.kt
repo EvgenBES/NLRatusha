@@ -5,7 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.Order

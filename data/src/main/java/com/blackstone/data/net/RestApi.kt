@@ -1,6 +1,6 @@
 package com.blackstone.data.net
 
-import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 
@@ -11,9 +11,9 @@ import retrofit2.http.GET
 interface RestApi {
 
     @GET("info/cityhall_1.txt")
-    fun getForpost(): Observable<ResponseBody>
+    fun getForpost(): Deferred<ResponseBody>
 
     @GET("info/cityhall_2.txt")
-    fun getOctal(): Observable<ResponseBody>
+    fun getOctal(): Deferred<ResponseBody>
 
 }

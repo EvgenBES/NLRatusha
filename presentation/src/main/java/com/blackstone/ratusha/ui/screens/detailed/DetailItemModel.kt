@@ -1,19 +1,17 @@
 package com.blackstone.ratusha.ui.screens.detailed
 
 
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.blackstone.domain.entity.ItemRecipeFull
-import com.blackstone.domain.usecases.GetItemsUseCase
-import com.blackstone.domain.usecases.GetRecipeUseCase
+import com.blackstone.domain.usecases.*
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
 import com.blackstone.ratusha.ui.base.recycler.RecyclerRecipeAdapter
 import com.blackstone.ratusha.utils.CalculationsUtils
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 /**
@@ -46,10 +44,13 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     private val emptyItemRecipe = listOf<ItemRecipeFull>(ItemRecipeFull(id = 0))
 
     @Inject
-    lateinit var getRecipeUseCase: GetRecipeUseCase
+    lateinit var getRecipeItemUseCase: GetRecipeItemUseCase
 
     @Inject
-    lateinit var getItemsUseCase: GetItemsUseCase
+    lateinit var getRecipeAlchemyUseCase: GetRecipeAlchemyUseCase
+
+    @Inject
+    lateinit var getItemCategoryUseCase: GetItemCategoryUseCase
 
     init {
         App.appComponent.runInject(this)
@@ -58,16 +59,16 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     fun getItemAndRecipe(idItem: Int) {
         typeItem.set(idItem > 50)
 
-        val disposableA = getItemsUseCase.getItem(idItem).subscribeBy(
-            onNext = {
+        getItemCategoryUseCase.setID(idItem)
+        getItemCategoryUseCase.execute {
+            onComplete {
                 image.set(getImageResources(it.image))
                 name.set(it.name)
                 price.set("Цена: ${it.price} / ")
                 reputation.set("x${it.reputation} (${it.countItemRep})")
-            },
-            onError = { Log.d(TAG, "getItem message: ${it.message}") }
-        )
-        addToDisposable(disposableA)
+            }
+            onError { Log.d(TAG, "getItem message: ${it.message}") }
+        }
 
         if (idItem > 50) getRecipeItem(idItem) else getAlchemyRecipe(idItem)
     }
@@ -82,29 +83,31 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     }
 
     private fun getAlchemyRecipe(id: Int) {
-        val disposableB = getRecipeUseCase.getRecipeAlchemy(id).subscribeBy (
-            onNext = {
+        getRecipeAlchemyUseCase.setID(id)
+        getRecipeAlchemyUseCase.execute {
+            onComplete {
                 adapter.setItems(it)
                 setTotal(it)
                 if (it.isEmpty()) adapter.setItems(emptyItemRecipe)
-            },
-            onError = { Log.d(TAG, "getAlchemyRecipe message: ${it.message}") }
-        )
-        addToDisposable(disposableB)
+            }
+            onError {
+                Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
+            }
+        }
     }
 
     private fun getRecipeItem(id: Int) {
-        val disposableB = getRecipeUseCase.getRecipeItem(id).subscribeBy (
-            onNext = {
+        getRecipeItemUseCase.setID(id)
+        getRecipeItemUseCase.execute {
+            onComplete {
                 adapter.setItems(it)
                 listItem = it as MutableList<ItemRecipeFull>
                 setTotal(it)
                 if (it.isEmpty()) adapter.setItems(emptyItemRecipe)
                 itemNoAlchemy.set(true)
-            },
-            onError = { Log.d(TAG, "getRecipeItem message: ${it.message}") }
-        )
-        addToDisposable(disposableB)
+            }
+            onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
+        }
     }
 
 

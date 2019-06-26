@@ -129,7 +129,7 @@
 
         </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/wrap_progress"
                 android:layout_width="116dp"
                 android:layout_height="match_parent"
@@ -162,7 +162,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="275 850 / 305 700"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
                 android:id="@+id/tv_card_total_remain"

@@ -1,7 +1,7 @@
 package com.blackstone.ratusha.ui.base.mvvm
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import android.os.Bundle
 import com.blackstone.ratusha.BR
 
@@ -31,6 +31,7 @@ abstract class BaseMvvmActivity<VM : BaseViewModel<R>, R : BaseRouter<*>, B : Vi
     override fun onResume() {
         super.onResume()
         viewModel.addRouter(router)
+        viewModel.onResume()
     }
 
     override fun onPause() {

@@ -10,7 +10,7 @@
                 type="com.blackstone.ratusha.ui.screens.main.FMainModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -25,7 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent">
         </LinearLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -34,7 +34,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/headLayout">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayoutSwipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -61,11 +61,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/borderBottom">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/constraintLayout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
                                         android:text="@{viewModel.getForpostPercent}"/>
                             </LinearLayout>
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                         <LinearLayout
@@ -193,7 +193,7 @@
                                     android:text="@{viewModel.getTimeProduct}"/>
                         </LinearLayout>
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 </LinearLayout>
@@ -210,11 +210,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/firstCastle">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/constraintLayout4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -300,7 +300,7 @@
                             </LinearLayout>
 
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                         <LinearLayout
@@ -345,16 +345,28 @@
                                     android:text="@{viewModel.getTimeProduct}"/>
                         </LinearLayout>
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
 
+                <TextView
+                        android:id="@+id/tv_update_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:textColor="@color/card_view_text_blue"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:text="@{viewModel.getUpdateTime}"
+                        app:layout_constraintTop_toBottomOf="@+id/secondCastle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                 <Button
                         android:id="@+id/buttonRefresh"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:alpha="0.0"
                         android:background="@drawable/button_refresh"
@@ -363,13 +375,13 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/secondCastle"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_update_time"/>
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

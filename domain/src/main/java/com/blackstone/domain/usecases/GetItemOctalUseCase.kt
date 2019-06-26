@@ -2,7 +2,8 @@ package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.executors.PostExecutionThread
-import com.blackstone.domain.repositories.ServerRepository
+import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.domain.usecases.base.RxUseCase
 import com.blackstone.domain.utils.DomainUtils.sortItemOrder
 import io.reactivex.Flowable
 import javax.inject.Inject
@@ -12,11 +13,11 @@ import javax.inject.Inject
  * @created 08.02.2019
  */
 class GetItemOctalUseCase @Inject constructor(postExecutionThread: PostExecutionThread,
-                                              private val itemRepository: ServerRepository
-) : BaseUseCase(postExecutionThread) {
+                                              private val daoRepository: DaoRepository
+) : RxUseCase(postExecutionThread) {
 
     fun getAllItemOrder(): Flowable<List<ItemOrder>> {
-        return itemRepository
+        return daoRepository
             .getItemOctal()
             .map { sortItemOrder(it) }
             .observeOn(postExecutorThread)

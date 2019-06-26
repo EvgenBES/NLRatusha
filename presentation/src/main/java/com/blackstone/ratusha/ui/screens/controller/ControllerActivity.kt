@@ -1,16 +1,16 @@
 package com.blackstone.ratusha.ui.screens.controller
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.res.ResourcesCompat
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
-import com.blackstone.ratusha.ui.screens.main.FMain
 import com.blackstone.ratusha.databinding.ActivityControllerBinding
+import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
 import com.blackstone.ratusha.ui.screens.forpost.FForpost
 import com.blackstone.ratusha.ui.screens.information.FInformation
+import com.blackstone.ratusha.ui.screens.main.FMain
 import com.blackstone.ratusha.ui.screens.octal.FOctal
 import com.blackstone.ratusha.utils.DisplayUtils
 import java.util.*

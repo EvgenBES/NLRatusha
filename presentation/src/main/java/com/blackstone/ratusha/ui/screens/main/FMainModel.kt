@@ -1,12 +1,16 @@
 package com.blackstone.ratusha.ui.screens.main
 
-import android.databinding.ObservableField
+import android.content.Context
+import androidx.databinding.ObservableField
 import android.util.Log
+import com.blackstone.data.extension.defaultSharedPreferences
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.domain.usecases.GetItemOctalUseCase
+import com.blackstone.ratusha.R
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
+import com.blackstone.ratusha.ui.screens.controller.ControllerModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils.countProgress
 import com.blackstone.ratusha.utils.TimerUtils
@@ -26,6 +30,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     }
 
     private val timeProduct = ObservableField<String>("02:00:00")
+    private val updateTime = ObservableField<String>()
     private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private val forpostPercent = ObservableField<String>("00%")
@@ -37,13 +42,6 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
 
-    init {
-        App.appComponent.runInject(this)
-        getTownHall()
-        getProgressOrders()
-        startTimer()
-    }
-
     @Inject
     lateinit var getInfoTownHall: GetInfoTownHall
 
@@ -54,6 +52,19 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     lateinit var getItemOctal: GetItemOctalUseCase
 
     fun getTimeProduct(): ObservableField<String> = timeProduct
+
+    init {
+        App.appComponent.runInject(this)
+        getTownHall()
+        getProgressOrders()
+        startTimer()
+    }
+
+    override fun onResume() {
+        updateTime.set(getTimeUpdateSharedPref(router?.activity))
+    }
+
+    fun getUpdateTime(): ObservableField<String> = updateTime
     fun getTimeOrderForpost(): ObservableField<String> = remainderTimeOrderForpost
     fun getTimeOrderOctal(): ObservableField<String> =  remainderTimeOrderOctal
     fun getForpostPercent(): ObservableField<String> = forpostPercent
@@ -82,18 +93,19 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
      */
     private fun getProgressOrders() {
         //Forpost
-        val disposable = getItemForpost.getAllItemOrder().subscribeBy(
+        addToDisposable(getItemForpost.getAllItemOrder().subscribeBy(
             onNext = { if (it.isNotEmpty()) forpostPercent.set("${countProgress(it)}%") },
             onError = { Log.d(TAG, "getForpostOrders message: ${it.message}") }
-        )
-        addToDisposable(disposable)
+        ))
 
         //Octal
-        val disposableOct = getItemOctal.getAllItemOrder().subscribeBy(
-            onNext = { if (it.isNotEmpty()) octalPercent.set("${countProgress(it)}%") },
+        addToDisposable(getItemOctal.getAllItemOrder().subscribeBy(
+            onNext = {
+                if (it.isNotEmpty()) octalPercent.set("${countProgress(it)}%")
+                updateTime.set(getTimeUpdateSharedPref(router?.activity))
+            },
             onError = { Log.d(TAG, "getOctalOrders message: ${it.message}") }
-        )
-        addToDisposable(disposableOct)
+        ))
     }
 
     private fun startTimer() {
@@ -102,9 +114,20 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
                 timeProduct.set(TimerUtils.timerProduct())
                 remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast))
                 remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast))
+                if ((it.toInt() % 60) == 0) updateTime.set(getTimeUpdateSharedPref(router?.activity))
             },
             { e -> println("MainPresenter startTimer: $e") }
         )
         addToDisposable(disposable)
+    }
+
+    private fun getTimeUpdateSharedPref(context: Context?): String {
+        if (context == null) return ""
+
+        val sharedPref = context.defaultSharedPreferences
+        val result = sharedPref.getLong(ControllerModel.UPDATE_TIME, 0L)
+        val time = TimerUtils.updateTime(result)
+
+        return if (time < 60) context.getString(R.string.update_data_less60min, time) else context.getString(R.string.update_data_more60min)
     }
 }

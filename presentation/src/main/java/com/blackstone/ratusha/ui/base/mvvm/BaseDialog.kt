@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.ui.base.mvvm
 
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

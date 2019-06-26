@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.di.injection
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blackstone.ratusha.ui.screens.forpost.FForpost
 import dagger.Module
 import dagger.Provides
@@ -12,5 +12,6 @@ import dagger.Provides
 @Module
 class FragmentModule {
     @Provides
-    internal fun provideLinearLayoutManager(fragment: FForpost): LinearLayoutManager = LinearLayoutManager(fragment.activity)
+    internal fun provideLinearLayoutManager(fragment: FForpost): LinearLayoutManager =
+        LinearLayoutManager(fragment.activity)
 }

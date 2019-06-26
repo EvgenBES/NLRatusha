@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.ui.screens.octal
 
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
 import android.util.Log
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.usecases.GetInfoTownHall

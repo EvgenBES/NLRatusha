@@ -1,9 +1,8 @@
 package com.blackstone.data.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import androidx.room.Dao
+import androidx.room.Query
 import com.blackstone.data.db.entity.Items
-import io.reactivex.Flowable
 
 /**
  * @author Evgeny Butov
@@ -14,9 +13,9 @@ import io.reactivex.Flowable
 interface ItemsDao {
 
     @Query("SELECT * FROM items WHERE categoryID = :id ORDER BY name")
-    fun getItemsCategory(id: Int): Flowable<List<Items>>
+    suspend fun getItemsCategory(id: Int): List<Items>
 
     @Query("SELECT * FROM items WHERE id = :id")
-    fun getItem(id: Int): Flowable<Items>
+    suspend fun getItem(id: Int): Items
 
 }

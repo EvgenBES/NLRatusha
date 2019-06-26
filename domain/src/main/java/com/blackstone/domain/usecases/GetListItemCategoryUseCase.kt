@@ -7,13 +7,23 @@ import javax.inject.Inject
 
 /**
  * @author Evgeny Butov
- * @created 08.03.2019
+ * @created 09.03.2019
  */
-class GetCategoryListUseCase
-@Inject constructor( private val daoRepository: DaoRepository)
+class GetListItemCategoryUseCase
+@Inject constructor(private val daoRepository: DaoRepository)
     : CoroutineUseCase<List<ItemCategory>>() {
 
+    private var id: Int = 0
+    fun setID(id: Int) {
+        this.id = id
+    }
+
     override suspend fun executeOnBackground(): List<ItemCategory> {
-        return daoRepository.getCategoryList()
+        return daoRepository.getItemsCategory(id)
     }
 }
+
+
+
+
+

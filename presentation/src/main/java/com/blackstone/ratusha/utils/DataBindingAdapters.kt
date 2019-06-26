@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.utils
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.view.View
 import android.widget.ImageView
 import com.squareup.picasso.Picasso

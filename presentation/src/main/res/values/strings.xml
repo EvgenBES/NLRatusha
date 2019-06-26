@@ -20,4 +20,6 @@
     <string name="detail_item_time">Time</string>
     <string name="detail_item_cost">Cost</string>
 
+    <string name="update_data_less60min">Последнее обновление:\n%1$d мин. назад</string>
+    <string name="update_data_more60min">Последнее обновление:\nболее часа назад</string>
 </resources>

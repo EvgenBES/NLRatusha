@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.ui.base.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author Evgeny Butov

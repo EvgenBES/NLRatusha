@@ -1,12 +1,15 @@
 package com.blackstone.ratusha.ui.screens.controller
 
-import android.arch.lifecycle.MutableLiveData
-import com.blackstone.domain.usecases.UpdateDataUseCase
+import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import com.blackstone.data.extension.defaultSharedPreferences
+import com.blackstone.domain.usecases.UpdateForpostDataUseCase
+import com.blackstone.domain.usecases.UpdateOctalDataUseCase
 import com.blackstone.notif.NotificationR
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
 import com.blackstone.ratusha.utils.TimerUtils
-import io.reactivex.rxkotlin.subscribeBy
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -17,13 +20,17 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     companion object {
         const val TAG = "Ratusha ControllerModel"
+        const val UPDATE_TIME = "updateTime"
     }
 
     var stateRecyclerFragment: Boolean = false
     val stateData = MutableLiveData<Boolean>()
 
     @Inject
-    lateinit var updateDataBase: UpdateDataUseCase
+    lateinit var updateOctalData: UpdateOctalDataUseCase
+
+    @Inject
+    lateinit var updateForpostData: UpdateForpostDataUseCase
 
     @Inject
     lateinit var notificationR: NotificationR
@@ -35,16 +42,18 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun getOrderInformation() {
-        updateDataBase.updateDataForpost().subscribeBy(onError = { })
+        updateOctalData.execute {
+            onComplete { stateData.value = it }
+            onError { stateData.value = false }
+        }
 
-        updateDataBase.updateDataOctal()
-            .subscribeBy(
-                onNext = { stateData.value = true },
-                onError = { error ->
-                    router?.showError(error.message.let { "Error connect..." })
-                    stateData.value = false
-                }
-            )
+        updateForpostData.execute {
+            onComplete {
+                stateData.value = it
+                setTimeUpdateSharedPref(router?.activity, Date().time)
+            }
+            onError { stateData.value = false }
+        }
     }
 
     fun refreshData() {
@@ -68,4 +77,10 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
         router?.openSettings()
     }
 
+    private fun setTimeUpdateSharedPref(context: Context?, time: Long) {
+        context?.let {
+            val sharedPref = context.defaultSharedPreferences
+            sharedPref.edit().putLong(UPDATE_TIME, time).apply()
+        }
+    }
 }

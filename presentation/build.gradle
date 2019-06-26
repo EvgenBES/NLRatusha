@@ -38,17 +38,18 @@ dependencies {
     def daggerVersion = '2.16'
     def picassoVersion = '2.71828'
     def lifecycleVersion = "1.1.1"
+    def kotlinCoroutineVersion = "1.0.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$supportVersion"
-    implementation "com.android.support:support-v4:$supportVersion"
-    implementation "com.android.support:design:$supportVersion"
-    implementation "com.android.support:exifinterface:$supportVersion"
-    implementation "com.android.support:support-vector-drawable:$supportVersion"
-    implementation "com.android.support:recyclerview-v7:$supportVersion"
-    implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
-    implementation "com.android.support:multidex:1.0.3"
-    api "com.android.support:cardview-v7:$supportVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.multidex:multidex:2.0.0'
+    api 'androidx.cardview:cardview:1.0.0'
 
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.8'
@@ -66,8 +67,9 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     //Lifecycle
-    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel-ktx', version: '2.2.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 
     //Rx
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"

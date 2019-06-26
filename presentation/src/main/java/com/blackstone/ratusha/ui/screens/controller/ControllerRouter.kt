@@ -1,6 +1,6 @@
 package com.blackstone.ratusha.ui.screens.controller
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.mvvm.BaseRouter
 import com.blackstone.ratusha.ui.screens.settings.Settings

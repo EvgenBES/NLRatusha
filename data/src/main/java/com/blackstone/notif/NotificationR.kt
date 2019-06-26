@@ -3,7 +3,7 @@ package com.blackstone.notif
 import android.content.Context
 import android.graphics.Color
 import android.media.RingtoneManager
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import android.util.Log
 import com.blackstone.data.R
 import com.blackstone.data.db.AppDataBase

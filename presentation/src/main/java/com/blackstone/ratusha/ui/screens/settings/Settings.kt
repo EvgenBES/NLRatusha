@@ -1,7 +1,7 @@
 package com.blackstone.ratusha.ui.screens.settings
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.DialogSettingsBinding
