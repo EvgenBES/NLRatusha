@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.FragmentOctalBinding
-import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
+import com.blackstone.ratusha.ui.base.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 
 /**

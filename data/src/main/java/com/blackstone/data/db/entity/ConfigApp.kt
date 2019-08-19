@@ -10,8 +10,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "config")
 data class ConfigApp(
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey (autoGenerate = false)
+    val id: Int = 0,
     val tpForpost: Boolean = false,
     val tpOctal: Boolean = false,
     val statusForpost: Boolean = false,

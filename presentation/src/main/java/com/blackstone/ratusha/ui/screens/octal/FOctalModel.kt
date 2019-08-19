@@ -1,19 +1,19 @@
 package com.blackstone.ratusha.ui.screens.octal
 
 import androidx.databinding.ObservableField
-import android.util.Log
+import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemOctalUseCase
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
-import com.blackstone.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
+import com.blackstone.ratusha.ui.base.BaseViewModel
+import com.blackstone.ratusha.ui.adapter.RecyclerItemRatushaAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
 import com.blackstone.ratusha.utils.DisplayUtils
 import com.blackstone.ratusha.utils.TimerUtils
-import com.blackstone.domain.entity.Town.OCTAL
-import io.reactivex.rxkotlin.subscribeBy
+import com.blackstone.domain.entity.TownHall
+import com.blackstone.ratusha.utils.Const
 import javax.inject.Inject
 
 /**
@@ -21,10 +21,6 @@ import javax.inject.Inject
  * @created 21.04.2019
  */
 class FOctalModel : BaseViewModel<ControllerRouter>() {
-
-    companion object {
-        const val TAG = "Ratusha FOctalModel"
-    }
 
     val adapter = RecyclerItemRatushaAdapter(type = 1)
 
@@ -35,40 +31,22 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
 
-    @Inject
-    lateinit var getItemOctal: GetItemOctalUseCase
+    private val itemsOrder: Observer<List<ItemOrder>> = Observer { list -> setItems(list) }
+    private val fpTownHall: Observer<TownHall> = Observer { data -> timeOrderOctalNoCast = data.finish }
 
-    @Inject
-    lateinit var getInfoTownHall: GetInfoTownHall
+    @Inject lateinit var getItemOctal: GetItemOctalUseCase
+    @Inject lateinit var getInfoTownHall: GetInfoTownHall
 
     init {
         App.appComponent.runInject(this)
-        getItems()
-        getTownHall()
+        getItemOctal.getAllItemOrder().observeForever(itemsOrder)
+        getInfoTownHall.getTownHall(Const.OCTAL_ID).observeForever(fpTownHall)
         startTimer()
     }
 
-    private fun getItems() {
-        val disposable = getItemOctal.getAllItemOrder()
-            .subscribeBy(
-                onNext = {
-                    adapter.setItems(it)
-                    setTotalSumOrder(it)
-                },
-                onError = { Log.d(TAG, "Error message: ${it.message}") }
-            )
-        addToDisposable(disposable)
-    }
-
-    /**
-     * Get remainder time order from database
-     */
-    private fun getTownHall() {
-        val disposable = getInfoTownHall.getTownHall(OCTAL.getId()).subscribeBy(
-            onNext = { timeOrderOctalNoCast = it.finish },
-            onError = { Log.d(TAG, "getTownHall message: ${it.message}") }
-        )
-        addToDisposable(disposable)
+    private fun setItems(list: List<ItemOrder>) {
+        adapter.setItems(list)
+        setTotalSumOrder(list)
     }
 
     fun getTimeOrder(): ObservableField<String> {
@@ -96,10 +74,6 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun startTimer() {
-        val disposable = TimerUtils.observable1s.subscribe(
-            { remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast)) },
-            { e -> println("$TAG startTimer: $e") }
-        )
-        addToDisposable(disposable)
+        TimerUtils.repeatAfter1Sec { remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast)) }
     }
 }

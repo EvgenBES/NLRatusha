@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.ui.base.mvvm
+package com.blackstone.ratusha.ui.base
 
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import androidx.fragment.app.DialogFragment
 import com.blackstone.ratusha.BR
 
 /**
  * @author Evgeny Butov
  * @created 13.04.2019
  */
-abstract class BaseMvvmFragment<VM : BaseViewModel<R>, R : BaseRouter<*>, B : ViewDataBinding> : BaseFragment() {
+abstract class BaseMvvmDialog<VM : BaseViewModel<R>, R : BaseRouter<*>, B : ViewDataBinding> : DialogFragment() {
+
+    protected var TAG: String = "RATUSHA ${this::class.java.simpleName}"
 
     protected lateinit var viewModel: VM
     protected lateinit var binding: B
@@ -25,6 +29,7 @@ abstract class BaseMvvmFragment<VM : BaseViewModel<R>, R : BaseRouter<*>, B : Vi
         binding = DataBindingUtil.inflate(inflater, provideLayoutId(), container, false)
         viewModel = provideViewModel()
         binding.setVariable(BR.viewModel, viewModel)
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return binding.root
     }
 
@@ -37,12 +42,9 @@ abstract class BaseMvvmFragment<VM : BaseViewModel<R>, R : BaseRouter<*>, B : Vi
 
     override fun onResume() {
         super.onResume()
-        viewModel.addRouter(router)
-        viewModel.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.removeRouter()
     }
 }

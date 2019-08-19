@@ -1,20 +1,20 @@
 package com.blackstone.ratusha.ui.screens.forpost
 
 import androidx.databinding.ObservableField
-import android.util.Log
+import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
-import com.blackstone.domain.entity.Town.FORPOST
+import com.blackstone.domain.entity.TownHall
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
-import com.blackstone.ratusha.ui.base.recycler.RecyclerItemRatushaAdapter
+import com.blackstone.ratusha.ui.base.BaseViewModel
+import com.blackstone.ratusha.ui.adapter.RecyclerItemRatushaAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
 import com.blackstone.ratusha.utils.CalculationsUtils.countProgress
+import com.blackstone.ratusha.utils.Const.FORPOST_ID
 import com.blackstone.ratusha.utils.DisplayUtils
 import com.blackstone.ratusha.utils.TimerUtils
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 /**
@@ -22,10 +22,6 @@ import javax.inject.Inject
  * @created 20.04.2019
  */
 class FForpostModel : BaseViewModel<ControllerRouter>() {
-
-    companion object {
-        const val TAG = "Ratusha FForpostModel"
-    }
 
     val adapter = RecyclerItemRatushaAdapter()
 
@@ -36,6 +32,9 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
     private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
 
+    private val itemsOrder: Observer<List<ItemOrder>> = Observer { list -> setItems(list) }
+    private val fpTownHall: Observer<TownHall> = Observer { data -> timeOrderForpostNoCast = data.finish }
+
     @Inject
     lateinit var getItemForpost: GetItemForpostUseCase
 
@@ -44,32 +43,20 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
 
     init {
         App.appComponent.runInject(this)
-        getItems()
-        getTownHall()
+        getItemForpost.getAllItemOrder().observeForever(itemsOrder)
+        getInfoTownHall.getTownHall(FORPOST_ID).observeForever(fpTownHall)
         startTimer()
     }
 
-    private fun getItems() {
-        val disposable = getItemForpost.getAllItemOrder()
-            .subscribeBy(
-                onNext = {
-                    adapter.setItems(it)
-                    setTotalSumOrder(it)
-                },
-                onError = { Log.d(TAG, "Error message: ${it.message}") }
-            )
-        addToDisposable(disposable)
+    override fun onCleared() {
+        getItemForpost.getAllItemOrder().removeObserver(itemsOrder)
+        getInfoTownHall.getTownHall(FORPOST_ID).removeObserver(fpTownHall)
+        super.onCleared()
     }
 
-    /**
-     * Get remainder time order from database
-     */
-    private fun getTownHall() {
-        val disposable = getInfoTownHall.getTownHall(FORPOST.getId()).subscribeBy(
-            onNext = { timeOrderForpostNoCast = it.finish },
-            onError = { Log.d(TAG, "getTownHall message: ${it.message}") }
-        )
-        addToDisposable(disposable)
+    private fun setItems(list: List<ItemOrder>) {
+        adapter.setItems(list)
+        setTotalSumOrder(list)
     }
 
     fun getTimeOrder(): ObservableField<String> {
@@ -97,10 +84,6 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun startTimer() {
-        val disposable = TimerUtils.observable1s.subscribe(
-            { remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast)) },
-            { e -> println("$TAG startTimer: $e") }
-        )
-        addToDisposable(disposable)
+        TimerUtils.repeatAfter1Sec { remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast)) }
     }
 }

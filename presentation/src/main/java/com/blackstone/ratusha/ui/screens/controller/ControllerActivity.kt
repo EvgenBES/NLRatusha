@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.ActivityControllerBinding
-import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
+import com.blackstone.ratusha.ui.base.BaseMvvmActivity
+import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
 import com.blackstone.ratusha.ui.screens.forpost.FForpost
 import com.blackstone.ratusha.ui.screens.information.FInformation
 import com.blackstone.ratusha.ui.screens.main.FMain
@@ -22,8 +23,12 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     override fun provideViewModel(): ControllerModel {
         return ViewModelProviders.of(this).get(ControllerModel::class.java)
     }
+
     private var selectedFragment: Fragment = FMain()
     private var timerBackPressed: Long = 0L
+
+    private val currentFragment: Fragment?
+        get() = supportFragmentManager.findFragmentById(R.id.constraintLayout2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,13 +69,16 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
 
     override fun onBackPressed() {
         val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.mainFragment)
-        if (viewModel.stateRecyclerFragment && fragment != null && fragment is FInformation) (fragment).onBackPresserFragment()
+        if (currentFragment is DetailItemFragment) super.onBackPressed()
         else {
-            if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
-                finish()
-            } else {
-                timerBackPressed = Calendar.getInstance().time.time
-                Toast.makeText(applicationContext, R.string.exit_app, Toast.LENGTH_SHORT).show()
+            if (viewModel.stateRecyclerFragment && fragment != null && fragment is FInformation) (fragment).onBackPresserFragment()
+            else {
+                if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
+                    finish()
+                } else {
+                    timerBackPressed = Calendar.getInstance().time.time
+                    Toast.makeText(applicationContext, R.string.exit_app, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

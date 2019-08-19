@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="ForpostHeader">
         <item name="android:textColor">@color/fp_accent</item>
         <item name="android:textSize">36sp</item>

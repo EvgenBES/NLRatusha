@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.blackstone.ratusha.ui.screens.detailed.DetailItemModel"/>
+                type="com.blackstone.ratusha.ui.screens.detailed.DetailItemViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

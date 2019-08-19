@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.ui.base.recycler
+package com.blackstone.ratusha.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

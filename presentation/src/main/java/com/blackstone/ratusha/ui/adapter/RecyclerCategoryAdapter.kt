@@ -1,13 +1,13 @@
-package com.blackstone.ratusha.ui.base.recycler
+package com.blackstone.ratusha.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import com.blackstone.ratusha.R
 import com.blackstone.domain.entity.ItemCategory
-import com.blackstone.ratusha.ui.screens.detailed.DetailItemInfo
-import io.reactivex.subjects.PublishSubject
+import com.blackstone.ratusha.ui.base.recycler.ItemClick
 import kotlinx.android.synthetic.main.item_category_recycler.view.*
 
 
@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.item_category_recycler.view.*
  */
 class RecyclerCategoryAdapter(var itemList: MutableList<ItemCategory> = mutableListOf()) : RecyclerView.Adapter<RecyclerCategoryAdapter.BaseViewHolder>() {
 
-    val clickItemSubject = PublishSubject.create<ItemClick<ItemCategory>>()
+    val clickItemSubject = MutableLiveData<ItemClick<ItemCategory>>()
+    val clickDetailItemInfo = MutableLiveData<ItemClick<ItemCategory>>()
 
     override fun getItemCount(): Int = itemList.size
 
@@ -48,8 +49,18 @@ class RecyclerCategoryAdapter(var itemList: MutableList<ItemCategory> = mutableL
 
         private fun setItemClickListener(position: Int) {
             itemView.setOnClickListener {
-                if (itemList[position].image.contains("prof_")) clickItemSubject.onNext(ItemClick(itemList[position], position))
-                else itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, itemList[position].id))
+                if (itemList[position].image.contains("prof_")) clickItemSubject.postValue(
+                    ItemClick(
+                        itemList[position],
+                        position
+                    )
+                )
+                else clickDetailItemInfo.postValue(
+                    ItemClick(
+                        itemList[position],
+                        position
+                    )
+                )
             }
         }
 

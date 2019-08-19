@@ -1,12 +1,12 @@
 package com.blackstone.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.blackstone.data.db.entity.ItemOctal
 import com.blackstone.domain.entity.ItemOrder
-import io.reactivex.Flowable
 
 @Dao
 interface ItemOctDao {
@@ -26,5 +26,5 @@ interface ItemOctDao {
     fun deleteAll()
 
     @Query("SELECT itemId as id, $T1.name, $T1.image, countStart, countFinish, price, reputation, countItemRep FROM $TABLE_NAME LEFT JOIN items ON $T1.itemId = items.id")
-    fun getAll(): Flowable<List<ItemOrder>>
+    fun getAll(): LiveData<List<ItemOrder>>
 }

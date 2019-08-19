@@ -4,7 +4,6 @@ import androidx.databinding.BindingAdapter
 import android.view.View
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
-import io.reactivex.subjects.PublishSubject
 
 
 @BindingAdapter("first")
@@ -36,13 +35,6 @@ fun setLayoutHeight(view: View, width: Int) {
     val layoutParams = view.layoutParams
     layoutParams.width = width
     view.layoutParams = layoutParams
-}
-
-@BindingAdapter("onClick")
-fun View.onClick(subject: PublishSubject<Boolean>) {
-    setOnClickListener {
-        subject.onNext(true)
-    }
 }
 
 

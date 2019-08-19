@@ -1,17 +1,24 @@
 package com.blackstone.ratusha.utils
 
-import io.reactivex.Observable
+import android.os.Handler
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * @author Evgeny Butov
  * @created 06.04.2019
  */
 object TimerUtils {
-    val observable1s: Observable<Long> = Observable.interval(1, TimeUnit.SECONDS)
-    val observable5m: Observable<Long> = Observable.interval(5, TimeUnit.MINUTES)
+
+    fun repeatAfter1Sec(delay: Long = 1000L, todo: () -> Unit) {
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                todo()
+                handler.postDelayed(this, delay)
+            }
+        }, delay)
+    }
 
     fun getDefTimerOrder(): String {
         return SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date().time + 864000000L) //today + 10days
@@ -63,6 +70,6 @@ object TimerUtils {
     fun updateTime(time: Long): Int {
         if (time == 0L) return 99
         val currentTime = Date().time - time
-        return SimpleDateFormat("mm", Locale.getDefault()).format(currentTime).toInt()
+        return (currentTime.toInt() / 1000) / 60
     }
 }

@@ -1,14 +1,14 @@
-package com.blackstone.domain.usecases.base
+package com.blackstone.domain.usecases
 
 
 import com.blackstone.domain.entity.ErrorModel
-import com.blackstone.domain.extension.mapToDomainErrorException
+import com.blackstone.domain.extension.mapErrorException
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-typealias CompletionBlock<T> = CoroutineUseCase.Request<T>.() -> Unit
+typealias CompletionBlock<T> = BaseUseCase.Request<T>.() -> Unit
 
-abstract class CoroutineUseCase<T> {
+abstract class BaseUseCase<T> {
 
     private var parentJob: Job = SupervisorJob()
     var backgroundContext: CoroutineContext = Dispatchers.IO
@@ -30,7 +30,7 @@ abstract class CoroutineUseCase<T> {
             } catch (cancellationException: CancellationException) {
                 response(cancellationException)
             } catch (e: Exception) {
-                val error = e.mapToDomainErrorException(e)
+                val error = e.mapErrorException(e)
                 response(error)
             }
         }

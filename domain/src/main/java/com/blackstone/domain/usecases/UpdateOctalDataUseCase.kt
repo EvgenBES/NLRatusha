@@ -1,7 +1,6 @@
 package com.blackstone.domain.usecases
 
 import com.blackstone.domain.repositories.ServerRepository
-import com.blackstone.domain.usecases.base.CoroutineUseCase
 import javax.inject.Inject
 
 /**
@@ -10,7 +9,7 @@ import javax.inject.Inject
  */
 class UpdateOctalDataUseCase
 @Inject constructor(private val itemRepository: ServerRepository)
-    : CoroutineUseCase<Boolean>() {
+    : BaseUseCase<Boolean>() {
 
     override suspend fun executeOnBackground(): Boolean {
         return itemRepository.updateDataOctal()

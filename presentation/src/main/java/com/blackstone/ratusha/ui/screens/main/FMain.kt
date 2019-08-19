@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmFragment
+import com.blackstone.ratusha.ui.base.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.databinding.FragmentMainBinding
 import com.blackstone.ratusha.ui.screens.controller.ControllerModel

@@ -1,15 +1,16 @@
 package com.blackstone.ratusha.ui.screens.information
 
 import android.util.Log
+import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.usecases.GetCategoryListUseCase
 import com.blackstone.domain.usecases.GetListItemCategoryUseCase
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
+import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.base.recycler.ItemClick
-import com.blackstone.ratusha.ui.base.recycler.RecyclerCategoryAdapter
+import com.blackstone.ratusha.ui.adapter.RecyclerCategoryAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
-import io.reactivex.rxkotlin.subscribeBy
+import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
 import javax.inject.Inject
 
 /**
@@ -18,22 +19,25 @@ import javax.inject.Inject
  */
 class FInformationModel : BaseViewModel<ControllerRouter>() {
 
-    companion object {
-        const val TAG = "Ratusha FInfoModel"
-    }
-
     val adapter = RecyclerCategoryAdapter()
 
-    @Inject
-    lateinit var getCategoryList: GetCategoryListUseCase
+    @Inject lateinit var getCategoryList: GetCategoryListUseCase
+    @Inject lateinit var getListItemCategoryUseCase: GetListItemCategoryUseCase
 
-    @Inject
-    lateinit var getListItemCategoryUseCase: GetListItemCategoryUseCase
+    private val onClickAdapter: Observer<ItemClick<ItemCategory>> = Observer { onClickItem(it) }
+    private val onStartDetail: Observer<ItemClick<ItemCategory>> = Observer { startFragment(it) }
 
     init {
         App.appComponent.runInject(this)
         getCategoryDao()
-        subscribeOnClick()
+        adapter.clickItemSubject.observeForever(onClickAdapter)
+        adapter.clickDetailItemInfo.observeForever(onStartDetail)
+    }
+
+    override fun onCleared() {
+        adapter.clickItemSubject.removeObserver(onClickAdapter)
+        adapter.clickDetailItemInfo.removeObserver(onStartDetail)
+        super.onCleared()
     }
 
     fun getCategoryDao() {
@@ -46,22 +50,17 @@ class FInformationModel : BaseViewModel<ControllerRouter>() {
         }
     }
 
-    private fun subscribeOnClick() {
-        val disposable = adapter.clickItemSubject.subscribeBy(
-            onNext = { onClickItem(it) },
-            onError = { Log.d(TAG, "subcribeOnClick message: ${it.message}") }
-        )
-        addToDisposable(disposable)
-    }
-
     private fun onClickItem(item: ItemClick<ItemCategory>) {
-        getListItemCategoryUseCase.setID(item.item.id)
-        getListItemCategoryUseCase.execute {
+        getListItemCategoryUseCase.execute(item.item.id) {
             onComplete {
                 adapter.setItems(it)
                 router?.activity?.changedStatusRecyclerFragment(true)
             }
             onError { Log.d(TAG, "onClickItem message: ${it.message}") }
         }
+    }
+
+    private fun startFragment(item: ItemClick<ItemCategory>) {
+        router?.startFragmentTest(DetailItemFragment())
     }
 }

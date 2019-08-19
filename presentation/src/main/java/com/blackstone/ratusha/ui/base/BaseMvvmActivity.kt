@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.ui.base.mvvm
+package com.blackstone.ratusha.ui.base
 
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding

@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.ui.base.recycler
+package com.blackstone.ratusha.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import com.blackstone.domain.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 import android.text.Html
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.screens.detailed.DetailItemInfo
 import com.blackstone.ratusha.ui.widget.ExpandableCardView
 import com.blackstone.ratusha.utils.CalculationsUtils.calculatePercent
 import com.blackstone.ratusha.utils.CalculationsUtils.totalRemainderCardView
@@ -63,7 +62,7 @@ class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<It
 
         private fun setItemClickListener(id: Int) {
             itemView.setOnClickListener {
-                itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
+              //  itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
             }
         }
 

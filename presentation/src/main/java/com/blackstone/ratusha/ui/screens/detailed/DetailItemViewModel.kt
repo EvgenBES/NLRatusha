@@ -9,8 +9,9 @@ import android.view.View
 import com.blackstone.domain.entity.ItemRecipeFull
 import com.blackstone.domain.usecases.*
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
-import com.blackstone.ratusha.ui.base.recycler.RecyclerRecipeAdapter
+import com.blackstone.ratusha.ui.base.BaseViewModel
+import com.blackstone.ratusha.ui.adapter.RecyclerRecipeAdapter
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
 import javax.inject.Inject
 
@@ -19,11 +20,7 @@ import javax.inject.Inject
  * @created 19.04.2019
  */
 
-class DetailItemModel : BaseViewModel<DetailItemRouter>() {
-
-    companion object {
-        const val TAG = "Ratusha DetailItemModel"
-    }
+class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
     val counter: ObservableField<String> = ObservableField<String>("1")
     val typeItem: ObservableBoolean = ObservableBoolean(true)
@@ -43,14 +40,9 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     val adapter = RecyclerRecipeAdapter()
     private val emptyItemRecipe = listOf<ItemRecipeFull>(ItemRecipeFull(id = 0))
 
-    @Inject
-    lateinit var getRecipeItemUseCase: GetRecipeItemUseCase
-
-    @Inject
-    lateinit var getRecipeAlchemyUseCase: GetRecipeAlchemyUseCase
-
-    @Inject
-    lateinit var getItemCategoryUseCase: GetItemCategoryUseCase
+    @Inject lateinit var getRecipeItemUseCase: GetRecipeItemUseCase
+    @Inject lateinit var getRecipeAlchemyUseCase: GetRecipeAlchemyUseCase
+    @Inject lateinit var getItemCategoryUseCase: GetItemCategoryUseCase
 
     init {
         App.appComponent.runInject(this)
@@ -59,8 +51,7 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     fun getItemAndRecipe(idItem: Int) {
         typeItem.set(idItem > 50)
 
-        getItemCategoryUseCase.setID(idItem)
-        getItemCategoryUseCase.execute {
+        getItemCategoryUseCase.execute(idItem) {
             onComplete {
                 image.set(getImageResources(it.image))
                 name.set(it.name)
@@ -83,8 +74,7 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     }
 
     private fun getAlchemyRecipe(id: Int) {
-        getRecipeAlchemyUseCase.setID(id)
-        getRecipeAlchemyUseCase.execute {
+        getRecipeAlchemyUseCase.execute(id) {
             onComplete {
                 adapter.setItems(it)
                 setTotal(it)
@@ -97,8 +87,7 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
     }
 
     private fun getRecipeItem(id: Int) {
-        getRecipeItemUseCase.setID(id)
-        getRecipeItemUseCase.execute {
+        getRecipeItemUseCase.execute(id) {
             onComplete {
                 adapter.setItems(it)
                 listItem = it as MutableList<ItemRecipeFull>
@@ -154,12 +143,12 @@ class DetailItemModel : BaseViewModel<DetailItemRouter>() {
 
     private fun setVisibilityTextCount(event: Int) {
         if (textVisibility.not()) {
-            router?.showTextCounter()
+        //    router?.showTextCounter()
             textVisibility = true
         }
 
         if (event == MotionEvent.ACTION_UP && textVisibility) {
-            router?.hideTextCounter()
+      //      router?.hideTextCounter()
             textVisibility = false
         }
     }

@@ -3,7 +3,7 @@ package com.blackstone.ratusha.di.injection
 
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.screens.controller.ControllerModel
-import com.blackstone.ratusha.ui.screens.detailed.DetailItemModel
+import com.blackstone.ratusha.ui.screens.detailed.DetailItemViewModel
 import com.blackstone.ratusha.ui.screens.forpost.FForpostModel
 import com.blackstone.ratusha.ui.screens.information.FInformationModel
 import com.blackstone.ratusha.ui.screens.main.FMainModel
@@ -29,7 +29,7 @@ interface AppComponent {
     fun inject(app: App)
 
     fun runInject(controller: ControllerModel)
-    fun runInject(detailItemModel: DetailItemModel)
+    fun runInject(detailItemViewModel: DetailItemViewModel)
     fun runInject(fMainModel: FMainModel)
     fun runInject(fForpostModel: FForpostModel)
     fun runInject(fOctalModel: FOctalModel)

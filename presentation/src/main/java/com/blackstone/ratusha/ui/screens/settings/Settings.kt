@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.DialogSettingsBinding
-import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmDialog
+import com.blackstone.ratusha.ui.base.BaseMvvmDialog
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 
 /**

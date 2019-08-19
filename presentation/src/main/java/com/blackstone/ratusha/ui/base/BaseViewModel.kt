@@ -1,8 +1,6 @@
-package com.blackstone.ratusha.ui.base.mvvm
+package com.blackstone.ratusha.ui.base
 
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 
 /**
  * @author Evgeny Butov
@@ -10,7 +8,8 @@ import io.reactivex.disposables.Disposable
  */
 abstract class BaseViewModel<R : BaseRouter<*>> : ViewModel() {
 
-    protected val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
+    protected var TAG: String = "RATUSHA ${this::class.java.simpleName}"
+
     protected var router: R? = null
     public  fun addRouter(router: R?){
         this.router = router
@@ -20,15 +19,11 @@ abstract class BaseViewModel<R : BaseRouter<*>> : ViewModel() {
         this.router = null
     }
 
-    protected fun addToDisposable(disposable: Disposable) {
-        compositeDisposable.add(disposable)
-    }
 
     open fun onResume() {
     }
 
     override fun onCleared() {
         super.onCleared()
-        compositeDisposable.clear()
     }
 }

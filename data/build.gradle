@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    def room_version = "2.1.0"
+    def room_version = "2.2.0-alpha02"
     def ok_http_version = "3.11.0"
     def rx_java_version = "2.4.0"
     def supportVersion = '1.0.0'
@@ -36,14 +36,12 @@ dependencies {
     //Retrofit + Okhttp
     implementation "com.squareup.retrofit2:retrofit:$rx_java_version"
     implementation "com.squareup.retrofit2:converter-gson:$rx_java_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rx_java_version"
     implementation "com.squareup.okhttp3:okhttp:$ok_http_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$ok_http_version"
 
     //Room
     api "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
     //SQLiteAssetHelper

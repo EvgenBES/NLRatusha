@@ -1,39 +1,40 @@
 package com.blackstone.ratusha.ui.screens.detailed
 
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.DefaultItemAnimator
+import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blackstone.ratusha.R
-import com.blackstone.ratusha.ui.base.mvvm.BaseMvvmActivity
 import com.blackstone.ratusha.databinding.ActivityDetailItemInfoBinding
+import com.blackstone.ratusha.ui.base.BaseMvvmFragment
+import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 
-class DetailItemInfo : BaseMvvmActivity<DetailItemModel, DetailItemRouter, ActivityDetailItemInfoBinding>(){
+class DetailItemFragment : BaseMvvmFragment<DetailItemViewModel, ControllerRouter, ActivityDetailItemInfoBinding>(){
 
     companion object {
         private const val ID_ITEM = "ID_ITEM"
 
         fun getInstance(context: Context, id: Int): Intent {
-            return Intent(context, DetailItemInfo::class.java).putExtra(ID_ITEM, id)
+            return Intent(context, DetailItemFragment::class.java).putExtra(ID_ITEM, id)
         }
     }
 
-    override fun provideViewModel(): DetailItemModel {
-        return ViewModelProviders.of(this).get(DetailItemModel::class.java)
+    override fun provideViewModel(): DetailItemViewModel {
+        return ViewModelProviders.of(this).get(DetailItemViewModel::class.java)
     }
-    override fun provideRouter(): DetailItemRouter = DetailItemRouter(this)
+
     override fun provideLayoutId(): Int = R.layout.activity_detail_item_info
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
+      //  viewModel.getItemAndRecipe(intent.getIntExtra(ID_ITEM,0))
+        viewModel.getItemAndRecipe(24)
 
         binding.recyclerInfo.setHasFixedSize(true)
-        binding.recyclerInfo.layoutManager = LinearLayoutManager(this)
-        binding.recyclerInfo.itemAnimator = DefaultItemAnimator()
+        binding.recyclerInfo.layoutManager = LinearLayoutManager(this.activity)
         binding.recyclerInfo.isNestedScrollingEnabled = false
         binding.recyclerInfo.adapter = viewModel.adapter
 
@@ -46,4 +47,5 @@ class DetailItemInfo : BaseMvvmActivity<DetailItemModel, DetailItemRouter, Activ
     fun showTextCount() {
         binding.tvCounter.animate().alpha(1.0f).duration = 250
     }
+
 }

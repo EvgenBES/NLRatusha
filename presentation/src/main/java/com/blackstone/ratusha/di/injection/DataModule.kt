@@ -5,11 +5,9 @@ import com.blackstone.data.db.AppDataBase
 import com.blackstone.data.net.RestService
 import com.blackstone.data.repositories.DaoRepositoryImpl
 import com.blackstone.data.repositories.ServerRepositoryImpl
-import com.blackstone.domain.executors.PostExecutionThread
 import com.blackstone.domain.repositories.DaoRepository
 import com.blackstone.domain.repositories.ServerRepository
 import com.blackstone.notif.NotificationR
-import com.blackstone.ratusha.di.executors.UIThread
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -43,12 +41,6 @@ class DataModule {
     @Provides
     fun provideNotificationR(appDataBase: AppDataBase, context: Context): NotificationR {
         return NotificationR(appDataBase, context)
-    }
-
-    @Singleton
-    @Provides
-    fun providePostExecutionThread(): PostExecutionThread {
-        return UIThread()
     }
 
     @Singleton

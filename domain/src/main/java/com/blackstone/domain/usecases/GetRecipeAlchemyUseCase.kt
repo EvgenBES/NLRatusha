@@ -2,7 +2,6 @@ package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemRecipeFull
 import com.blackstone.domain.repositories.DaoRepository
-import com.blackstone.domain.usecases.base.CoroutineUseCase
 import javax.inject.Inject
 
 /**
@@ -10,15 +9,10 @@ import javax.inject.Inject
  * @created 14.03.2019
  */
 class GetRecipeAlchemyUseCase
-@Inject constructor( private val daoRepository: DaoRepository
-) : CoroutineUseCase<List<ItemRecipeFull>>() {
+    @Inject constructor(private val daoRepository: DaoRepository) : BaseUseCaseParams<Int, List<ItemRecipeFull>>() {
 
-    private var id: Int = 0
-    fun setID(id: Int) {
-        this.id = id
-    }
 
-    override suspend fun executeOnBackground(): List<ItemRecipeFull> {
-        return daoRepository.getReceptAlchemy(id)
+    override suspend fun executeOnBackground(params: Int): List<ItemRecipeFull> {
+        return daoRepository.getReceptAlchemy(params)
     }
 }

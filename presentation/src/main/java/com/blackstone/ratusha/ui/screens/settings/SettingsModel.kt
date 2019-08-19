@@ -1,14 +1,13 @@
 package com.blackstone.ratusha.ui.screens.settings
 
-import androidx.lifecycle.MutableLiveData
 import androidx.databinding.ObservableBoolean
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.Config
 import com.blackstone.domain.usecases.GetConfigUseCase
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
+import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 /**
@@ -17,6 +16,7 @@ import javax.inject.Inject
  */
 class SettingsModel : BaseViewModel<ControllerRouter>() {
 
+    private val configObserver: Observer<Config> = Observer { config -> setConfig(config) }
     val closeDialog = MutableLiveData<Boolean>()
 
     val checkTpForpost = ObservableBoolean()
@@ -24,45 +24,36 @@ class SettingsModel : BaseViewModel<ControllerRouter>() {
     val checkStatusForpost = ObservableBoolean()
     val checkStatusOctal = ObservableBoolean()
 
-    companion object {
-        const val TAG = "SettingsModel"
-    }
-
-    @Inject
-    lateinit var configUseCase: GetConfigUseCase
+    @Inject lateinit var configUseCase: GetConfigUseCase
 
     init {
         App.appComponent.runInject(this)
-        getConfigDao()
+        configUseCase.getConfig().observeForever(configObserver)
     }
 
-    private fun getConfigDao() {
-        addToDisposable(configUseCase.getConfig()
-            .subscribeBy(
-                onNext = { setConfig(it) },
-                onError = { Log.d(TAG, "get config error") }
-            )
-        )
+    override fun onCleared() {
+        configUseCase.getConfig().removeObserver(configObserver)
+        super.onCleared()
     }
 
-    private fun setConfig(config: Config) {
-        checkTpForpost.set(config.tpForpost)
-        checkTpOctal.set(config.tpOctal)
-        checkStatusForpost.set(config.statusForpost)
-        checkStatusOctal.set(config.statusOctal)
+
+    private fun setConfig(config: Config?) {
+        config?.let { _config ->
+            checkTpForpost.set(_config.tpForpost)
+            checkTpOctal.set(_config.tpOctal)
+            checkStatusForpost.set(_config.statusForpost)
+            checkStatusOctal.set(_config.statusOctal)
+        }
     }
 
     fun onClickSave() {
-        addToDisposable(configUseCase.update(
-            Config(
+        configUseCase.execute( Config(
                 checkTpForpost.get(),
                 checkTpOctal.get(),
                 checkStatusForpost.get(),
-                checkStatusOctal.get())
-        ).subscribeBy(
-            onComplete = { closeDialog.value = true  },
-            onError = { Log.d(TAG, "update config error") }
-        ))
+                checkStatusOctal.get())) {
+            onComplete { closeDialog.value = true }
+        }
     }
 
     fun onClickBack() {

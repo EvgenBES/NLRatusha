@@ -1,10 +1,11 @@
 package com.blackstone.data.db
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
 import android.content.Context
-import com.blackstone.data.db.entity.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.blackstone.data.db.dao.*
+import com.blackstone.data.db.entity.*
 
 @Database(
     entities = [
@@ -17,7 +18,7 @@ import com.blackstone.data.db.dao.*
         Resources::class,
         ItemToType::class,
         Type::class,
-        ConfigApp::class], version = 2
+        ConfigApp::class], version = 1
 )
 abstract class AppDataBase : RoomDatabase() {
 
@@ -25,14 +26,14 @@ abstract class AppDataBase : RoomDatabase() {
         private const val DATABASE_NAME = "db_ratusha"
 
         fun getInstance(context: Context): AppDataBase {
-//            return Room
-//                    .databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
-//                    .fallbackToDestructiveMigration() //if version was edit - deleted bd and created new
-//                    .build()
-
-            return RoomAssetHelper.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
-//                    .fallbackToDestructiveMigration() //if version was edit - deleted bd and created new
+            return Room
+                    .databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
+                    .createFromAsset("database/db_ratusha.db")
                     .build()
+
+//            return RoomAssetHelper.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
+////                    .fallbackToDestructiveMigration() //if version was edit - deleted bd and created new
+//                    .build()
         }
     }
 
@@ -42,5 +43,5 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun getCategoryDao(): CategoryDao
     abstract fun getItemsDao(): ItemsDao
     abstract fun getRecipeDao(): RecipeDao
-    abstract fun getConfgigDao():ConfigDao
+    abstract fun getConfigDao():ConfigDao
 }

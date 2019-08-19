@@ -1,11 +1,11 @@
 package com.blackstone.data.repositories
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.blackstone.data.db.AppDataBase
 import com.blackstone.data.db.entity.*
 import com.blackstone.domain.entity.*
 import com.blackstone.domain.repositories.DaoRepository
-import io.reactivex.Completable
-import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**
@@ -15,29 +15,27 @@ import javax.inject.Inject
 class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase) :
     DaoRepository {
 
-    override fun getConfig(): Flowable<Config> {
-        return appDataBase.getConfgigDao().getConfig().map { it.transformToConfig() }
+    override fun getConfig(): LiveData<Config> {
+        return appDataBase.getConfigDao().getConfig()
     }
 
-    override fun setConfig(config: Config): Completable {
-        return Completable.create {
-            appDataBase.getConfgigDao().insert(config.transformToConfigApp())
-            it.onComplete()}
+    override fun setConfig(config: Config) {
+        return appDataBase.getConfigDao().insert(config.transformToConfigApp())
     }
 
-    override fun getTownHall(id: Int): Flowable<TownHall> {
-        return appDataBase.getTownHallDao().getTownHall(id).map { it.transformToPresenter() }
+    override fun getTownHall(id: Int): LiveData<TownHall> {
+        return Transformations.map(appDataBase.getTownHallDao().getTownHall(id)) { it.transformToPresenter() }
     }
 
-    override fun getInfoTownHall(): Flowable<List<TownHall>> {
-        return appDataBase.getTownHallDao().getAll().map { list -> list.map { it.transformToPresenter() } }
+    override fun getInfoTownHall(): LiveData<List<TownHall>> {
+        return Transformations.map(appDataBase.getTownHallDao().getAll()) { list -> list.map { it.transformToPresenter() } }
     }
 
-    override fun getItemForpost(): Flowable<List<ItemOrder>> {
+    override fun getItemForpost(): LiveData<List<ItemOrder>> {
         return appDataBase.getForpDao().getAll()
     }
 
-    override fun getItemOctal(): Flowable<List<ItemOrder>> {
+    override fun getItemOctal(): LiveData<List<ItemOrder>> {
         return appDataBase.getOctDao().getAll()
     }
 

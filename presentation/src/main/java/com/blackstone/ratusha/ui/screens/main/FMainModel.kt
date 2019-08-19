@@ -2,19 +2,20 @@ package com.blackstone.ratusha.ui.screens.main
 
 import android.content.Context
 import androidx.databinding.ObservableField
-import android.util.Log
+import androidx.lifecycle.Observer
 import com.blackstone.data.extension.defaultSharedPreferences
+import com.blackstone.domain.entity.ItemOrder
+import com.blackstone.domain.entity.TownHall
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.domain.usecases.GetItemOctalUseCase
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
+import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils.countProgress
 import com.blackstone.ratusha.utils.TimerUtils
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 
@@ -24,10 +25,6 @@ import javax.inject.Inject
  */
 
 class FMainModel : BaseViewModel<ControllerRouter>() {
-
-    companion object {
-        const val TAG = "Ratusha FMainModel"
-    }
 
     private val timeProduct = ObservableField<String>("02:00:00")
     private val updateTime = ObservableField<String>()
@@ -42,6 +39,10 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
 
+    private val listTownHall: Observer<List<TownHall>> = Observer { list -> setTownHall(list) }
+    private val itemsOrederForpost: Observer<List<ItemOrder>> = Observer { list -> setProgressOrdersForpost(list) }
+    private val itemsOrederOctal: Observer<List<ItemOrder>> = Observer { list -> setProgressOrdersOctal(list) }
+
     @Inject
     lateinit var getInfoTownHall: GetInfoTownHall
 
@@ -55,9 +56,17 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
 
     init {
         App.appComponent.runInject(this)
-        getTownHall()
-        getProgressOrders()
+        getInfoTownHall.get().observeForever(listTownHall)
+        getItemForpost.getAllItemOrder().observeForever(itemsOrederForpost)
+        getItemOctal.getAllItemOrder().observeForever(itemsOrederOctal)
         startTimer()
+    }
+
+    override fun onCleared() {
+        getInfoTownHall.get().removeObserver(listTownHall)
+        getItemForpost.getAllItemOrder().removeObserver(itemsOrederForpost)
+        getItemOctal.getAllItemOrder().removeObserver(itemsOrederOctal)
+        super.onCleared()
     }
 
     override fun onResume() {
@@ -73,52 +82,36 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     /**
      * Get remainder time and get images product orders from database
      */
-    private fun getTownHall() {
-        val disposable = getInfoTownHall.get().subscribeBy(
-            onNext = {
-                if (it.size >= 2) {
-                    timeOrderForpostNoCast = it[0].finish
-                    timeOrderOctalNoCast = it[1].finish
-                    urlFirst.set(it[0].url)
-                    urlSecond.set(it[1].url)
-                }
-            },
-            onError = { Log.d(TAG, "getTownHall message: ${it.message}") }
-        )
-        addToDisposable(disposable)
+    private fun setTownHall(list: List<TownHall>) {
+        if (list.size >= 2) {
+            timeOrderForpostNoCast = list[0].finish
+            timeOrderOctalNoCast = list[1].finish
+            urlFirst.set(list[0].url)
+            urlSecond.set(list[1].url)
+        }
     }
 
     /**
      * Get all items forpost and octal from database
      */
-    private fun getProgressOrders() {
-        //Forpost
-        addToDisposable(getItemForpost.getAllItemOrder().subscribeBy(
-            onNext = { if (it.isNotEmpty()) forpostPercent.set("${countProgress(it)}%") },
-            onError = { Log.d(TAG, "getForpostOrders message: ${it.message}") }
-        ))
+    private fun setProgressOrdersForpost(list: List<ItemOrder>) {
+        forpostPercent.set("${countProgress(list)}%")
+    }
 
-        //Octal
-        addToDisposable(getItemOctal.getAllItemOrder().subscribeBy(
-            onNext = {
-                if (it.isNotEmpty()) octalPercent.set("${countProgress(it)}%")
-                updateTime.set(getTimeUpdateSharedPref(router?.activity))
-            },
-            onError = { Log.d(TAG, "getOctalOrders message: ${it.message}") }
-        ))
+    private fun setProgressOrdersOctal(list: List<ItemOrder>) {
+        octalPercent.set("${countProgress(list)}%")
     }
 
     private fun startTimer() {
-        val disposable = TimerUtils.observable1s.subscribe(
-            {
-                timeProduct.set(TimerUtils.timerProduct())
-                remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast))
-                remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast))
-                if ((it.toInt() % 60) == 0) updateTime.set(getTimeUpdateSharedPref(router?.activity))
-            },
-            { e -> println("MainPresenter startTimer: $e") }
-        )
-        addToDisposable(disposable)
+        TimerUtils.repeatAfter1Sec {
+            timeProduct.set(TimerUtils.timerProduct())
+            remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast))
+            remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast))
+        }
+
+        TimerUtils.repeatAfter1Sec(6000L) {
+            updateTime.set(getTimeUpdateSharedPref(router?.activity))
+        }
     }
 
     private fun getTimeUpdateSharedPref(context: Context?): String {

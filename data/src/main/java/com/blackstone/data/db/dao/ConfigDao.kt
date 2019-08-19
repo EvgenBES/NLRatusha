@@ -1,11 +1,12 @@
 package com.blackstone.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.blackstone.data.db.entity.ConfigApp
-import io.reactivex.Flowable
+import com.blackstone.domain.entity.Config
 
 /**
  * @author Evgeny Butov
@@ -22,6 +23,6 @@ interface ConfigDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(config: ConfigApp)
 
-    @Query("SELECT * FROM $TABLE_NAME LIMIT 1")
-    fun getConfig(): Flowable<ConfigApp>
+    @Query("SELECT tpForpost, tpOctal, statusForpost, statusOctal  FROM $TABLE_NAME LIMIT 1")
+    fun getConfig(): LiveData<Config>
 }

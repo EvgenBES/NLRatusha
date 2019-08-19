@@ -7,8 +7,7 @@ import com.blackstone.domain.usecases.UpdateForpostDataUseCase
 import com.blackstone.domain.usecases.UpdateOctalDataUseCase
 import com.blackstone.notif.NotificationR
 import com.blackstone.ratusha.app.App
-import com.blackstone.ratusha.ui.base.mvvm.BaseViewModel
-import com.blackstone.ratusha.utils.TimerUtils
+import com.blackstone.ratusha.ui.base.BaseViewModel
 import java.util.*
 import javax.inject.Inject
 
@@ -19,7 +18,6 @@ import javax.inject.Inject
 class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     companion object {
-        const val TAG = "Ratusha ControllerModel"
         const val UPDATE_TIME = "updateTime"
     }
 
@@ -37,7 +35,6 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     init {
         App.appComponent.runInject(this)
-        startTimer()
         getOrderInformation()
     }
 
@@ -58,19 +55,6 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     fun refreshData() {
         getOrderInformation()
-    }
-
-    /**
-     * This getting new information from internet
-     * once in 5 minutes
-     */
-    private fun startTimer() {
-        val disposable = TimerUtils.observable5m.subscribe(
-            { getOrderInformation() },
-            { e -> println("$TAG startTimer: $e") },
-            { }
-        )
-        addToDisposable(disposable)
     }
 
     fun openSettings() {

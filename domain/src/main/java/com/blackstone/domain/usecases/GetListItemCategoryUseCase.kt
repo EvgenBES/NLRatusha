@@ -2,7 +2,6 @@ package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.repositories.DaoRepository
-import com.blackstone.domain.usecases.base.CoroutineUseCase
 import javax.inject.Inject
 
 /**
@@ -10,16 +9,10 @@ import javax.inject.Inject
  * @created 09.03.2019
  */
 class GetListItemCategoryUseCase
-@Inject constructor(private val daoRepository: DaoRepository)
-    : CoroutineUseCase<List<ItemCategory>>() {
+    @Inject constructor(private val daoRepository: DaoRepository) : BaseUseCaseParams<Int, List<ItemCategory>>() {
 
-    private var id: Int = 0
-    fun setID(id: Int) {
-        this.id = id
-    }
-
-    override suspend fun executeOnBackground(): List<ItemCategory> {
-        return daoRepository.getItemsCategory(id)
+    override suspend fun executeOnBackground(params: Int): List<ItemCategory> {
+        return daoRepository.getItemsCategory(params)
     }
 }
 

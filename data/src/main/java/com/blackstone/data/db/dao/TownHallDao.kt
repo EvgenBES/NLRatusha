@@ -1,11 +1,11 @@
 package com.blackstone.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.blackstone.data.db.entity.InfoTownHall
-import io.reactivex.Flowable
 
 /**
  * @author Evgeny Butov
@@ -26,8 +26,8 @@ interface TownHallDao {
     fun deleteAll()
 
     @Query("SELECT * FROM $TABLE_NAME")
-    fun getAll(): Flowable<List<InfoTownHall>>
+    fun getAll(): LiveData<List<InfoTownHall>>
 
     @Query("SELECT * FROM $TABLE_NAME WHERE idTown = :id LIMIT 1")
-    fun getTownHall(id: Int): Flowable<InfoTownHall>
+    fun getTownHall(id: Int): LiveData<InfoTownHall>
 }

@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.ui.base.mvvm
+package com.blackstone.ratusha.ui.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

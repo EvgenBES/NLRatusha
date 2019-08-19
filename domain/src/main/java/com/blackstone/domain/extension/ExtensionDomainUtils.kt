@@ -6,7 +6,7 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-fun Exception.mapToDomainErrorException(throwable: Throwable?): ErrorModel {
+fun Exception.mapErrorException(throwable: Throwable?): ErrorModel {
     val errorModel: ErrorModel? = when (throwable) {
 
         // handle api call timeout error
