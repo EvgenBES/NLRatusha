@@ -32,9 +32,8 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private val forpostPercent = ObservableField<String>("00%")
     private val octalPercent = ObservableField<String>("00%")
-
-    val urlFirst = ObservableField<String>()
-    val urlSecond = ObservableField<String>()
+    private val productForpost = ObservableField<String>()
+    private val productOctal = ObservableField<String>()
 
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
@@ -43,14 +42,9 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private val itemsOrederForpost: Observer<List<ItemOrder>> = Observer { list -> setProgressOrdersForpost(list) }
     private val itemsOrederOctal: Observer<List<ItemOrder>> = Observer { list -> setProgressOrdersOctal(list) }
 
-    @Inject
-    lateinit var getInfoTownHall: GetInfoTownHall
-
-    @Inject
-    lateinit var getItemForpost: GetItemForpostUseCase
-
-    @Inject
-    lateinit var getItemOctal: GetItemOctalUseCase
+    @Inject lateinit var getInfoTownHall: GetInfoTownHall
+    @Inject lateinit var getItemForpost: GetItemForpostUseCase
+    @Inject lateinit var getItemOctal: GetItemOctalUseCase
 
     fun getTimeProduct(): ObservableField<String> = timeProduct
 
@@ -78,6 +72,8 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     fun getTimeOrderOctal(): ObservableField<String> =  remainderTimeOrderOctal
     fun getForpostPercent(): ObservableField<String> = forpostPercent
     fun getOctalPercent(): ObservableField<String> = octalPercent
+    fun getProductForpost(): ObservableField<String> = productForpost
+    fun getProductOctal(): ObservableField<String> = productOctal
 
     /**
      * Get remainder time and get images product orders from database
@@ -86,8 +82,8 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
         if (list.size >= 2) {
             timeOrderForpostNoCast = list[0].finish
             timeOrderOctalNoCast = list[1].finish
-            urlFirst.set(list[0].url)
-            urlSecond.set(list[1].url)
+            productForpost.set(list[0].url)
+            productOctal.set(list[1].url)
         }
     }
 

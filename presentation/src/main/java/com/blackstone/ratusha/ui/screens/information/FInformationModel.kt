@@ -2,15 +2,17 @@ package com.blackstone.ratusha.ui.screens.information
 
 import android.util.Log
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.usecases.GetCategoryListUseCase
 import com.blackstone.domain.usecases.GetListItemCategoryUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.base.recycler.ItemClick
-import com.blackstone.ratusha.ui.adapter.RecyclerCategoryAdapter
+import com.blackstone.ratusha.ui.adapter.category.CategoryAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -19,48 +21,54 @@ import javax.inject.Inject
  */
 class FInformationModel : BaseViewModel<ControllerRouter>() {
 
-    val adapter = RecyclerCategoryAdapter()
+    val adapter = CategoryAdapter()
+
+    private val onClickAdapter: Observer<ItemClick<ItemCategory>> = Observer { onClickItem(it) }
 
     @Inject lateinit var getCategoryList: GetCategoryListUseCase
     @Inject lateinit var getListItemCategoryUseCase: GetListItemCategoryUseCase
 
-    private val onClickAdapter: Observer<ItemClick<ItemCategory>> = Observer { onClickItem(it) }
-    private val onStartDetail: Observer<ItemClick<ItemCategory>> = Observer { startFragment(it) }
-
     init {
         App.appComponent.runInject(this)
         getCategoryDao()
-        adapter.clickItemSubject.observeForever(onClickAdapter)
-        adapter.clickDetailItemInfo.observeForever(onStartDetail)
+        adapter.onClickItemSubject().observeForever(onClickAdapter)
     }
 
     override fun onCleared() {
-        adapter.clickItemSubject.removeObserver(onClickAdapter)
-        adapter.clickDetailItemInfo.removeObserver(onStartDetail)
+        adapter.onClickItemSubject().removeObserver(onClickAdapter)
         super.onCleared()
     }
 
     fun getCategoryDao() {
-        getCategoryList.execute {
-            onComplete {
-                adapter.setItems(it)
-                router?.activity?.changedStatusRecyclerFragment(false)
+        viewModelScope.launch {
+            getCategoryList.execute {
+                onComplete {
+                    adapter.setItems(it)
+                    router?.activity?.changedStatusRecyclerFragment(false)
+                }
+                onError { Log.d(TAG, "getCategoryDao message: ${it.message}") }
             }
-            onError { Log.d(TAG, "getCategoryDao message: ${it.message}") }
         }
     }
 
-    private fun onClickItem(item: ItemClick<ItemCategory>) {
-        getListItemCategoryUseCase.execute(item.item.id) {
-            onComplete {
-                adapter.setItems(it)
-                router?.activity?.changedStatusRecyclerFragment(true)
+    private fun onClickItem(itemClick: ItemClick<ItemCategory>) {
+        if (itemClick.item.image.contains("prof_")) getListItemsCategory(itemClick.item.id)
+        else startDetailItemFragment(itemClick)
+    }
+
+    private fun getListItemsCategory(id: Int) {
+        viewModelScope.launch {
+            getListItemCategoryUseCase.execute(id) {
+                onComplete {
+                    adapter.setItems(it)
+                    router?.activity?.changedStatusRecyclerFragment(true)
+                }
+                onError { Log.d(TAG, "onClickItem message: ${it.message}") }
             }
-            onError { Log.d(TAG, "onClickItem message: ${it.message}") }
         }
     }
 
-    private fun startFragment(item: ItemClick<ItemCategory>) {
-        router?.startFragmentTest(DetailItemFragment())
+    private fun startDetailItemFragment(itemClick: ItemClick<ItemCategory>) {
+        router?.startFragmentTest(DetailItemFragment.getInstance(itemClick.item.id))
     }
 }

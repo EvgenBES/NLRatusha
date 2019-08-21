@@ -6,13 +6,16 @@ import androidx.databinding.ObservableField
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.entity.ItemRecipeFull
+import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.usecases.*
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.adapter.RecyclerRecipeAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -74,14 +77,16 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun getAlchemyRecipe(id: Int) {
-        getRecipeAlchemyUseCase.execute(id) {
-            onComplete {
-                adapter.setItems(it)
-                setTotal(it)
-                if (it.isEmpty()) adapter.setItems(emptyItemRecipe)
-            }
-            onError {
-                Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
+        viewModelScope.launch {
+            getRecipeAlchemyUseCase.execute(id) {
+                onComplete {
+                    adapter.setItems(it)
+                    setTotal(it)
+                    if (it.isEmpty()) adapter.setItems(emptyItemRecipe.convertToLinkedList())
+                }
+                onError {
+                    Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
+                }
             }
         }
     }
@@ -92,7 +97,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                 adapter.setItems(it)
                 listItem = it as MutableList<ItemRecipeFull>
                 setTotal(it)
-                if (it.isEmpty()) adapter.setItems(emptyItemRecipe)
+                if (it.isEmpty()) adapter.setItems(emptyItemRecipe.convertToLinkedList())
                 itemNoAlchemy.set(true)
             }
             onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
@@ -162,7 +167,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                 returnList.add(ItemRecipeFull(it.id, it.image, it.name, it.price, it.number * result, it.type))
             }
 
-            adapter.setItems(returnList)
+            adapter.setItems(returnList.convertToLinkedList())
             if (returnList.isNotEmpty()) setTotal(returnList)
         }
     }

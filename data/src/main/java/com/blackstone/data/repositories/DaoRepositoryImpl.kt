@@ -3,7 +3,10 @@ package com.blackstone.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.blackstone.data.db.AppDataBase
-import com.blackstone.data.db.entity.*
+import com.blackstone.data.db.entity.transformToConfigApp
+import com.blackstone.data.db.entity.transformToFull
+import com.blackstone.data.db.entity.transformToItemCategory
+import com.blackstone.data.db.entity.transformToPresenter
 import com.blackstone.domain.entity.*
 import com.blackstone.domain.repositories.DaoRepository
 import javax.inject.Inject
@@ -24,7 +27,7 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
     }
 
     override fun getTownHall(id: Int): LiveData<TownHall> {
-        return Transformations.map(appDataBase.getTownHallDao().getTownHall(id)) { it.transformToPresenter() }
+        return appDataBase.getTownHallDao().getTownHall(id)
     }
 
     override fun getInfoTownHall(): LiveData<List<TownHall>> {

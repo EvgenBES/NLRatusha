@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.blackstone.data.db.entity.InfoTownHall
+import com.blackstone.domain.entity.TownHall
 
 /**
  * @author Evgeny Butov
@@ -28,6 +29,6 @@ interface TownHallDao {
     @Query("SELECT * FROM $TABLE_NAME")
     fun getAll(): LiveData<List<InfoTownHall>>
 
-    @Query("SELECT * FROM $TABLE_NAME WHERE idTown = :id LIMIT 1")
-    fun getTownHall(id: Int): LiveData<InfoTownHall>
+    @Query("SELECT idTown as id, *  FROM $TABLE_NAME WHERE idTown = :id LIMIT 1")
+    fun getTownHall(id: Int): LiveData<TownHall>
 }

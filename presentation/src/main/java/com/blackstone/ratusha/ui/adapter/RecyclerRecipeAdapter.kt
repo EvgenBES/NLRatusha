@@ -8,13 +8,14 @@ import com.blackstone.ratusha.R
 import com.blackstone.domain.entity.ItemRecipeFull
 import com.blackstone.ratusha.utils.twoCharAfterDot
 import kotlinx.android.synthetic.main.item_detailed_item.view.*
+import java.util.*
 
 
 /**
  * @author Evgeny Butov
  * @created 17.02.2019
  */
-class RecyclerRecipeAdapter(var itemList: MutableList<ItemRecipeFull> = mutableListOf()) : RecyclerView.Adapter<RecyclerRecipeAdapter.BaseViewHolder>() {
+class RecyclerRecipeAdapter(var itemList: LinkedList<ItemRecipeFull> = LinkedList()) : RecyclerView.Adapter<RecyclerRecipeAdapter.BaseViewHolder>() {
 
     override fun getItemCount(): Int = itemList.size
 
@@ -25,8 +26,8 @@ class RecyclerRecipeAdapter(var itemList: MutableList<ItemRecipeFull> = mutableL
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(LayoutInflater.from(parent.context)
             .inflate(R.layout.item_detailed_item, parent, false))
 
-    fun setItems(items: List<ItemRecipeFull>) {
-        this.itemList = items as MutableList<ItemRecipeFull>
+    fun setItems(items: LinkedList<ItemRecipeFull>) {
+        this.itemList = items
         notifyDataSetChanged()
     }
 

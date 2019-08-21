@@ -180,7 +180,7 @@
                                         android:id="@+id/product_item_forp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        app:first="@{viewModel.urlFirst}"/>
+                                        app:imageUrl="@{viewModel.productForpost}"/>
                             </LinearLayout>
 
 
@@ -332,7 +332,7 @@
                                         android:id="@+id/product_item_octal"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        app:second="@{viewModel.urlSecond}"/>
+                                        app:imageUrl="@{viewModel.productOctal}"/>
                             </LinearLayout>
 
 

@@ -5,6 +5,7 @@ import com.blackstone.domain.entity.ErrorStatus
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.*
 
 fun Exception.mapErrorException(throwable: Throwable?): ErrorModel {
     val errorModel: ErrorModel? = when (throwable) {
@@ -25,4 +26,10 @@ fun Exception.mapErrorException(throwable: Throwable?): ErrorModel {
         else -> null
     }
     return errorModel!!
+}
+
+fun <T>List<T>.convertToLinkedList(): LinkedList<T> {
+    val linkedList: LinkedList<T> = LinkedList<T>()
+    linkedList.addAll(this)
+    return linkedList
 }

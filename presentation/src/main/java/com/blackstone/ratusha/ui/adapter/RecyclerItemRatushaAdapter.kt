@@ -7,19 +7,25 @@ import android.view.ViewGroup
 import com.blackstone.domain.entity.ItemOrder
 import kotlinx.android.synthetic.main.item_order_recycler.view.*
 import android.text.Html
+import androidx.lifecycle.MutableLiveData
+import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.ratusha.R
+import com.blackstone.ratusha.ui.base.recycler.ItemClick
 import com.blackstone.ratusha.ui.widget.ExpandableCardView
 import com.blackstone.ratusha.utils.CalculationsUtils.calculatePercent
 import com.blackstone.ratusha.utils.CalculationsUtils.totalRemainderCardView
 import com.blackstone.ratusha.utils.CalculationsUtils.transformTotalSum
+import java.util.*
 
 
 /**
  * @author Evgeny Butov
  * @created 17.02.2019
  */
-class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<ItemOrder> = mutableListOf()) :
+class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: LinkedList<ItemOrder> = LinkedList()) :
     RecyclerView.Adapter<RecyclerItemRatushaAdapter.BaseViewHolder>() {
+
+    val clickItemSubject = MutableLiveData<ItemClick<ItemOrder>>()
 
     override fun getItemCount(): Int = itemList.size
 
@@ -32,8 +38,8 @@ class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<It
             .inflate(R.layout.item_order_recycler, parent, false))
 
 
-    fun setItems(items: List<ItemOrder>) {
-        this.itemList = items as MutableList<ItemOrder>
+    fun setItems(items: LinkedList<ItemOrder>) {
+        this.itemList = items
         notifyDataSetChanged()
     }
 
@@ -57,12 +63,12 @@ class RecyclerItemRatushaAdapter(val type: Int = 0, var itemList: MutableList<It
         fun onBind(position: Int) {
             val (id, itemName, urlImage, countStart, countFinish, price) = itemList[position]
             inflateData(itemName, urlImage, countStart, countFinish, price)
-            setItemClickListener(id)
+            setItemClickListener(itemList[position], position)
         }
 
-        private fun setItemClickListener(id: Int) {
+        private fun setItemClickListener(item: ItemOrder, position: Int) {
             itemView.setOnClickListener {
-              //  itemView.context.startActivity(DetailItemInfo.getInstance(itemView.context, id))
+                clickItemSubject.postValue(ItemClick(item, position))
             }
         }
 

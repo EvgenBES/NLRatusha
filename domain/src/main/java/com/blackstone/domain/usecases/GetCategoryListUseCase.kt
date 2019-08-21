@@ -1,7 +1,9 @@
 package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemCategory
+import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.repositories.DaoRepository
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -10,9 +12,9 @@ import javax.inject.Inject
  */
 class GetCategoryListUseCase
     @Inject constructor( private val daoRepository: DaoRepository)
-    : BaseUseCase<List<ItemCategory>>() {
+    : BaseUseCase<LinkedList<ItemCategory>>() {
 
-    override suspend fun executeOnBackground(): List<ItemCategory> {
-        return daoRepository.getCategoryList()
+    override suspend fun executeOnBackground(): LinkedList<ItemCategory> {
+        return daoRepository.getCategoryList().convertToLinkedList()
     }
 }
