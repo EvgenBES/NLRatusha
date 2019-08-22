@@ -9,6 +9,8 @@ object Const {
     const val FORPOST_ID = 1
     const val OCTAL_ID = 2
 
+    const val OCTAL = 1
+
     const val FORPOST_CLOSE = "FORPOST_CLOSE"
     const val OCTAL_CLOSE = "OCTAL_CLOSE"
     const val FORPOST_TP = "FORPOST_TP"

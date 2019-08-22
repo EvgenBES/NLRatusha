@@ -20,5 +20,4 @@ class GetConfigUseCase
         itemRepository.setConfig(params)
         return true
     }
-
 }

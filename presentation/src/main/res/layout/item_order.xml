@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewModel"
+                type="com.blackstone.ratusha.ui.adapter.items.ItemsViewModel" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <com.blackstone.ratusha.ui.widget.ExpandableCardView
+                android:id="@+id/exp_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:type="@{viewModel.type}"
+                app:title="@{viewModel.title}"
+                app:price="@{viewModel.price}"
+                app:total="@{viewModel.total}"
+                app:image="@{viewModel.image}"
+                app:progress="@{viewModel.progress}"
+                app:quantity="@{viewModel.quantity}"
+                app:remainder="@{viewModel.remainder}"
+                app:totalRemain="@{viewModel.totalRemain}"/>
+    </LinearLayout>
+
+</layout>

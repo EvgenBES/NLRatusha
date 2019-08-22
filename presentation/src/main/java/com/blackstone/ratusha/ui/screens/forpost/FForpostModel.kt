@@ -8,8 +8,8 @@ import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.ratusha.app.App
+import com.blackstone.ratusha.ui.adapter.items.ItemsAdapter
 import com.blackstone.ratusha.ui.base.BaseViewModel
-import com.blackstone.ratusha.ui.adapter.RecyclerItemRatushaAdapter
 import com.blackstone.ratusha.ui.base.recycler.ItemClick
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
@@ -26,12 +26,11 @@ import javax.inject.Inject
  */
 class FForpostModel : BaseViewModel<ControllerRouter>() {
 
-    val adapter = RecyclerItemRatushaAdapter()
+    val adapter = ItemsAdapter()
 
     private val progress = ObservableField<Int>()
     private val paid = ObservableField<String>("0 / 0")
     private val remainder = ObservableField<String>("Еще: 0")
-
     private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
 
@@ -46,14 +45,14 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
         App.appComponent.runInject(this)
         getItemForpost.getAllItemOrder().observeForever(itemsOrder)
         getInfoTownHall.getTownHall(FORPOST_ID).observeForever(fpTownHall)
-        adapter.clickItemSubject.observeForever(onClickAdapter)
+        adapter.onClickItemSubject().observeForever(onClickAdapter)
         startTimer()
     }
 
     override fun onCleared() {
         getItemForpost.getAllItemOrder().removeObserver(itemsOrder)
         getInfoTownHall.getTownHall(FORPOST_ID).removeObserver(fpTownHall)
-        adapter.clickItemSubject.removeObserver(onClickAdapter)
+        adapter.onClickItemSubject().removeObserver(onClickAdapter)
         super.onCleared()
     }
 

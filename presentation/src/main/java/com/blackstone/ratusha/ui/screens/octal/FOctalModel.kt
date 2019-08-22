@@ -2,22 +2,22 @@ package com.blackstone.ratusha.ui.screens.octal
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
-import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.entity.ItemOrder
+import com.blackstone.domain.entity.TownHall
+import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.usecases.GetInfoTownHall
 import com.blackstone.domain.usecases.GetItemOctalUseCase
 import com.blackstone.ratusha.app.App
+import com.blackstone.ratusha.ui.adapter.items.ItemsAdapter
 import com.blackstone.ratusha.ui.base.BaseViewModel
-import com.blackstone.ratusha.ui.adapter.RecyclerItemRatushaAdapter
+import com.blackstone.ratusha.ui.base.recycler.ItemClick
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
+import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
 import com.blackstone.ratusha.utils.CalculationsUtils
+import com.blackstone.ratusha.utils.Const
+import com.blackstone.ratusha.utils.Const.OCTAL
 import com.blackstone.ratusha.utils.DisplayUtils
 import com.blackstone.ratusha.utils.TimerUtils
-import com.blackstone.domain.entity.TownHall
-import com.blackstone.domain.extension.convertToLinkedList
-import com.blackstone.ratusha.ui.base.recycler.ItemClick
-import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
-import com.blackstone.ratusha.utils.Const
 import javax.inject.Inject
 
 /**
@@ -26,12 +26,11 @@ import javax.inject.Inject
  */
 class FOctalModel : BaseViewModel<ControllerRouter>() {
 
-    val adapter = RecyclerItemRatushaAdapter(type = 1)
+    val adapter = ItemsAdapter(type = OCTAL)
 
     private val progress = ObservableField<Int>()
     private val paid = ObservableField<String>("0 / 0")
     private val remainder = ObservableField<String>("Еще: 0")
-
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
 
@@ -46,14 +45,14 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
         App.appComponent.runInject(this)
         getItemOctal.getAllItemOrder().observeForever(itemsOrder)
         getInfoTownHall.getTownHall(Const.OCTAL_ID).observeForever(fpTownHall)
-        adapter.clickItemSubject.observeForever(onClickAdapter)
+        adapter.onClickItemSubject().observeForever(onClickAdapter)
         startTimer()
     }
 
     override fun onCleared() {
         getItemOctal.getAllItemOrder().observeForever(itemsOrder)
         getInfoTownHall.getTownHall(Const.OCTAL_ID).observeForever(fpTownHall)
-        adapter.clickItemSubject.observeForever(onClickAdapter)
+        adapter.onClickItemSubject().observeForever(onClickAdapter)
         super.onCleared()
     }
 
