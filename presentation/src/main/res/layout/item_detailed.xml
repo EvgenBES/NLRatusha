@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewModel"
+                type="com.blackstone.ratusha.ui.adapter.recipe.RecipeViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:background="@color/colorDarkText">
+
+        <ImageView
+                android:id="@+id/image_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:src="@{viewModel.image}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_res_406" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/item_name"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:maxLines="2"
+                android:textColor="@color/colorAccent"
+                android:text="@{viewModel.title}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/item_quantity"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/image_item"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Бронза зачарованного доспеха" />
+
+        <View
+                android:id="@+id/divider5"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/white12"
+                app:layout_constraintBottom_toTopOf="@+id/divider8"
+                app:layout_constraintEnd_toStartOf="@+id/item_quantity"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/item_quantity"
+                android:layout_width="68dp"
+                android:layout_height="0dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:text="@{viewModel.quantity}"
+                app:layout_constraintBottom_toTopOf="@+id/divider8"
+                app:layout_constraintEnd_toStartOf="@+id/item_price"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1.75"
+                tools:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/item_price"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:text="@{viewModel.price}"
+                app:layout_constraintBottom_toTopOf="@+id/divider8"
+                app:layout_constraintEnd_toStartOf="@+id/item_cost"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="39м"
+                tools:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/item_cost"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_regular"
+                android:paddingStart="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:text="@{viewModel.cost}"
+                app:layout_constraintBottom_toTopOf="@+id/divider8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="68.25"
+                tools:textSize="14sp" />
+
+        <View
+                android:id="@+id/divider8"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

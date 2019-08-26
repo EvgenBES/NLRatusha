@@ -12,7 +12,7 @@ import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.usecases.*
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
-import com.blackstone.ratusha.ui.adapter.RecyclerRecipeAdapter
+import com.blackstone.ratusha.ui.adapter.recipe.RecipeAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
 import kotlinx.coroutines.launch
@@ -40,8 +40,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     private var minusTime: Long = 0
     private var textVisibility: Boolean = false
 
-    val adapter = RecyclerRecipeAdapter()
-    private val emptyItemRecipe = listOf<ItemRecipeFull>(ItemRecipeFull(id = 0))
+    val adapter = RecipeAdapter()
 
     @Inject lateinit var getRecipeItemUseCase: GetRecipeItemUseCase
     @Inject lateinit var getRecipeAlchemyUseCase: GetRecipeAlchemyUseCase
@@ -82,7 +81,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                 onComplete {
                     adapter.setItems(it)
                     setTotal(it)
-                    if (it.isEmpty()) adapter.setItems(emptyItemRecipe.convertToLinkedList())
+                    if (it.isEmpty()) {} //todo show empty data
                 }
                 onError {
                     Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
@@ -97,7 +96,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                 adapter.setItems(it)
                 listItem = it as MutableList<ItemRecipeFull>
                 setTotal(it)
-                if (it.isEmpty()) adapter.setItems(emptyItemRecipe.convertToLinkedList())
+                if (it.isEmpty()) {} //todo show empty data
                 itemNoAlchemy.set(true)
             }
             onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
