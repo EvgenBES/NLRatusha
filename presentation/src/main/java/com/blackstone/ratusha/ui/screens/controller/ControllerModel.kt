@@ -1,14 +1,15 @@
 package com.blackstone.ratusha.ui.screens.controller
 
-import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.blackstone.data.extension.defaultSharedPreferences
+import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.usecases.UpdateForpostDataUseCase
 import com.blackstone.domain.usecases.UpdateOctalDataUseCase
 import com.blackstone.notif.NotificationR
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
-import java.util.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -22,38 +23,43 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     }
 
     var stateRecyclerFragment: Boolean = false
-    val stateData = MutableLiveData<Boolean>()
+    private val buttonRefresh = MutableLiveData<Boolean>()
+    private val progressBar = MutableLiveData<Boolean>()
 
-    @Inject
-    lateinit var updateOctalData: UpdateOctalDataUseCase
-
-    @Inject
-    lateinit var updateForpostData: UpdateForpostDataUseCase
-
-    @Inject
-    lateinit var notificationR: NotificationR
+    @Inject lateinit var updateOctalData: UpdateOctalDataUseCase
+    @Inject lateinit var updateForpostData: UpdateForpostDataUseCase
+    @Inject lateinit var notificationR: NotificationR
 
     init {
         App.appComponent.runInject(this)
         getOrderInformation()
     }
 
-    private fun getOrderInformation() {
-        updateOctalData.execute {
-            onComplete { stateData.value = it }
-            onError { stateData.value = false }
-        }
+    fun getButtonRefresh(): LiveData<Boolean> = buttonRefresh
+    fun getProgressBar(): LiveData<Boolean> = progressBar
 
-        updateForpostData.execute {
-            onComplete {
-                stateData.value = it
-                setTimeUpdateSharedPref(router?.activity, Date().time)
+    private fun getOrderInformation() {
+        viewModelScope.launch {
+            updateOctalData.execute { }
+
+            updateForpostData.execute {
+                onComplete {
+                    viewModelScope.launch {
+                        delay(1250)
+                        progressBar.value = false
+                    }
+                }
+                onError {
+                    buttonRefresh.value = false
+                    progressBar.value = false
+                }
             }
-            onError { stateData.value = false }
         }
     }
 
     fun refreshData() {
+        buttonRefresh.value = true
+        progressBar.value = true
         getOrderInformation()
     }
 
@@ -61,10 +67,4 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
         router?.openSettings()
     }
 
-    private fun setTimeUpdateSharedPref(context: Context?, time: Long) {
-        context?.let {
-            val sharedPref = context.defaultSharedPreferences
-            sharedPref.edit().putLong(UPDATE_TIME, time).apply()
-        }
-    }
 }

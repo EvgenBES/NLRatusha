@@ -4,9 +4,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.ActivityControllerBinding
+import com.blackstone.ratusha.ui.Screens
+import com.blackstone.ratusha.ui.Screens.FORPOST
+import com.blackstone.ratusha.ui.Screens.HOME
+import com.blackstone.ratusha.ui.Screens.INFO
+import com.blackstone.ratusha.ui.Screens.OCTAL
 import com.blackstone.ratusha.ui.base.BaseMvvmActivity
 import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
 import com.blackstone.ratusha.ui.screens.forpost.FForpost
@@ -24,7 +30,6 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
         return ViewModelProviders.of(this).get(ControllerModel::class.java)
     }
 
-    private var selectedFragment: Fragment = FMain()
     private var timerBackPressed: Long = 0L
 
     private val currentFragment: Fragment?
@@ -33,8 +38,7 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState == null) router.startFragment(FMain())
-
+        if (savedInstanceState == null)  selectTab(HOME)
         bottomNavigation()
     }
 
@@ -43,16 +47,47 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
         binding.navigation.setOnNavigationItemSelectedListener { item ->
             setBaseStyleNavigation()
             when (item.itemId) {
-                R.id.menu_btn_home -> selectedFragment = FMain()
-                R.id.menu_btn_fp -> selectedFragment = FForpost()
-                R.id.menu_btn_oct -> { selectedFragment = FOctal()
+                R.id.menu_btn_home -> selectTab(HOME)
+                R.id.menu_btn_fp -> selectTab(FORPOST)
+                R.id.menu_btn_oct -> { selectTab(OCTAL)
                     setYellowStyleNavigation()
                 }
-                R.id.menu_btn_info -> selectedFragment = FInformation()
+                R.id.menu_btn_info -> selectTab(INFO)
             }
-            router.startFragment(selectedFragment)
             return@setOnNavigationItemSelectedListener true
         }
+    }
+
+    private fun selectTab(tab: String) {
+        val fm = supportFragmentManager
+        var currentFragment: Fragment? = null
+        val fragments = fm.fragments
+
+        if (fragments != null) {
+            for (f: Fragment in fragments) {
+                if (f.isVisible) {
+                    currentFragment = f
+                    break
+                }
+            }
+        }
+
+        val newFragment: Fragment? = fm.findFragmentByTag(tab)
+        if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
+
+        val transaction: FragmentTransaction = fm.beginTransaction()
+        if (newFragment == null) {
+            transaction.add(R.id.mainFragment, Screens.tabScreen(tab), tab)
+        }
+
+        if (currentFragment != null) {
+            transaction.hide(currentFragment)
+        }
+
+        if (newFragment != null) {
+            transaction.show(newFragment)
+        }
+        transaction.commitNow()
     }
 
     private fun setBaseStyleNavigation() {

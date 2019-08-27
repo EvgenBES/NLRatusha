@@ -45,18 +45,30 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
     }
 
     private fun observeInput(controllerModel: ControllerModel) {
-        controllerModel.stateData.observe(this, Observer { status ->
+        controllerModel.getButtonRefresh().observe(this, Observer { status ->
             status?.let { if (status) hideButtonRefresh() else showButtonRefresh() }
+        })
+
+        controllerModel.getProgressBar().observe(this, Observer { status ->
+            status?.let { if (status) showProgressBar() else hideProgressBar()  }
         })
     }
 
 
-    fun hideButtonRefresh() {
+    private fun hideButtonRefresh() {
         binding.buttonRefresh.animate().alpha(0.0f).duration = 750
     }
 
-    fun showButtonRefresh() {
+    private fun showButtonRefresh() {
         binding.buttonRefresh.animate().alpha(1.0f).duration = 750
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.animate().alpha(0.0f).duration = 750
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.animate().alpha(1.0f).duration = 750
     }
 
     private fun setSwipeController() {

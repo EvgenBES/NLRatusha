@@ -377,6 +377,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_update_time"/>
 
+                <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/buttonRefresh"
+                        app:layout_constraintEnd_toEndOf="@+id/buttonRefresh"
+                        app:layout_constraintStart_toStartOf="@+id/buttonRefresh"
+                        app:layout_constraintTop_toTopOf="@+id/buttonRefresh" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
