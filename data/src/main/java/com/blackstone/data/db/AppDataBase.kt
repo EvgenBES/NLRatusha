@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.blackstone.data.db.converters.DateConverters
 import com.blackstone.data.db.dao.*
 import com.blackstone.data.db.entity.*
+import com.blackstone.data.db.entity.Meta
 
 @Database(
     entities = [
@@ -18,8 +21,11 @@ import com.blackstone.data.db.entity.*
         Resources::class,
         ItemToType::class,
         Type::class,
-        ConfigApp::class], version = 1
+        ConfigApp::class,
+        Meta::class
+    ], version = 1, exportSchema = false
 )
+@TypeConverters(value = [DateConverters::class])
 abstract class AppDataBase : RoomDatabase() {
 
     companion object {
@@ -44,4 +50,5 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun getItemsDao(): ItemsDao
     abstract fun getRecipeDao(): RecipeDao
     abstract fun getConfigDao():ConfigDao
+    abstract fun getMetaDao():MetaDao
 }

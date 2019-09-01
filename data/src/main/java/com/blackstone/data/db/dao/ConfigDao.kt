@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.blackstone.data.db.ConstDao.TABLE_CONFIG
 import com.blackstone.data.db.entity.ConfigApp
 import com.blackstone.domain.entity.Config
 
@@ -16,13 +17,9 @@ import com.blackstone.domain.entity.Config
 @Dao
 interface ConfigDao {
 
-    companion object {
-        const val TABLE_NAME = "config"
-    }
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(config: ConfigApp)
 
-    @Query("SELECT tpForpost, tpOctal, statusForpost, statusOctal  FROM $TABLE_NAME LIMIT 1")
+    @Query("SELECT tpForpost, tpOctal, statusForpost, statusOctal  FROM $TABLE_CONFIG LIMIT 1")
     fun getConfig(): LiveData<Config>
 }

@@ -20,15 +20,15 @@
                 android:id="@+id/exp_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:type="@{viewModel.type}"
-                app:title="@{viewModel.title}"
-                app:price="@{viewModel.price}"
-                app:total="@{viewModel.total}"
-                app:image="@{viewModel.image}"
-                app:progress="@{viewModel.progress}"
-                app:quantity="@{viewModel.quantity}"
-                app:remainder="@{viewModel.remainder}"
-                app:totalRemain="@{viewModel.totalRemain}"/>
+                type="@{viewModel.type}"
+                title="@{viewModel.title}"
+                price="@{viewModel.price}"
+                total="@{viewModel.total}"
+                image="@{viewModel.image}"
+                progress="@{viewModel.progress}"
+                quantity="@{viewModel.quantity}"
+                remainder="@{viewModel.remainder}"
+                totalRemain="@{viewModel.totalRemain}"/>
     </LinearLayout>
 
 </layout>

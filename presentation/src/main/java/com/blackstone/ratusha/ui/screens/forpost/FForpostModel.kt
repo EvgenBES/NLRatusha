@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.TownHall
 import com.blackstone.domain.extension.convertToLinkedList
-import com.blackstone.domain.usecases.GetInfoTownHall
+import com.blackstone.domain.usecases.GetInfoTownHallUseCase
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.adapter.items.ItemsAdapter
@@ -39,7 +39,7 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
     private val onClickAdapter: Observer<ItemClick<ItemOrder>> = Observer { onClickItem(it) }
 
     @Inject lateinit var getItemForpost: GetItemForpostUseCase
-    @Inject lateinit var getInfoTownHall: GetInfoTownHall
+    @Inject lateinit var getInfoTownHall: GetInfoTownHallUseCase
 
     init {
         App.appComponent.runInject(this)

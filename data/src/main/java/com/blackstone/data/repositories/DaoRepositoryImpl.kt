@@ -26,6 +26,10 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
         return appDataBase.getConfigDao().insert(config.transformToConfigApp())
     }
 
+    override fun getMeta(): LiveData<MetaInfo> {
+        return appDataBase.getMetaDao().getMeta()
+    }
+
     override fun getTownHall(id: Int): LiveData<TownHall> {
         return appDataBase.getTownHallDao().getTownHall(id)
     }

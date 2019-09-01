@@ -21,12 +21,12 @@ fun loadImage(view: ImageView, url: String?) {
             .into(view)
 }
 
-@BindingAdapter("app:src")
+@BindingAdapter("src")
 fun setImageResource(view: ImageView, resource: Int) {
     if (resource > 0) view.setImageResource(resource)
 }
 
-@BindingAdapter("app:src")
+@BindingAdapter("src")
 fun setImageResource(view: ImageView, image: String) {
     val imageRes = view.context?.resources?.getIdentifier("ic_$image", "drawable", view.context.packageName)
     imageRes?.let { if (it > 0) view.setImageResource(imageRes) }
@@ -34,7 +34,7 @@ fun setImageResource(view: ImageView, image: String) {
 }
 
 
-@BindingAdapter("app:progress")
+@BindingAdapter("progress")
 fun setLayoutHeight(view: View, width: Int) {
     val layoutParams = view.layoutParams
     layoutParams.width = width
@@ -56,43 +56,43 @@ fun setTextResource(view: TextView, resource: Int) {
 
 /** ExpandableCardView **/
 
-@BindingAdapter("app:title")
+@BindingAdapter("title")
 fun setTitleCardView(view: ExpandableCardView, title: String) {
     view.exp_cardview.cardTitle = title
 }
 
-@BindingAdapter("app:total")
+@BindingAdapter("total")
 fun setTotalCardView(view: ExpandableCardView, total: String) {
     view.exp_cardview.cardTotal = total
 }
 
-@BindingAdapter("app:image")
+@BindingAdapter("image")
 fun setImageCardView(view: ExpandableCardView, image: String) {
     val imageRes = view.context?.resources?.getIdentifier(image, "drawable", view.context.packageName)
     imageRes?.let { if (it > 0) view.exp_cardview.cardImage = imageRes }
 }
 
-@BindingAdapter("app:price")
+@BindingAdapter("price")
 fun setPriceCardView(view: ExpandableCardView, price: String) {
     view.exp_cardview.cardPrice = price
 }
 
-@BindingAdapter("app:progress")
+@BindingAdapter("progress")
 fun setProgressCardView(view: ExpandableCardView, progress: Int) {
     view.exp_cardview.cardProgress = progress
 }
 
-@BindingAdapter("app:quantity")
+@BindingAdapter("quantity")
 fun setQuantityCardView(view: ExpandableCardView, quantity: Spanned) {
     view.exp_cardview.cardQuantity = quantity
 }
 
-@BindingAdapter("app:remainder")
+@BindingAdapter("remainder")
 fun setRemainderCardView(view: ExpandableCardView, remainder: String) {
     view.exp_cardview.cardRemainder = remainder
 }
 
-@BindingAdapter("app:totalRemain")
+@BindingAdapter("totalRemain")
 fun setTotalRemainCardView(view: ExpandableCardView, totalRemain: String) {
     view.exp_cardview.cardTotalRemain = totalRemain
 }

@@ -2,8 +2,9 @@ package com.blackstone.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.blackstone.data.db.ConstDao.TABLE_FORPOST
 
-@Entity(tableName = "forpost")
+@Entity(tableName = TABLE_FORPOST)
 data class ItemForpost(
         @PrimaryKey (autoGenerate = true)
         val id: Int,

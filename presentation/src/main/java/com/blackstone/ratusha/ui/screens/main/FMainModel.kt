@@ -1,18 +1,18 @@
 package com.blackstone.ratusha.ui.screens.main
 
-import android.content.Context
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
-import com.blackstone.data.extension.defaultSharedPreferences
 import com.blackstone.domain.entity.ItemOrder
+import com.blackstone.domain.entity.MetaInfo
 import com.blackstone.domain.entity.TownHall
-import com.blackstone.domain.usecases.GetInfoTownHall
+import com.blackstone.domain.usecases.GetInfoTownHallUseCase
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.domain.usecases.GetItemOctalUseCase
+import com.blackstone.domain.usecases.GetMetadataUseCase
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
-import com.blackstone.ratusha.ui.screens.controller.ControllerModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils.countProgress
 import com.blackstone.ratusha.utils.TimerUtils
@@ -34,6 +34,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private val octalPercent = ObservableField<String>("00%")
     private val productForpost = ObservableField<String>()
     private val productOctal = ObservableField<String>()
+    private var updateOrder: Long = 0
 
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
     private var timeOrderOctalNoCast: String = TimerUtils.getDefTimerOrder()
@@ -41,10 +42,12 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     private val listTownHall: Observer<List<TownHall>> = Observer { list -> setTownHall(list) }
     private val itemsOrederForpost: Observer<List<ItemOrder>> = Observer { list -> setProgressOrdersForpost(list) }
     private val itemsOrederOctal: Observer<List<ItemOrder>> = Observer { list -> setProgressOrdersOctal(list) }
+    private val metaObserver: Observer<MetaInfo> = Observer { data -> updateTimeOrder(data?.updateDate?.time) }
 
-    @Inject lateinit var getInfoTownHall: GetInfoTownHall
+    @Inject lateinit var getInfoTownHall: GetInfoTownHallUseCase
     @Inject lateinit var getItemForpost: GetItemForpostUseCase
     @Inject lateinit var getItemOctal: GetItemOctalUseCase
+    @Inject lateinit var getMetadata: GetMetadataUseCase
 
     fun getTimeProduct(): ObservableField<String> = timeProduct
 
@@ -53,6 +56,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
         getInfoTownHall.get().observeForever(listTownHall)
         getItemForpost.getAllItemOrder().observeForever(itemsOrederForpost)
         getItemOctal.getAllItemOrder().observeForever(itemsOrederOctal)
+        getMetadata.get().observeForever(metaObserver)
         startTimer()
     }
 
@@ -60,11 +64,12 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
         getInfoTownHall.get().removeObserver(listTownHall)
         getItemForpost.getAllItemOrder().removeObserver(itemsOrederForpost)
         getItemOctal.getAllItemOrder().removeObserver(itemsOrederOctal)
+        getMetadata.get().removeObserver(metaObserver)
         super.onCleared()
     }
 
     override fun onResume() {
-        updateTime.set(getTimeUpdateSharedPref(router?.activity))
+       updateTimeOrder(updateOrder)
     }
 
     fun getUpdateTime(): ObservableField<String> = updateTime
@@ -105,18 +110,19 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
             remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast))
         }
 
-        TimerUtils.repeatAfter1Sec(6000L) {
-            updateTime.set(getTimeUpdateSharedPref(router?.activity))
+        TimerUtils.repeatAfter1Sec(60_000L) {
+           updateTimeOrder(updateOrder)
         }
     }
 
-    private fun getTimeUpdateSharedPref(context: Context?): String {
-        if (context == null) return ""
+    private fun updateTimeOrder(data: Long?) {
+        var time: Int = 60
+        data?.let {
+            updateOrder = it
+            time = TimerUtils.updateTime(data)
+        }
+        val timeString = if (time < 60) router?.activity?.getString(R.string.update_data_less60min, time) else router?.activity?.getString(R.string.update_data_more60min)
 
-        val sharedPref = context.defaultSharedPreferences
-        val result = sharedPref.getLong(ControllerModel.UPDATE_TIME, 0L)
-        val time = TimerUtils.updateTime(result)
-
-        return if (time < 60) context.getString(R.string.update_data_less60min, time) else context.getString(R.string.update_data_more60min)
+        updateTime.set(timeString ?: "")
     }
 }

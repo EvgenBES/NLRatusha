@@ -11,6 +11,8 @@ interface DaoRepository {
     fun getConfig(): LiveData<Config>
     fun setConfig(config: Config)
 
+    fun getMeta(): LiveData<MetaInfo>
+
     fun getTownHall(id: Int): LiveData<TownHall>
     fun getInfoTownHall(): LiveData<List<TownHall>>
 

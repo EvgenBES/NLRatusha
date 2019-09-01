@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.TownHall
 import com.blackstone.domain.extension.convertToLinkedList
-import com.blackstone.domain.usecases.GetInfoTownHall
+import com.blackstone.domain.usecases.GetInfoTownHallUseCase
 import com.blackstone.domain.usecases.GetItemOctalUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.adapter.items.ItemsAdapter
@@ -15,7 +15,7 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.ui.screens.detailed.DetailItemFragment
 import com.blackstone.ratusha.utils.CalculationsUtils
 import com.blackstone.ratusha.utils.Const
-import com.blackstone.ratusha.utils.Const.OCTAL
+import com.blackstone.ratusha.utils.Const.OCTAL_ADAPTER
 import com.blackstone.ratusha.utils.DisplayUtils
 import com.blackstone.ratusha.utils.TimerUtils
 import javax.inject.Inject
@@ -26,7 +26,7 @@ import javax.inject.Inject
  */
 class FOctalModel : BaseViewModel<ControllerRouter>() {
 
-    val adapter = ItemsAdapter(type = OCTAL)
+    val adapter = ItemsAdapter(type = OCTAL_ADAPTER)
 
     private val progress = ObservableField<Int>()
     private val paid = ObservableField<String>("0 / 0")
@@ -39,7 +39,7 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     private val onClickAdapter: Observer<ItemClick<ItemOrder>> = Observer { onClickItem(it) }
 
     @Inject lateinit var getItemOctal: GetItemOctalUseCase
-    @Inject lateinit var getInfoTownHall: GetInfoTownHall
+    @Inject lateinit var getInfoTownHall: GetInfoTownHallUseCase
 
     init {
         App.appComponent.runInject(this)

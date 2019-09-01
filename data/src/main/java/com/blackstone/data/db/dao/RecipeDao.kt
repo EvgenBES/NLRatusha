@@ -2,6 +2,7 @@ package com.blackstone.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.blackstone.data.db.ConstDao.TABLE_RECIPE
 import com.blackstone.domain.entity.ItemRecipe
 import com.blackstone.domain.entity.ItemRecipeFull
 
@@ -13,7 +14,7 @@ import com.blackstone.domain.entity.ItemRecipeFull
 @Dao
 interface RecipeDao {
 
-    @Query("SELECT resources.id, image, name, price, number FROM recipe INNER JOIN resources ON recipe.resource = resources.id WHERE recipe = :id")
+    @Query("SELECT resources.id, image, name, price, number FROM $TABLE_RECIPE INNER JOIN resources ON recipe.resource = resources.id WHERE recipe = :id")
     suspend fun getRecipe(id: Int): List<ItemRecipe>
 
     @Query("SELECT resources.id, image, resources.name, price, number, type.name as type FROM recipe " +

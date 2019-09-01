@@ -2,6 +2,7 @@ package com.blackstone.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.blackstone.data.db.ConstDao.TABLE_CATEGORY
 import com.blackstone.data.db.entity.Category
 
 /**
@@ -12,7 +13,7 @@ import com.blackstone.data.db.entity.Category
 @Dao
 interface CategoryDao {
 
-    @Query("SELECT * FROM category")
+    @Query("SELECT * FROM $TABLE_CATEGORY")
     suspend fun getAll(): List<Category>
 
 }
