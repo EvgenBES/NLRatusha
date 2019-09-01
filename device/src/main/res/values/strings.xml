@@ -1,2 +1,6 @@
 <resources>
+    <string name="notification_fp">Ратуша: Форпост</string>
+    <string name="notification_oc">Ратуша: Октал</string>
+    <string name="notification_tp">Телепорт на Остров Туротор!</string>
+    <string name="notification_close_order">Заказ завершен!</string>
 </resources>

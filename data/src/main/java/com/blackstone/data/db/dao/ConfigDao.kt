@@ -20,6 +20,6 @@ interface ConfigDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(config: ConfigApp)
 
-    @Query("SELECT tpForpost, tpOctal, statusForpost, statusOctal  FROM $TABLE_CONFIG LIMIT 1")
+    @Query("SELECT tpForpost, tpOctal, statusForpost, statusOctal FROM $TABLE_CONFIG")
     fun getConfig(): LiveData<Config>
 }

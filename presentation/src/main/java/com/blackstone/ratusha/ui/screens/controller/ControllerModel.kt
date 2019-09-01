@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.usecases.UpdateForpostDataUseCase
 import com.blackstone.domain.usecases.UpdateOctalDataUseCase
-import com.blackstone.notif.NotificationR
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import kotlinx.coroutines.delay
@@ -28,7 +27,6 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     @Inject lateinit var updateOctalData: UpdateOctalDataUseCase
     @Inject lateinit var updateForpostData: UpdateForpostDataUseCase
-    @Inject lateinit var notificationR: NotificationR
 
     init {
         App.appComponent.runInject(this)

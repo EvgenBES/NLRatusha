@@ -1,13 +1,16 @@
 package com.blackstone.ratusha.di.injection
 
 import android.content.Context
+import androidx.core.app.NotificationManagerCompat
 import com.blackstone.data.db.AppDataBase
 import com.blackstone.data.net.RestService
 import com.blackstone.data.repositories.DaoRepositoryImpl
 import com.blackstone.data.repositories.ServerRepositoryImpl
+import com.blackstone.device.notification.NotificationBuilder
+import com.blackstone.device.notification.Notifications
+import com.blackstone.device.notification.NotificationsImpl
 import com.blackstone.domain.repositories.DaoRepository
 import com.blackstone.domain.repositories.ServerRepository
-import com.blackstone.notif.NotificationR
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,20 +30,14 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideItemRepository(itemRepository: ServerRepositoryImpl): ServerRepository {
-        return itemRepository
+    fun provideItemRepository(serverRepositoryImpl: ServerRepositoryImpl): ServerRepository {
+        return serverRepositoryImpl
     }
 
     @Singleton
     @Provides
-    fun provideItemDaoRepository(itemDaoRepository: DaoRepositoryImpl): DaoRepository {
-        return itemDaoRepository
-    }
-
-    @Singleton
-    @Provides
-    fun provideNotificationR(appDataBase: AppDataBase, context: Context): NotificationR {
-        return NotificationR(appDataBase, context)
+    fun provideItemDaoRepository(daoRepositoryImpl: DaoRepositoryImpl): DaoRepository {
+        return daoRepositoryImpl
     }
 
     @Singleton

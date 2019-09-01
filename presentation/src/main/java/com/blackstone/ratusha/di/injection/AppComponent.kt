@@ -2,6 +2,7 @@ package com.blackstone.ratusha.di.injection
 
 
 import com.blackstone.ratusha.app.App
+import com.blackstone.ratusha.services.NotificationService
 import com.blackstone.ratusha.ui.screens.controller.ControllerModel
 import com.blackstone.ratusha.ui.screens.detailed.DetailItemViewModel
 import com.blackstone.ratusha.ui.screens.forpost.FForpostModel
@@ -15,7 +16,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class, AppModule::class, DataModule::class, FragmentModule::class])
+@Component(modules = [AndroidSupportInjectionModule::class, AppModule::class, DataModule::class, DeviceModule::class])
 interface AppComponent {
 
     @Component.Builder
@@ -27,6 +28,7 @@ interface AppComponent {
     }
 
     fun inject(app: App)
+    fun runInject(notificationService: NotificationService)
 
     fun runInject(controller: ControllerModel)
     fun runInject(detailItemViewModel: DetailItemViewModel)

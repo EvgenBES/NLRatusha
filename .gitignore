@@ -1,3 +1,9 @@
+#Key
+keyStore/*.*
+
+#Release
+presentation/release/*.*
+
 # Built application files
 *.apk
 *.ap_

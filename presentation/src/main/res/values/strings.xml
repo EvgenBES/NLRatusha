@@ -22,4 +22,11 @@
 
     <string name="update_data_less60min">Последнее обновление:\n%1$d мин. назад</string>
     <string name="update_data_more60min">Последнее обновление:\nболее часа назад</string>
+    <string name="notification_settings">Настройки уведомлений</string>
+    <string name="notification_tp_forpost">Телепорт в Форпосте</string>
+    <string name="notification_tp_octal">Телепорт в Октале</string>
+    <string name="notification_close_forpost">Закрытие Форпоста</string>
+    <string name="notification_close_octal">Закрытие Октала</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
 </resources>

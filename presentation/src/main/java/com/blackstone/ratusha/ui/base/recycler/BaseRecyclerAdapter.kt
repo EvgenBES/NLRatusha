@@ -34,7 +34,7 @@ abstract class BaseRecyclerAdapter<Entity, VM : BaseItemViewModel<Entity>>
     }
 
     fun setItems(items: LinkedList<Entity>) {
-        this.itemList = items as LinkedList<Entity>
+        this.itemList = items
         notifyDataSetChanged()
     }
 

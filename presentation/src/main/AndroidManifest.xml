@@ -32,7 +32,7 @@
                 android:value="false" />
 
         <service
-                android:name=".notif.NotificationMessagingService"
+                android:name=".services.NotificationService"
                 android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

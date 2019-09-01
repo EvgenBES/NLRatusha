@@ -14,14 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
         <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Настройки уведомлений"
+                android:text="@string/notification_settings"
                 android:textColor="@color/card_view_text_blue"
                 android:textSize="18sp"
                 android:fontFamily="@font/roboto_medium"
@@ -49,7 +48,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
             <Switch
-                    android:text="Телепорт в Форпосте"
+                    android:text="@string/notification_tp_forpost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -59,7 +58,7 @@
                     android:fontFamily="@font/roboto_regular"/>
 
             <Switch
-                    android:text="Телепорт в Октале"
+                    android:text="@string/notification_tp_octal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -69,7 +68,7 @@
                     android:fontFamily="@font/roboto_regular"/>
 
             <Switch
-                    android:text="Закрытие Форпоста"
+                    android:text="@string/notification_close_forpost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -79,7 +78,7 @@
                     android:fontFamily="@font/roboto_regular"/>
 
             <Switch
-                    android:text="Закрытие Октала"
+                    android:text="@string/notification_close_octal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -118,7 +117,7 @@
                     android:gravity="center"
                     android:textColor="@color/card_view_text_blue"
                     android:onClick="@{()-> viewModel.onClickBack()}"
-                    android:text="Отмена"
+                    android:text="@string/cancel"
                     tools:text="BACK"/>
 
             <LinearLayout
@@ -135,7 +134,7 @@
                     android:gravity="center"
                     android:onClick="@{() -> viewModel.onClickSave()}"
                     android:textColor="@color/card_view_text_blue"
-                    android:text="Сохранить"
+                    android:text="@string/save"
                     tools:text="SAVE"/>
 
         </LinearLayout>

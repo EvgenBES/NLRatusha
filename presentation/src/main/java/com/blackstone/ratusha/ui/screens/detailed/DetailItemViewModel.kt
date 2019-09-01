@@ -94,7 +94,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
         getRecipeItemUseCase.execute(id) {
             onComplete {
                 adapter.setItems(it)
-                listItem = it as MutableList<ItemRecipeFull>
+                listItem = it
                 setTotal(it)
                 if (it.isEmpty()) {} //todo show empty data
                 itemNoAlchemy.set(true)
