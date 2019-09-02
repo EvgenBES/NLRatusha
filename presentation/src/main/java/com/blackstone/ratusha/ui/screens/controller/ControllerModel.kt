@@ -7,6 +7,7 @@ import com.blackstone.domain.usecases.UpdateForpostDataUseCase
 import com.blackstone.domain.usecases.UpdateOctalDataUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
+import com.blackstone.ratusha.utils.TimerUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,10 +17,6 @@ import javax.inject.Inject
  * @created 13.04.2019
  */
 class ControllerModel : BaseViewModel<ControllerRouter>() {
-
-    companion object {
-        const val UPDATE_TIME = "updateTime"
-    }
 
     var stateRecyclerFragment: Boolean = false
     private val buttonRefresh = MutableLiveData<Boolean>()
@@ -31,6 +28,7 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
     init {
         App.appComponent.runInject(this)
         getOrderInformation()
+        startTimer()
     }
 
     fun getButtonRefresh(): LiveData<Boolean> = buttonRefresh
@@ -63,6 +61,12 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     fun openSettings() {
         router?.openSettings()
+    }
+
+    private fun startTimer() {
+        TimerUtils.repeatAfter1Sec(300_000L) {
+            getOrderInformation()
+        }
     }
 
 }
