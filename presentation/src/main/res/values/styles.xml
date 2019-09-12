@@ -14,7 +14,7 @@
 
     <style name="ForpostHeader">
         <item name="android:textColor">@color/fp_accent</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/defused</item>
     </style>

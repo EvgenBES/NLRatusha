@@ -3,7 +3,7 @@
     <string name="app_name">NeverLandsR</string>
     <string name="exit_app">Нажми еще раз чтобы выйти</string>
 
-    <string name="castle_name_forp">FORP</string>
+    <string name="castle_name_forp">FORPOST</string>
     <string name="castle_name_octal">OCTAL</string>
     <string name="order_progress">00%</string>
     <string name="main_activity_product_header">Товар:</string>

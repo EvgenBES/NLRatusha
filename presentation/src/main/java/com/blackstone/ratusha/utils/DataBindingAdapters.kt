@@ -1,7 +1,6 @@
 package com.blackstone.ratusha.utils
 
 import android.text.Spanned
-import android.util.Log
 import androidx.databinding.BindingAdapter
 import android.view.View
 import android.widget.ImageView
@@ -9,7 +8,6 @@ import android.widget.TextView
 import com.blackstone.ratusha.ui.widget.ExpandableCardView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_order.view.*
-import kotlinx.android.synthetic.main.view_expandable_card.view.*
 
 
 @BindingAdapter("imageUrl")
@@ -27,15 +25,14 @@ fun setImageResource(view: ImageView, resource: Int) {
 }
 
 @BindingAdapter("src")
-fun setImageResource(view: ImageView, image: String) {
+fun setImageResource(view: ImageView, image: String?) {
     val imageRes = view.context?.resources?.getIdentifier("ic_$image", "drawable", view.context.packageName)
     imageRes?.let { if (it > 0) view.setImageResource(imageRes) }
-
 }
 
 
 @BindingAdapter("progress")
-fun setLayoutHeight(view: View, width: Int) {
+fun setLayoutWidth(view: View, width: Int) {
     val layoutParams = view.layoutParams
     layoutParams.width = width
     view.layoutParams = layoutParams

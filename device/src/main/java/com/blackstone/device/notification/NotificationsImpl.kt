@@ -17,7 +17,7 @@ class NotificationsImpl @Inject constructor(
 ): Notifications {
 
     private var configApp: Config = Config()
-    private val configObserver: Observer<Config> = Observer { configApp = it }
+    private val configObserver: Observer<Config> = Observer { it?.let { configApp = it } }
 
     init {
         daoRepository.getConfig().observeForever(configObserver)

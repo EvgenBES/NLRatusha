@@ -1,7 +1,7 @@
 package com.blackstone.ratusha.ui.screens.main
 
-import android.util.Log
 import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.MetaInfo
@@ -15,6 +15,7 @@ import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils.countProgress
+import com.blackstone.ratusha.utils.DisplayUtils.getDensityDouble
 import com.blackstone.ratusha.utils.TimerUtils
 import javax.inject.Inject
 
@@ -26,14 +27,16 @@ import javax.inject.Inject
 
 class FMainModel : BaseViewModel<ControllerRouter>() {
 
-    private val timeProduct = ObservableField<String>("02:00:00")
+    private val productTime = ObservableField<String>("02:00:00")
     private val updateTime = ObservableField<String>()
     private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
     private val forpostPercent = ObservableField<String>("00%")
     private val octalPercent = ObservableField<String>("00%")
-    private val productForpost = ObservableField<String>()
-    private val productOctal = ObservableField<String>()
+    private val productForpost: ObservableField<String> = ObservableField<String>()
+    private val productOctal: ObservableField<String> = ObservableField<String>()
+    private val progressForpost: ObservableInt = ObservableInt()
+    private val progressOctal: ObservableInt = ObservableInt()
     private var updateOrder: Long = 0
 
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
@@ -49,21 +52,19 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     @Inject lateinit var getItemOctal: GetItemOctalUseCase
     @Inject lateinit var getMetadata: GetMetadataUseCase
 
-    fun getTimeProduct(): ObservableField<String> = timeProduct
-
     init {
         App.appComponent.runInject(this)
-        getInfoTownHall.get().observeForever(listTownHall)
         getItemForpost.getAllItemOrder().observeForever(itemsOrederForpost)
         getItemOctal.getAllItemOrder().observeForever(itemsOrederOctal)
+        getInfoTownHall.get().observeForever(listTownHall)
         getMetadata.get().observeForever(metaObserver)
         startTimer()
     }
 
     override fun onCleared() {
-        getInfoTownHall.get().removeObserver(listTownHall)
         getItemForpost.getAllItemOrder().removeObserver(itemsOrederForpost)
         getItemOctal.getAllItemOrder().removeObserver(itemsOrederOctal)
+        getInfoTownHall.get().removeObserver(listTownHall)
         getMetadata.get().removeObserver(metaObserver)
         super.onCleared()
     }
@@ -79,6 +80,9 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     fun getOctalPercent(): ObservableField<String> = octalPercent
     fun getProductForpost(): ObservableField<String> = productForpost
     fun getProductOctal(): ObservableField<String> = productOctal
+    fun getProductTime(): ObservableField<String> = productTime
+    fun getProgressForpost(): ObservableInt = progressForpost
+    fun getProgressOctal(): ObservableInt = progressOctal
 
     /**
      * Get remainder time and get images product orders from database
@@ -87,8 +91,8 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
         if (list.size >= 2) {
             timeOrderForpostNoCast = list[0].finish
             timeOrderOctalNoCast = list[1].finish
-            productForpost.set(list[0].url)
-            productOctal.set(list[1].url)
+            productForpost.set(list[0].url.replace(".gif", ""))
+            productOctal.set(list[1].url.replace(".gif", ""))
         }
     }
 
@@ -96,16 +100,28 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
      * Get all items forpost and octal from database
      */
     private fun setProgressOrdersForpost(list: List<ItemOrder>) {
-        forpostPercent.set("${countProgress(list)}%")
+        val forProgress = countProgress(list)
+        forpostPercent.set("${forProgress}%")
+
+        router?.activity?.let {
+            val progressInt = (Integer.valueOf(forProgress) * 1.45 * getDensityDouble(it.applicationContext)).toInt()
+            progressForpost.set(progressInt)
+        }
     }
 
     private fun setProgressOrdersOctal(list: List<ItemOrder>) {
-        octalPercent.set("${countProgress(list)}%")
+        val octProgress = countProgress(list)
+        octalPercent.set("${octProgress}%")
+
+        router?.activity?.let {
+            val progressInt = (Integer.valueOf(octProgress) * 1.45 * getDensityDouble(it.applicationContext)).toInt()
+            progressOctal.set(progressInt)
+        }
     }
 
     private fun startTimer() {
         TimerUtils.repeatAfter1Sec {
-            timeProduct.set(TimerUtils.timerProduct())
+            productTime.set(TimerUtils.timerProduct())
             remainderTimeOrderForpost.set(TimerUtils.timeMap(timeOrderForpostNoCast))
             remainderTimeOrderOctal.set(TimerUtils.timeMap(timeOrderOctalNoCast))
         }

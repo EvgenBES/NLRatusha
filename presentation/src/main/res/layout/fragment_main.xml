@@ -50,318 +50,277 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
 
-                <LinearLayout
-                        android:id="@+id/firstCastle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="8dp"
+                <ImageView
+                        android:id="@+id/imgForpost"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="3dp"
+                        android:background="@drawable/bottom_shadow"
+                        android:scaleType="fitXY"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/borderBottom">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/constraintLayout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/border_fp_item"
-                                android:padding="2dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="0dp"
-                                    android:background="@drawable/castle"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/bg_forp" />
 
 
-                            <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="0dp"
-                                    android:background="@drawable/border_radius_left"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="4dp"
+                        android:src="@drawable/logo_fp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
+                        app:layout_constraintStart_toStartOf="@+id/imgForpost"
+                        app:layout_constraintTop_toTopOf="@+id/imgForpost" />
 
-
-                            <LinearLayout
-                                    android:id="@+id/linearLayout2"
-                                    android:layout_width="155dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="6dp"
-                                    android:layout_marginTop="12dp"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintEnd_toStartOf="@+id/layoutProgress"
-                                    app:layout_constraintHorizontal_bias="0.0"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                <TextView
-                                        style="@style/ForpostHeader"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/castle_name_forp"/>
-
-                                <TextView
-                                        android:id="@+id/time_order_forp"
-                                        style="@style/ForpostTime"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="-10dp"
-                                        tools:text="@string/order_timer"
-                                        android:text="@{viewModel.getTimeOrderForpost}"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                    android:id="@+id/layoutProgress"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/ring_blue"
-                                    android:orientation="vertical"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-
-                                <TextView
-                                        android:id="@+id/progress_order_forp"
-                                        style="@style/ForpostProgress"
-                                        android:layout_width="85dp"
-                                        android:layout_height="85dp"
-                                        android:layout_gravity="center"
-                                        android:gravity="center"
-                                        android:paddingTop="5dp"
-                                        android:text="@{viewModel.getForpostPercent}"/>
-                            </LinearLayout>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                        <LinearLayout
-                                android:id="@+id/linearLayout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:background="@drawable/border_radius_right"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="2dp"
-                                android:paddingStart="3dp"
-                                android:paddingEnd="6dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                    style="@style/ProductStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/main_activity_product_header"/>
-
-                            <LinearLayout
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:gravity="center">
-
-                                <ImageView
-                                        android:id="@+id/product_item_forp"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        app:imageUrl="@{viewModel.productForpost}"/>
-                            </LinearLayout>
-
-
-                            <TextView
-                                    android:id="@+id/product_time_forp"
-                                    style="@style/ProductStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    tools:text="2:00:00"
-                                    android:text="@{viewModel.getTimeProduct}"/>
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                        android:id="@+id/secondCastle"
+                <TextView
+                        android:id="@+id/textView"
+                        style="@style/ForpostHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/castle_name_forp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imgForpost" />
+
+                <TextView
+                        android:id="@+id/textView3"
+                        style="@style/ForpostTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@{viewModel.timeOrderForpost}"
+                        android:textColor="#acbfce"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView"
+                        app:layout_constraintStart_toStartOf="@+id/textView"
+                        app:layout_constraintTop_toTopOf="@+id/imgForpost"
+                        tools:text="@string/order_timer" />
+
+                <View
+                        android:id="@+id/progress_order_fp"
+                        android:layout_width="147dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/progress_forpost"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                        android:id="@+id/progress_active_order_fp"
+                        android:layout_width="25dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        progress="@{viewModel.progressForpost}"
+                        android:background="@drawable/progress_active_forpost"
+                        app:layout_constraintBottom_toBottomOf="@+id/progress_order_fp"
+                        app:layout_constraintStart_toStartOf="@+id/progress_order_fp"
+                        app:layout_constraintTop_toTopOf="@+id/progress_order_fp" />
+
+                <TextView
+                        android:id="@+id/tv_card_total_forpost"
+                        style="@style/TextHeaderProgressOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="14dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@{viewModel.forpostPercent}"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/progress_order_fp"
+                        app:layout_constraintEnd_toEndOf="@+id/progress_order_fp"
+                        app:layout_constraintStart_toStartOf="@+id/progress_order_fp" />
+
+
+                <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/border_product_fp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
+                        app:layout_constraintEnd_toEndOf="@+id/imgForpost"
+                        app:layout_constraintTop_toTopOf="@+id/imgForpost" />
+
+
+                <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                        app:layout_constraintStart_toStartOf="@+id/imageView3"
+                        app:layout_constraintTop_toTopOf="@+id/imageView3"
+                        android:src="@drawable/ic_iw_empty"
+                        src="@{viewModel.productForpost}"
+                        tools:src="@drawable/ic_w18_okta" />
+
+                <TextView
+                        style="@style/ForpostTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="@{viewModel.productTime}"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                        app:layout_constraintStart_toStartOf="@+id/imageView7"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+
+                <ImageView
+                        android:id="@+id/imgOctal"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="3dp"
+                        android:background="@drawable/bottom_shadow"
+                        android:scaleType="fitXY"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/firstCastle">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/constraintLayout4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/border_oct_item"
-                                android:padding="2dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="0dp"
-                                    android:background="@drawable/castle"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@+id/imgForpost"
+                        tools:background="@drawable/bg_octal" />
 
 
-                            <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="0dp"
-                                    android:background="@drawable/border_radius_left"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginBottom="4dp"
+                        android:src="@drawable/logo_octal"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
+                        app:layout_constraintStart_toStartOf="@+id/imgOctal"
+                        app:layout_constraintTop_toTopOf="@+id/imgOctal" />
 
 
-                            <LinearLayout
-                                    android:id="@+id/linearLayout5"
-                                    android:layout_width="155dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="6dp"
-                                    android:layout_marginTop="12dp"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintEnd_toStartOf="@+id/layoutProgressOct"
-                                    app:layout_constraintHorizontal_bias="0.0"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                <TextView
-                                        style="@style/OctalHeader"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/castle_name_octal"/>
-
-                                <TextView
-                                        android:id="@+id/time_order_octal"
-                                        style="@style/OctalTime"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="-10dp"
-                                        tools:text="@string/order_timer"
-                                        android:text="@{viewModel.getTimeOrderOctal}"/>
-
-                            </LinearLayout>
+                <TextView
+                        android:id="@+id/textView2"
+                        style="@style/OctalHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/castle_name_octal"
+                        android:textScaleX="1.15"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="@+id/imgOctal" />
 
 
-                            <LinearLayout
-                                    android:id="@+id/layoutProgressOct"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/ring_orange"
-                                    android:orientation="vertical"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                        android:id="@+id/textView5"
+                        style="@style/OctalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@{viewModel.timeOrderOctal}"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView2"
+                        app:layout_constraintStart_toStartOf="@+id/textView2"
+                        app:layout_constraintTop_toTopOf="@+id/imgOctal"
+                        tools:text="@string/order_timer" />
 
 
-                                <TextView
+                <View
+                        android:id="@+id/progress_order_oct"
+                        android:layout_width="147dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/progress_octal"
+                        android:maxWidth="180dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                                        android:id="@+id/progress_order_octal"
-                                        style="@style/OctalProgress"
-                                        android:layout_width="85dp"
-                                        android:layout_height="85dp"
-                                        android:layout_gravity="center"
-                                        android:gravity="center"
-                                        android:paddingTop="5dp"
-                                        android:text="@{viewModel.getOctalPercent}"/>
-                            </LinearLayout>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                        <LinearLayout
-                                android:id="@+id/linearLayout6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:background="@drawable/border_radius_right"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="2dp"
-                                android:paddingStart="3dp"
-                                android:paddingEnd="6dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                    style="@style/ProductStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/main_activity_product_header"/>
-
-                            <LinearLayout
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:gravity="center">
-
-                                <ImageView
-                                        android:id="@+id/product_item_octal"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        app:imageUrl="@{viewModel.productOctal}"/>
-                            </LinearLayout>
+                <View
+                        android:id="@+id/progress_active_order_oct"
+                        android:layout_width="25dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        progress="@{viewModel.progressOctal}"
+                        android:background="@drawable/progress_active_octal"
+                        app:layout_constraintBottom_toBottomOf="@+id/progress_order_oct"
+                        app:layout_constraintStart_toStartOf="@+id/progress_order_oct"
+                        app:layout_constraintTop_toTopOf="@+id/progress_order_oct" />
 
 
-                            <TextView
-                                    android:id="@+id/product_time_octal"
-                                    style="@style/ProductStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    tools:text="2:00:00"
-                                    android:text="@{viewModel.getTimeProduct}"/>
-                        </LinearLayout>
+                <TextView
+                        android:id="@+id/tv_card_total_octal"
+                        style="@style/TextHeaderProgressOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="14dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@{viewModel.octalPercent}"
+                        android:textColor="#8b7e7a"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/progress_order_oct"
+                        app:layout_constraintEnd_toEndOf="@+id/progress_order_oct"
+                        app:layout_constraintStart_toStartOf="@+id/progress_active_order_oct"
+                        app:layout_constraintTop_toTopOf="@+id/progress_order_oct" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </LinearLayout>
+                <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/border_product_oct"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
+                        app:layout_constraintEnd_toEndOf="@+id/imgOctal"
+                        app:layout_constraintTop_toTopOf="@+id/imgOctal" />
+
+
+                <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                        app:layout_constraintStart_toStartOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="@+id/imageView5"
+                        android:src="@drawable/ic_iw_empty"
+                        src="@{viewModel.productOctal}"
+                        tools:src="@drawable/ic_i_w28_33" />
+
+                <TextView
+                        style="@style/OctalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="@{viewModel.productTime}"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
                 <TextView
                         android:id="@+id/tv_update_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:textColor="@color/card_view_text_blue"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="@font/roboto_regular"
-                        android:textSize="14sp"
+                        android:text="@{viewModel.updateTime}"
                         android:textAlignment="center"
-                        android:text="@{viewModel.getUpdateTime}"
-                        app:layout_constraintTop_toBottomOf="@+id/secondCastle"
+                        android:textColor="@color/card_view_text_blue"
+                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgOctal" />
 
                 <Button
                         android:id="@+id/buttonRefresh"

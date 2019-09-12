@@ -1,15 +1,16 @@
 package com.blackstone.ratusha.ui.screens.main
 
+import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.NotificationManagerCompat
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.BaseMvvmFragment
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.databinding.FragmentMainBinding
 import com.blackstone.ratusha.ui.screens.controller.ControllerModel
+import com.blackstone.ratusha.utils.BitmapHelper
 
 /**
  * @author Evgeny Butov
@@ -32,6 +33,7 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
         onSwipeRefreshListener = activity as OnRefreshInfoListener
 
+        initImage(context)
         setSwipeController()
         initClick()
 
@@ -41,6 +43,13 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
         activity?.let {
             val sharedViewModel = ViewModelProviders.of(it).get(ControllerModel::class.java)
             observeInput(sharedViewModel)
+        }
+    }
+
+    private fun initImage(context: Context?){
+        context?.let {
+           binding.imgForpost.setImageBitmap(BitmapHelper.setCornersRadius(it, R.drawable.bg_forp))
+           binding.imgOctal.setImageBitmap(BitmapHelper.setCornersRadius(it, R.drawable.bg_octal))
         }
     }
 
@@ -80,16 +89,15 @@ class FMain : BaseMvvmFragment<FMainModel, ControllerRouter, FragmentMainBinding
 
     private fun initClick() {
         binding.buttonRefresh.setOnClickListener(this)
-        binding.firstCastle.setOnClickListener(this)
-        binding.secondCastle.setOnClickListener(this)
+        binding.imgForpost.setOnClickListener(this)
+        binding.imgOctal.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v) {
             binding.buttonRefresh -> router?.refreshInformation()
-            binding.firstCastle -> onSwipeRefreshListener.onClickForpost()
-            binding.secondCastle -> onSwipeRefreshListener.onClickOctal()
+            binding.imgForpost -> onSwipeRefreshListener.onClickForpost()
+            binding.imgOctal -> onSwipeRefreshListener.onClickOctal()
         }
     }
-
 }

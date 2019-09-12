@@ -46,6 +46,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:text="@string/fragment_octal_title"
+                        android:textScaleX="1.15"
                         android:textSize="30sp"/>
 
                 <TextView
