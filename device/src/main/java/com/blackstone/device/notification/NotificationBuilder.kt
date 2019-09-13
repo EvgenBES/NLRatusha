@@ -2,6 +2,8 @@ package com.blackstone.device.notification
 
 import android.app.Notification
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
@@ -31,7 +33,7 @@ class NotificationBuilder
 
     private fun createForpostCloseNotification(): Notification{
         return build(NOTIFICATION_ID_FORPOST_CLOSE,
-            R.drawable.ic_notif_banner_fp,
+            createBitmapIcon(R.drawable.ic_notif_banner_fp),
             context.getString(R.string.notification_fp),
             context.getString(R.string.notification_close_order))
     }
@@ -39,7 +41,7 @@ class NotificationBuilder
     private fun createOctalCloseNotification(): Notification{
         return build(
             NOTIFICATION_ID_OCTAL_CLOSE,
-            R.drawable.ic_notif_banner_oc,
+            createBitmapIcon(R.drawable.ic_notif_banner_oc),
             context.getString(R.string.notification_oc),
             context.getString(R.string.notification_close_order))
     }
@@ -47,7 +49,7 @@ class NotificationBuilder
     private fun createForpostTeleportNotification(): Notification{
         return build(
             NOTIFICATION_ID_FORPOST_TP,
-            R.drawable.ic_notif_scroll,
+            createBitmapIcon(R.drawable.ic_notif_scroll),
             context.getString(R.string.notification_fp),
             context.getString(R.string.notification_tp))
     }
@@ -55,20 +57,23 @@ class NotificationBuilder
     private fun createOctalTeleportNotification(): Notification{
         return build(
             NOTIFICATION_ID_OCTAL_TP,
-            R.drawable.ic_notif_banner_oc,
+            createBitmapIcon(R.drawable.ic_notif_banner_oc),
             context.getString(R.string.notification_oc),
             context.getString(R.string.notification_tp))
     }
 
-    private fun build(id: Int, icon: Int, title: String, description: String): Notification {
+    private fun build(id: Int, largeIcon: Bitmap, title: String, description: String)
+            : Notification {
+
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val vibrate = longArrayOf(0, 300, 200)
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
 
         return notificationBuilder
-            .setSmallIcon(icon)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
             .setContentText(description)
+            .setLargeIcon(largeIcon)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .setLights(Color.BLUE, 500,500)
@@ -76,5 +81,9 @@ class NotificationBuilder
             .setSound(alarmSound)
             .setAutoCancel(true)
             .build()
+    }
+
+    private fun createBitmapIcon(icon: Int): Bitmap {
+        return BitmapFactory.decodeResource(context.resources, icon)
     }
 }
