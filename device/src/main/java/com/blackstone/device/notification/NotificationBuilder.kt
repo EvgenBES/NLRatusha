@@ -1,6 +1,7 @@
 package com.blackstone.device.notification
 
 import android.app.Notification
+import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,13 +15,17 @@ import com.blackstone.device.notification.Const.NOTIFICATION_ID_FORPOST_TP
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_OCTAL_CLOSE
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_OCTAL_TP
 import javax.inject.Inject
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.content.Intent
+
 
 /**
  * @author Evgeny Butov
  * @created 01.09.2019
  */
 class NotificationBuilder
-@Inject constructor(private val context: Context) {
+@Inject constructor(private val context: Context,
+                    private val intentActivity: Intent) {
 
     fun builder(notificationId: Int): Notification {
         return when (notificationId) {
@@ -57,7 +62,7 @@ class NotificationBuilder
     private fun createOctalTeleportNotification(): Notification{
         return build(
             NOTIFICATION_ID_OCTAL_TP,
-            createBitmapIcon(R.drawable.ic_notif_banner_oc),
+            createBitmapIcon(R.drawable.ic_notif_scroll),
             context.getString(R.string.notification_oc),
             context.getString(R.string.notification_tp))
     }
@@ -65,9 +70,13 @@ class NotificationBuilder
     private fun build(id: Int, largeIcon: Bitmap, title: String, description: String)
             : Notification {
 
+        //Configuration
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val vibrate = longArrayOf(0, 300, 200)
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
+        val resultPendingIntent = PendingIntent.getActivity(
+            context, 0, intentActivity, FLAG_UPDATE_CURRENT
+        )
 
         return notificationBuilder
             .setSmallIcon(R.drawable.ic_notification)
@@ -76,7 +85,7 @@ class NotificationBuilder
             .setLargeIcon(largeIcon)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
-            .setLights(Color.BLUE, 500,500)
+            .setContentIntent(resultPendingIntent)
             .setVibrate(vibrate)
             .setSound(alarmSound)
             .setAutoCancel(true)

@@ -1,11 +1,13 @@
 package com.blackstone.ratusha.di.injection
 
 import android.content.Context
+import android.content.Intent
 import androidx.core.app.NotificationManagerCompat
 import com.blackstone.device.notification.NotificationBuilder
 import com.blackstone.device.notification.Notifications
 import com.blackstone.device.notification.NotificationsImpl
 import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.ratusha.ui.screens.controller.ControllerActivity
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -33,7 +35,13 @@ class DeviceModule {
 
     @Singleton
     @Provides
-    fun provideNotificationBuilder(context: Context): NotificationBuilder {
-        return NotificationBuilder(context)
+    fun provideNotificationBuilder(context: Context, intentActivity: Intent): NotificationBuilder {
+        return NotificationBuilder(context, intentActivity)
+    }
+
+    @Singleton
+    @Provides
+    fun provideIntentActivity(context: Context): Intent {
+        return Intent(context, ControllerActivity::class.java)
     }
 }

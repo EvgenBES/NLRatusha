@@ -62,7 +62,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/bg_forp" />
+                        tools:src="@drawable/bg_forp"
+                        android:contentDescription="@string/description_image"/>
 
 
                 <ImageView
@@ -74,7 +75,8 @@
                         android:src="@drawable/logo_fp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
                         app:layout_constraintStart_toStartOf="@+id/imgForpost"
-                        app:layout_constraintTop_toTopOf="@+id/imgForpost" />
+                        app:layout_constraintTop_toTopOf="@+id/imgForpost"
+                        android:contentDescription="@string/description_image"/>
 
                 <TextView
                         android:id="@+id/textView"
@@ -102,13 +104,13 @@
                         tools:text="@string/order_timer" />
 
                 <View
-                        android:id="@+id/progress_order_fp"
+                        android:id="@+id/progress_order_fp_wrap"
                         android:layout_width="147dp"
                         android:layout_height="16dp"
                         android:layout_marginStart="100dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/progress_forpost"
+                        android:background="@drawable/progress_forpost_wrap"
                         app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
                         app:layout_constraintEnd_toStartOf="@+id/imageView3"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -126,6 +128,20 @@
                         app:layout_constraintStart_toStartOf="@+id/progress_order_fp"
                         app:layout_constraintTop_toTopOf="@+id/progress_order_fp" />
 
+                <View
+                        android:id="@+id/progress_order_fp"
+                        android:layout_width="147dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/progress_forpost"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+
                 <TextView
                         android:id="@+id/tv_card_total_forpost"
                         style="@style/TextHeaderProgressOrder"
@@ -134,9 +150,11 @@
                         android:layout_marginBottom="1dp"
                         android:text="@{viewModel.forpostPercent}"
                         android:textSize="10sp"
+                        tools:text="10%"
                         app:layout_constraintBottom_toBottomOf="@+id/progress_order_fp"
                         app:layout_constraintEnd_toEndOf="@+id/progress_order_fp"
-                        app:layout_constraintStart_toStartOf="@+id/progress_order_fp" />
+                        app:layout_constraintStart_toStartOf="@+id/progress_order_fp"
+                        tools:ignore="SmallSp" />
 
 
                 <ImageView
@@ -144,11 +162,12 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/border_product_fp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgForpost"
                         app:layout_constraintEnd_toEndOf="@+id/imgForpost"
-                        app:layout_constraintTop_toTopOf="@+id/imgForpost" />
+                        app:layout_constraintTop_toTopOf="@+id/imgForpost"
+                        android:contentDescription="@string/description_image"/>
 
 
                 <ImageView
@@ -162,7 +181,8 @@
                         app:layout_constraintTop_toTopOf="@+id/imageView3"
                         android:src="@drawable/ic_iw_empty"
                         src="@{viewModel.productForpost}"
-                        tools:src="@drawable/ic_w18_okta" />
+                        tools:src="@drawable/ic_w18_okta"
+                        android:contentDescription="@string/description_image"/>
 
                 <TextView
                         style="@style/ForpostTime"
@@ -170,10 +190,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
                         android:text="@{viewModel.productTime}"
+                        tools:text="@string/product_timer"
                         android:textSize="8sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView7"
                         app:layout_constraintStart_toStartOf="@+id/imageView7"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+                        tools:ignore="SmallSp" />
 
 
                 <ImageView
@@ -188,7 +210,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgForpost"
-                        tools:background="@drawable/bg_octal" />
+                        tools:background="@drawable/bg_octal"
+                        android:contentDescription="@string/description_image"/>
 
 
                 <ImageView
@@ -200,7 +223,8 @@
                         android:src="@drawable/logo_octal"
                         app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
                         app:layout_constraintStart_toStartOf="@+id/imgOctal"
-                        app:layout_constraintTop_toTopOf="@+id/imgOctal" />
+                        app:layout_constraintTop_toTopOf="@+id/imgOctal"
+                        android:contentDescription="@string/description_image"/>
 
 
                 <TextView
@@ -229,19 +253,19 @@
                         app:layout_constraintTop_toTopOf="@+id/imgOctal"
                         tools:text="@string/order_timer" />
 
-
                 <View
-                        android:id="@+id/progress_order_oct"
+                        android:id="@+id/progress_order_oct_wrap"
                         android:layout_width="147dp"
                         android:layout_height="16dp"
                         android:layout_marginStart="100dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/progress_octal"
+                        android:background="@drawable/progress_octal_wrap"
                         android:maxWidth="180dp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
                         app:layout_constraintEnd_toStartOf="@+id/imageView5"
                         app:layout_constraintStart_toStartOf="parent" />
+
 
                 <View
                         android:id="@+id/progress_active_order_oct"
@@ -257,6 +281,20 @@
                         app:layout_constraintTop_toTopOf="@+id/progress_order_oct" />
 
 
+                <View
+                        android:id="@+id/progress_order_oct"
+                        android:layout_width="147dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/progress_octal"
+                        android:maxWidth="180dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
                 <TextView
                         android:id="@+id/tv_card_total_octal"
                         style="@style/TextHeaderProgressOrder"
@@ -269,7 +307,8 @@
                         app:layout_constraintBottom_toBottomOf="@+id/progress_order_oct"
                         app:layout_constraintEnd_toEndOf="@+id/progress_order_oct"
                         app:layout_constraintStart_toStartOf="@+id/progress_active_order_oct"
-                        app:layout_constraintTop_toTopOf="@+id/progress_order_oct" />
+                        app:layout_constraintTop_toTopOf="@+id/progress_order_oct"
+                        tools:ignore="SmallSp" />
 
 
                 <ImageView
@@ -277,11 +316,12 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/border_product_oct"
                         app:layout_constraintBottom_toBottomOf="@+id/imgOctal"
                         app:layout_constraintEnd_toEndOf="@+id/imgOctal"
-                        app:layout_constraintTop_toTopOf="@+id/imgOctal" />
+                        app:layout_constraintTop_toTopOf="@+id/imgOctal"
+                        android:contentDescription="@string/description_image"/>
 
 
                 <ImageView
@@ -295,7 +335,8 @@
                         app:layout_constraintTop_toTopOf="@+id/imageView5"
                         android:src="@drawable/ic_iw_empty"
                         src="@{viewModel.productOctal}"
-                        tools:src="@drawable/ic_i_w28_33" />
+                        tools:src="@drawable/ic_i_w28_33"
+                        android:contentDescription="@string/description_image"/>
 
                 <TextView
                         style="@style/OctalTime"
@@ -306,7 +347,8 @@
                         android:textSize="8sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                        tools:ignore="SmallSp" />
 
                 <TextView
                         android:id="@+id/tv_update_time"
@@ -324,17 +366,18 @@
 
                 <Button
                         android:id="@+id/buttonRefresh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="64dp"
+                        android:layout_height="36dp"
                         android:layout_marginBottom="8dp"
                         android:alpha="0.0"
                         android:background="@drawable/button_refresh"
                         android:drawableStart="@drawable/ic_refresh_wifi"
-                        android:paddingStart="28dp"
+                        android:paddingStart="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_update_time"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_update_time"
+                        tools:ignore="RtlSymmetry" />
 
                 <ProgressBar
                         android:id="@+id/progressBar"

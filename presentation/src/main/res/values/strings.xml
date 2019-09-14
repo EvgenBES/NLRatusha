@@ -29,4 +29,5 @@
     <string name="notification_close_octal">Закрытие Октала</string>
     <string name="cancel">Отмена</string>
     <string name="save">Сохранить</string>
+    <string name="description_image">Image</string>
 </resources>
