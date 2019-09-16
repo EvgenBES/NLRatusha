@@ -41,7 +41,7 @@ class DetailItemFragment : BaseMvvmFragment<DetailItemViewModel, ControllerRoute
         binding.recyclerInfo.setHasFixedSize(true)
         binding.recyclerInfo.layoutManager = LinearLayoutManager(this.activity)
         binding.recyclerInfo.isNestedScrollingEnabled = false
-        binding.recyclerInfo.adapter = viewModel.adapter
+        binding.recyclerInfo.adapter = viewModel.getAdapter()
 
     }
 

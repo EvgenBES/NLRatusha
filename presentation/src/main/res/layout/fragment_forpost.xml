@@ -134,10 +134,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header_background">
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+            <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/close_door"
+                        android:alpha="0.0"
+                        anim="@{viewModel.closeDoor}" />
+
+                <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#4D021728"
+                        android:alpha="0.0"
+                        anim="@{viewModel.closeDoor}"/>
+
+            </FrameLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

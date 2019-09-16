@@ -14,6 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryBlack"
+            android:clickable="true"
+            android:focusable="true"
             tools:context=".ui.screens.detailed.DetailItemInfo">
 
         <LinearLayout
@@ -32,6 +34,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/tvCounter"
                     android:alpha="0.0"
+                    anim="@{viewModel.counterVisible}"
                     android:fontFamily="@font/roboto_regular"
                     android:textColor="@color/colorAccent"
                     android:textSize="52sp"
@@ -205,7 +208,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="@{viewModel.typeItem ? @string/detail_item_quantity : @string/detail_item_type}"
+                android:text="@{viewModel.typeItemNoAlchemy ? @string/detail_item_quantity : @string/detail_item_type}"
                 android:textAlignment="center"
                 android:textColor="@color/white60"
                 android:textSize="14dp"
@@ -222,7 +225,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
-                android:text="@{viewModel.typeItem ? @string/detail_item_price : @string/detail_item_time}"
+                android:text="@{viewModel.typeItemNoAlchemy ? @string/detail_item_price : @string/detail_item_time}"
                 android:textAlignment="center"
                 android:textColor="@color/white60"
                 android:textSize="14dp"
@@ -239,7 +242,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingStart="8dp"
-                android:text="@{viewModel.typeItem ? @string/detail_item_cost : @string/detail_item_price}"
+                android:text="@{viewModel.typeItemNoAlchemy ? @string/detail_item_cost : @string/detail_item_price}"
                 android:textAlignment="center"
                 android:textColor="@color/white60"
                 android:textSize="14dp"

@@ -40,8 +40,17 @@ fun setLayoutWidth(view: View, width: Int) {
 
 
 @BindingAdapter("visibility")
-fun View.visidility(visibility: Boolean) {
+fun View.visibility(visibility: Boolean) {
     this.visibility = if (visibility) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("anim")
+fun visibilityAnim(view: View, visibility: Boolean) {
+    if (visibility) {
+        view.animate().alpha(1.0f).duration = 1250
+    } else {
+        view.animate().alpha(0.0f).duration = 1250
+    }
 }
 
 

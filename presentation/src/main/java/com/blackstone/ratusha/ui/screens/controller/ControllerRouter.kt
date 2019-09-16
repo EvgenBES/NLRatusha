@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.ui.base.BaseRouter
 import com.blackstone.ratusha.ui.screens.settings.Settings
+import com.blackstone.ratusha.ui.screens.settings.Settings.Companion.SETTING
 
 /**
  * @author Evgeny Butov
@@ -11,20 +12,13 @@ import com.blackstone.ratusha.ui.screens.settings.Settings
  */
 class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActivity>(activity) {
 
-    fun startFragment(fragment: Fragment) {
+    fun startReplaceFragment(fragment: Fragment) {
         replaceFragment(
-                activity.supportFragmentManager,
-                fragment,
-                R.id.mainFragment,
-                false)
-    }
-
-    fun startFragmentTest(fragment: Fragment) {
-        replaceFragment(
-                activity.supportFragmentManager,
-                fragment,
-                R.id.constraintLayout2,
-                true)
+            activity.supportFragmentManager,
+            fragment,
+            R.id.constraintLayout2,
+            true
+        )
     }
 
     fun refreshInformation() {
@@ -32,6 +26,6 @@ class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActi
     }
 
     fun openSettings() {
-        Settings().show(activity.supportFragmentManager, "Settings")
+        Settings().show(activity.supportFragmentManager, SETTING)
     }
 }

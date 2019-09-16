@@ -69,6 +69,6 @@ class FInformationModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun startDetailItemFragment(itemClick: ItemClick<ItemCategory>) {
-        router?.startFragmentTest(DetailItemFragment.getInstance(itemClick.item.id))
+        router?.startReplaceFragment(DetailItemFragment.getInstance(itemClick.item.id))
     }
 }

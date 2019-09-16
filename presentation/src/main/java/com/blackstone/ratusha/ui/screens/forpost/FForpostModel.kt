@@ -1,5 +1,6 @@
 package com.blackstone.ratusha.ui.screens.forpost
 
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
@@ -29,6 +30,7 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
     val adapter = ItemsAdapter()
 
     private val progress = ObservableField<Int>()
+    private val closeDoor = ObservableBoolean()
     private val paid = ObservableField<String>("0 / 0")
     private val remainder = ObservableField<String>("Еще: 0")
     private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
@@ -60,8 +62,10 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
     fun getPaid(): ObservableField<String> = paid
     fun getRemainder(): ObservableField<String> = remainder
     fun getProgress(): ObservableField<Int> = progress
+    fun getCloseDoor(): ObservableBoolean = closeDoor
 
     private fun setItems(list: List<ItemOrder>) {
+        closeDoor.set(list.isEmpty())
         adapter.setItems(list.convertToLinkedList())
         setTotalSumOrder(list)
     }
@@ -93,6 +97,6 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun onClickItem(item: ItemClick<ItemOrder>) {
-        router?.startFragmentTest(DetailItemFragment.getInstance(item.item.id))
+        router?.startReplaceFragment(DetailItemFragment.getInstance(item.item.id))
     }
 }

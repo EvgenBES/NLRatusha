@@ -12,6 +12,11 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
+    <style name="SettingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
     <style name="ForpostHeader">
         <item name="android:textColor">@color/fp_accent</item>
         <item name="android:textSize">26sp</item>

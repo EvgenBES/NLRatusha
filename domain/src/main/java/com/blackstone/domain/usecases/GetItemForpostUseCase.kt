@@ -18,6 +18,5 @@ class GetItemForpostUseCase
 
     fun getAllItemOrder(): LiveData<LinkedList<ItemOrder>> {
         return Transformations.map(daoRepository.getItemForpost()) { sortItemOrder(it).convertToLinkedList() }
-
     }
 }

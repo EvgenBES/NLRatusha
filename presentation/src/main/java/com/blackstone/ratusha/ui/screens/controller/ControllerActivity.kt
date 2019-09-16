@@ -121,13 +121,13 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     override fun onClickForpost() {
         setBaseStyleNavigation()
         binding.navigation.menu.getItem(1).isChecked = true
-        router.startFragment(FForpost())
+        selectTab(FORPOST)
     }
 
     override fun onClickOctal() {
         setYellowStyleNavigation()
         binding.navigation.menu.getItem(2).isChecked = true
-        router.startFragment(FOctal())
+        selectTab(OCTAL)
     }
 
     fun changedStatusRecyclerFragment(state: Boolean) {

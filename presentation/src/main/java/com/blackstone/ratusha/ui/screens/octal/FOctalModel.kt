@@ -1,5 +1,6 @@
 package com.blackstone.ratusha.ui.screens.octal
 
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
@@ -29,6 +30,7 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     val adapter = ItemsAdapter(type = OCTAL_ADAPTER)
 
     private val progress = ObservableField<Int>()
+    private val closeDoor = ObservableBoolean()
     private val paid = ObservableField<String>("0 / 0")
     private val remainder = ObservableField<String>("Еще: 0")
     private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
@@ -60,8 +62,10 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     fun getPaid(): ObservableField<String> = paid
     fun getRemainder(): ObservableField<String>  = remainder
     fun getProgress(): ObservableField<Int> = progress
+    fun getCloseDoor(): ObservableBoolean = closeDoor
 
     private fun setItems(list: List<ItemOrder>) {
+        closeDoor.set(list.isEmpty())
         adapter.setItems(list.convertToLinkedList())
         setTotalSumOrder(list)
     }
@@ -83,6 +87,6 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun onClickItem(item: ItemClick<ItemOrder>) {
-        router?.startFragmentTest(DetailItemFragment.getInstance(item.item.id))
+        router?.startReplaceFragment(DetailItemFragment.getInstance(item.item.id))
     }
 }

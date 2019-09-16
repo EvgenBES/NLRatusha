@@ -26,21 +26,22 @@ import javax.inject.Inject
 class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
     val counter: ObservableField<String> = ObservableField<String>("1")
-    val typeItem: ObservableBoolean = ObservableBoolean(true)
+    val counterVisible: ObservableBoolean = ObservableBoolean()
+    val typeItemNoAlchemy: ObservableBoolean = ObservableBoolean(true)
     val total: ObservableField<String> = ObservableField<String>("0.00")
-    val image: ObservableField<Int> = ObservableField<Int>()
+    val image: ObservableField<String> = ObservableField<String>()
     val name: ObservableField<String> = ObservableField<String>("Неизвестный предмет")
     val price: ObservableField<String> = ObservableField<String>("Цена: 0")
     val reputation: ObservableField<String> = ObservableField<String>("х0")
     val craft: ObservableField<String> = ObservableField<String>("1")
     val itemNoAlchemy: ObservableBoolean = ObservableBoolean(false)
-    var listItem = mutableListOf<ItemRecipeFull>()
 
+    private var listItem = mutableListOf<ItemRecipeFull>()
     private var plusTime: Long = 0
     private var minusTime: Long = 0
     private var textVisibility: Boolean = false
 
-    val adapter = RecipeAdapter()
+    private val adapter = RecipeAdapter()
 
     @Inject lateinit var getRecipeItemUseCase: GetRecipeItemUseCase
     @Inject lateinit var getRecipeAlchemyUseCase: GetRecipeAlchemyUseCase
@@ -50,25 +51,24 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
         App.appComponent.runInject(this)
     }
 
-    fun getItemAndRecipe(idItem: Int) {
-        typeItem.set(idItem > 50)
+    fun getAdapter(): RecipeAdapter = adapter
 
-        getItemCategoryUseCase.execute(idItem) {
-            onComplete {
-                image.set(getImageResources(it.image))
-                name.set(it.name)
-                price.set("Цена: ${it.price} / ")
-                reputation.set("x${it.reputation} (${it.countItemRep})")
+    fun getItemAndRecipe(idItem: Int) {
+        typeItemNoAlchemy.set(idItem > 50)
+
+        viewModelScope.launch {
+            getItemCategoryUseCase.execute(idItem) {
+                onComplete {
+                    image.set(it.image)
+                    name.set(it.name)
+                    price.set("Цена: ${it.price} / ")
+                    reputation.set("x${it.reputation} (${it.countItemRep})")
+                }
+                onError { Log.d(TAG, "getItem message: ${it.message}") }
             }
-            onError { Log.d(TAG, "getItem message: ${it.message}") }
         }
 
         if (idItem > 50) getRecipeItem(idItem) else getAlchemyRecipe(idItem)
-    }
-
-    private fun getImageResources(image: String): Int {
-        return router?.activity?.resources?.getIdentifier("ic_$image", "drawable", router?.activity?.packageName)
-            ?: router?.activity?.resources?.getIdentifier("ic_iw_empty", "drawable", router?.activity?.packageName) ?: 0
     }
 
     private fun setTotal(listItem: List<ItemRecipeFull>) {
@@ -91,15 +91,18 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun getRecipeItem(id: Int) {
-        getRecipeItemUseCase.execute(id) {
-            onComplete {
-                adapter.setItems(it)
-                listItem = it
-                setTotal(it)
-                if (it.isEmpty()) {} //todo show empty data
-                itemNoAlchemy.set(true)
+        viewModelScope.launch {
+            getRecipeItemUseCase.execute(id) {
+                onComplete {
+                    adapter.setItems(it)
+                    listItem = it
+                    setTotal(it)
+                    if (it.isEmpty()) {
+                    } //todo show empty data
+                    itemNoAlchemy.set(true)
+                }
+                onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
             }
-            onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
         }
     }
 
@@ -147,12 +150,12 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
     private fun setVisibilityTextCount(event: Int) {
         if (textVisibility.not()) {
-        //    router?.showTextCounter()
+            counterVisible.set(true)
             textVisibility = true
         }
 
         if (event == MotionEvent.ACTION_UP && textVisibility) {
-      //      router?.hideTextCounter()
+            counterVisible.set(false)
             textVisibility = false
         }
     }
