@@ -48,7 +48,6 @@ class App : MultiDexApplication(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        Stetho.initializeWithDefaults(this)
 
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseMessaging.getInstance().subscribeToTopic(NOTIFICATION_FORPOST_CLOSE)

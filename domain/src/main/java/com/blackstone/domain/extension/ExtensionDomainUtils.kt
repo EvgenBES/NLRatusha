@@ -23,7 +23,7 @@ fun Exception.mapErrorException(throwable: Throwable?): ErrorModel {
         is UnknownHostException -> {
             ErrorModel("CHECK CONNECTION",0, ErrorStatus.NO_CONNECTION)
         }
-        else -> null
+        else -> ErrorModel("UNAUTHORIZED",0, ErrorStatus.UNAUTHORIZED)
     }
     return errorModel!!
 }
