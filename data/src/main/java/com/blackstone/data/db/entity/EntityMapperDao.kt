@@ -69,5 +69,5 @@ fun Config.transformToConfigApp(): ConfigApp{
 }
 
 fun ItemOrderExtended.transformToPresenter(): ItemOrder {
-    return ItemOrder(id = 0, name = name, image = image, countStart = countStart, countFinish = countFinish, price = price, reputation = reputation, countItemRep = countItemRep)
+    return ItemOrder(id = id, name = name, image = image, countStart = countStart, countFinish = countFinish, price = price, reputation = reputation, countItemRep = countItemRep)
 }

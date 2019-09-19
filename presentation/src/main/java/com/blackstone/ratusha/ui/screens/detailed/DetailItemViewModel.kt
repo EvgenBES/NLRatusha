@@ -115,7 +115,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
         if (craft.get()?.toInt() ?: 1 < 999) {
 
-            if (System.currentTimeMillis() - 50 > plusTime && event.actionMasked == MotionEvent.ACTION_MOVE) {
+            if (System.currentTimeMillis() - 100 > plusTime && event.actionMasked == MotionEvent.ACTION_MOVE) {
                 plusTime = System.currentTimeMillis()
                 val count: Int = craft.get()?.toInt() ?: 1
                 craft.set(count.plus(1).toString())
@@ -135,7 +135,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
         }
 
         if (craft.get()?.toInt() ?: 1 > 1) {
-            if (System.currentTimeMillis() - 50 > minusTime && event.actionMasked == MotionEvent.ACTION_MOVE) {
+            if (System.currentTimeMillis() - 100 > minusTime && event.actionMasked == MotionEvent.ACTION_MOVE) {
                 minusTime = System.currentTimeMillis()
                 val count: Int = craft.get()?.toInt() ?: 1
                 craft.set(count.minus(1).toString())
