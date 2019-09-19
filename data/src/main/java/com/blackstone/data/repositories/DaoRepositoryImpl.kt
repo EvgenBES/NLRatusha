@@ -3,10 +3,7 @@ package com.blackstone.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.blackstone.data.db.AppDataBase
-import com.blackstone.data.db.entity.transformToConfigApp
-import com.blackstone.data.db.entity.transformToFull
-import com.blackstone.data.db.entity.transformToItemCategory
-import com.blackstone.data.db.entity.transformToPresenter
+import com.blackstone.data.db.entity.*
 import com.blackstone.domain.entity.*
 import com.blackstone.domain.repositories.DaoRepository
 import javax.inject.Inject
@@ -19,7 +16,7 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
     DaoRepository {
 
     override fun getConfig(): LiveData<Config> {
-        return appDataBase.getConfigDao().getConfig()
+        return Transformations.map(appDataBase.getConfigDao().getConfig()) { config -> config?.transformToConfig() }
     }
 
     override fun setConfig(config: Config) {
@@ -39,11 +36,11 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
     }
 
     override fun getItemForpost(): LiveData<List<ItemOrder>> {
-        return appDataBase.getForpDao().getAll()
+        return Transformations.map(appDataBase.getForpDao().getAll()) { list -> list.map { it.transformToPresenter() } }
     }
 
     override fun getItemOctal(): LiveData<List<ItemOrder>> {
-        return appDataBase.getOctDao().getAll()
+        return  Transformations.map(appDataBase.getOctDao().getAll()) { list -> list.map { it.transformToPresenter() } }
     }
 
     override suspend fun getCategoryList(): List<ItemCategory> {

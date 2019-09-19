@@ -24,17 +24,16 @@ android {
 }
 
 dependencies {
-    def room_version = "2.2.0-alpha02"
+    def room_version = "2.2.0-rc01"
     def ok_http_version = "3.11.0"
     def rx_java_version = "2.4.0"
-    def supportVersion = '1.0.0'
+    def support_version = '1.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.legacy:legacy-support-v4:$support_version"
+    implementation "androidx.appcompat:appcompat:1.1.0"
 
-    implementation "androidx.appcompat:appcompat:$supportVersion"
-    implementation "androidx.legacy:legacy-support-v4:$supportVersion"
-
-    //Kotlin
+    //Kotlin for Retrofit
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
     //Retrofit + Okhttp
@@ -47,12 +46,6 @@ dependencies {
     api "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-
-    //SQLiteAssetHelper
-    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
-
-    //Debug stetho
-    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
 
     implementation "javax.inject:javax.inject:1"
 

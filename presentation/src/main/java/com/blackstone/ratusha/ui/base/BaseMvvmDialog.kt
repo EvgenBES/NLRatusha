@@ -29,7 +29,7 @@ abstract class BaseMvvmDialog<VM : BaseViewModel<R>, R : BaseRouter<*>, B : View
         binding = DataBindingUtil.inflate(inflater, provideLayoutId(), container, false)
         viewModel = provideViewModel()
         binding.setVariable(BR.viewModel, viewModel)
-        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return binding.root
     }
 

@@ -34,7 +34,7 @@ class Settings: BaseMvvmDialog<SettingsModel, ControllerRouter, DialogSettingsBi
 
         viewModel.closeDialog.observe(this, Observer {
             it?.let { result ->
-                if (result) dialog.dismiss()
+                if (result) dialog?.dismiss()
             }
         })
     }

@@ -5,11 +5,10 @@ import com.blackstone.data.db.entity.Meta
 import com.blackstone.data.db.entity.transformToItemForpostDao
 import com.blackstone.data.db.entity.transformToItemOctalDao
 import com.blackstone.data.db.entity.transformToTownHallDao
-import com.blackstone.data.extension.mapResponceOrder
+import com.blackstone.data.extension.mapResponseOrder
 import com.blackstone.data.net.RestService
 import com.blackstone.domain.entity.Order
 import com.blackstone.domain.repositories.ServerRepository
-import java.util.*
 import javax.inject.Inject
 
 class ServerRepositoryImpl @Inject constructor(
@@ -18,7 +17,7 @@ class ServerRepositoryImpl @Inject constructor(
 
     override suspend fun updateDataForpost(): Boolean {
         val result = apiService.getForpost()
-        val responseOrder: Order = result.string().mapResponceOrder()
+        val responseOrder: Order = result.string().mapResponseOrder()
         appDataBase.getForpDao().deleteAll()
 
         if (responseOrder.itemList.isNotEmpty()) {
@@ -33,7 +32,7 @@ class ServerRepositoryImpl @Inject constructor(
     override suspend fun updateDataOctal(): Boolean {
         val result = apiService.getOctal()
 
-        val responseOrder: Order = result.string().mapResponceOrder()
+        val responseOrder: Order = result.string().mapResponseOrder()
         appDataBase.getOctDao().deleteAll()
 
         if (responseOrder.itemList.isNotEmpty()) {

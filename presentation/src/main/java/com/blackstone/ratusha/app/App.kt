@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import com.blackstone.ratusha.di.injection.AppComponent
 import com.blackstone.ratusha.di.injection.DaggerAppComponent
-import com.facebook.stetho.Stetho
 
 import javax.inject.Inject
 

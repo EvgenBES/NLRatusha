@@ -2,6 +2,7 @@ package com.blackstone.ratusha.ui.adapter.items
 
 import android.text.Html
 import android.text.Spanned
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import com.blackstone.domain.entity.ItemOrder
@@ -23,6 +24,7 @@ class ItemsViewModel(private val typeAdapter: Int): BaseItemViewModel<ItemOrder>
     private val remainder: ObservableField<String> = ObservableField<String>()
     private val totalRemain: ObservableField<String> = ObservableField<String>()
     private val progress: ObservableInt = ObservableInt()
+    private val isOpenCardView: ObservableBoolean = ObservableBoolean()
 
     fun getType(): ObservableInt = type
     fun getImage(): ObservableField<String> = image

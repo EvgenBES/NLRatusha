@@ -1,5 +1,6 @@
 package com.blackstone.data.db.entity
 
+import android.util.Log
 import com.blackstone.domain.entity.*
 
 /**
@@ -65,4 +66,8 @@ fun ConfigApp.transformToConfig(): Config{
 
 fun Config.transformToConfigApp(): ConfigApp{
     return ConfigApp(0, tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
+}
+
+fun ItemOrderExtended.transformToPresenter(): ItemOrder {
+    return ItemOrder(id = 0, name = name, image = image, countStart = countStart, countFinish = countFinish, price = price, reputation = reputation, countItemRep = countItemRep)
 }

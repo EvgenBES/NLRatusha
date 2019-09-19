@@ -54,7 +54,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider">
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
+                        android:theme="@style/SwitchSetting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -64,7 +65,8 @@
                         android:textColor="@color/card_view_text_blue"
                         android:textSize="14sp" />
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
+                        android:theme="@style/SwitchSetting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -74,7 +76,8 @@
                         android:textColor="@color/card_view_text_blue"
                         android:textSize="14sp" />
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
+                        android:theme="@style/SwitchSetting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -84,7 +87,8 @@
                         android:textColor="@color/card_view_text_blue"
                         android:textSize="14sp" />
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
+                        android:theme="@style/SwitchSetting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

@@ -1,10 +1,10 @@
-package com.blackstone.domain.entity
+package com.blackstone.data.db.entity
 
 /**
  * @author Evgeny Butov
  * @created 03.02.2019
  */
-data class ItemOrder(
+data class ItemOrderExtended(
     val id: Int,
     val name: String,
     val image: String,
@@ -12,6 +12,5 @@ data class ItemOrder(
     val countFinish: Int,
     val price: Int = 0,
     val reputation: Double = 0.0,
-    val countItemRep: Int = 0,
-    var isOpen: Boolean = false
+    val countItemRep: Int = 0
 )

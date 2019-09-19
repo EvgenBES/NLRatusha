@@ -37,7 +37,7 @@ class NotificationBuilder
     }
 
     private fun createForpostCloseNotification(): Notification{
-        return build(NOTIFICATION_ID_FORPOST_CLOSE,
+        return build(
             createBitmapIcon(R.drawable.ic_notif_banner_fp),
             context.getString(R.string.notification_fp),
             context.getString(R.string.notification_close_order))
@@ -45,7 +45,6 @@ class NotificationBuilder
 
     private fun createOctalCloseNotification(): Notification{
         return build(
-            NOTIFICATION_ID_OCTAL_CLOSE,
             createBitmapIcon(R.drawable.ic_notif_banner_oc),
             context.getString(R.string.notification_oc),
             context.getString(R.string.notification_close_order))
@@ -53,7 +52,6 @@ class NotificationBuilder
 
     private fun createForpostTeleportNotification(): Notification{
         return build(
-            NOTIFICATION_ID_FORPOST_TP,
             createBitmapIcon(R.drawable.ic_notif_scroll),
             context.getString(R.string.notification_fp),
             context.getString(R.string.notification_tp))
@@ -61,13 +59,12 @@ class NotificationBuilder
 
     private fun createOctalTeleportNotification(): Notification{
         return build(
-            NOTIFICATION_ID_OCTAL_TP,
             createBitmapIcon(R.drawable.ic_notif_scroll),
             context.getString(R.string.notification_oc),
             context.getString(R.string.notification_tp))
     }
 
-    private fun build(id: Int, largeIcon: Bitmap, title: String, description: String)
+    private fun build(largeIcon: Bitmap, title: String, description: String)
             : Notification {
 
         //Configuration

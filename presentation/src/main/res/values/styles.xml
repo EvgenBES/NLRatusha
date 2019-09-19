@@ -16,6 +16,12 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="SwitchSetting" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorSuperLightWhite</item>
+        <!-- No Active-->
+        <item name="colorSwitchThumbNormal">@color/colorPrimaryLight</item>
+        <item name="android:colorForeground">@color/colorPrimaryLight</item>
+    </style>
 
     <style name="ForpostHeader">
         <item name="android:textColor">@color/fp_accent</item>
@@ -26,10 +32,6 @@
 
     <style name="ForpostTime" parent="ForpostHeader">
         <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="ForpostProgress" parent="ForpostHeader">
-        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextHeaderProgressOrder">
@@ -44,18 +46,6 @@
 
     <style name="OctalTime" parent="OctalHeader">
         <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="OctalProgress" parent="OctalHeader">
-        <item name="android:textSize">24sp</item>
-    </style>
-
-
-    <style name="ProductStyle">
-        <item name="android:textColor">@color/colorDarkText</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
 

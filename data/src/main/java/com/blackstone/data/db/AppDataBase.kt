@@ -23,23 +23,21 @@ import com.blackstone.data.db.entity.Meta
         Type::class,
         ConfigApp::class,
         Meta::class
-    ], version = 1, exportSchema = false
+    ], version = 2, exportSchema = false
 )
 @TypeConverters(value = [DateConverters::class])
 abstract class AppDataBase : RoomDatabase() {
 
     companion object {
         private const val DATABASE_NAME = "db_ratusha"
+        private const val DATABASE_FILE_PATH = "database/db_ratusha.db"
 
         fun getInstance(context: Context): AppDataBase {
             return Room
-                    .databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
-                    .createFromAsset("database/db_ratusha.db")
-                    .build()
-
-//            return RoomAssetHelper.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
-////                    .fallbackToDestructiveMigration() //if version was edit - deleted bd and created new
-//                    .build()
+                .databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .createFromAsset(DATABASE_FILE_PATH)
+                .build()
         }
     }
 

@@ -103,11 +103,18 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     }
 
     override fun onBackPressed() {
-        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.mainFragment)
+        val fragments = supportFragmentManager.fragments
+        var currentFragment: Fragment? = null
+        fragments?.let { it.forEach {fragment ->
+            if (fragment.isVisible) currentFragment = fragment
+        } }
+
         if (currentFragment is DetailItemFragment) super.onBackPressed()
+
         else {
-            if (viewModel.stateRecyclerFragment && fragment != null && fragment is FInformation) (fragment).onBackPresserFragment()
-            else {
+            if (viewModel.stateRecyclerFragment && currentFragment != null && currentFragment is FInformation) {
+                (currentFragment as FInformation).onBackPresserFragment()
+            } else {
                 if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
                     finish()
                 } else {

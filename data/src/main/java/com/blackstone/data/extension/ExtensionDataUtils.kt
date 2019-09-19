@@ -24,7 +24,7 @@ fun Context.notificationManager() =
     getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
 
 
-fun String.mapResponceOrder(): Order {
+fun String.mapResponseOrder(): Order {
     val listString = this.lines()
 
     val timeList = arrayListOf<String>()
