@@ -1,6 +1,6 @@
 # Ratusha NeverLands;
 
-For create this project i used:
+# For create this project i used:
 - Language Kotlin;
 - Pattern MVVM;
 - Modules (Data/Device/Domain/Presentation)
@@ -12,9 +12,9 @@ For create this project i used:
 - LiveData;
 - Livecycler;
 - Firebase:
-+ Analytics
-+ Crashlytics
-+ Cloud Messaging
+	- Analytics
+	- Crashlytics
+	- Cloud Messaging
 
 Screens finished project. Release version 1.4;
 
