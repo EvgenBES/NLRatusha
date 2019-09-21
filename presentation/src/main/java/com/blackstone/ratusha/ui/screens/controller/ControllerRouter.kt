@@ -24,7 +24,7 @@ class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActi
         replaceFragment(
             activity.supportFragmentManager,
             fragment,
-            R.id.constraintLayout2,
+            R.id.detailFragment,
             true
         )
     }
