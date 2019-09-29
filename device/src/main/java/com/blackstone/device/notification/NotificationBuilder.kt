@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import com.blackstone.device.R
@@ -13,7 +12,6 @@ import com.blackstone.device.notification.Const.NOTIFICATION_CHANNEL
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_FORPOST_CLOSE
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_FORPOST_TP
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_OCTAL_CLOSE
-import com.blackstone.device.notification.Const.NOTIFICATION_ID_OCTAL_TP
 import javax.inject.Inject
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Intent

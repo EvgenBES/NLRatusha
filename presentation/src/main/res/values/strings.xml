@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NeverLandsR</string>
+    <string name="default_notification_channel_id">NOTIFICATION_NLR</string>
+
     <string name="exit_app">Нажми еще раз чтобы выйти</string>
 
     <string name="castle_name_forp">FORPOST</string>

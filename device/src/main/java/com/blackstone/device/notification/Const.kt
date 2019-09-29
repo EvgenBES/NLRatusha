@@ -15,5 +15,5 @@ object Const {
     const val NOTIFICATION_ID_FORPOST_TP = 2
     const val NOTIFICATION_ID_OCTAL_TP = 3
 
-    const val NOTIFICATION_CHANNEL = "NLR_NOTIFICATION"
+    const val NOTIFICATION_CHANNEL = "NOTIFICATION_NLR"
 }
