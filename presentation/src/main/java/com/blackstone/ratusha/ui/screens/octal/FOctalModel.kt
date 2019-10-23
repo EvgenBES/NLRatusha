@@ -87,6 +87,6 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun onClickItem(item: ItemClick<ItemOrder>) {
-        router?.startReplaceFragment(DetailItemFragment.getInstance(item.item.id))
+        router?.startReplaceFragment(DetailItemFragment.getInstance(item.item.id), DetailItemFragment.TAG)
     }
 }

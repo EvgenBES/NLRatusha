@@ -11,7 +11,7 @@ class DateConverters {
 
     @TypeConverter
     fun fromTimestamp(value: Long?): Date {
-        return if (value == null) Date(0) else Date(value)
+        return if (value == null) Date() else Date(value)
     }
 
     @TypeConverter

@@ -17,13 +17,6 @@ import java.lang.NumberFormatException
  * @created 13.04.2019
  */
 
-inline val Context.defaultSharedPreferences: SharedPreferences
-    get() = PreferenceManager.getDefaultSharedPreferences(this)
-
-fun Context.notificationManager() =
-    getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
-
-
 fun String.mapResponseOrder(): Order {
     val listString = this.lines()
 

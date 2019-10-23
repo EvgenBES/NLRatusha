@@ -12,18 +12,11 @@ import com.blackstone.ratusha.ui.screens.settings.Settings.Companion.SETTING
  */
 class ControllerRouter(activity: ControllerActivity) : BaseRouter<ControllerActivity>(activity) {
 
-    fun startFragment(fragment: Fragment) {
+    fun startReplaceFragment(fragment: Fragment, tag: String) {
         replaceFragment(
             activity.supportFragmentManager,
             fragment,
-            R.id.mainFragment,
-            false)
-    }
-
-    fun startReplaceFragment(fragment: Fragment) {
-        replaceFragment(
-            activity.supportFragmentManager,
-            fragment,
+            tag,
             R.id.detailFragment,
             true
         )

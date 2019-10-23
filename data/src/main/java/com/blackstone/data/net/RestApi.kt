@@ -11,9 +11,9 @@ import retrofit2.http.GET
 interface RestApi {
 
     @GET("info/cityhall_1.txt")
-    fun getForpost(): Deferred<ResponseBody>
+    suspend fun getForpostAsync(): Deferred<ResponseBody>
 
     @GET("info/cityhall_2.txt")
-    fun getOctal(): Deferred<ResponseBody>
+    suspend fun getOctalAsync(): Deferred<ResponseBody>
 
 }

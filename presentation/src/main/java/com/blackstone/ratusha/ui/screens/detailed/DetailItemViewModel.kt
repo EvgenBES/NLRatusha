@@ -66,9 +66,9 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                 }
                 onError { Log.d(TAG, "getItem message: ${it.message}") }
             }
-        }
 
-        if (idItem > 50) getRecipeItem(idItem) else getAlchemyRecipe(idItem)
+            if (idItem > 50) getRecipeItem(idItem) else getAlchemyRecipe(idItem)
+        }
     }
 
     private fun setTotal(listItem: List<ItemRecipeFull>) {
@@ -76,34 +76,27 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun getAlchemyRecipe(id: Int) {
-        viewModelScope.launch {
             getRecipeAlchemyUseCase.execute(id) {
                 onComplete {
                     adapter.setItems(it)
                     setTotal(it)
-                    if (it.isEmpty()) {} //todo show empty data
                 }
                 onError {
                     Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
                 }
             }
-        }
     }
 
     private fun getRecipeItem(id: Int) {
-        viewModelScope.launch {
             getRecipeItemUseCase.execute(id) {
                 onComplete {
                     adapter.setItems(it)
                     listItem = it
                     setTotal(it)
-                    if (it.isEmpty()) {
-                    } //todo show empty data
                     itemNoAlchemy.set(true)
                 }
                 onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
             }
-        }
     }
 
 

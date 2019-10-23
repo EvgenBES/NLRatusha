@@ -13,6 +13,8 @@ import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 class DetailItemFragment : BaseMvvmFragment<DetailItemViewModel, ControllerRouter, FragmentFullInfoBinding>(){
 
     companion object {
+        const val TAG = "DetailItemFragment"
+
         private const val ID_ITEM = "ID_ITEM"
 
         fun getInstance(id: Int): Fragment {

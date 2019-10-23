@@ -17,11 +17,12 @@ abstract class BaseRouter<A : BaseActivity>(val activity: A) {
     fun replaceFragment(
         fragmentManager: FragmentManager,
         fragment: Fragment,
+        tag: String,
         containerResId: Int,
         addToBackStack: Boolean = false
     ) {
         val fragmentTransition = fragmentManager.beginTransaction()
-        fragmentTransition.replace(containerResId, fragment, fragment::class.java.simpleName)
+        fragmentTransition.replace(containerResId, fragment, tag)
         if (addToBackStack) {
             fragmentTransition.addToBackStack(null)
         }

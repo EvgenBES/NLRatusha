@@ -18,7 +18,7 @@ interface ItemOctDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(itemOctResponce: List<ItemOctal>) // (vararg student: StudentDb)(Student...student)
+    fun insert(itemOctResponce: List<ItemOctal>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(itemOctResponce: ItemOctal)

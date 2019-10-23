@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -42,10 +41,10 @@ class RestService {
     }
 
     suspend fun getOctal(): ResponseBody {
-        return restApi.getOctal().await()
+        return restApi.getOctalAsync().await()
     }
 
     suspend fun getForpost(): ResponseBody {
-        return restApi.getForpost().await()
+        return restApi.getForpostAsync().await()
     }
 }

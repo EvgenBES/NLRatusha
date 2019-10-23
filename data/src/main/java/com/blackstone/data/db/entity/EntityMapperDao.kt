@@ -1,20 +1,11 @@
 package com.blackstone.data.db.entity
 
-import android.util.Log
 import com.blackstone.domain.entity.*
 
 /**
  * @author Evgeny Butov
  * @created 04.02.2019
  */
-
-fun ItemForpost.transformToPresenter(): ItemOrder {
-    return ItemOrder(id = itemId, name = name, image = image, countStart = countStart, countFinish = countFinish)
-}
-
-fun ItemOctal.transformToPresenter(): ItemOrder {
-    return ItemOrder(id = itemId, name = name, image = image, countStart = countStart, countFinish = countFinish)
-}
 
 fun InfoTownHall.transformToPresenter(): TownHall {
     return TownHall(id = idTown, start = start, finish = finish, url = url)

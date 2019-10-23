@@ -18,7 +18,7 @@ interface ItemForpDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(itemForpResponce: List<ItemForpost>) // (vararg student: StudentDb)(Student...student)
+    fun insert(itemForpResponce: List<ItemForpost>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(itemForpResponce: ItemForpost)

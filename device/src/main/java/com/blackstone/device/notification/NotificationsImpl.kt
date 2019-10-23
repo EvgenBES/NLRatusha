@@ -10,7 +10,7 @@ import com.blackstone.domain.entity.Config
 import com.blackstone.domain.repositories.DaoRepository
 import javax.inject.Inject
 
-class NotificationsImpl @Inject constructor(
+class NotificationsImpl (
     private val notificationManagerCompat: NotificationManagerCompat,
     private val notificationBuilder: NotificationBuilder,
     daoRepository: DaoRepository

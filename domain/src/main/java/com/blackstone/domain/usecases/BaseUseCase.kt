@@ -65,22 +65,15 @@ abstract class BaseUseCase<T> {
 
 
         operator fun invoke(result: T) {
-            onComplete?.let {
-                it.invoke(result)
-            }
+            onComplete?.invoke(result)
         }
 
         operator fun invoke(error: ErrorModel) {
-            onError?.let {
-                it.invoke(error)
-
-            }
+            onError?.invoke(error)
         }
 
         operator fun invoke(error: CancellationException) {
-            onCancel?.let {
-                it.invoke(error)
-            }
+            onCancel?.invoke(error)
         }
     }
 }
