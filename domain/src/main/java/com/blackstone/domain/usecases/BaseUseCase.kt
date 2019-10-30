@@ -30,7 +30,7 @@ abstract class BaseUseCase<T> {
             } catch (cancellationException: CancellationException) {
                 response(cancellationException)
             } catch (e: Exception) {
-                val error = e.mapErrorException(e)
+                val error = mapErrorException(e)
                 response(error)
             }
         }

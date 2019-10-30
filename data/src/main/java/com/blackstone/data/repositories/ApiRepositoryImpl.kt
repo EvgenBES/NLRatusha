@@ -5,15 +5,15 @@ import com.blackstone.data.db.entity.Meta
 import com.blackstone.data.db.entity.transformToItemForpostDao
 import com.blackstone.data.db.entity.transformToItemOctalDao
 import com.blackstone.data.db.entity.transformToTownHallDao
-import com.blackstone.data.extension.mapResponseOrder
 import com.blackstone.data.net.RestService
 import com.blackstone.domain.entity.Order
-import com.blackstone.domain.repositories.ServerRepository
+import com.blackstone.domain.extension.mapResponseOrder
+import com.blackstone.domain.repositories.ApiRepository
 import javax.inject.Inject
 
-class ServerRepositoryImpl @Inject constructor(
+class ApiRepositoryImpl @Inject constructor(
     private val appDataBase: AppDataBase, private val apiService: RestService
-) : ServerRepository {
+) : ApiRepository {
 
     override suspend fun updateDataForpost(): Boolean {
         val result = apiService.getForpost()

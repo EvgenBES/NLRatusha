@@ -9,21 +9,6 @@ import java.util.*
 
 object CalculationsUtils {
 
-    fun timeMap(finish: String): String {
-        return if (finish != " ") {
-            val fixTime = 10800000L // 3 hor
-            val dateFinish = SimpleDateFormat("dd.MM.yyyy HH:mm").parse(finish).time
-            val dateNew = dateFinish - Date().time - fixTime
-
-            val daysLeft = SimpleDateFormat("d", Locale.getDefault()).format(dateNew).toInt()
-            val result = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(dateNew)
-
-            "${daysLeft - 1}д $result"
-        } else {
-            "0д 0:00:00"
-        }
-    }
-
     fun totalSum(listItem: List<ItemOrder>): TotalSum {
         var sum = 0
         var paid = 0
@@ -57,7 +42,7 @@ object CalculationsUtils {
 
 
     fun totalRemainderCardView(price: Int, countStart: Int, countFinish: Int): Boolean {
-       return ((price * countFinish) - (price * countStart)) != 0
+        return ((price * countFinish) - (price * countStart)) != 0
     }
 
 

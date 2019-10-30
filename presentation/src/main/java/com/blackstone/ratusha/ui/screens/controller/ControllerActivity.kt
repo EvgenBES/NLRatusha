@@ -112,7 +112,7 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
         if (currentFragment is DetailItemFragment) super.onBackPressed()
 
         else {
-            if (viewModel.stateRecyclerFragment && currentFragment != null && currentFragment is FInformation) {
+            if (viewModel.getStateRecyclerFragment() && currentFragment != null && currentFragment is FInformation) {
                 (currentFragment as FInformation).onBackPresserFragment()
             } else {
                 if (Calendar.getInstance().time.time - 1500 < timerBackPressed) {
@@ -138,7 +138,7 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     }
 
     fun changedStatusRecyclerFragment(state: Boolean) {
-        viewModel.stateRecyclerFragment = state
+        viewModel.setStateRecyclerFragment(state)
     }
 
 }

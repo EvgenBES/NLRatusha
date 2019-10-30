@@ -8,7 +8,6 @@ import androidx.room.Query
 import com.blackstone.data.db.ConstDao.TABLE_FORPOST
 import com.blackstone.data.db.entity.ItemForpost
 import com.blackstone.data.db.entity.ItemOrderExtended
-import com.blackstone.domain.entity.ItemOrder
 
 @Dao
 interface ItemForpDao {
@@ -26,6 +25,7 @@ interface ItemForpDao {
     @Query("DELETE FROM $TABLE_FORPOST")
     fun deleteAll()
 
+    //TODO CHANGED
     @Query("SELECT itemId as id, $T1.name, $T1.image, countStart, countFinish, price, reputation, countItemRep FROM $TABLE_FORPOST LEFT JOIN items ON $T1.itemId = items.id")
     fun getAll(): LiveData<List<ItemOrderExtended>>
 }

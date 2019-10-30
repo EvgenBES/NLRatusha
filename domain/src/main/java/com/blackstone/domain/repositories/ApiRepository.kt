@@ -1,6 +1,6 @@
 package com.blackstone.domain.repositories
 
-interface ServerRepository {
+interface ApiRepository {
     suspend fun updateDataForpost(): Boolean
     suspend fun updateDataOctal(): Boolean
 }

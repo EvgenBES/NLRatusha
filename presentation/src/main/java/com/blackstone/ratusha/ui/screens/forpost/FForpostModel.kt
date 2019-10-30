@@ -5,7 +5,6 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.TownHall
-import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.usecases.GetInfoTownHallUseCase
 import com.blackstone.domain.usecases.GetItemForpostUseCase
 import com.blackstone.ratusha.app.App
@@ -31,9 +30,9 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
 
     private val progress = ObservableField<Int>()
     private val closeDoor = ObservableBoolean()
-    private val paid = ObservableField<String>("0 / 0")
-    private val remainder = ObservableField<String>("Еще: 0")
-    private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
+    private val paid = ObservableField<String>()
+    private val remainder = ObservableField<String>()
+    private val remainderTimeOrderForpost = ObservableField<String>()
     private var timeOrderForpostNoCast: String = TimerUtils.getDefTimerOrder()
 
     private val itemsOrder: Observer<List<ItemOrder>> = Observer { list -> setItems(list) }
@@ -66,7 +65,7 @@ class FForpostModel : BaseViewModel<ControllerRouter>() {
 
     private fun setItems(list: List<ItemOrder>) {
         closeDoor.set(list.isEmpty())
-        adapter.setItems(list.convertToLinkedList())
+        adapter.setItems(list)
         setTotalSumOrder(list)
     }
 

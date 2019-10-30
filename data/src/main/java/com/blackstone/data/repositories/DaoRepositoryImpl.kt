@@ -12,8 +12,7 @@ import javax.inject.Inject
  * @author Evgeny Butov
  * @created 14.04.2019
  */
-class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase) :
-    DaoRepository {
+class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase) : DaoRepository {
 
     override fun getConfig(): LiveData<Config> {
         return Transformations.map(appDataBase.getConfigDao().getConfig()) { config -> config?.transformToConfig() }

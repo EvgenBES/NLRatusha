@@ -1,11 +1,6 @@
-package com.blackstone.data.extension
+package com.blackstone.domain.extension
 
-import android.app.NotificationManager
 import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.Order

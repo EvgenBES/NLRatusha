@@ -2,8 +2,8 @@ package com.blackstone.ratusha.ui.adapter.recipe
 
 import androidx.databinding.ObservableField
 import com.blackstone.domain.entity.ItemRecipeFull
+import com.blackstone.domain.extension.twoCharAfterDot
 import com.blackstone.ratusha.ui.base.recycler.BaseItemViewModel
-import com.blackstone.ratusha.utils.twoCharAfterDot
 
 /**
  * @author Evgeny Butov

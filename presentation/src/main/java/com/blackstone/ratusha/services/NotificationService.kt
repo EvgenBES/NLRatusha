@@ -37,7 +37,6 @@ class NotificationService : FirebaseMessagingService() {
             NOTIFICATION_OCTAL_CLOSE -> notifications.showNotification(NOTIFICATION_ID_OCTAL_CLOSE)
             NOTIFICATION_FORPOST_TP -> notifications.showNotification(NOTIFICATION_ID_FORPOST_TP)
             NOTIFICATION_OCTAL_TP -> notifications.showNotification(NOTIFICATION_ID_OCTAL_TP)
-            else -> {}
         }
     }
 }

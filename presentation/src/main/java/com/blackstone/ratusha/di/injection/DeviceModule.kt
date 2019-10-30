@@ -6,7 +6,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.blackstone.device.notification.NotificationBuilder
 import com.blackstone.device.notification.Notifications
 import com.blackstone.device.notification.NotificationsImpl
-import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.domain.repositories.AppRepository
 import com.blackstone.ratusha.ui.screens.controller.ControllerActivity
 import dagger.Module
 import dagger.Provides
@@ -23,8 +23,8 @@ class DeviceModule {
     @Provides
     fun provideNotifications(notificationManagerCompat: NotificationManagerCompat,
                              notificationBuilder: NotificationBuilder,
-                             daoRepository: DaoRepository): Notifications {
-        return NotificationsImpl(notificationManagerCompat, notificationBuilder, daoRepository)
+                             appRepository: AppRepository): Notifications {
+        return NotificationsImpl(notificationManagerCompat, notificationBuilder, appRepository)
     }
 
     @Singleton

@@ -1,4 +1,4 @@
-package com.blackstone.ratusha.utils
+package com.blackstone.domain.extension
 
 import java.text.DecimalFormat
 

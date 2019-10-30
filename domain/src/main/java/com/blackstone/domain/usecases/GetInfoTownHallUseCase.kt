@@ -2,7 +2,7 @@ package com.blackstone.domain.usecases
 
 import androidx.lifecycle.LiveData
 import com.blackstone.domain.entity.TownHall
-import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.domain.repositories.AppRepository
 import javax.inject.Inject
 
 /**
@@ -10,13 +10,13 @@ import javax.inject.Inject
  * @created 07.02.2019
  */
 class GetInfoTownHallUseCase
-    @Inject constructor(private val daoRepository: DaoRepository) {
+@Inject constructor(private val repository: AppRepository) {
 
     fun get(): LiveData<List<TownHall>> {
-        return daoRepository.getInfoTownHall()
+        return repository.getDatabaseService().getInfoTownHall()
     }
 
     fun getTownHall(id: Int): LiveData<TownHall> {
-        return daoRepository.getTownHall(id)
+        return repository.getDatabaseService().getTownHall(id)
     }
 }

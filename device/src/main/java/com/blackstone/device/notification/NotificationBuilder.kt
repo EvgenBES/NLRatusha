@@ -21,9 +21,7 @@ import android.content.Intent
  * @author Evgeny Butov
  * @created 01.09.2019
  */
-class NotificationBuilder
-@Inject constructor(private val context: Context,
-                    private val intentActivity: Intent) {
+class NotificationBuilder(private val context: Context, private val intentActivity: Intent) {
 
     fun builder(notificationId: Int): Notification {
         return when (notificationId) {

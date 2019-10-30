@@ -8,16 +8,6 @@ import android.widget.TextView
 import com.blackstone.ratusha.ui.widget.ExpandableCardView
 import kotlinx.android.synthetic.main.item_order.view.*
 
-
-//@BindingAdapter("imageUrl")
-//fun loadImage(view: ImageView, url: String?) {
-//        Picasso.get()
-//            .load("http://image.neverlands.ru/weapon/$url")
-//            .placeholder(com.blackstone.ratusha.R.drawable.ic_hourglass)
-//            .error(com.blackstone.ratusha.R.drawable.ic_cancel)
-//            .into(view)
-//}
-
 @BindingAdapter("src")
 fun setImageResource(view: ImageView, resource: Int) {
     if (resource > 0) view.setImageResource(resource)

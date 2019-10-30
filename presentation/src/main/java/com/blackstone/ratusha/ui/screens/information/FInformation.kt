@@ -25,7 +25,7 @@ class FInformation : BaseMvvmFragment<FInformationModel, ControllerRouter, Fragm
 
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.setHasFixedSize(true)
-        binding.recyclerview.adapter = viewModel.adapter
+        binding.recyclerview.adapter = viewModel.getCategoryAdapter()
     }
 
     fun onBackPresserFragment() {

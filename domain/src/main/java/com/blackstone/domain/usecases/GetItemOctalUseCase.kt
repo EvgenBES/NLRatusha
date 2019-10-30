@@ -3,10 +3,8 @@ package com.blackstone.domain.usecases
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.blackstone.domain.entity.ItemOrder
-import com.blackstone.domain.extension.convertToLinkedList
-import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.domain.repositories.AppRepository
 import com.blackstone.domain.utils.DomainUtils.sortItemOrder
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -14,9 +12,9 @@ import javax.inject.Inject
  * @created 08.02.2019
  */
 class GetItemOctalUseCase
-    @Inject constructor(private val daoRepository: DaoRepository) {
+@Inject constructor(private val repository: AppRepository) {
 
-    fun getAllItemOrder(): LiveData<LinkedList<ItemOrder>> {
-        return Transformations.map(daoRepository.getItemOctal()) { sortItemOrder(it).convertToLinkedList() }
+    fun getAllItemOrder(): LiveData<List<ItemOrder>> {
+        return Transformations.map(repository.getDatabaseService().getItemOctal()) { sortItemOrder(it) }
     }
 }

@@ -2,7 +2,7 @@ package com.blackstone.domain.usecases
 
 import androidx.lifecycle.LiveData
 import com.blackstone.domain.entity.Config
-import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.domain.repositories.AppRepository
 import javax.inject.Inject
 
 /**
@@ -10,14 +10,15 @@ import javax.inject.Inject
  * @created 19.05.2019
  */
 class GetConfigUseCase
-    @Inject constructor(private val itemRepository: DaoRepository): BaseUseCaseParams<Config, Boolean>() {
+@Inject constructor(private val repository: AppRepository) :
+    BaseUseCaseParams<Config, Boolean>() {
 
     fun getConfig(): LiveData<Config> {
-        return itemRepository.getConfig()
+        return repository.getDatabaseService().getConfig()
     }
 
     override suspend fun executeOnBackground(params: Config): Boolean {
-        itemRepository.setConfig(params)
+        repository.getDatabaseService().setConfig(params)
         return true
     }
 }

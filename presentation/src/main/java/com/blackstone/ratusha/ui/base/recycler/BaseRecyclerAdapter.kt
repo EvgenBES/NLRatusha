@@ -3,7 +3,6 @@ package com.blackstone.ratusha.ui.base.recycler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 
 /**
  * @author Evgeny Butov
@@ -11,7 +10,7 @@ import java.util.*
  */
 
 abstract class BaseRecyclerAdapter<Entity, VM : BaseItemViewModel<Entity>>
-    (private var itemList: LinkedList<Entity> = LinkedList()) : RecyclerView.Adapter<BaseViewHolder<Entity, VM, *>>() {
+    (private var itemList: MutableList<Entity> = mutableListOf<Entity>()) : RecyclerView.Adapter<BaseViewHolder<Entity, VM, *>>() {
 
     private val clickItemSubject = MutableLiveData<ItemClick<Entity>>()
     fun onClickItemSubject():LiveData<ItemClick<Entity>> = clickItemSubject
@@ -29,17 +28,17 @@ abstract class BaseRecyclerAdapter<Entity, VM : BaseItemViewModel<Entity>>
         return if (itemList.lastIndex  < position) null else itemList[position]
     }
 
-    fun getListItems(): LinkedList<Entity> {
+    fun getListItems(): List<Entity> {
         return itemList
     }
 
-    fun setItems(items: LinkedList<Entity>) {
-        this.itemList = items
+    fun setItems(items: List<Entity>) {
+        this.itemList = items as MutableList<Entity>
         notifyDataSetChanged()
     }
 
-    fun itemsRangeChanged(listItems: LinkedList<Entity>, positionStart: Int, itemCount: Int) {
-        this.itemList = listItems
+    fun itemsRangeChanged(listItems: List<Entity>, positionStart: Int, itemCount: Int) {
+        this.itemList = listItems as MutableList<Entity>
         notifyItemRangeChanged(positionStart, itemCount)
     }
 
@@ -52,17 +51,6 @@ abstract class BaseRecyclerAdapter<Entity, VM : BaseItemViewModel<Entity>>
     fun updateItem(position: Int, item: Entity) {
         itemList[position] = item
         notifyItemChanged(position)
-    }
-
-    open fun moveItem(fromPosition: Int, toPosition: Int = 1) {
-        val item: Entity = itemList[fromPosition]
-        itemList.removeAt(fromPosition)
-        itemList.add(toPosition, item)
-        notifyItemMoved(fromPosition, toPosition)
-
-        val positionStart = if (fromPosition < toPosition) fromPosition else toPosition
-        val itemCount = Math.abs(fromPosition - toPosition) + 1
-        notifyItemRangeChanged(positionStart, itemCount)
     }
 
     fun cleanItems() {

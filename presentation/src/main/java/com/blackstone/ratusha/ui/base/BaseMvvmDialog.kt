@@ -39,12 +39,4 @@ abstract class BaseMvvmDialog<VM : BaseViewModel<R>, R : BaseRouter<*>, B : View
             router = (activity as BaseMvvmActivity<*, *, *>).router as R
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
 }

@@ -8,7 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.entity.ItemRecipeFull
-import com.blackstone.domain.extension.convertToLinkedList
 import com.blackstone.domain.usecases.*
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
@@ -25,16 +24,16 @@ import javax.inject.Inject
 
 class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
-    val counter: ObservableField<String> = ObservableField<String>("1")
+    val counter: ObservableField<String> = ObservableField<String>()
     val counterVisible: ObservableBoolean = ObservableBoolean()
     val typeItemNoAlchemy: ObservableBoolean = ObservableBoolean(true)
-    val total: ObservableField<String> = ObservableField<String>("0.00")
+    val total: ObservableField<String> = ObservableField<String>()
     val image: ObservableField<String> = ObservableField<String>()
-    val name: ObservableField<String> = ObservableField<String>("Неизвестный предмет")
-    val price: ObservableField<String> = ObservableField<String>("Цена: 0")
-    val reputation: ObservableField<String> = ObservableField<String>("х0")
-    val craft: ObservableField<String> = ObservableField<String>("1")
-    val itemNoAlchemy: ObservableBoolean = ObservableBoolean(false)
+    val name: ObservableField<String> = ObservableField<String>()
+    val price: ObservableField<String> = ObservableField<String>()
+    val reputation: ObservableField<String> = ObservableField<String>()
+    val craft: ObservableField<String> = ObservableField<String>()
+    val itemNoAlchemy: ObservableBoolean = ObservableBoolean()
 
     private var listItem = mutableListOf<ItemRecipeFull>()
     private var plusTime: Long = 0
@@ -76,27 +75,27 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     private fun getAlchemyRecipe(id: Int) {
-            getRecipeAlchemyUseCase.execute(id) {
-                onComplete {
-                    adapter.setItems(it)
-                    setTotal(it)
-                }
-                onError {
-                    Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
-                }
+        getRecipeAlchemyUseCase.execute(id) {
+            onComplete {
+                adapter.setItems(it)
+                setTotal(it)
             }
+            onError {
+                Log.d(TAG, "getAlchemyRecipe message: ${it.message}")
+            }
+        }
     }
 
     private fun getRecipeItem(id: Int) {
-            getRecipeItemUseCase.execute(id) {
-                onComplete {
-                    adapter.setItems(it)
-                    listItem = it
-                    setTotal(it)
-                    itemNoAlchemy.set(true)
-                }
-                onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
+        getRecipeItemUseCase.execute(id) {
+            onComplete {
+                adapter.setItems(it)
+                listItem = it as MutableList
+                setTotal(it)
+                itemNoAlchemy.set(true)
             }
+            onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
+        }
     }
 
 
@@ -162,7 +161,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                 returnList.add(ItemRecipeFull(it.id, it.image, it.name, it.price, it.number * result, it.type))
             }
 
-            adapter.setItems(returnList.convertToLinkedList())
+            adapter.setItems(returnList)
             if (returnList.isNotEmpty()) setTotal(returnList)
         }
     }

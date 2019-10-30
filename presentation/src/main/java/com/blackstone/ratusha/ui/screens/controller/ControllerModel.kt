@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 class ControllerModel : BaseViewModel<ControllerRouter>() {
 
-    var stateRecyclerFragment: Boolean = false
+    private var stateRecyclerFragment: Boolean = false
     private val buttonRefresh = MutableLiveData<Boolean>()
     private val progressBar = MutableLiveData<Boolean>()
 
@@ -33,6 +33,10 @@ class ControllerModel : BaseViewModel<ControllerRouter>() {
 
     fun getButtonRefresh(): LiveData<Boolean> = buttonRefresh
     fun getProgressBar(): LiveData<Boolean> = progressBar
+    fun getStateRecyclerFragment(): Boolean = stateRecyclerFragment
+    fun setStateRecyclerFragment(state: Boolean) {
+        stateRecyclerFragment = state
+    }
 
     private fun getOrderInformation() {
         viewModelScope.launch {

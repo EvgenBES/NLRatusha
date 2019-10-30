@@ -1,9 +1,7 @@
 package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemRecipeFull
-import com.blackstone.domain.extension.convertToLinkedList
-import com.blackstone.domain.repositories.DaoRepository
-import java.util.*
+import com.blackstone.domain.repositories.AppRepository
 import javax.inject.Inject
 
 /**
@@ -11,10 +9,10 @@ import javax.inject.Inject
  * @created 14.03.2019
  */
 class GetRecipeAlchemyUseCase
-    @Inject constructor(private val daoRepository: DaoRepository) : BaseUseCaseParams<Int, LinkedList<ItemRecipeFull>>() {
+@Inject constructor(private val repository: AppRepository) :
+    BaseUseCaseParams<Int, List<ItemRecipeFull>>() {
 
-
-    override suspend fun executeOnBackground(params: Int): LinkedList<ItemRecipeFull> {
-        return daoRepository.getReceptAlchemy(params).convertToLinkedList()
+    override suspend fun executeOnBackground(params: Int): List<ItemRecipeFull> {
+        return repository.getDatabaseService().getReceptAlchemy(params)
     }
 }

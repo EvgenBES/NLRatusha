@@ -11,19 +11,15 @@ abstract class BaseViewModel<R : BaseRouter<*>> : ViewModel() {
     protected var TAG: String = "RATUSHA ${this::class.java.simpleName}"
 
     protected var router: R? = null
-    public  fun addRouter(router: R?){
+
+    fun addRouter(router: R?){
         this.router = router
     }
 
-    public fun removeRouter() {
+    fun removeRouter() {
         this.router = null
     }
 
-
     open fun onResume() {
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 }

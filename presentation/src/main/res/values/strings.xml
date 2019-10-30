@@ -29,4 +29,17 @@
     <string name="cancel">Отмена</string>
     <string name="save">Сохранить</string>
     <string name="description_image">Image</string>
+
+    <string name="startCounter">1</string>
+    <string name="total">0.00</string>
+    <string name="not_found_item">Неизвестный предмет</string>
+    <string name="price">Цена: 0</string>
+    <string name="reputation">х0</string>
+
+    <string name="paid">0 / 0</string>
+    <string name="remainder">Еще: 0</string>
+    <string name="timeOrder">9д 23:59:59</string>
+    <string name="productTime">02:00:00</string>
+    <string name="percent">00%</string>
+
 </resources>

@@ -27,12 +27,12 @@ import javax.inject.Inject
 
 class FMainModel : BaseViewModel<ControllerRouter>() {
 
-    private val productTime = ObservableField<String>("02:00:00")
+    private val productTime = ObservableField<String>()
     private val updateTime = ObservableField<String>()
-    private val remainderTimeOrderForpost = ObservableField<String>("9д 23:59:59")
-    private val remainderTimeOrderOctal = ObservableField<String>("9д 23:59:59")
-    private val forpostPercent = ObservableField<String>("00%")
-    private val octalPercent = ObservableField<String>("00%")
+    private val remainderTimeOrderForpost = ObservableField<String>()
+    private val remainderTimeOrderOctal = ObservableField<String>()
+    private val forpostPercent = ObservableField<String>()
+    private val octalPercent = ObservableField<String>()
     private val productForpost: ObservableField<String> = ObservableField<String>()
     private val productOctal: ObservableField<String> = ObservableField<String>()
     private val progressForpost: ObservableInt = ObservableInt()
@@ -70,7 +70,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
     }
 
     override fun onResume() {
-       updateTimeOrder(updateOrder)
+        updateTimeOrder(updateOrder)
     }
 
     fun getUpdateTime(): ObservableField<String> = updateTime
@@ -127,7 +127,7 @@ class FMainModel : BaseViewModel<ControllerRouter>() {
         }
 
         TimerUtils.repeatAfter1Sec(60_000L) {
-           updateTimeOrder(updateOrder)
+            updateTimeOrder(updateOrder)
         }
     }
 

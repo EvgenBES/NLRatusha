@@ -37,9 +37,6 @@ class ExpandableCardView : FrameLayout {
     private val layoutContent by bind<View>(R.id.layout_content)
     private val wrapProgress by bind<ConstraintLayout>(R.id.wrap_progress)
 
-    constructor(context: Context, type: Int) : super(context) {
-        init(null)
-    }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(attrs)

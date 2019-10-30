@@ -37,8 +37,7 @@ class App : MultiDexApplication(), HasActivityInjector {
         instance = this
     }
 
-    @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     override fun activityInjector(): AndroidInjector<Activity>? {
         return activityInjector
@@ -52,25 +51,32 @@ class App : MultiDexApplication(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
 
+        initDI()
+        initCrashlytics()
+        initFirebaseMessaging()
+
+    }
+
+    private fun initDI() {
+        appComponent = DaggerAppComponent
+            .builder()
+            .application(this)
+            .build()
+
+        appComponent.inject(this)
+    }
+
+    private fun initCrashlytics() {
+        CrashLogger.initialize(this)
+    }
+
+    private fun initFirebaseMessaging() {
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseMessaging.getInstance().subscribeToTopic(NOTIFICATION_FORPOST_CLOSE)
         FirebaseMessaging.getInstance().subscribeToTopic(NOTIFICATION_FORPOST_TP)
         FirebaseMessaging.getInstance().subscribeToTopic(NOTIFICATION_OCTAL_TP)
         FirebaseMessaging.getInstance().subscribeToTopic(NOTIFICATION_OCTAL_CLOSE)
         createNotificationChannel()
-
-        appComponent = DaggerAppComponent
-                .builder()
-                .application(this)
-                .build()
-
-        appComponent.inject(this)
-
-        initCrashlytics()
-    }
-
-    private fun initCrashlytics() {
-        CrashLogger.initialize(this)
     }
 
     private fun createNotificationChannel() {

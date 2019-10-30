@@ -21,8 +21,7 @@ import javax.inject.Inject
  */
 class FInformationModel : BaseViewModel<ControllerRouter>() {
 
-    val adapter = CategoryAdapter()
-
+    private val adapter = CategoryAdapter()
     private val onClickAdapter: Observer<ItemClick<ItemCategory>> = Observer { onClickItem(it) }
 
     @Inject lateinit var getCategoryList: GetCategoryListUseCase
@@ -38,6 +37,8 @@ class FInformationModel : BaseViewModel<ControllerRouter>() {
         adapter.onClickItemSubject().removeObserver(onClickAdapter)
         super.onCleared()
     }
+
+    fun getCategoryAdapter(): CategoryAdapter = adapter
 
     fun getCategoryDao() {
         viewModelScope.launch {

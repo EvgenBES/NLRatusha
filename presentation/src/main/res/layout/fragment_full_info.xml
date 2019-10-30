@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                    android:text="@{viewModel.counter}"
+                    android:text="@{viewModel.counter, default=@string/startCounter}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/tvCounter"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@{viewModel.name}"
+                android:text="@{viewModel.name, default=@string/not_found_item}"
                 android:textColor="@color/colorAccent"
                 tools:text="Неизвестный предмет"
                 app:autoSizeMaxTextSize="16sp"
@@ -93,7 +93,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/white80"
                 android:textSize="14dp"
-                android:text="@{viewModel.price}"
+                android:text="@{viewModel.price, default=@string/price}"
                 app:layout_constraintStart_toStartOf="@+id/tv_item_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
                 tools:text="Цена: 200 / "/>
@@ -140,7 +140,7 @@
                     android:imeOptions="actionDone"
                     android:minWidth="20dp"
                     android:maxLength="3"
-                    android:text="@={viewModel.craft}"
+                    android:text="@={viewModel.craft, default=@string/startCounter}"
                     android:onTextChanged="@{viewModel::onTextChanged}"
                     tools:text="1"
                     android:textSize="14sp"/>
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@{viewModel.reputation}"
+                android:text="@{viewModel.reputation, default=@string/reputation}"
                 tools:text="х0 (0)"
                 android:textColor="@color/white80"
                 android:textSize="14dp"
@@ -306,7 +306,7 @@
                         android:layout_marginEnd="16dp"
                         android:fontFamily="@font/roboto_regular"
                         android:paddingStart="16dp"
-                        android:text="@{viewModel.total}"
+                        android:text="@{viewModel.total, default=@string/total}"
                         tools:text="65"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"

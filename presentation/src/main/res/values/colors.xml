@@ -35,4 +35,5 @@
     <color name="white60">#99FFFFFF</color>
     <color name="white12">#1FFFFFFF</color>
     <color name="ic_color_gray">#B8C9D9</color>
+    <color name="background_dialog">#33FFFFFF</color>
 </resources>

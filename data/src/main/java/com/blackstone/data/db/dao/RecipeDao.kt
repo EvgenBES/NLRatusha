@@ -14,6 +14,8 @@ import com.blackstone.domain.entity.ItemRecipeFull
 @Dao
 interface RecipeDao {
 
+    //TODO CHANGED
+
     @Query("SELECT resources.id, image, name, price, number FROM $TABLE_RECIPE INNER JOIN resources ON recipe.resource = resources.id WHERE recipe = :id")
     suspend fun getRecipe(id: Int): List<ItemRecipe>
 

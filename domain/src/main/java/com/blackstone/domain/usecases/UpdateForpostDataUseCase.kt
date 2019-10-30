@@ -1,6 +1,6 @@
 package com.blackstone.domain.usecases
 
-import com.blackstone.domain.repositories.ServerRepository
+import com.blackstone.domain.repositories.AppRepository
 import javax.inject.Inject
 
 /**
@@ -8,9 +8,9 @@ import javax.inject.Inject
  * @created 03.02.2019
  */
 class UpdateForpostDataUseCase
-    @Inject constructor(private val itemRepository: ServerRepository): BaseUseCase<Boolean>() {
+@Inject constructor(private val repository: AppRepository) : BaseUseCase<Boolean>() {
 
     override suspend fun executeOnBackground(): Boolean {
-        return itemRepository.updateDataForpost()
+        return repository.getApiService().updateDataForpost()
     }
 }

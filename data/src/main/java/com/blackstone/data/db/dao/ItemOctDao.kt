@@ -8,7 +8,6 @@ import androidx.room.Query
 import com.blackstone.data.db.ConstDao.TABLE_OCTAL
 import com.blackstone.data.db.entity.ItemOctal
 import com.blackstone.data.db.entity.ItemOrderExtended
-import com.blackstone.domain.entity.ItemOrder
 
 @Dao
 interface ItemOctDao {
@@ -26,6 +25,8 @@ interface ItemOctDao {
     @Query("DELETE FROM $TABLE_OCTAL")
     fun deleteAll()
 
+
+    //TODO CHANGED
     @Query("SELECT itemId as id, $T1.name, $T1.image, countStart, countFinish, price, reputation, countItemRep FROM $TABLE_OCTAL LEFT JOIN items ON $T1.itemId = items.id")
     fun getAll(): LiveData<List<ItemOrderExtended>>
 }
