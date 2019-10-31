@@ -32,7 +32,7 @@ class Settings: BaseMvvmDialog<SettingsModel, ControllerRouter, DialogSettingsBi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.closeDialog.observe(this, Observer {
+        viewModel.getCloseDialog().observe(this, Observer {
             it?.let { result ->
                 if (result) dialog?.dismiss()
             }

@@ -26,7 +26,7 @@ import javax.inject.Inject
  */
 class FOctalModel : BaseViewModel<ControllerRouter>() {
 
-    val adapter = ItemsAdapter(type = OCTAL_ADAPTER)
+    private val adapter = ItemsAdapter(type = OCTAL_ADAPTER)
 
     private val progress = ObservableField<Int>()
     private val closeDoor = ObservableBoolean()
@@ -62,6 +62,7 @@ class FOctalModel : BaseViewModel<ControllerRouter>() {
     fun getRemainder(): ObservableField<String>  = remainder
     fun getProgress(): ObservableField<Int> = progress
     fun getCloseDoor(): ObservableBoolean = closeDoor
+    fun getItemsAdapter(): ItemsAdapter = adapter
 
     private fun setItems(list: List<ItemOrder>) {
         closeDoor.set(list.isEmpty())

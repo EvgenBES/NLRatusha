@@ -16,13 +16,12 @@ import javax.inject.Inject
  */
 class SettingsModel : BaseViewModel<ControllerRouter>() {
 
+    private val closeDialog = MutableLiveData<Boolean>()
+    private val checkTpForpost = ObservableBoolean()
+    private val checkTpOctal = ObservableBoolean()
+    private val checkStatusForpost = ObservableBoolean()
+    private val checkStatusOctal = ObservableBoolean()
     private val configObserver: Observer<Config> = Observer { config -> setConfig(config) }
-    val closeDialog = MutableLiveData<Boolean>()
-
-    val checkTpForpost = ObservableBoolean()
-    val checkTpOctal = ObservableBoolean()
-    val checkStatusForpost = ObservableBoolean()
-    val checkStatusOctal = ObservableBoolean()
 
     @Inject lateinit var configUseCase: GetConfigUseCase
 
@@ -36,6 +35,11 @@ class SettingsModel : BaseViewModel<ControllerRouter>() {
         super.onCleared()
     }
 
+    fun getCheckTpForpost(): ObservableBoolean = checkTpForpost
+    fun getCheckTpOctal(): ObservableBoolean = checkTpOctal
+    fun getCheckStatusForpost(): ObservableBoolean = checkStatusForpost
+    fun getCheckStatusOctal(): ObservableBoolean = checkStatusOctal
+    fun getCloseDialog(): MutableLiveData<Boolean> = closeDialog
 
     private fun setConfig(config: Config?) {
         config?.let { _config ->

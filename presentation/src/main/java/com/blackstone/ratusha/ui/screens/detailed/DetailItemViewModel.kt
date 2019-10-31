@@ -24,16 +24,16 @@ import javax.inject.Inject
 
 class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
-    val counter: ObservableField<String> = ObservableField<String>()
-    val counterVisible: ObservableBoolean = ObservableBoolean()
-    val typeItemNoAlchemy: ObservableBoolean = ObservableBoolean(true)
-    val total: ObservableField<String> = ObservableField<String>()
-    val image: ObservableField<String> = ObservableField<String>()
-    val name: ObservableField<String> = ObservableField<String>()
-    val price: ObservableField<String> = ObservableField<String>()
-    val reputation: ObservableField<String> = ObservableField<String>()
-    val craft: ObservableField<String> = ObservableField<String>()
-    val itemNoAlchemy: ObservableBoolean = ObservableBoolean()
+    private val counter: ObservableField<String> = ObservableField<String>()
+    private val counterVisible: ObservableBoolean = ObservableBoolean()
+    private val typeItemNoAlchemy: ObservableBoolean = ObservableBoolean(true)
+    private val total: ObservableField<String> = ObservableField<String>()
+    private val image: ObservableField<String> = ObservableField<String>()
+    private val name: ObservableField<String> = ObservableField<String>()
+    private val price: ObservableField<String> = ObservableField<String>()
+    private val reputation: ObservableField<String> = ObservableField<String>()
+    private val craft: ObservableField<String> = ObservableField<String>("1")
+    private val itemNoAlchemy: ObservableBoolean = ObservableBoolean()
 
     private var listItem = mutableListOf<ItemRecipeFull>()
     private var plusTime: Long = 0
@@ -51,6 +51,16 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     fun getAdapter(): RecipeAdapter = adapter
+    fun getCounter(): ObservableField<String> = counter
+    fun getTotal(): ObservableField<String> = total
+    fun getImage(): ObservableField<String> = image
+    fun getName(): ObservableField<String> = name
+    fun getPrice(): ObservableField<String> = price
+    fun getReputation(): ObservableField<String> = reputation
+    fun getCraft(): ObservableField<String> = craft
+    fun getItemNoAlchemy(): ObservableBoolean = itemNoAlchemy
+    fun getTypeItemNoAlchemy(): ObservableBoolean = typeItemNoAlchemy
+    fun getCounterVisible(): ObservableBoolean = counterVisible
 
     fun getItemAndRecipe(idItem: Int) {
         typeItemNoAlchemy.set(idItem > 50)
@@ -101,7 +111,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
     fun onPlusTouched(v: View, event: MotionEvent): Boolean {
 
-        if (craft.get().toString().length == 0) {
+        if (craft.get().toString().isEmpty()) {
             craft.set("1")
         }
 
@@ -122,7 +132,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
     fun onMinusTouched(v: View, event: MotionEvent): Boolean {
 
-        if (craft.get().toString().length == 0) {
+        if (craft.get().toString().isEmpty()) {
             craft.set("1")
         }
 

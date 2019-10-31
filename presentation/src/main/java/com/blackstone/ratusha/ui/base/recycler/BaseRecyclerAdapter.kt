@@ -33,12 +33,12 @@ abstract class BaseRecyclerAdapter<Entity, VM : BaseItemViewModel<Entity>>
     }
 
     fun setItems(items: List<Entity>) {
-        this.itemList = items as MutableList<Entity>
+        this.itemList = items.toMutableList()
         notifyDataSetChanged()
     }
 
     fun itemsRangeChanged(listItems: List<Entity>, positionStart: Int, itemCount: Int) {
-        this.itemList = listItems as MutableList<Entity>
+        this.itemList = listItems.toMutableList()
         notifyItemRangeChanged(positionStart, itemCount)
     }
 

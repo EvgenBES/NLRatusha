@@ -25,7 +25,7 @@ class FForpost : BaseMvvmFragment<FForpostModel, ControllerRouter, FragmentForpo
 
         binding.recyclerview.setHasFixedSize(true)
         binding.recyclerview.layoutManager = LinearLayoutManager(this.activity)
-        binding.recyclerview.adapter = viewModel.adapter
+        binding.recyclerview.adapter = viewModel.getItemsAdapter()
 
         setSwipeController()
     }
