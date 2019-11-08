@@ -3,43 +3,54 @@
     <string name="app_name">NeverLandsR</string>
     <string name="default_notification_channel_id">NOTIFICATION_NLR</string>
 
-    <string name="exit_app">Нажми еще раз чтобы выйти</string>
+    <string name="exit_app">Click again to exit</string>
 
     <string name="castle_name_forp">FORPOST</string>
     <string name="castle_name_octal">OCTAL</string>
     <string name="fragment_octal_title">OCTAL</string>
     <string name="fragment_forpost_title">FORPOST</string>
-    <string name="order_timer">0д 00:00:00</string>
+    <string name="order_timer">0d 00:00:00</string>
     <string name="product_timer">02:00:00</string>
 
     <string name="detailed_total">TOTAL:</string>
     <string name="detail_item_quantity">Quantity</string>
+    <string name="full_info_component">Components</string>
     <string name="detail_item_type">Type</string>
     <string name="detail_item_price">Price</string>
     <string name="detail_item_time">Time</string>
     <string name="detail_item_cost">Cost</string>
 
-    <string name="update_data_less60min">Последнее обновление:\n%1$d мин. назад</string>
-    <string name="update_data_more60min">Последнее обновление:\nболее часа назад</string>
-    <string name="notification_settings">Настройки уведомлений</string>
-    <string name="notification_tp_forpost">Телепорт в Форпосте</string>
-    <string name="notification_tp_octal">Телепорт в Октале</string>
-    <string name="notification_close_forpost">Закрытие Форпоста</string>
-    <string name="notification_close_octal">Закрытие Октала</string>
-    <string name="cancel">Отмена</string>
-    <string name="save">Сохранить</string>
+    <string name="recipte_item_empty">Empty</string>
+    <string name="item_price">Price: %d / </string>
+    <string name="item_level">Lv: %d</string>
+    <string name="item_level_profession">Skill: %d /</string>
+    <string name="item_weight">weight: %d</string>
+    <string name="item_reputation">х%s</string>
+
+    <string name="update_data_less60min">Last update:\n%1$d min. back</string>
+    <string name="update_data_more60min">Last update:\nmore than an hour ago</string>
+    <string name="notification_settings">Notification settings</string>
+    <string name="notification_tp_forpost">Teleport in Forpost</string>
+    <string name="notification_tp_octal">Teleport in Octal</string>
+    <string name="notification_close_forpost">Closing Forpost</string>
+    <string name="notification_close_octal">Closing Octal</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
     <string name="description_image">Image</string>
 
     <string name="startCounter">1</string>
     <string name="total">0.00</string>
-    <string name="not_found_item">Неизвестный предмет</string>
-    <string name="price">Цена: 0</string>
+    <string name="not_found_item">Unknown item</string>
+    <string name="price">Price: 0</string>
     <string name="reputation">х0</string>
 
     <string name="paid">0 / 0</string>
-    <string name="remainder">Еще: 0</string>
-    <string name="timeOrder">9д 23:59:59</string>
+    <string name="remainder">More: 0</string>
+    <string name="timeOrder">9d 23:59:59</string>
     <string name="productTime">02:00:00</string>
     <string name="percent">00%</string>
+
+
+    <string name="total_remain">More: %s</string>
 
 </resources>

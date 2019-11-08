@@ -28,6 +28,7 @@
         <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/defused</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="ForpostTime" parent="ForpostHeader">
@@ -48,5 +49,68 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="BaseText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="DetailHeaderText" parent="BaseText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="DetailItemText" parent="BaseText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white80</item>
+    </style>
+
+    <style name="DetailTableText" parent="DetailItemText">
+        <item name="android:textColor">@color/white60</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="DialogHeaderText">
+        <item name="android:textColor">@color/card_view_text_blue</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="DialogSwitchCompat" parent="SwitchSetting">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/card_view_text_blue</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DialogTextButton" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/card_view_text_blue</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="ExpandableCardText" >
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/card_view_text_blue</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ExpandableCardTitleText" >
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/card_view_text_blue</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
 
 </resources>

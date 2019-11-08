@@ -36,4 +36,7 @@
     <color name="white12">#1FFFFFFF</color>
     <color name="ic_color_gray">#B8C9D9</color>
     <color name="background_dialog">#33FFFFFF</color>
+    <color name="forpost_close_wrap">#4D021728</color>
+    <color name="octal_close_wrap">#4D7a5616</color>
+    <color name="bg_card_view">#314250</color>
 </resources>

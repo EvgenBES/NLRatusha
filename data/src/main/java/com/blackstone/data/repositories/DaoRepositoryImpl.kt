@@ -31,19 +31,19 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
     }
 
     override fun getInfoTownHall(): LiveData<List<TownHall>> {
-        return Transformations.map(appDataBase.getTownHallDao().getAll()) { list -> list.map { it.transformToPresenter() } }
+        return Transformations.map(appDataBase.getTownHallDao().getAll()) { list -> list.map { it.transformToTownHall() } }
     }
 
     override fun getItemForpost(): LiveData<List<ItemOrder>> {
-        return Transformations.map(appDataBase.getForpDao().getAll()) { list -> list.map { it.transformToPresenter() } }
+        return Transformations.map(appDataBase.getForpDao().getAll()) { list -> list.map { it.transformToItemOrder() } }
     }
 
     override fun getItemOctal(): LiveData<List<ItemOrder>> {
-        return  Transformations.map(appDataBase.getOctDao().getAll()) { list -> list.map { it.transformToPresenter() } }
+        return  Transformations.map(appDataBase.getOctDao().getAll()) { list -> list.map { it.transformToItemOrder() } }
     }
 
     override suspend fun getCategoryList(): List<ItemCategory> {
-        return appDataBase.getCategoryDao().getAll().map { it.transformToPresenter() }
+        return appDataBase.getCategoryDao().getAll().map { it.transformToItemCategory() }
     }
 
     override suspend fun getItemsCategory(id: Int): List<ItemCategory> {
@@ -51,7 +51,7 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
     }
 
     override suspend fun getItem(id: Int): Item {
-        return appDataBase.getItemsDao().getItem(id).transformToPresenter()
+        return appDataBase.getItemsDao().getItem(id).transformToItem()
     }
 
     override suspend fun getRecept(id: Int): List<ItemRecipeFull> {
@@ -59,6 +59,6 @@ class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase
     }
 
     override suspend fun getReceptAlchemy(id: Int): List<ItemRecipeFull> {
-        return appDataBase.getRecipeDao().getRecipeAlchemy(id)
+        return appDataBase.getRecipeDao().getRecipeAlchemy(id).map { it.transformToAlchemyRecipe() }
     }
 }

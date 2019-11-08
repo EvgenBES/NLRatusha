@@ -7,13 +7,16 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.viewModelScope
+import com.blackstone.domain.entity.Item
 import com.blackstone.domain.entity.ItemRecipeFull
+import com.blackstone.domain.entity.TypeRecipe
 import com.blackstone.domain.usecases.*
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.adapter.recipe.RecipeAdapter
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
 import com.blackstone.ratusha.utils.CalculationsUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,10 +31,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     private val counterVisible: ObservableBoolean = ObservableBoolean()
     private val typeItemNoAlchemy: ObservableBoolean = ObservableBoolean(true)
     private val total: ObservableField<String> = ObservableField<String>()
-    private val image: ObservableField<String> = ObservableField<String>()
-    private val name: ObservableField<String> = ObservableField<String>()
-    private val price: ObservableField<String> = ObservableField<String>()
-    private val reputation: ObservableField<String> = ObservableField<String>()
+    private val item: ObservableField<Item> = ObservableField<Item>()
     private val craft: ObservableField<String> = ObservableField<String>("1")
     private val itemNoAlchemy: ObservableBoolean = ObservableBoolean()
 
@@ -51,12 +51,9 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     }
 
     fun getAdapter(): RecipeAdapter = adapter
+    fun getItem(): ObservableField<Item> = item
     fun getCounter(): ObservableField<String> = counter
     fun getTotal(): ObservableField<String> = total
-    fun getImage(): ObservableField<String> = image
-    fun getName(): ObservableField<String> = name
-    fun getPrice(): ObservableField<String> = price
-    fun getReputation(): ObservableField<String> = reputation
     fun getCraft(): ObservableField<String> = craft
     fun getItemNoAlchemy(): ObservableBoolean = itemNoAlchemy
     fun getTypeItemNoAlchemy(): ObservableBoolean = typeItemNoAlchemy
@@ -67,16 +64,14 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
         viewModelScope.launch {
             getItemCategoryUseCase.execute(idItem) {
-                onComplete {
-                    image.set(it.image)
-                    name.set(it.name)
-                    price.set("Цена: ${it.price} / ")
-                    reputation.set("x${it.reputation} (${it.countItemRep})")
-                }
+                onComplete { item.set(it) }
                 onError { Log.d(TAG, "getItem message: ${it.message}") }
             }
 
-            if (idItem > 50) getRecipeItem(idItem) else getAlchemyRecipe(idItem)
+            if (idItem > 50) {
+                itemNoAlchemy.set(true)
+                getRecipeItem(idItem)
+            } else getAlchemyRecipe(idItem)
         }
     }
 
@@ -100,9 +95,8 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
         getRecipeItemUseCase.execute(id) {
             onComplete {
                 adapter.setItems(it)
-                listItem = it as MutableList
+                listItem = it.toMutableList()
                 setTotal(it)
-                itemNoAlchemy.set(true)
             }
             onError { Log.d(TAG, "getRecipeItem message: ${it.message}") }
         }

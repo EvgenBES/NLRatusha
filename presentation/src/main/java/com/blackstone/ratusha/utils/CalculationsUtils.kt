@@ -3,6 +3,7 @@ package com.blackstone.ratusha.utils
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.ItemRecipeFull
 import com.blackstone.domain.entity.TotalSum
+import com.blackstone.domain.entity.TypeRecipe
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -50,7 +51,9 @@ object CalculationsUtils {
         val decimalFormat: DecimalFormat = DecimalFormat("#.##")
         var total = 0.0
 
-        if (listItem[0].type.contains("empty")) listItem.forEach { total += it.number * it.price } else listItem.forEach { total += it.price }
+        listItem.forEach {
+            if (it.typeRecipe == TypeRecipe.DEFAULT) total += it.number * it.price else total += it.price
+        }
 
         return decimalFormat.format(total)
     }

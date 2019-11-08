@@ -6,9 +6,10 @@ package com.blackstone.domain.entity
  */
 data class ItemRecipeFull (
         val id: Int,
-        val image: String = "res_empty",
-        val name: String = "Empty",
+        val image: String,
+        val name: String,
         val price: Int = 0,
         val number: Double = 0.00,
-        val type: String = "empty"
+        val type: String = "",
+        var typeRecipe: TypeRecipe = TypeRecipe.DEFAULT
 )

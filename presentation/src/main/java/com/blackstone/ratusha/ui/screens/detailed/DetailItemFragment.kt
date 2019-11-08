@@ -46,13 +46,4 @@ class DetailItemFragment : BaseMvvmFragment<DetailItemViewModel, ControllerRoute
         binding.recyclerInfo.adapter = viewModel.getAdapter()
 
     }
-
-    fun hideTextCount() {
-        binding.tvCounter.animate().alpha(0.0f).duration = 750
-    }
-
-    fun showTextCount() {
-        binding.tvCounter.animate().alpha(1.0f).duration = 250
-    }
-
 }

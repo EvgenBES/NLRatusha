@@ -27,7 +27,7 @@
                 progress="@{viewModel.progress}"
                 quantity="@{viewModel.quantity}"
                 remainder="@{viewModel.remainder}"
-                totalRemain="@{viewModel.totalRemain}"/>
+                totalRemain="@{@string/total_remain(viewModel.totalRemain)}"/>
     </LinearLayout>
 
 </layout>

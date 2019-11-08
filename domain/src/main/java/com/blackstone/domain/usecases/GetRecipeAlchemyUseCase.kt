@@ -1,6 +1,7 @@
 package com.blackstone.domain.usecases
 
 import com.blackstone.domain.entity.ItemRecipeFull
+import com.blackstone.domain.entity.TypeRecipe
 import com.blackstone.domain.repositories.AppRepository
 import javax.inject.Inject
 

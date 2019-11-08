@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -9,9 +8,6 @@
                 type="com.blackstone.ratusha.ui.screens.settings.SettingsModel"/>
     </data>
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -21,15 +17,11 @@
                 android:background="@drawable/border_radius_10dp">
 
             <TextView
+                    style="@style/DialogHeaderText"
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
                     android:text="@string/notification_settings"
-                    android:textColor="@color/card_view_text_blue"
-                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -55,48 +47,28 @@
                     app:layout_constraintTop_toBottomOf="@+id/divider">
 
                 <androidx.appcompat.widget.SwitchCompat
+                        style="@style/DialogSwitchCompat"
                         android:theme="@style/SwitchSetting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:checked="@={viewModel.checkTpForpost}"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/notification_tp_forpost"
-                        android:textColor="@color/card_view_text_blue"
-                        android:textSize="14sp" />
+                        android:text="@string/notification_tp_forpost"/>
 
                 <androidx.appcompat.widget.SwitchCompat
+                        style="@style/DialogSwitchCompat"
                         android:theme="@style/SwitchSetting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:checked="@={viewModel.checkTpOctal}"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/notification_tp_octal"
-                        android:textColor="@color/card_view_text_blue"
-                        android:textSize="14sp" />
+                        android:text="@string/notification_tp_octal" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                        style="@style/DialogSwitchCompat"
                         android:theme="@style/SwitchSetting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:checked="@={viewModel.checkStatusForpost}"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/notification_close_forpost"
-                        android:textColor="@color/card_view_text_blue"
-                        android:textSize="14sp" />
+                        android:text="@string/notification_close_forpost" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                        style="@style/DialogSwitchCompat"
                         android:theme="@style/SwitchSetting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:checked="@={viewModel.checkStatusOctal}"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/notification_close_octal"
-                        android:textColor="@color/card_view_text_blue"
-                        android:textSize="14sp" />
+                        android:text="@string/notification_close_octal" />
 
             </LinearLayout>
 
@@ -121,15 +93,10 @@
                     app:layout_constraintTop_toBottomOf="@+id/divider2">
 
                 <TextView
+                        style="@style/DialogTextButton"
                         android:id="@+id/actionBack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:onClick="@{()-> viewModel.onClickBack()}"
                         android:text="@string/cancel"
-                        android:textColor="@color/card_view_text_blue"
-                        tools:text="BACK" />
+                        android:onClick="@{()-> viewModel.onClickBack()}"/>
 
                 <LinearLayout
                         android:layout_width="0.5dp"
@@ -137,20 +104,13 @@
                         android:background="@color/background_dialog"/>
 
                 <TextView
+                        style="@style/DialogTextButton"
                         android:id="@+id/actionSave"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
                         android:onClick="@{() -> viewModel.onClickSave()}"
-                        android:text="@string/save"
-                        android:textColor="@color/card_view_text_blue"
-                        tools:text="SAVE" />
+                        android:text="@string/save"/>
 
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
 
 </layout>

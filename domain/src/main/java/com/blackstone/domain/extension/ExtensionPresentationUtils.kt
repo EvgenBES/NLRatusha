@@ -1,6 +1,7 @@
 package com.blackstone.domain.extension
 
-import java.text.DecimalFormat
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 /**
  * @author Evgeny Butov
@@ -8,6 +9,9 @@ import java.text.DecimalFormat
  */
 
 fun Double.twoCharAfterDot(): String{
-    val formatText: DecimalFormat = DecimalFormat("#.##")
-    return formatText.format(this)
+    return BigDecimal(this).setScale(2, RoundingMode.UP).toString()
+}
+
+fun Double.zeroCharAfterDot(): String{
+    return BigDecimal(this).setScale(0, RoundingMode.UP).toString()
 }

@@ -24,7 +24,6 @@ class ItemsViewModel(private val typeAdapter: Int): BaseItemViewModel<ItemOrder>
     private val remainder: ObservableField<String> = ObservableField<String>()
     private val totalRemain: ObservableField<String> = ObservableField<String>()
     private val progress: ObservableInt = ObservableInt()
-    private val isOpenCardView: ObservableBoolean = ObservableBoolean()
 
     fun getType(): ObservableInt = type
     fun getImage(): ObservableField<String> = image
@@ -69,8 +68,8 @@ class ItemsViewModel(private val typeAdapter: Int): BaseItemViewModel<ItemOrder>
 
     private fun getCustomTotalRemainder(item: ItemOrder) {
         if (CalculationsUtils.totalRemainderCardView(item.price, item.countStart, item.countFinish)) {
-            totalRemain.set("Еще: ${CalculationsUtils.transformTotalSum(
-                (item.price * item.countFinish) - (item.price * item.countStart))}")
+            totalRemain.set(CalculationsUtils.transformTotalSum(
+                    (item.price * item.countFinish) - (item.price * item.countStart)))
         } else {
             totalRemain.set("")
         }

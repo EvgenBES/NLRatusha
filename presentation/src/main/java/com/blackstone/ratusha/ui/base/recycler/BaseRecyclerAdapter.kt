@@ -32,7 +32,7 @@ abstract class BaseRecyclerAdapter<Entity, VM : BaseItemViewModel<Entity>>
         return itemList
     }
 
-    fun setItems(items: List<Entity>) {
+    open fun setItems(items: List<Entity>) {
         this.itemList = items.toMutableList()
         notifyDataSetChanged()
     }

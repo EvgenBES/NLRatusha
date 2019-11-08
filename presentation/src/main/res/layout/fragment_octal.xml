@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.screens.octal.FOctal">
+            android:layout_height="match_parent">
 
 
         <ImageView
@@ -162,7 +161,7 @@
                         android:id="@+id/view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#4D7a5616"
+                        android:background="@color/octal_close_wrap"
                         android:alpha="0.0"
                         anim="@{viewModel.closeDoor}"/>
 

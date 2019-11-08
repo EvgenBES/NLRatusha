@@ -7,5 +7,8 @@ data class Item(
         val image: String,
         val price: Int,
         val reputation: Double,
-        val countItemRep: Int
+        val countItemRep: Int,
+        val level: Int = 12,
+        val skill: Int = 0,
+        val weight: Int = 0
 )

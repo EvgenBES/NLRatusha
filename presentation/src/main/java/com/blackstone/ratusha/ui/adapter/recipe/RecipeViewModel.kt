@@ -2,14 +2,16 @@ package com.blackstone.ratusha.ui.adapter.recipe
 
 import androidx.databinding.ObservableField
 import com.blackstone.domain.entity.ItemRecipeFull
+import com.blackstone.domain.entity.TypeRecipe
 import com.blackstone.domain.extension.twoCharAfterDot
+import com.blackstone.domain.extension.zeroCharAfterDot
 import com.blackstone.ratusha.ui.base.recycler.BaseItemViewModel
 
 /**
  * @author Evgeny Butov
  * @created 21.08.2019
  */
-class RecipeViewModel : BaseItemViewModel<ItemRecipeFull>() {
+class RecipeViewModel: BaseItemViewModel<ItemRecipeFull>() {
 
     private val image: ObservableField<String> = ObservableField<String>()
     private val title: ObservableField<String> = ObservableField<String>()
@@ -27,10 +29,10 @@ class RecipeViewModel : BaseItemViewModel<ItemRecipeFull>() {
         image.set(item.image)
         title.set(item.name)
 
-        if (item.type.contains("empty")) {
-            quantity.set(item.number.toString())
+        if (item.typeRecipe == TypeRecipe.DEFAULT) {
+            quantity.set(item.number.twoCharAfterDot())
             price.set(item.price.toString())
-            cost.set((item.number * item.price).twoCharAfterDot())
+            cost.set((item.number * item.price).zeroCharAfterDot())
         } else  {
             quantity.set(item.type)
             price.set(if (item.number.toInt() == 0 || item.number.toInt() == 14) "${item.number.toInt()}м" else "${item.number.toInt()}д")

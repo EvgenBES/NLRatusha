@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.screens.forpost.FForpost">
+            android:layout_height="match_parent">
 
         <ImageView
                 android:id="@+id/header_background"
@@ -44,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:gravity="center_horizontal"
                 android:text="@string/fragment_forpost_title"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="@+id/header_background"
@@ -57,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
                 android:text="@{viewModel.timeOrder ?? @string/timeOrder}"
                 app:layout_constraintEnd_toEndOf="@+id/textView6"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -158,7 +155,7 @@
                         android:id="@+id/view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#4D021728"
+                        android:background="@color/forpost_close_wrap"
                         android:alpha="0.0"
                         anim="@{viewModel.closeDoor}"/>
 

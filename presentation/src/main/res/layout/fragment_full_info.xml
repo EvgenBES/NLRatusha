@@ -41,6 +41,7 @@
                     android:gravity="center"/>
         </LinearLayout>
 
+
         <View
                 android:id="@+id/divider2"
                 android:layout_width="0dp"
@@ -55,48 +56,82 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/border_radius_items_details"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2"
-                android:background="@drawable/border_radius_items_details">
+                app:layout_constraintTop_toBottomOf="@+id/divider2">
 
             <ImageView
                     android:id="@+id/imgItem"
+                    src="@{viewModel.item.image}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_iw_empty"
-                    android:focusableInTouchMode="true"
-                    src="@{viewModel.image}"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
+                style="@style/DetailHeaderText"
                 android:id="@+id/tv_item_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@{viewModel.name ?? @string/not_found_item}"
-                android:textColor="@color/colorAccent"
-                tools:text="Неизвестный предмет"
-                app:autoSizeMaxTextSize="16sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{viewModel.item.name ?? @string/not_found_item}"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
                 app:layout_constraintStart_toEndOf="@+id/img_wrap"
-                app:layout_constraintTop_toTopOf="@+id/img_wrap"/>
+                app:layout_constraintTop_toBottomOf="@+id/headLayout"
+                tools:text="@string/not_found_item" />
 
         <TextView
+                style="@style/DetailItemText"
+                android:id="@+id/tv_item_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/item_level(viewModel.item.level)}"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/img_wrap"
+                app:layout_constraintStart_toStartOf="@+id/img_wrap"
+                app:layout_constraintTop_toBottomOf="@+id/img_wrap" />
+
+        <TextView
+                style="@style/DetailItemText"
                 android:id="@+id/tv_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/white80"
-                android:textSize="14dp"
-                android:text="@{viewModel.price ?? @string/price}"
+                android:layout_marginTop="2dp"
+                android:text="@{@string/item_price(viewModel.item.price)}"
                 app:layout_constraintStart_toStartOf="@+id/tv_item_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
-                tools:text="Цена: 200 / "/>
+                tools:text="Цена: 200 / " />
+
+        <TextView
+                style="@style/DetailItemText"
+                android:id="@+id/tv_item_skill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/item_level_profession(viewModel.item.skill)}"
+                tools:text="Умение: 540 / "
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_price" />
+
+        <TextView
+                style="@style/DetailItemText"
+                android:id="@+id/tv_item_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{@string/item_weight(viewModel.item.weight)}"
+                tools:text="масса: 70"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_skill"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_price" />
 
         <ImageView
                 android:id="@+id/imageView4"
@@ -109,88 +144,85 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_item_price"/>
 
         <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginTop="3dp"
-                app:visibility="@{viewModel.itemNoAlchemy}"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_item_rep"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_item_rep"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_item_rep" >
+                app:visibility="@{viewModel.itemNoAlchemy}">
 
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="6dp"
                     android:padding="12dp"
+                    android:paddingEnd="6dp"
                     android:src="@drawable/ic_rounded_delete_button"
-                    app:onTouchListener="@{viewModel::onMinusTouched}"/>
+                    app:onTouchListener="@{viewModel::onMinusTouched}" />
 
 
             <EditText
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/colorSuperLightWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:background="@android:color/transparent"
-                    android:inputType="number"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
                     android:imeOptions="actionDone"
-                    android:minWidth="20dp"
+                    android:inputType="number"
                     android:maxLength="3"
-                    android:text="@={viewModel.craft}"
+                    android:minWidth="20dp"
                     android:onTextChanged="@{viewModel::onTextChanged}"
-                    tools:text="1"
-                    android:textSize="14sp"/>
+                    android:text="@={viewModel.craft}"
+                    android:textColor="@color/colorSuperLightWhite"
+                    android:textSize="14sp"
+                    tools:text="999" />
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="6dp"
                     android:padding="12dp"
+                    android:paddingStart="6dp"
                     android:src="@drawable/ic_round_add_button"
-                    app:onTouchListener="@{viewModel::onPlusTouched}"/>
+                    app:onTouchListener="@{viewModel::onPlusTouched}" />
         </LinearLayout>
+
         <TextView
+                style="@style/DetailItemText"
                 android:id="@+id/tv_item_rep"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@{viewModel.reputation ?? @string/reputation}"
-                tools:text="х0 (0)"
-                android:textColor="@color/white80"
-                android:textSize="14dp"
+                android:layout_marginEnd="8dp"
+                android:text= "@{@string/item_reputation(Double.toString(viewModel.item.reputation))}"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/tv_item_price"/>
+                app:layout_constraintTop_toTopOf="@+id/tv_item_price"
+                tools:text="х0" />
 
         <View
                 android:id="@+id/divider3"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_wrap"/>
+                app:layout_constraintTop_toBottomOf="@+id/img_wrap" />
 
         <TextView
                 android:id="@+id/textView4"
+                style="@style/DetailTableText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="Component"
-                android:textColor="@color/white60"
-                android:textSize="14dp"
+                android:text="@string/full_info_component"
                 app:layout_constraintBottom_toTopOf="@+id/divider4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
-                app:layout_constraintEnd_toStartOf="@+id/divider7"
-                app:layout_constraintHorizontal_bias="0.0"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <View
                 android:id="@+id/divider7"
@@ -202,54 +234,46 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider3"/>
 
         <TextView
+                style="@style/DetailTableText"
                 android:id="@+id/tv_quantity"
                 android:layout_width="68dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="5dp"
                 android:text="@{viewModel.typeItemNoAlchemy ? @string/detail_item_quantity : @string/detail_item_type}"
-                android:textAlignment="center"
-                android:textColor="@color/white60"
-                android:textSize="14dp"
                 app:layout_constraintBottom_toTopOf="@+id/divider4"
                 app:layout_constraintEnd_toStartOf="@+id/tv_price"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
-                tools:text="@string/detail_item_quantity"/>
+                tools:text="@string/detail_item_quantity" />
 
 
         <TextView
+                style="@style/DetailTableText"
                 android:id="@+id/tv_price"
-                android:layout_width="42dp"
+                android:layout_width="46dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
                 android:text="@{viewModel.typeItemNoAlchemy ? @string/detail_item_price : @string/detail_item_time}"
-                android:textAlignment="center"
-                android:textColor="@color/white60"
-                android:textSize="14dp"
                 app:layout_constraintBottom_toTopOf="@+id/divider4"
                 app:layout_constraintEnd_toStartOf="@+id/tv_cost"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
-                tools:text="@string/detail_item_price"/>
+                tools:text="@string/detail_item_price" />
 
 
         <TextView
+                style="@style/DetailTableText"
                 android:id="@+id/tv_cost"
                 android:layout_width="52dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/roboto_regular"
+                android:layout_marginEnd="12dp"
                 android:paddingStart="8dp"
                 android:text="@{viewModel.typeItemNoAlchemy ? @string/detail_item_cost : @string/detail_item_price}"
-                android:textAlignment="center"
-                android:textColor="@color/white60"
-                android:textSize="14dp"
                 app:layout_constraintBottom_toTopOf="@+id/divider4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
-                tools:text="@string/detail_item_cost"/>
+                tools:text="@string/detail_item_cost" />
 
         <View
                 android:id="@+id/divider4"
@@ -284,14 +308,12 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                        style="@style/DetailHeaderText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="20dp"
-                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/detailed_total"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/tv_total"
                         app:layout_constraintTop_toBottomOf="@+id/recyclerInfo"
@@ -299,18 +321,15 @@
 
 
                 <TextView
+                        style="@style/DetailHeaderText"
                         android:id="@+id/tv_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/roboto_regular"
                         android:paddingStart="16dp"
                         android:text="@{viewModel.total ?? @string/total}"
                         tools:text="65"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="14dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/recyclerInfo"/>
 

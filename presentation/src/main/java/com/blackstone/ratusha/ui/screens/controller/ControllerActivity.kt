@@ -105,9 +105,9 @@ class ControllerActivity : BaseMvvmActivity<ControllerModel, ControllerRouter, A
     override fun onBackPressed() {
         val fragments = supportFragmentManager.fragments
         var currentFragment: Fragment? = null
-        fragments?.let { it.forEach {fragment ->
+        fragments.forEach {fragment ->
             if (fragment.isVisible) currentFragment = fragment
-        } }
+        }
 
         if (currentFragment is DetailItemFragment) super.onBackPressed()
 
