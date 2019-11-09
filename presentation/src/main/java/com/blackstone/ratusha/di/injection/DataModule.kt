@@ -6,9 +6,11 @@ import com.blackstone.data.net.RestService
 import com.blackstone.data.repositories.ApiRepositoryImpl
 import com.blackstone.data.repositories.AppRepositoryImpl
 import com.blackstone.data.repositories.DaoRepositoryImpl
+import com.blackstone.data.repositories.SharedProviderImpl
 import com.blackstone.domain.repositories.ApiRepository
 import com.blackstone.domain.repositories.AppRepository
 import com.blackstone.domain.repositories.DaoRepository
+import com.blackstone.domain.repositories.SharedProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -42,6 +44,12 @@ class DataModule {
     @Provides
     fun provideAppRepository(appRepositoryImpl: AppRepositoryImpl): AppRepository {
         return appRepositoryImpl
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedProvider(sharedProviderImpl: SharedProviderImpl): SharedProvider {
+        return sharedProviderImpl
     }
 
     @Singleton

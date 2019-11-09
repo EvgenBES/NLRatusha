@@ -5,8 +5,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.TownHall
-import com.blackstone.domain.usecases.GetInfoTownHallUseCase
-import com.blackstone.domain.usecases.GetItemOctalUseCase
+import com.blackstone.domain.usecases.townhall.GetInfoTownHallUseCase
+import com.blackstone.domain.usecases.octal.GetItemOctalUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.adapter.items.ItemsAdapter
 import com.blackstone.ratusha.ui.base.BaseViewModel

@@ -3,8 +3,8 @@ package com.blackstone.ratusha.ui.screens.controller
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.blackstone.domain.usecases.UpdateForpostDataUseCase
-import com.blackstone.domain.usecases.UpdateOctalDataUseCase
+import com.blackstone.domain.usecases.forpost.UpdateForpostDataUseCase
+import com.blackstone.domain.usecases.octal.UpdateOctalDataUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.utils.TimerUtils

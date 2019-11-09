@@ -8,9 +8,6 @@ import com.blackstone.domain.entity.*
  * @created 14.04.2019
  */
 interface DaoRepository {
-    fun getConfig(): LiveData<Config>
-    fun setConfig(config: Config)
-
     fun getMeta(): LiveData<MetaInfo>
 
     fun getTownHall(id: Int): LiveData<TownHall>

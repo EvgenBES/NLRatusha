@@ -1,4 +1,4 @@
-package com.blackstone.domain.usecases
+package com.blackstone.domain.usecases.base
 
 
 import com.blackstone.domain.extension.mapErrorException

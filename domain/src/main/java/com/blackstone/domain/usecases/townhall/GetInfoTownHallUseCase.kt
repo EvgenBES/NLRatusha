@@ -1,4 +1,4 @@
-package com.blackstone.domain.usecases
+package com.blackstone.domain.usecases.townhall
 
 import androidx.lifecycle.LiveData
 import com.blackstone.domain.entity.TownHall

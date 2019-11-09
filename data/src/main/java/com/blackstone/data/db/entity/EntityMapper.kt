@@ -55,14 +55,6 @@ fun CustomItemRecipe.transformToAlchemyRecipe(): ItemRecipeFull {
     return ItemRecipeFull(id = id, image = image, name = name, price = price, number = number, type = type, typeRecipe = TypeRecipe.ALCHEMY)
 }
 
-fun ConfigApp.transformToConfig(): Config{
-    return Config(tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
-}
-
-fun Config.transformToConfigApp(): ConfigApp{
-    return ConfigApp(0, tpForpost = tpForpost, tpOctal = tpOctal, statusForpost = statusForpost, statusOctal = statusOctal)
-}
-
 fun ItemOrderExtended.transformToItemOrder(): ItemOrder {
     return ItemOrder(id = id, name = name, image = image, countStart = countStart, countFinish = countFinish, price = price, reputation = reputation, countItemRep = countItemRep)
 }

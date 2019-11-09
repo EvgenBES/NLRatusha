@@ -1,7 +1,8 @@
-package com.blackstone.domain.usecases
+package com.blackstone.domain.usecases.recipe
 
 import com.blackstone.domain.entity.ItemRecipeFull
 import com.blackstone.domain.repositories.AppRepository
+import com.blackstone.domain.usecases.base.BaseUseCaseParams
 import javax.inject.Inject
 
 /**

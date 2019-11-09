@@ -8,6 +8,10 @@
                 type="com.blackstone.ratusha.ui.screens.settings.SettingsModel"/>
     </data>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -112,5 +116,7 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </layout>

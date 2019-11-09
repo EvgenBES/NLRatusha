@@ -2,9 +2,9 @@ package com.blackstone.ratusha.ui.screens.settings
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.blackstone.domain.entity.Config
-import com.blackstone.domain.usecases.GetConfigUseCase
+import com.blackstone.domain.usecases.config.GetConfigUseCase
+import com.blackstone.domain.usecases.config.UpdateConfigUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
@@ -21,18 +21,13 @@ class SettingsModel : BaseViewModel<ControllerRouter>() {
     private val checkTpOctal = ObservableBoolean()
     private val checkStatusForpost = ObservableBoolean()
     private val checkStatusOctal = ObservableBoolean()
-    private val configObserver: Observer<Config> = Observer { config -> setConfig(config) }
 
-    @Inject lateinit var configUseCase: GetConfigUseCase
+    @Inject lateinit var getConfigUseCase: GetConfigUseCase
+    @Inject lateinit var updateConfigUseCase: UpdateConfigUseCase
 
     init {
         App.appComponent.runInject(this)
-        configUseCase.getConfig().observeForever(configObserver)
-    }
-
-    override fun onCleared() {
-        configUseCase.getConfig().removeObserver(configObserver)
-        super.onCleared()
+        setConfig()
     }
 
     fun getCheckTpForpost(): ObservableBoolean = checkTpForpost
@@ -41,23 +36,26 @@ class SettingsModel : BaseViewModel<ControllerRouter>() {
     fun getCheckStatusOctal(): ObservableBoolean = checkStatusOctal
     fun getCloseDialog(): MutableLiveData<Boolean> = closeDialog
 
-    private fun setConfig(config: Config?) {
-        config?.let { _config ->
-            checkTpForpost.set(_config.tpForpost)
-            checkTpOctal.set(_config.tpOctal)
-            checkStatusForpost.set(_config.statusForpost)
-            checkStatusOctal.set(_config.statusOctal)
-        }
+    private fun setConfig() {
+        val config = getConfigUseCase.getConfigSharedProvider()
+
+        checkTpForpost.set(config.tpForpost)
+        checkTpOctal.set(config.tpOctal)
+        checkStatusForpost.set(config.closeForpost)
+        checkStatusOctal.set(config.closeOctal)
     }
 
     fun onClickSave() {
-        configUseCase.execute( Config(
-                checkTpForpost.get(),
-                checkTpOctal.get(),
-                checkStatusForpost.get(),
-                checkStatusOctal.get())) {
-            onComplete { closeDialog.value = true }
-        }
+        updateConfigUseCase.updateConfigSharedProvider(
+            Config(
+                tpForpost = checkTpForpost.get(),
+                tpOctal = checkTpOctal.get(),
+                closeForpost = checkStatusForpost.get(),
+                closeOctal = checkStatusOctal.get()
+            )
+        )
+
+        closeDialog.value = true
     }
 
     fun onClickBack() {

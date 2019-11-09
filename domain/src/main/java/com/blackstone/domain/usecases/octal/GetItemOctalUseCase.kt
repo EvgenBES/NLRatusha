@@ -1,4 +1,4 @@
-package com.blackstone.domain.usecases
+package com.blackstone.domain.usecases.octal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations

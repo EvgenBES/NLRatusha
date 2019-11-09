@@ -21,7 +21,6 @@ import com.blackstone.data.db.entity.Meta
         Resources::class,
         ItemToType::class,
         Type::class,
-        ConfigApp::class,
         Meta::class
     ], version = 2, exportSchema = false
 )
@@ -47,6 +46,5 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun getCategoryDao(): CategoryDao
     abstract fun getItemsDao(): ItemsDao
     abstract fun getRecipeDao(): RecipeDao
-    abstract fun getConfigDao():ConfigDao
     abstract fun getMetaDao():MetaDao
 }

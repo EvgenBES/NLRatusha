@@ -7,7 +7,6 @@ package com.blackstone.data.db
 object ConstDao {
 
     const val TABLE_CATEGORY = "category"
-    const val TABLE_CONFIG   = "config"
     const val TABLE_FORPOST  = "forpost"
     const val TABLE_OCTAL    = "octal"
     const val TABLE_ITEMS    = "items"

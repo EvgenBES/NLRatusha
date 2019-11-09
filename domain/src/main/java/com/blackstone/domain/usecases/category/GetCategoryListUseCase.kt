@@ -1,7 +1,8 @@
-package com.blackstone.domain.usecases
+package com.blackstone.domain.usecases.category
 
 import com.blackstone.domain.entity.ItemCategory
 import com.blackstone.domain.repositories.AppRepository
+import com.blackstone.domain.usecases.base.BaseUseCase
 import javax.inject.Inject
 
 /**

@@ -14,14 +14,6 @@ import javax.inject.Inject
  */
 class DaoRepositoryImpl @Inject constructor(private val appDataBase: AppDataBase) : DaoRepository {
 
-    override fun getConfig(): LiveData<Config> {
-        return Transformations.map(appDataBase.getConfigDao().getConfig()) { config -> config?.transformToConfig() }
-    }
-
-    override fun setConfig(config: Config) {
-        return appDataBase.getConfigDao().insert(config.transformToConfigApp())
-    }
-
     override fun getMeta(): LiveData<MetaInfo> {
         return appDataBase.getMetaDao().getMeta()
     }

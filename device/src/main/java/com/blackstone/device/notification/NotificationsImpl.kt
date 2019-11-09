@@ -1,7 +1,6 @@
 package com.blackstone.device.notification
 
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.Observer
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_FORPOST_CLOSE
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_FORPOST_TP
 import com.blackstone.device.notification.Const.NOTIFICATION_ID_OCTAL_CLOSE
@@ -15,17 +14,12 @@ class NotificationsImpl (
     repository: AppRepository
 ): Notifications {
 
-    private var configApp: Config = Config()
-    private val configObserver: Observer<Config> = Observer { it?.let { configApp = it } }
-
-    init {
-        repository.getDatabaseService().getConfig().observeForever(configObserver)
-    }
+    private var configApp: Config = repository.getSharedProviderService().getNotificationSettings()
 
     override fun showNotification(notificationId: Int) {
         when (notificationId) {
-            NOTIFICATION_ID_FORPOST_CLOSE -> if (configApp.statusForpost) notificationManager(notificationId)
-            NOTIFICATION_ID_OCTAL_CLOSE -> if (configApp.statusOctal) notificationManager(notificationId)
+            NOTIFICATION_ID_FORPOST_CLOSE -> if (configApp.closeForpost) notificationManager(notificationId)
+            NOTIFICATION_ID_OCTAL_CLOSE -> if (configApp.closeOctal) notificationManager(notificationId)
             NOTIFICATION_ID_FORPOST_TP -> if (configApp.tpForpost) notificationManager(notificationId)
             NOTIFICATION_ID_OCTAL_TP -> if (configApp.tpOctal) notificationManager(notificationId)
         }

@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.entity.ItemCategory
-import com.blackstone.domain.usecases.GetCategoryListUseCase
-import com.blackstone.domain.usecases.GetListItemCategoryUseCase
+import com.blackstone.domain.usecases.category.GetCategoryListUseCase
+import com.blackstone.domain.usecases.category.GetListItemCategoryUseCase
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.ui.base.BaseViewModel
 import com.blackstone.ratusha.ui.base.recycler.ItemClick
