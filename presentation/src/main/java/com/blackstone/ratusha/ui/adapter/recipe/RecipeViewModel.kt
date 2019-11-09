@@ -30,7 +30,7 @@ class RecipeViewModel: BaseItemViewModel<ItemRecipeFull>() {
         title.set(item.name)
 
         if (item.typeRecipe == TypeRecipe.DEFAULT) {
-            quantity.set(item.number.twoCharAfterDot())
+            quantity.set("${item.number.twoCharAfterDot()}")
             price.set(item.price.toString())
             cost.set((item.number * item.price).zeroCharAfterDot())
         } else  {

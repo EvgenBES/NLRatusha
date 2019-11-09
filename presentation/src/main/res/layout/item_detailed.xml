@@ -31,16 +31,15 @@
                 tools:src="@drawable/ic_res_406" />
 
         <androidx.appcompat.widget.AppCompatTextView
+                style="@style/BaseText"
                 android:id="@+id/item_name"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
-                android:fontFamily="@font/roboto_regular"
                 android:gravity="center_vertical"
                 android:lines="2"
                 android:maxLines="2"
-                android:textColor="@color/colorAccent"
                 android:text="@{viewModel.title ?? @string/recipte_item_empty}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/item_quantity"
@@ -60,55 +59,42 @@
 
         <TextView
                 android:id="@+id/item_quantity"
+                style="@style/ItemRecipeStyle"
                 android:layout_width="68dp"
-                android:layout_height="0dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="center"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:singleLine="true"
-                android:textColor="@color/colorAccent"
+                android:layout_height="wrap_content"
+                android:paddingStart="4dp"
+                android:paddingEnd="5dp"
                 android:text="@{viewModel.quantity}"
                 app:layout_constraintBottom_toTopOf="@+id/divider8"
                 app:layout_constraintEnd_toStartOf="@+id/item_price"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="1.75"
-                tools:textSize="14sp" />
+                tools:text="1.75" />
 
         <TextView
                 android:id="@+id/item_price"
-                android:layout_width="44dp"
+                style="@style/ItemRecipeStyle"
+                android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@{viewModel.price}"
                 app:layout_constraintBottom_toTopOf="@+id/divider8"
                 app:layout_constraintEnd_toStartOf="@+id/item_cost"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="39м"
-                tools:textSize="14sp" />
+                tools:text="39м" />
 
         <TextView
                 android:id="@+id/item_cost"
-                android:layout_width="50dp"
+                style="@style/ItemRecipeStyle"
+                android:layout_width="52dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/roboto_regular"
+                android:layout_marginEnd="12dp"
                 android:paddingStart="8dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:singleLine="true"
-                android:ellipsize="end"
                 android:text="@{viewModel.cost}"
                 app:layout_constraintBottom_toTopOf="@+id/divider8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="68.25"
-                tools:textSize="14sp" />
+                tools:text="68.25" />
 
         <View
                 android:id="@+id/divider8"

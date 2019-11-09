@@ -8,8 +8,8 @@ import java.math.RoundingMode
  * @created 06.04.2019
  */
 
-fun Double.twoCharAfterDot(): String{
-    return BigDecimal(this).setScale(2, RoundingMode.UP).toString()
+fun Double.twoCharAfterDot(): Double{
+    return BigDecimal(this).setScale(2, RoundingMode.HALF_UP).toDouble()
 }
 
 fun Double.zeroCharAfterDot(): String{

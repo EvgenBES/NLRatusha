@@ -4,6 +4,8 @@ import com.blackstone.domain.entity.ItemOrder
 import com.blackstone.domain.entity.ItemRecipeFull
 import com.blackstone.domain.entity.TotalSum
 import com.blackstone.domain.entity.TypeRecipe
+import com.blackstone.domain.extension.twoCharAfterDot
+import com.blackstone.domain.extension.zeroCharAfterDot
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,14 +50,13 @@ object CalculationsUtils {
 
 
     fun getTotalPriceRecipte(listItem: List<ItemRecipeFull>): String {
-        val decimalFormat: DecimalFormat = DecimalFormat("#.##")
         var total = 0.0
 
         listItem.forEach {
-            if (it.typeRecipe == TypeRecipe.DEFAULT) total += it.number * it.price else total += it.price
+            if (it.typeRecipe == TypeRecipe.DEFAULT) total += (it.number * it.price).twoCharAfterDot() else total += it.price
         }
 
-        return decimalFormat.format(total)
+        return total.zeroCharAfterDot()
     }
 
 
