@@ -152,8 +152,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_item_rep"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_item_rep"
-                app:visibility="@{viewModel.itemNoAlchemy}">
+                app:layout_constraintTop_toTopOf="@+id/tv_item_rep">
 
 
             <ImageView

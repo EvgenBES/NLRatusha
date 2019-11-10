@@ -9,6 +9,7 @@ import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.entity.Item
 import com.blackstone.domain.entity.ItemRecipeFull
+import com.blackstone.domain.extension.twoCharAfterDot
 import com.blackstone.domain.usecases.category.GetItemCategoryUseCase
 import com.blackstone.domain.usecases.recipe.GetRecipeAlchemyUseCase
 import com.blackstone.domain.usecases.recipe.GetRecipeItemUseCase
@@ -32,8 +33,8 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     private val typeItemNoAlchemy: ObservableBoolean = ObservableBoolean(true)
     private val total: ObservableField<String> = ObservableField<String>()
     private val item: ObservableField<Item> = ObservableField<Item>()
+    private lateinit var itemMutable: Item
     private val craft: ObservableField<String> = ObservableField<String>("1")
-    private val itemNoAlchemy: ObservableBoolean = ObservableBoolean()
 
     private var listItem = mutableListOf<ItemRecipeFull>()
     private var plusTime: Long = 0
@@ -55,7 +56,6 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     fun getCounter(): ObservableField<String> = counter
     fun getTotal(): ObservableField<String> = total
     fun getCraft(): ObservableField<String> = craft
-    fun getItemNoAlchemy(): ObservableBoolean = itemNoAlchemy
     fun getTypeItemNoAlchemy(): ObservableBoolean = typeItemNoAlchemy
     fun getCounterVisible(): ObservableBoolean = counterVisible
 
@@ -64,14 +64,14 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
 
         viewModelScope.launch {
             getItemCategoryUseCase.execute(idItem) {
-                onComplete { item.set(it) }
+                onComplete {
+                    item.set(it)
+                    itemMutable = it
+                }
                 onError { Log.d(TAG, "getItem message: ${it.message}") }
             }
 
-            if (idItem > 50) {
-                itemNoAlchemy.set(true)
-                getRecipeItem(idItem)
-            } else getAlchemyRecipe(idItem)
+            if (idItem > 50)  getRecipeItem(idItem) else getAlchemyRecipe(idItem)
         }
     }
 
@@ -161,12 +161,31 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
             val result: Int = s.toString().toInt()
             val returnList = mutableListOf<ItemRecipeFull>()
 
-            listItem.forEach {
-                returnList.add(ItemRecipeFull(it.id, it.image, it.name, it.price, it.number * result, it.type))
+
+            if (typeItemNoAlchemy.get()) {
+                listItem.forEach {
+                    returnList.add(ItemRecipeFull(it.id, it.image, it.name, it.price, it.number * result, it.type))
+                }
+
+                adapter.setItems(returnList)
+                if (returnList.isNotEmpty()) setTotal(returnList)
             }
 
-            adapter.setItems(returnList)
-            if (returnList.isNotEmpty()) setTotal(returnList)
+            if (::itemMutable.isInitialized) {
+                item.set(
+                    Item(
+                        id = itemMutable.id,
+                        name = itemMutable.name,
+                        categoryID = itemMutable.categoryID,
+                        image = itemMutable.image,
+                        price = itemMutable.price,
+                        reputation = (itemMutable.reputation * result).twoCharAfterDot(),
+                        level = itemMutable.level,
+                        skill = itemMutable.skill,
+                        weight = (itemMutable.weight * result)
+                    )
+                )
+            }
         }
     }
 

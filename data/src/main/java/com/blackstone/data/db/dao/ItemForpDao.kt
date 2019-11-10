@@ -25,6 +25,6 @@ interface ItemForpDao {
     @Query("DELETE FROM $TABLE_FORPOST")
     fun deleteAll()
 
-    @Query("SELECT itemId as id, $T1.name, $T1.image, countStart, countFinish, price, reputation, countItemRep FROM $TABLE_FORPOST LEFT JOIN items ON $T1.itemId = items.id")
+    @Query("SELECT itemId as id, $T1.name, $T1.image, countStart, countFinish, price FROM $TABLE_FORPOST LEFT JOIN items ON $T1.itemId = items.id")
     fun getAll(): LiveData<List<ItemOrderExtended>>
 }

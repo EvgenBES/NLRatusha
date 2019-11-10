@@ -44,7 +44,7 @@ fun Items.transformToItemCategory(): ItemCategory {
 }
 
 fun Items.transformToItem(): Item {
-    return Item(id = id , name = name, categoryID = categoryID, image = image, price = price, reputation = reputation, countItemRep = countItemRep)
+    return Item(id = id , name = name, categoryID = categoryID, image = image, price = price, reputation = reputation, level = level, skill = skill, weight = weight)
 }
 
 fun ItemRecipe.transformToFull(): ItemRecipeFull {
@@ -56,5 +56,5 @@ fun CustomItemRecipe.transformToAlchemyRecipe(): ItemRecipeFull {
 }
 
 fun ItemOrderExtended.transformToItemOrder(): ItemOrder {
-    return ItemOrder(id = id, name = name, image = image, countStart = countStart, countFinish = countFinish, price = price, reputation = reputation, countItemRep = countItemRep)
+    return ItemOrder(id = id, name = name, image = image, countStart = countStart, countFinish = countFinish, price = price)
 }

@@ -13,5 +13,7 @@ data class Items(
         val image: String,
         val price: Int,
         val reputation: Double,
-        val countItemRep: Int
+        val level: Int,
+        val skill: Int,
+        val weight: Int
 )
