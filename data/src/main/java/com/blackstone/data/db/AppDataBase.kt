@@ -22,7 +22,7 @@ import com.blackstone.data.db.entity.Meta
         ItemToType::class,
         Type::class,
         Meta::class
-    ], version = 3, exportSchema = false
+    ], version = 4, exportSchema = false
 )
 @TypeConverters(value = [DateConverters::class])
 abstract class AppDataBase : RoomDatabase() {

@@ -174,7 +174,7 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:minWidth="20dp"
-                    android:onTextChanged="@{viewModel::onTextChanged}"
+                    android:onTextChanged="@{(text, start, count, after) -> viewModel.onTextChanged(text)}"
                     android:text="@={viewModel.craft}"
                     android:textColor="@color/colorSuperLightWhite"
                     android:textSize="14sp"

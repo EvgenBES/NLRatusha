@@ -156,7 +156,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
         }
     }
 
-    fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+    fun onTextChanged(s: CharSequence) {
         if (s.isNotEmpty()) {
             val result: Int = s.toString().toInt()
             val returnList = mutableListOf<ItemRecipeFull>()

@@ -33,6 +33,7 @@ class NotificationBuilder(private val context: Context, private val intentActivi
     }
 
     private fun createForpostCloseNotification(): Notification{
+
         return build(
             createBitmapIcon(R.drawable.ic_notif_banner_fp),
             context.getString(R.string.notification_fp),
@@ -76,7 +77,7 @@ class NotificationBuilder(private val context: Context, private val intentActivi
             .setContentTitle(title)
             .setContentText(description)
             .setLargeIcon(largeIcon)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .setContentIntent(resultPendingIntent)
             .setVibrate(vibrate)
