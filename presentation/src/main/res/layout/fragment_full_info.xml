@@ -29,16 +29,16 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                    android:text="@{viewModel.counter ?? @string/startCounter}"
+                    android:id="@+id/tvCounter"
+                    anim="@{viewModel.counterVisible}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/tvCounter"
                     android:alpha="0.0"
-                    anim="@{viewModel.counterVisible}"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:text="@{viewModel.counter ?? @string/startCounter}"
                     android:textColor="@color/colorAccent"
-                    android:textSize="52sp"
-                    android:gravity="center"/>
+                    android:textSize="52sp" />
         </LinearLayout>
 
 
@@ -165,6 +165,7 @@
 
 
             <EditText
+                    android:id="@+id/tvChangedCounter"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"

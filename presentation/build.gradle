@@ -79,6 +79,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+
+    //KeyboardVisiblyEvent
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.3.0'
+
     implementation "javax.inject:javax.inject:1"
 
     implementation project(path: ":data")

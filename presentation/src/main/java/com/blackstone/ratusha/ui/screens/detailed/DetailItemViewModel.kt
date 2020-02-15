@@ -6,6 +6,8 @@ import androidx.databinding.ObservableField
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blackstone.domain.entity.Item
 import com.blackstone.domain.entity.ItemRecipeFull
@@ -36,12 +38,14 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     private lateinit var itemMutable: Item
     private val craft: ObservableField<String> = ObservableField<String>("1")
 
+    private val _listAdapter = MutableLiveData<List<ItemRecipeFull>>()
+    val listAdapter: LiveData<List<ItemRecipeFull>> = _listAdapter
+
     private var listItem = mutableListOf<ItemRecipeFull>()
     private var plusTime: Long = 0
     private var minusTime: Long = 0
     private var textVisibility: Boolean = false
 
-    private val adapter = RecipeAdapter()
 
     @Inject lateinit var getRecipeItemUseCase: GetRecipeItemUseCase
     @Inject lateinit var getRecipeAlchemyUseCase: GetRecipeAlchemyUseCase
@@ -51,7 +55,6 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
         App.appComponent.runInject(this)
     }
 
-    fun getAdapter(): RecipeAdapter = adapter
     fun getItem(): ObservableField<Item> = item
     fun getCounter(): ObservableField<String> = counter
     fun getTotal(): ObservableField<String> = total
@@ -82,7 +85,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     private fun getAlchemyRecipe(id: Int) {
         getRecipeAlchemyUseCase.execute(id) {
             onComplete {
-                adapter.setItems(it)
+                _listAdapter.postValue(it)
                 setTotal(it)
             }
             onError {
@@ -94,7 +97,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
     private fun getRecipeItem(id: Int) {
         getRecipeItemUseCase.execute(id) {
             onComplete {
-                adapter.setItems(it)
+                _listAdapter.postValue(it)
                 listItem = it.toMutableList()
                 setTotal(it)
             }
@@ -167,7 +170,7 @@ class DetailItemViewModel : BaseViewModel<ControllerRouter>() {
                     returnList.add(ItemRecipeFull(it.id, it.image, it.name, it.price, it.number * result, it.type))
                 }
 
-                adapter.setItems(returnList)
+                _listAdapter.postValue(returnList)
                 if (returnList.isNotEmpty()) setTotal(returnList)
             }
 

@@ -4,6 +4,7 @@ package com.blackstone.ratusha.di.injection
 import com.blackstone.ratusha.app.App
 import com.blackstone.ratusha.services.NotificationService
 import com.blackstone.ratusha.ui.screens.controller.ControllerModel
+import com.blackstone.ratusha.ui.screens.detailDialog.DetailedDialogViewModel
 import com.blackstone.ratusha.ui.screens.detailed.DetailItemViewModel
 import com.blackstone.ratusha.ui.screens.forpost.FForpostModel
 import com.blackstone.ratusha.ui.screens.information.FInformationModel
@@ -30,11 +31,13 @@ interface AppComponent {
     fun inject(app: App)
     fun runInject(notificationService: NotificationService)
 
-    fun runInject(controller: ControllerModel)
-    fun runInject(detailItemViewModel: DetailItemViewModel)
-    fun runInject(fMainModel: FMainModel)
-    fun runInject(fForpostModel: FForpostModel)
-    fun runInject(fOctalModel: FOctalModel)
-    fun runInject(fInformationModel: FInformationModel)
-    fun runInject(settingsModel: SettingsModel)
+    fun runInject(viewModel: ControllerModel)
+    fun runInject(viewModel: DetailItemViewModel)
+    fun runInject(viewModel: FMainModel)
+    fun runInject(viewModel: FForpostModel)
+    fun runInject(viewModel: FOctalModel)
+    fun runInject(viewModel: FInformationModel)
+
+    fun runInject(viewModel: SettingsModel)
+    fun runInject(viewModel: DetailedDialogViewModel)
 }

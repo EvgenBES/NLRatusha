@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/border_radius_10dp">
+                android:background="@drawable/border_radius_top_15dp">
 
             <TextView
                     style="@style/DialogHeaderText"
