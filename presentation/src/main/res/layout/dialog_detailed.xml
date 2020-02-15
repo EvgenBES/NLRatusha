@@ -14,150 +14,120 @@
             android:layout_height="wrap_content">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/border_radius_15dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/border_radius_10dp">
 
-            <TextView
-                    style="@style/DialogHeaderText"
-                    android:id="@+id/tv_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/notification_settings"
+        <LinearLayout
+                android:id="@+id/img_wrap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_radius_items_details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/imgItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_iw_empty"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                    android:id="@+id/divider3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/background_dialog"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        </LinearLayout>
 
-            <TextView
-                    android:id="@+id/textView4"
-                    style="@style/DetailTableText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/full_info_component"
-                    app:layout_constraintBottom_toTopOf="@+id/divider4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/DetailHeaderText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@+id/img_wrap"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/not_found_item" />
 
-            <View
-                    android:id="@+id/divider7"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:background="@color/white12"
-                    app:layout_constraintBottom_toTopOf="@+id/divider4"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_quantity"
-                    app:layout_constraintTop_toBottomOf="@+id/divider3"/>
+        <TextView
+                style="@style/DetailItemText"
+                android:id="@+id/tv_item_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/img_wrap"
+                app:layout_constraintStart_toStartOf="@+id/img_wrap"
+                app:layout_constraintTop_toBottomOf="@+id/img_wrap" />
 
-            <TextView
-                    style="@style/DetailTableText"
-                    android:id="@+id/tv_quantity"
-                    android:layout_width="68dp"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="5dp"
-                    android:text="@string/detail_item_quantity"
-                    app:layout_constraintBottom_toTopOf="@+id/divider4"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_price"
-                    app:layout_constraintTop_toBottomOf="@+id/divider3"
-                    tools:text="@string/detail_item_quantity" />
+        <TextView
+                style="@style/DetailItemText"
+                android:id="@+id/tvTimeHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
+                tools:text="Цена: 200 / " />
+
+        <TextView
+                style="@style/DetailItemText"
+                android:id="@+id/tvTimeCraft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Умение: 540 / "
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/tvTimeHeight" />
+
+        <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_wrap" />
+
+        <TextView
+                style="@style/DetailHeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Получение:"
+                app:layout_constraintBottom_toTopOf="@+id/divider4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+        <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="36dp"
+                android:background="@color/white12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
 
-            <TextView
-                    style="@style/DetailTableText"
-                    android:id="@+id/tv_price"
-                    android:layout_width="46dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
-                    android:text="@string/detail_item_price"
-                    app:layout_constraintBottom_toTopOf="@+id/divider4"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_cost"
-                    app:layout_constraintTop_toBottomOf="@+id/divider3"
-                    tools:text="@string/detail_item_price" />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
 
-            <TextView
-                    android:id="@+id/tv_cost"
-                    style="@style/DetailTableText"
-                    android:layout_width="52dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:paddingStart="8dp"
-                    android:text="@string/detail_item_cost"
-                    app:layout_constraintBottom_toTopOf="@+id/divider4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider3"
-                    tools:text="@string/detail_item_cost" />
-
-            <View
-                    android:id="@+id/divider4"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="46dp"
-                    android:background="@color/white12"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider3"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-            <View
-                    android:id="@+id/divider2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/background_dialog"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerInfo" />
-
-            <LinearLayout
-                    android:id="@+id/buttonMenuItem"
-                    android:layout_width="0dp"
-                    android:layout_height="42dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider2">
-
-                <TextView
-                        style="@style/DialogTextButton"
-                        android:id="@+id/actionBack"
-                        android:text="@string/cancel"/>
-
-                <LinearLayout
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/background_dialog"/>
-
-                <TextView
-                        style="@style/DialogTextButton"
-                        android:id="@+id/actionSave"
-                        android:text="@string/save"/>
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.DialogDetailedBinding
-import com.blackstone.ratusha.databinding.DialogSettingsBinding
 import com.blackstone.ratusha.ui.adapter.recipe.RecipeAdapter
 import com.blackstone.ratusha.ui.base.BaseMvvmDialog
 import com.blackstone.ratusha.ui.screens.controller.ControllerRouter
@@ -27,7 +26,7 @@ class DetailedDialog: BaseMvvmDialog<DetailedDialogViewModel, ControllerRouter, 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.SettingDialog)
+        setStyle(STYLE_NO_TITLE, R.style.FragmentDialog)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

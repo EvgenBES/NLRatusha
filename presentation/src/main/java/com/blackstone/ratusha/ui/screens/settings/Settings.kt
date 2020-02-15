@@ -3,7 +3,6 @@ package com.blackstone.ratusha.ui.screens.settings
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import com.blackstone.ratusha.R
 import com.blackstone.ratusha.databinding.DialogSettingsBinding
 import com.blackstone.ratusha.ui.base.BaseMvvmDialog
@@ -26,7 +25,7 @@ class Settings: BaseMvvmDialog<SettingsModel, ControllerRouter, DialogSettingsBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.SettingDialog)
+        setStyle(STYLE_NO_TITLE, R.style.FragmentDialog)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

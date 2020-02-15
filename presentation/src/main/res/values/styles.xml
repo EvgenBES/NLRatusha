@@ -12,7 +12,7 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <style name="SettingDialog" parent="@android:style/Theme.Dialog">
+    <style name="FragmentDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
@@ -90,13 +90,10 @@
     </style>
 
     <style name="DialogTextButton" >
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/card_view_text_blue</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="ExpandableCardText" >
